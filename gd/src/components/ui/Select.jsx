@@ -1,0 +1,77 @@
+import * as SelectPrimitive from "@radix-ui/react-select";
+
+const baseTrigger =
+  "flex items-center justify-between w-full text-sm rounded-md focus:outline-none focus:ring-2 focus:ring-slate-500";
+const variants = {
+  default: "px-4 py-2 bg-gray-50 border border-gray-200 text-slate-700 hover:bg-gray-100 transition-colors",
+  ghost: "px-3 py-1.5 bg-transparent border border-transparent hover:border-slate-200 text-slate-700",
+};
+
+export const Select = ({
+  value,
+  onValueChange,
+  options,
+  placeholder,
+  className = "",
+  dir,
+  variant = "default",
+}) => {
+  const triggerClasses = `${baseTrigger} ${variants[variant] || variants.default} ${className}`;
+  const iconColor = variant === "ghost" ? "text-slate-500" : "text-gray-400";
+
+  return (
+    <SelectPrimitive.Root value={value} onValueChange={onValueChange} dir={dir}>
+      <SelectPrimitive.Trigger className={triggerClasses}>
+        <span className="text-slate-700">{placeholder}</span>
+        <SelectPrimitive.Icon>
+          <svg
+            className={`w-4 h-4 ${iconColor}`}
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M19 9l-7 7-7-7"
+            />
+          </svg>
+        </SelectPrimitive.Icon>
+      </SelectPrimitive.Trigger>
+
+      <SelectPrimitive.Portal>
+        <SelectPrimitive.Content
+          className="z-50 overflow-hidden bg-white border border-gray-200 rounded-md shadow-lg min-w-[200px]"
+          position="popper"
+          sideOffset={5}
+        >
+          <SelectPrimitive.Viewport className="p-1">
+            {options.map((opt) => (
+              <SelectPrimitive.Item
+                key={opt.value}
+                value={opt.value}
+                className="relative flex items-center px-8 py-2 text-sm text-gray-700 rounded-sm cursor-default select-none hover:bg-slate-100 focus:bg-slate-100 outline-none"
+              >
+                <SelectPrimitive.ItemText>{opt.label}</SelectPrimitive.ItemText>
+                <SelectPrimitive.ItemIndicator className="absolute left-2 flex items-center justify-center">
+                  <svg
+                    className="w-4 h-4"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                </SelectPrimitive.ItemIndicator>
+              </SelectPrimitive.Item>
+            ))}
+          </SelectPrimitive.Viewport>
+        </SelectPrimitive.Content>
+      </SelectPrimitive.Portal>
+    </SelectPrimitive.Root>
+  );
+};

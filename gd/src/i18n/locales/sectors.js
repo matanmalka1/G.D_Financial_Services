@@ -1,0 +1,20 @@
+export const sectorsTranslations = {
+  en: {
+    title: "Our Expertise",
+    searchPlaceholder: "Search sectors by title...",
+    viewDetails: "View Details",
+    noResults: "No sectors found matching your criteria.",
+    aboutSector: "About {name}",
+    ourServices: "Our Services",
+    clientBenefits: "Client Benefits",
+  },
+  he: {
+    title: "מומחיותנו",
+    searchPlaceholder: "חפש מגזרים לפי שם...",
+    viewDetails: "צפה בפרטים",
+    noResults: "לא נמצאו מגזרים התואמים את הקריטריונים שלך.",
+    aboutSector: "אודות {name}",
+    ourServices: "השירותים שלנו",
+    clientBenefits: "יתרונות ללקוחות",
+  },
+};
