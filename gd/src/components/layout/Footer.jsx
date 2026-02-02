@@ -1,5 +1,6 @@
 import { useLanguage } from '../../hooks/useLanguage';
 import { Logo } from '../common/Logo';
+import { InstagramLogo, FacebookLogo, LinkedInLogo } from '../common/SocialLogos';
 
 export const Footer = () => {
   const { t } = useLanguage();
@@ -17,7 +18,7 @@ export const Footer = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-12">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-12">
           <div>
             <h3 className="text-sm font-bold text-slate-900 uppercase tracking-widest mb-4">
               {t.footer.addressTitle}
@@ -36,6 +37,40 @@ export const Footer = () => {
               <li>{t.nav.news}</li>
               <li>{t.nav.contact}</li>
             </ul>
+          </div>
+          <div>
+            <h3 className="text-sm font-bold text-slate-900 uppercase tracking-widest mb-4">
+              Social Networks
+            </h3>
+            <div className="flex items-center gap-4 text-slate-600">
+              <a
+                href="https://www.instagram.com/g.d_finance/"
+                aria-label="Instagram"
+                target="_blank"
+                rel="noreferrer"
+                className="w-10 h-10 rounded-full bg-white border border-slate-200 flex items-center justify-center hover:border-slate-400 hover:text-slate-900 transition-colors shadow-sm"
+              >
+                <InstagramLogo />
+              </a>
+              <a
+                href="https://www.facebook.com/profile.php?id=61574465062159"
+                aria-label="Facebook"
+                target="_blank"
+                rel="noreferrer"
+                className="w-10 h-10 rounded-full bg-white border border-slate-200 flex items-center justify-center hover:border-slate-400 hover:text-slate-900 transition-colors shadow-sm"
+              >
+                <FacebookLogo />
+              </a>
+              <a
+                href="https://www.linkedin.com/company/strategic-market-advisors/?viewAsMember=true"
+                aria-label="LinkedIn"
+                target="_blank"
+                rel="noreferrer"
+                className="w-10 h-10 rounded-full bg-white border border-slate-200 flex items-center justify-center hover:border-slate-400 hover:text-slate-900 transition-colors shadow-sm"
+              >
+                <LinkedInLogo />
+              </a>
+            </div>
           </div>
         </div>
       </div>

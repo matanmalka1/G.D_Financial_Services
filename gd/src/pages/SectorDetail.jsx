@@ -5,6 +5,9 @@ import { useContent } from "../hooks/useContent";
 import { ParallaxHeader } from "../components/common/ParallaxHeader";
 import { routePaths } from "../routes/paths";
 import { translations } from "../i18n/translations";
+import { SectorServices } from "../components/sector/SectorServices";
+import { SectorBenefitsCard } from "../components/sector/SectorBenefitsCard";
+import { RelatedArticlesSection } from "../components/sector/RelatedArticlesSection";
 
 const SectorDetail = () => {
   const { id } = useParams();
@@ -100,139 +103,25 @@ const SectorDetail = () => {
             <p className="text-lg text-slate-600 leading-relaxed">
               {aboutDescription}
             </p>
-            <div className="bg-white p-10 rounded-[2rem] shadow-sm border border-slate-100">
-              <h4 className="text-xl font-bold text-slate-800 mb-6 flex items-center gap-3">
-                <span className="w-8 h-8 bg-slate-900 rounded-full flex items-center justify-center text-white text-xs">
-                  01
-                </span>
-                {t.sectors.ourServices}
-              </h4>
-              <ul className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                {detail?.services.map((service, idx) => (
-                  <li
-                    key={idx}
-                    className="flex items-start gap-3 text-slate-600 group"
-                  >
-                    <svg
-                      className="w-5 h-5 text-slate-400 group-hover:text-slate-900 transition-colors mt-0.5"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M5 13l4 4L19 7"
-                      />
-                    </svg>
-                    <span>{service}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
+            <SectorServices title={t.sectors.ourServices} services={detail?.services} />
           </div>
 
           <div className="lg:col-span-1">
-            <div className="bg-slate-900 text-white p-10 rounded-[2.5rem] shadow-xl h-full flex flex-col justify-center">
-              <h4 className="text-2xl font-bold mb-8 flex items-center gap-3">
-                <span className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center text-white text-xs">
-                  02
-                </span>
-                {t.sectors.clientBenefits}
-              </h4>
-              <ul className="space-y-6">
-                {detail?.benefits.map((benefit, idx) => (
-                  <li key={idx} className="flex items-start gap-4">
-                    <div className="w-2 h-2 bg-slate-400 rounded-full mt-2 flex-shrink-0" />
-                    <p className="text-slate-300 font-medium leading-snug">
-                      {benefit}
-                    </p>
-                  </li>
-                ))}
-              </ul>
-              <Link
-                to={routePaths.contact}
-                className="mt-12 inline-block px-8 py-4 bg-white text-slate-900 font-bold rounded-full hover:bg-slate-100 transition-all text-center"
-              >
-                {t.nav.contact}
-              </Link>
-            </div>
+            <SectorBenefitsCard
+              title={t.sectors.clientBenefits}
+              benefits={detail?.benefits}
+              ctaLabel={t.nav.contact}
+              ctaTo={routePaths.contact}
+            />
           </div>
         </div>
 
         {/* Related Articles Section */}
-        {relatedArticles.length > 0 && (
-          <div className="space-y-12">
-            <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
-              <div className="flex items-center gap-4 flex-grow">
-                <h3 className="text-2xl md:text-3xl font-bold text-slate-900 whitespace-nowrap">
-                  {t.news.relatedTitle}
-                </h3>
-                <div className="h-px bg-slate-200 w-full hidden md:block" />
-              </div>
-              <Link
-                to={routePaths.news}
-                className="inline-flex items-center gap-2 text-sm font-bold text-slate-900 hover:text-slate-600 transition-colors group"
-              >
-                <span>{t.sectorDetail.viewAllNews}</span>
-                <svg
-                  className={`w-4 h-4 transform group-hover:translate-x-1 ${isRtl ? "rotate-180 group-hover:-translate-x-1" : ""}`}
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M17 8l4 4m0 0l-4 4m4-4H3"
-                  />
-                </svg>
-              </Link>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {relatedArticles.map((article) => (
-                <Link
-                  to={routePaths.news}
-                  key={article.id}
-                  className="group bg-white p-8 rounded-[2rem] border border-slate-100 shadow-sm hover:shadow-2xl hover:-translate-y-1 transition-all duration-500 flex flex-col"
-                >
-                  <div className="flex items-center gap-3 mb-6">
-                    <span className="px-3 py-1 bg-slate-100 text-[10px] font-bold text-slate-500 rounded-full uppercase tracking-widest">
-                      {article.date}
-                    </span>
-                  </div>
-                  <h4 className="text-xl font-bold text-slate-900 mb-4 group-hover:text-slate-700 transition-colors line-clamp-2 leading-tight">
-                    {article.title.en}
-                  </h4>
-                  <p className="text-slate-500 text-sm leading-relaxed mb-8 line-clamp-3">
-                    {article.excerpt.en}
-                  </p>
-                  <div className="mt-auto flex items-center gap-2 text-xs font-bold text-slate-900">
-                    <span className="border-b-2 border-slate-900 pb-0.5">
-                      {t.news.readArticle}
-                    </span>
-                    <svg
-                      className={`w-4 h-4 ${isRtl ? "rotate-180" : ""}`}
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M14 5l7 7-7 7"
-                      />
-                    </svg>
-                  </div>
-                </Link>
-              ))}
-            </div>
-          </div>
-        )}
+        <RelatedArticlesSection
+          articles={relatedArticles}
+          t={t}
+          isRtl={isRtl}
+        />
       </section>
     </main>
   );

@@ -1,6 +1,9 @@
+import { Link } from "react-router-dom";
 import { useLanguage } from "../hooks/useLanguage";
 import { ParallaxHeader } from "../components/common/ParallaxHeader";
 import { translations } from "../i18n/translations";
+import { routePaths } from "../routes/paths";
+import { Button } from "../components/ui/primitives/Button";
 
 const CompanyProfile = () => {
   const { t } = useLanguage();
@@ -24,7 +27,8 @@ const CompanyProfile = () => {
     <main>
       <ParallaxHeader
         image="https://images.unsplash.com/photo-1554469384-e58fac16e23a?auto=format&fit=crop&q=80&w=2000"
-        title={translations.en.nav.profile}
+        title={t.nav.profile}
+        align="center"
       />
 
       <section className="py-24 max-w-4xl mx-auto px-4">
@@ -34,7 +38,6 @@ const CompanyProfile = () => {
         <p className="text-lg text-slate-600 leading-loose mb-12 text-center italic">
           "{t.companyProfile.missionStatement}"
         </p>
-
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16">
           {values.map((v, i) => (
             <div
@@ -48,6 +51,35 @@ const CompanyProfile = () => {
             </div>
           ))}
         </div>
+        {t.companyProfile.aboutText && (
+          <div className="max-w-5xl mx-auto mt-16 grid grid-cols-1 md:grid-cols-[0.9fr_1.1fr] gap-10 items-center">
+            <div className="w-full flex justify-center md:justify-start order-2 md:order-1">
+              <img
+                src="https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?auto=format&fit=crop&w=900&q=80"
+                alt="G.D Finance team collaboration"
+                className="w-full max-w-md rounded-3xl shadow-lg border border-slate-100 object-cover"
+                loading="lazy"
+              />
+            </div>
+            <div className="space-y-3 text-center md:text-left order-1 md:order-2">
+              {t.companyProfile.aboutSubtitle && (
+                <h3 className="text-xl font-semibold text-slate-900">
+                  {t.companyProfile.aboutSubtitle}
+                </h3>
+              )}
+              <p className="text-base text-slate-600 leading-relaxed">
+                {t.companyProfile.aboutText}
+              </p>
+              <div className="pt-4">
+                <Link to={routePaths.contact} className="inline-block">
+                  <Button className="px-6 py-3 bg-slate-900 text-white rounded-full hover:bg-slate-800 transition-colors">
+                    {t.nav.contact}
+                  </Button>
+                </Link>
+              </div>
+            </div>
+          </div>
+        )}
       </section>
 
       <section className="py-24 bg-white">

@@ -1,12 +1,12 @@
-export const ParallaxHeader = ({ 
-  image, 
-  title, 
-  subtitle, 
+export const ParallaxHeader = ({
+  image,
+  title,
+  subtitle,
   height = "h-[500px]",
-  overlayOpacity = "bg-black/40"
+  overlayOpacity = "bg-black/40",
 }) => {
   return (
-    <div 
+    <div
       className={`relative w-full ${height} parallax flex items-center justify-center overflow-hidden`}
       style={{ backgroundImage: `url(${image})` }}
     >
