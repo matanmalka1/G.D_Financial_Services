@@ -75,6 +75,13 @@ export const SectorDetail = () => {
       <ParallaxHeader image={sector.image} title={sectorTitleEn} />
 
       <section className="py-24 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+
+         {bubbles?.length ? (
+          <div className="mb-20">
+            <SectorValueBubbles title={bubbleTitle || sectorTitle} bubbles={bubbles} />
+          </div>
+        ) : null}
+        
         {/* Main Sector Content Card */}
         <div className="bg-white p-8 md:p-16 rounded-[2.5rem] shadow-xl shadow-slate-200/50 border border-slate-100 mb-20 relative overflow-hidden">
           <div className="absolute top-0 left-0 w-2 h-full bg-slate-900" />
@@ -113,11 +120,7 @@ export const SectorDetail = () => {
           </div>
         </div>
 
-        {bubbles?.length ? (
-          <div className="mb-20">
-            <SectorValueBubbles title={bubbleTitle || sectorTitle} bubbles={bubbles} />
-          </div>
-        ) : null}
+       
 
         {/* Dedicated "About [Sector]" Section */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 mb-24">

@@ -1,29 +1,17 @@
 import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import * as z from "zod";
 import { toast } from "sonner";
 import { useLanguage } from "../hooks/useLanguage";
 import { ParallaxHeader } from "../components/common/ParallaxHeader";
 import { Select } from "../components/ui/Select";
 import { Button } from "../components/ui/primitives/Button";
 import { translations } from "../i18n/translations";
-import { isValidPhone } from "../utils/helpers/validation";
+import { buildContactSchema } from "../validation/contactSchema";
 
 export const Contact = () => {
   const { t, isRtl } = useLanguage();
 
-  const schema = z.object({
-    fullName: z.string().min(2, t.contact.validation.nameMin),
-    email: z.string().email(t.contact.validation.emailInvalid),
-    phone: z
-      .string()
-      .optional()
-      .refine((val) => !val || isValidPhone(val), {
-        message: t.contact.validation.phoneInvalid,
-      }),
-    service: z.string().min(1, t.contact.validation.serviceRequired),
-    message: z.string().min(10, t.contact.validation.messageMin),
-  });
+  const schema = buildContactSchema(t);
 
   const {
     register,
@@ -110,7 +98,7 @@ export const Contact = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
                 <label className="block text-sm font-semibold text-slate-700 mb-2">
-                  {t.contact.phone}
+                  {t.contact.phone}*
                 </label>
                 <input
                   {...register("phone")}

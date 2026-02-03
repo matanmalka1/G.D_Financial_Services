@@ -13,6 +13,29 @@
         "Professional Brand Image",
         "Saves Valuable Executive Time"
       ],
+      "bubbleTitle": "What your presentation delivers",
+      "bubbles": [
+        {
+          "icon": "📣",
+          "title": "Clear investor story",
+          "description": "Positioning, market sizing, traction, and the ask wrapped into a sharp narrative."
+        },
+        {
+          "icon": "📊",
+          "title": "Data that convinces",
+          "description": "KPIs, unit economics, forecasts, and benchmarks visualized for quick grasp."
+        },
+        {
+          "icon": "🎨",
+          "title": "Design that signals trust",
+          "description": "Clean layouts, consistent branding, and compliant tables that feel board-ready."
+        },
+        {
+          "icon": "🎯",
+          "title": "Delivery prep",
+          "description": "Speaker notes, dry runs, and objection handling so you walk in confident."
+        }
+      ],
       "sections": [
         {
           "title": "Company Presentations",
@@ -46,6 +69,29 @@
         "בהירות במודלים עסקיים מורכבים",
         "תדמית מותג מקצועית",
         "חוסך זמן ניהולי יקר"
+      ],
+      "bubbleTitle": "מה המצגת העסקית מספקת לכם",
+      "bubbles": [
+        {
+          "icon": "📣",
+          "title": "סיפור משקיעים חד",
+          "description": "מיתוג, גודל שוק, הוכחות ביצוע והבקשה – נארזים לנרטיב משכנע."
+        },
+        {
+          "icon": "📊",
+          "title": "נתונים שמבססים אמון",
+          "description": "KPIs, כלכלת יחידה, תחזיות ובנצ'מרקים שמוצגים בצורה בהירה ומהירה להבנה."
+        },
+        {
+          "icon": "🎨",
+          "title": "עיצוב שמשדר אמינות",
+          "description": "עימוד נקי, מותג עקבי וטבלאות תואמות לדרישות הדירקטוריון."
+        },
+        {
+          "icon": "🎯",
+          "title": "הכנה להגשה",
+          "description": "פתקים לדובר, חזרות ומענה להתנגדויות כדי להיכנס לחדר בביטחון."
+        }
       ],
       "sections": [
         {

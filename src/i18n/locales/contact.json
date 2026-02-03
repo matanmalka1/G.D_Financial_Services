@@ -3,7 +3,7 @@
     "title": "Contact Us",
     "fullName": "Full Name",
     "email": "Email Address",
-    "phone": "Phone Number (Optional)",
+    "phone": "Phone Number",
     "service": "Service of Interest",
     "message": "Message",
     "submit": "Send Message",
@@ -13,6 +13,7 @@
     "validation": {
       "nameMin": "Name must be at least 2 characters",
       "emailInvalid": "Please enter a valid email address",
+      "phoneRequired": "Phone number is required",
       "serviceRequired": "Please select a service of interest",
       "messageMin": "Message should be at least 10 characters long",
       "phoneInvalid": "Please enter a valid phone number format"
@@ -22,7 +23,7 @@
     "title": "צור קשר",
     "fullName": "שם מלא",
     "email": "כתובת אימייל",
-    "phone": "מספר טלפון (אופציונלי)",
+    "phone": "מספר טלפון",
     "service": "שירות מבוקש",
     "message": "הודעה",
     "submit": "שלח הודעה",
@@ -32,6 +33,7 @@
     "validation": {
       "nameMin": "השם חייב להכיל לפחות 2 תווים",
       "emailInvalid": "אנא הזן כתובת אימייל תקינה",
+      "phoneRequired": "מספר הטלפון הוא שדה חובה",
       "serviceRequired": "אנא בחר שירות מהרשימה",
       "messageMin": "ההודעה חייבת להכיל לפחות 10 תווים",
       "phoneInvalid": "אנא הזן מספר טלפון בפורמט תקין"

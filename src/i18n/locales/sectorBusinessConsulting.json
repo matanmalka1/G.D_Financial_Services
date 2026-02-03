@@ -12,6 +12,29 @@
         "Improved Profit Margins",
         "Reduced Operational Waste",
         "Future-Proofed Business Model"
+      ],
+      "bubbleTitle": "What our consulting delivers",
+      "bubbles": [
+        {
+          "icon": "🔭",
+          "title": "Growth thesis",
+          "description": "Market scans and competitive angles that point to the next revenue curves."
+        },
+        {
+          "icon": "⚙️",
+          "title": "Operational efficiency",
+          "description": "Process mapping, cost baselines, and a quick-win playbook that lifts margins."
+        },
+        {
+          "icon": "📈",
+          "title": "KPI cockpit",
+          "description": "Dashboards and KPI definitions that keep teams aligned on outcomes."
+        },
+        {
+          "icon": "🤝",
+          "title": "Implementation support",
+          "description": "PMO cadence, change management, and talent plans so decisions stick."
+        }
       ]
     }
   },
@@ -28,6 +51,29 @@
         "שיפור שולי הרווח",
         "צמצום בזבוז תפעולי",
         "מודל עסקי עמיד לעתיד"
+      ],
+      "bubbleTitle": "מה הייעוץ העסקי מספק לכם",
+      "bubbles": [
+        {
+          "icon": "🔭",
+          "title": "תזה לצמיחה",
+          "description": "סריקות שוק וזוויות תחרות שמכוונות למסלולי ההכנסה הבאים."
+        },
+        {
+          "icon": "⚙️",
+          "title": "יעילות תפעולית",
+          "description": "מיפוי תהליכים, קווי בסיס לעלות ותוכנית מהלכים מהירים שמעלות רווחיות."
+        },
+        {
+          "icon": "📈",
+          "title": "לוח מחווני KPI",
+          "description": "הגדרות מדדים ודשבורדים שמיישרים את הצוותים על תוצאות."
+        },
+        {
+          "icon": "🤝",
+          "title": "ליווי יישום",
+          "description": "קצב PMO, ניהול שינוי ותוכנית כח אדם כדי שההחלטות יחזיקו."
+        }
       ]
     }
   }

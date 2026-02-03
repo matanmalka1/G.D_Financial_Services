@@ -12,6 +12,29 @@
         "Informed Strategic Decisions",
         "Stable Growth Trajectory",
         "Peace of Mind for Leadership"
+      ],
+      "bubbleTitle": "What ongoing advisory provides",
+      "bubbles": [
+        {
+          "icon": "📊",
+          "title": "Rolling forecasts",
+          "description": "Monthly updates to cash, runway, and scenarios so surprises are surfaced early."
+        },
+        {
+          "icon": "🧭",
+          "title": "Decision partner",
+          "description": "Board-ready insights on pricing, hiring, and capex with clear tradeoffs."
+        },
+        {
+          "icon": "🛠️",
+          "title": "Finance infrastructure",
+          "description": "Budgeting models, reporting packs, and controls that scale with the company."
+        },
+        {
+          "icon": "🤝",
+          "title": "Stakeholder confidence",
+          "description": "Consistent communications to investors, lenders, and teams that build trust."
+        }
       ]
     }
   },
@@ -28,6 +51,29 @@
         "קבלת החלטות אסטרטגיות מושכלות",
         "מסלול צמיחה יציב",
         "שקט נפשי להנהלה"
+      ],
+      "bubbleTitle": "מה הליווי השוטף נותן לכם",
+      "bubbles": [
+        {
+          "icon": "📊",
+          "title": "תחזיות מתעדכנות",
+          "description": "עדכוני תזרים, מסלול מזומן ותסריטים מדי חודש כדי לזהות הפתעות מוקדם."
+        },
+        {
+          "icon": "🧭",
+          "title": "שותף להחלטות",
+          "description": "תובנות מוכנות לדירקטוריון על תמחור, גיוסים והשקעות עם הצגת חלופות."
+        },
+        {
+          "icon": "🛠️",
+          "title": "תשתית פיננסית",
+          "description": "מודלי תקציב, חבילות דיווח ובקרות שגדלות יחד עם החברה."
+        },
+        {
+          "icon": "🤝",
+          "title": "אמון בעלי עניין",
+          "description": "תקשורת עקבית למשקיעים, בנקים וצוותים שמחזקת ביטחון."
+        }
       ]
     }
   }
