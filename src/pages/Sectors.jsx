@@ -5,8 +5,6 @@ import { ParallaxHeader } from "../components/common/ParallaxHeader";
 import { LoadBoundary } from "../components/common/LoadBoundary";
 import { SectorTile } from "../components/ui/SectorTile";
 import { SectionHeading } from "../components/ui/SectionHeading";
-import { ErrorState } from "../components/ui/ErrorState";
-import { LoadingGrid } from "../components/ui/LoadingGrid";
 import { SearchBar } from "../components/ui/SearchBar";
 
 

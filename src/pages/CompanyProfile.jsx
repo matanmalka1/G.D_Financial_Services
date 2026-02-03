@@ -1,6 +1,4 @@
 import { Link } from "react-router-dom";
-import { useEffect } from "react";
-import { toast } from "sonner";
 import { useLanguage } from "../hooks/useLanguage";
 import { useContent } from "../hooks/useContent";
 import { ParallaxHeader } from "../components/common/ParallaxHeader";
@@ -8,17 +6,11 @@ import { routePaths } from "../routes/paths";
 import { Button } from "../components/ui/primitives/Button";
 import { SectionHeading } from "../components/ui/SectionHeading";
 import { Card } from "../components/ui/primitives/Card";
-import { ErrorState } from "../components/ui/ErrorState";
+import { LoadBoundary } from "../components/common/LoadBoundary";
 
 export const CompanyProfile = () => {
   const { t } = useLanguage();
   const { error, refreshContent } = useContent();
-
-  useEffect(() => {
-    if (error) {
-      toast.error(t?.errors?.contentLoadFailed || "Unable to load content");
-    }
-  }, [error, t]);
 
   const values = [
     {
@@ -36,19 +28,17 @@ export const CompanyProfile = () => {
   ];
 
   return (
-    <main>
-      {error ? (
-        <section className="min-h-screen flex items-center justify-center bg-slate-50 px-4">
-          <ErrorState
-            title={
-              t?.errors?.contentLoadFailed || "Unable to load company profile"
-            }
-            message={error}
-            actionLabel={t?.news?.retry || "Retry"}
-            onAction={refreshContent}
-          />
-        </section>
-      ) : null}
+    <LoadBoundary
+      error={error}
+      loading={false}
+      onRetry={refreshContent}
+      errorTitle={
+        t?.errors?.contentLoadFailed || "Unable to load company profile"
+      }
+      errorMessage={error}
+      retryLabel={t?.news?.retry || "Retry"}
+    >
+      <main>
       <ParallaxHeader
         image="https://images.unsplash.com/photo-1554469384-e58fac16e23a?auto=format&fit=crop&q=80&w=2000"
         title={t.nav.profile}
@@ -119,5 +109,6 @@ export const CompanyProfile = () => {
         </div>
       </section>
     </main>
+    </LoadBoundary>
   );
 };
