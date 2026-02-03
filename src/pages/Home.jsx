@@ -1,37 +1,38 @@
-import { useLanguage } from '../hooks/useLanguage';
-import { ParallaxHeader } from '../components/common/ParallaxHeader';
-import { routePaths } from '../routes/paths';
-import { FeatureBubble } from '../components/ui/FeatureBubble';
-import { OwnerSpotlight } from '../components/ui/OwnerSpotlight';
-import { Button } from '../components/ui/primitives/Button';
-import { translations } from '../i18n/translations';
-import { ClientsSection } from '../components/sections/ClientsSection';
-import { useAnalyticsNavigation } from '../hooks/useAnalyticsNavigation';
-import { ITEMS_PER_PAGE } from '../constants/pagination';
+import { useLanguage } from "../hooks/useLanguage";
+import { ParallaxHeader } from "../components/common/ParallaxHeader";
+import { routePaths } from "../routes/paths";
+import { FeatureBubble } from "../components/ui/FeatureBubble";
+import { OwnerSpotlight } from "../components/ui/OwnerSpotlight";
+import { Button } from "../components/ui/primitives/Button";
+import { ClientsSection } from "../components/sections/ClientsSection";
+import { useAnalyticsNavigation } from "../hooks/useAnalyticsNavigation";
+import { ITEMS_PER_PAGE } from "../constants/pagination";
 
 export const Home = () => {
   const { t, isRtl } = useLanguage();
   const analyticsNavigate = useAnalyticsNavigation();
 
   const bubbles = [
-    { title: t.home.bubbles.exitStrategy, icon: '🎯' },
-    { title: t.home.bubbles.businessConsulting, icon: '💼' },
-    { title: t.home.bubbles.businessPlans, icon: '📋' },
-    { title: t.home.bubbles.investorPresentations, icon: '📈' },
+    { title: t.home.bubbles.exitStrategy, icon: "🎯" },
+    { title: t.home.bubbles.businessConsulting, icon: "💼" },
+    { title: t.home.bubbles.businessPlans, icon: "📋" },
+    { title: t.home.bubbles.investorPresentations, icon: "📈" },
   ].slice(0, ITEMS_PER_PAGE.FEATURED_ARTICLES);
   const handleContact = () => {
-    analyticsNavigate(routePaths.contact, 'owner_contact_click', { source: 'home' });
+    analyticsNavigate(routePaths.contact, "owner_contact_click", {
+      source: "home",
+    });
   };
   const handleBubbleClick = (title) => {
-    analyticsNavigate(routePaths.contact, 'home_bubble_click', { title });
+    analyticsNavigate(routePaths.contact, "home_bubble_click", { title });
   };
 
   return (
     <main className="relative">
       <ParallaxHeader
         image="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=2000"
-        title={translations.en.home.hero.title}
-        subtitle={translations.en.home.hero.subtitle}
+        title={t.home.hero.title}
+        subtitle={t.home.hero.subtitle}
         height="h-[75vh]"
       />
 
@@ -52,7 +53,9 @@ export const Home = () => {
       {/* About Section */}
       <section className="py-24 max-w-5xl mx-auto px-4">
         <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold text-slate-900 mb-6">{t.home.about.title}</h2>
+          <h2 className="text-3xl font-bold text-slate-900 mb-6">
+            {t.home.about.title}
+          </h2>
           <div className="w-20 h-1 bg-slate-900 mx-auto rounded-full" />
         </div>
         <div className="space-y-6 text-lg text-slate-600 leading-relaxed text-justify">

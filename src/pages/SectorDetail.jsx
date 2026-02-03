@@ -5,7 +5,6 @@ import { useLanguage } from "../hooks/useLanguage";
 import { useContent } from "../hooks/useContent";
 import { ParallaxHeader } from "../components/common/ParallaxHeader";
 import { routePaths } from "../routes/paths";
-import { translations } from "../i18n/translations";
 import { SectorServices } from "../components/sector/SectorServices";
 import { SectorBenefitsCard } from "../components/sector/SectorBenefitsCard";
 import { RelatedArticlesSection } from "../components/sector/RelatedArticlesSection";
@@ -16,7 +15,8 @@ import { ITEMS_PER_PAGE } from "../constants/pagination";
 export const SectorDetail = () => {
   const { id } = useParams();
   const { t, isRtl } = useLanguage();
-  const { getSectorById, getRelatedArticles, error, refreshContent } = useContent();
+  const { getSectorById, getRelatedArticles, error, refreshContent } =
+    useContent();
 
   const sector = getSectorById(id);
   const detail = sector ? t.sectorDetail.sectorDetails[sector.id] : null;
@@ -63,14 +63,18 @@ export const SectorDetail = () => {
     );
   }
 
-  const sectorTitleEn = translations.en.nav[sector.titleKey] || "";
+  const sectorTitleEn = t.nav[sector.titleKey] || "";
   const sectorTitle = t.nav[sector.titleKey];
   const mainDescription = useMemo(
     () => t.sectorDetail.mainDescription.replace(/\{sector\}/g, sectorTitle),
     [t.sectorDetail.mainDescription, sectorTitle],
   );
   const aboutDescription = useMemo(
-    () => t.sectorDetail.aboutDescription.replace(/\{sector\}/g, sectorTitle.toLowerCase()),
+    () =>
+      t.sectorDetail.aboutDescription.replace(
+        /\{sector\}/g,
+        sectorTitle.toLowerCase(),
+      ),
     [t.sectorDetail.aboutDescription, sectorTitle],
   );
   const longDescription = detail?.longDescription;
@@ -83,13 +87,15 @@ export const SectorDetail = () => {
       <ParallaxHeader image={sector.image} title={sectorTitleEn} />
 
       <section className="py-24 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-
-         {bubbles?.length ? (
+        {bubbles?.length ? (
           <div className="mb-20">
-            <SectorValueBubbles title={bubbleTitle || sectorTitle} bubbles={bubbles} />
+            <SectorValueBubbles
+              title={bubbleTitle || sectorTitle}
+              bubbles={bubbles}
+            />
           </div>
         ) : null}
-        
+
         {/* Main Sector Content Card */}
         <div className="bg-white p-8 md:p-16 rounded-[2.5rem] shadow-xl shadow-slate-200/50 border border-slate-100 mb-20 relative overflow-hidden">
           <div className="absolute top-0 left-0 w-2 h-full bg-slate-900" />
@@ -128,8 +134,6 @@ export const SectorDetail = () => {
           </div>
         </div>
 
-       
-
         {/* Dedicated "About [Sector]" Section */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 mb-24">
           <div className="lg:col-span-2 space-y-8">
@@ -147,39 +151,41 @@ export const SectorDetail = () => {
                     id={sec.id || undefined}
                     className="bg-white p-8 rounded-[1.5rem] border border-slate-100 shadow-sm text-slate-700 text-base leading-relaxed space-y-3"
                   >
-                    <h4 className="text-xl font-bold text-slate-900">{sec.title}</h4>
+                    <h4 className="text-xl font-bold text-slate-900">
+                      {sec.title}
+                    </h4>
                     {sec.stepLinks && (
                       <ul className="space-y-2 text-indigo-600 font-semibold">
                         {sec.stepLinks.map((step) => (
                           <li key={step.id}>
-                            <a href={`#${step.id}`} className="hover:text-indigo-800 transition-colors">
+                            <a
+                              href={`#${step.id}`}
+                              className="hover:text-indigo-800 transition-colors"
+                            >
                               {step.label}
                             </a>
                           </li>
                         ))}
                       </ul>
                     )}
-                    {sec.body
-                      .split(/\n\s*\n/)
-                      .map((para, pIdx) => (
-                        <p key={pIdx}>{para.trim()}</p>
-                      ))}
-                    {sec.extra && (
-                      <p className="text-slate-600">
-                        {sec.extra}
-                      </p>
-                    )}
+                    {sec.body.split(/\n\s*\n/).map((para, pIdx) => (
+                      <p key={pIdx}>{para.trim()}</p>
+                    ))}
+                    {sec.extra && <p className="text-slate-600">{sec.extra}</p>}
                   </div>
                 ))}
               </div>
             ) : longDescription ? (
               <div className="bg-white p-8 rounded-[1.5rem] border border-slate-100 shadow-sm text-slate-700 text-base leading-relaxed space-y-4">
-                {longDescription.split('\n').map((para, idx) => (
+                {longDescription.split("\n").map((para, idx) => (
                   <p key={idx}>{para.trim()}</p>
                 ))}
               </div>
             ) : null}
-            <SectorServices title={t.sectors.ourServices} services={detail?.services} />
+            <SectorServices
+              title={t.sectors.ourServices}
+              services={detail?.services}
+            />
           </div>
 
           <div className="lg:col-span-1">

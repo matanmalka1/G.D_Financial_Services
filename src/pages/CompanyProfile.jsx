@@ -40,7 +40,9 @@ export const CompanyProfile = () => {
       {error ? (
         <section className="min-h-screen flex items-center justify-center bg-slate-50 px-4">
           <ErrorState
-            title={t?.errors?.contentLoadFailed || "Unable to load company profile"}
+            title={
+              t?.errors?.contentLoadFailed || "Unable to load company profile"
+            }
             message={error}
             actionLabel={t?.news?.retry || "Retry"}
             onAction={refreshContent}

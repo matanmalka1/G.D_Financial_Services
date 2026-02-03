@@ -1,24 +1,22 @@
-
-import { useState, useMemo, useEffect } from 'react';
-import { toast } from 'sonner';
-import { useLanguage } from '../hooks/useLanguage';
-import { useContent } from '../hooks/useContent';
-import { ParallaxHeader } from '../components/common/ParallaxHeader';
-import { SectionHeading } from '../components/ui/SectionHeading';
-import { NewsCard } from '../components/ui/NewsCard';
-import { SearchBar } from '../components/ui/SearchBar';
-import { Pagination } from '../components/ui/Pagination';
-import { EmptyState } from '../components/ui/EmptyState';
-import { ErrorState } from '../components/ui/ErrorState';
-import { LoadingGrid } from '../components/ui/LoadingGrid';
-import { translations } from '../i18n/translations';
-import { ITEMS_PER_PAGE } from '../constants/pagination';
+import { useState, useMemo, useEffect } from "react";
+import { toast } from "sonner";
+import { useLanguage } from "../hooks/useLanguage";
+import { useContent } from "../hooks/useContent";
+import { ParallaxHeader } from "../components/common/ParallaxHeader";
+import { SectionHeading } from "../components/ui/SectionHeading";
+import { NewsCard } from "../components/ui/NewsCard";
+import { SearchBar } from "../components/ui/SearchBar";
+import { Pagination } from "../components/ui/Pagination";
+import { EmptyState } from "../components/ui/EmptyState";
+import { ErrorState } from "../components/ui/ErrorState";
+import { LoadingGrid } from "../components/ui/LoadingGrid";
+import { ITEMS_PER_PAGE } from "../constants/pagination";
 
 const ARTICLES_PER_PAGE = ITEMS_PER_PAGE.NEWS;
 
 export const News = () => {
   const { t, language, isRtl } = useLanguage();
-  const [search, setSearch] = useState('');
+  const [search, setSearch] = useState("");
   const { articles, error, refreshContent, loading } = useContent();
   const [currentPage, setCurrentPage] = useState(1);
 
@@ -59,11 +57,11 @@ export const News = () => {
     return filtered.slice(start, start + ARTICLES_PER_PAGE);
   }, [filtered, safeCurrentPage]);
 
-  const handleClearSearch = () => setSearch('');
+  const handleClearSearch = () => setSearch("");
 
   const goToPage = (page) => {
     setCurrentPage(page);
-    window.scrollTo({ top: 400, behavior: 'smooth' });
+    window.scrollTo({ top: 400, behavior: "smooth" });
   };
 
   if (error) {
@@ -82,9 +80,9 @@ export const News = () => {
   if (loading) {
     return (
       <main className="min-h-screen bg-slate-50/30 pb-20">
-        <ParallaxHeader 
+        <ParallaxHeader
           image="https://images.unsplash.com/photo-1504711434969-e33886168f5c?auto=format&fit=crop&q=80&w=2000"
-          title={translations.en.news.title}
+          title={t.news.title}
         />
         <section className="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <LoadingGrid count={9} />
@@ -95,9 +93,9 @@ export const News = () => {
 
   return (
     <main className="min-h-screen bg-slate-50/30 pb-20">
-      <ParallaxHeader 
+      <ParallaxHeader
         image="https://images.unsplash.com/photo-1504711434969-e33886168f5c?auto=format&fit=crop&q=80&w=2000"
-        title={translations.en.news.title}
+        title={t.news.title}
       />
 
       <section className="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -116,10 +114,20 @@ export const News = () => {
         {/* Articles Grid */}
         <SectionHeading
           title={t.news.title}
-          subtitle={search ? t.news.showingResults.replace('{count}', filtered.length.toString()) : `${articles.length} ${t.news.title}`}
+          subtitle={
+            search
+              ? t.news.showingResults.replace(
+                  "{count}",
+                  filtered.length.toString(),
+                )
+              : `${articles.length} ${t.news.title}`
+          }
           liveMessage={
             search
-              ? t.news.showingResults.replace('{count}', filtered.length.toString())
+              ? t.news.showingResults.replace(
+                  "{count}",
+                  filtered.length.toString(),
+                )
               : `${articles.length} ${t.news.title}`
           }
           action={
@@ -136,7 +144,11 @@ export const News = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
           {paginatedArticles.length > 0 ? (
             paginatedArticles.map((article) => (
-              <NewsCard key={article.id} article={article} language={language} />
+              <NewsCard
+                key={article.id}
+                article={article}
+                language={language}
+              />
             ))
           ) : (
             <EmptyState

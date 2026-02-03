@@ -5,7 +5,6 @@ import { useLanguage } from "../hooks/useLanguage";
 import { ParallaxHeader } from "../components/common/ParallaxHeader";
 import { Select } from "../components/ui/Select";
 import { Button } from "../components/ui/primitives/Button";
-import { translations } from "../i18n/translations";
 import { buildContactSchema } from "../validation/contactSchema";
 import { PhoneNumberInput } from "../components/ui/PhoneNumberInput";
 
@@ -58,7 +57,7 @@ export const Contact = () => {
     <main>
       <ParallaxHeader
         image="https://images.unsplash.com/photo-1521791136064-7986c295944c?auto=format&fit=crop&q=80&w=2000"
-        title={translations.en.contact.title}
+        title={t.contact.title}
       />
 
       <section className="py-24 max-w-3xl mx-auto px-4">

@@ -4,7 +4,6 @@ import { toast } from "sonner";
 import { useLanguage } from "../hooks/useLanguage";
 import { useContent } from "../hooks/useContent";
 import { ParallaxHeader } from "../components/common/ParallaxHeader";
-import { translations } from "../i18n/translations";
 import { SectorTile } from "../components/ui/SectorTile";
 import { SectionHeading } from "../components/ui/SectionHeading";
 import { ErrorState } from "../components/ui/ErrorState";
@@ -68,8 +67,8 @@ export const Sectors = () => {
     <main className="min-h-screen bg-slate-50/30">
       <ParallaxHeader
         image="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=2000"
-        title={translations.en.nav.sectors}
-        subtitle={translations.en.sectors.title}
+        title={t.nav.sectors}
+        subtitle={t.sectors.title}
       />
 
       <section className="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
