@@ -8,6 +8,7 @@ import { translations } from "../i18n/translations";
 import { SectorServices } from "../components/sector/SectorServices";
 import { SectorBenefitsCard } from "../components/sector/SectorBenefitsCard";
 import { RelatedArticlesSection } from "../components/sector/RelatedArticlesSection";
+import { SectorValueBubbles } from "../components/sector/SectorValueBubbles";
 
 const SectorDetail = () => {
   const { id } = useParams();
@@ -52,6 +53,8 @@ const SectorDetail = () => {
   );
   const longDescription = detail?.longDescription;
   const sections = detail?.sections;
+  const bubbles = detail?.bubbles;
+  const bubbleTitle = detail?.bubbleTitle;
 
   return (
     <main className="bg-slate-50/30 min-h-screen pb-20">
@@ -96,6 +99,12 @@ const SectorDetail = () => {
           </div>
         </div>
 
+        {bubbles?.length ? (
+          <div className="mb-20">
+            <SectorValueBubbles title={bubbleTitle || sectorTitle} bubbles={bubbles} />
+          </div>
+        ) : null}
+
         {/* Dedicated "About [Sector]" Section */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 mb-24">
           <div className="lg:col-span-2 space-y-8">
@@ -110,23 +119,31 @@ const SectorDetail = () => {
                 {sections.map((sec, idx) => (
                   <div
                     key={idx}
+                    id={sec.id || undefined}
                     className="bg-white p-8 rounded-[1.5rem] border border-slate-100 shadow-sm text-slate-700 text-base leading-relaxed space-y-3"
                   >
                     <h4 className="text-xl font-bold text-slate-900">{sec.title}</h4>
+                    {sec.stepLinks && (
+                      <ul className="space-y-2 text-indigo-600 font-semibold">
+                        {sec.stepLinks.map((step) => (
+                          <li key={step.id}>
+                            <a href={`#${step.id}`} className="hover:text-indigo-800 transition-colors">
+                              {step.label}
+                            </a>
+                          </li>
+                        ))}
+                      </ul>
+                    )}
                     {sec.body
                       .split(/\n\s*\n/)
                       .map((para, pIdx) => (
                         <p key={pIdx}>{para.trim()}</p>
                       ))}
-                    <button
-                      type="button"
-                      className="inline-flex items-center gap-2 text-sm font-bold text-indigo-600 hover:text-indigo-800 transition-colors"
-                    >
-                      <span>{t.news.readMore}</span>
-                      <svg className={`w-4 h-4 ${isRtl ? "rotate-180" : ""}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7-7 7" />
-                      </svg>
-                    </button>
+                    {sec.extra && (
+                      <p className="text-slate-600">
+                        {sec.extra}
+                      </p>
+                    )}
                   </div>
                 ))}
               </div>

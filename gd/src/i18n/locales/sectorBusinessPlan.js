@@ -13,6 +13,33 @@ export const sectorBusinessPlan = {
         "Plans tailored to industry context (startup, manufacturing, real estate)",
         "Data-driven decisions that reduce risk",
       ],
+      bubbleTitle: "What Your Business Plan Delivers",
+      bubbles: [
+        {
+          icon: "📣",
+          title: "Investor-ready story",
+          description:
+            "Positioning, market sizing, competition, traction, and use of funds wrapped into one persuasive narrative.",
+        },
+        {
+          icon: "📊",
+          title: "Financial model & runway",
+          description:
+            "Forecasts, unit economics, sensitivities, and cash flow so stakeholders trust the numbers.",
+        },
+        {
+          icon: "🧭",
+          title: "Execution roadmap",
+          description:
+            "Milestones, hiring plan, KPIs, and dependencies that connect strategy to delivery.",
+        },
+        {
+          icon: "🛡️",
+          title: "Risk & bank alignment",
+          description:
+            "Covenants, collateral, and mitigations formatted for bankers, regulators, and investors.",
+        },
+      ],
       sections: [
         {
           title: "Business Plan – The Key to Success",
@@ -54,6 +81,33 @@ export const sectorBusinessPlan = {
         "בהירות באסטרטגיית הצמיחה וביעדים",
         "תוכנית מותאמת לענף (סטארטאפ, ייצור, נדל\"ן)",
         "החלטות מבוססות נתונים שמפחיתות סיכון",
+      ],
+      bubbleTitle: "מה התוכנית העסקית מספקת לכם",
+      bubbles: [
+        {
+          icon: "📣",
+          title: "סיפור משקיעים ברור",
+          description:
+            "מיתוג, גודל שוק, תחרות, הוכחות ביצוע ושימוש בכסף בסיפור אחד משכנע.",
+        },
+        {
+          icon: "📊",
+          title: "מודל פיננסי ותזרים",
+          description:
+            "תחזיות, כלכלת יחידה, בדיקות רגישות ותזרים מזומנים שמבססים אמון במספרים.",
+        },
+        {
+          icon: "🧭",
+          title: "מפת ביצוע",
+          description:
+            "אבני דרך, תכנית גיוס עובדים, מדדי KPI ותלויות שמחברות בין אסטרטגיה ליישום.",
+        },
+        {
+          icon: "🛡️",
+          title: "יישור עם בנקים וסיכונים",
+          description:
+            "קובננטים, בטוחות ומדיניות מיתון סיכונים בשפה שבנקים ומשקיעים מבינים.",
+        },
       ],
       sections: [
         {

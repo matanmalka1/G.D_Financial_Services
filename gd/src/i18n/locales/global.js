@@ -22,7 +22,7 @@ export const globalTranslations = {
   he: {
     nav: {
       home: "דף הבית",
-      profile: "פרופיל חברה",
+      profile: "פרופיל החברה",
       sectors: "מגזרי פעילות",
       news: "חדשות ומאמרים",
       contact: "צור קשר",
