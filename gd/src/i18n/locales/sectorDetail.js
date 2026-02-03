@@ -33,35 +33,35 @@ export const sectorDetailTranslations = {
           "Bank / Investor Ready Decks",
         ],
         benefits: [
-          "Stronger Funding Readiness",
-          "Clarity on Growth Strategy",
-          "Bank-Compliant Documentation",
-          "Decision Support Across Milestones",
+          "Funding-ready documentation (banks & investors)",
+          "Clarity on growth strategy and milestones",
+          "Plans tailored to industry context (startup, manufacturing, real estate)",
+          "Data-driven decisions that reduce risk",
         ],
         sections: [
           {
             title: "Business Plan – The Key to Success",
-            body: "A detailed business plan is the roadmap for building, running, and growing a stable company. It clarifies structure, operations, and growth strategy so founders can make informed decisions at every stage.",
+            body: "Successful businesses are built on innovative ideas, but launching a company requires much more. A detailed business plan is the cornerstone of a stable company: a roadmap that lays out the structure, management approach, and growth strategy. A good plan helps founders face challenges and make informed decisions at every stage.\n\nBusiness plans are crucial for the economic success of a new venture. A well‑crafted plan can help secure funding and attract experienced partners by showing how the business will generate returns for investors. A comprehensive plan is a persuasive tool that demonstrates your company is a smart choice.\n\nAt G.D Finance, we build tailored business plans with market analysis, financial forecasts, operational strategies, and growth planning. Whether you need a plan for fundraising, performance improvement, or expansion into new markets, we’ll help you craft a clear, focused plan to move your business forward.",
           },
           {
             title: "Bank-Ready Plans",
-            body: "We prepare lender-ready documentation with realistic forecasts, cash-flow visibility, and risk analysis to meet bank requirements for loans and credit lines.",
+            body: "When applying for loans, credit lines, or financing, banks often require a structured business plan. We deliver documents that present the full picture: operations, repayment ability, risk analysis, financial forecasts, and the economic model—in the language and format banks expect.",
           },
           {
             title: "Plans for Manufacturing Firms",
-            body: "Operational and financial plans that cover process design, capacity, capex/opex modeling, and efficiency improvements to support growth and capital raising.",
+            body: "In competitive manufacturing, a comprehensive business plan underpins operational and financial growth—from setup and planning, through fundraising and expansion, to efficiency gains. We cover market analysis, process planning, financial forecasts, and goal setting to enable smarter decisions, better performance, and resource attraction.",
           },
           {
             title: "Plans for Startups",
-            body: "Investor-focused plans and financial stories for early and growth-stage startups, combining market sizing, go-to-market, and funding milestones.",
+            body: "A business plan is the foundation of every successful startup. Even a revolutionary idea won’t lift off without the right economic story. We support startups from early feasibility and market scans through the first raise, and later rounds after initial capital—so the financial story is investor‑ready.",
           },
           {
             title: "Plans for Real Estate & Construction",
-            body: "Full-scope plans addressing regulation, financing structures, market comps, and project cash flows for developers and construction companies.",
+            body: "Israel’s real estate market offers opportunities but is highly competitive and cost‑intensive. We build plans that address regulation and legal frameworks, project financing terms, market price trends and comps, and all project costs. Our long experience with developers, income‑producing real estate, and construction firms helps push your project a step ahead.",
           },
           {
             title: "Plans for New Small Businesses",
-            body: "Foundational plans for new businesses—customer acquisition, budgeting, risk mitigation, and competitive positioning to reduce early-stage uncertainty.",
+            body: "A business plan is a crucial tool for any new venture. A detailed plan can gauge potential, highlight strengths and weaknesses, and prevent losses. We focus on early‑stage challenges—customer acquisition, uncertainty, cash management, and competition—and craft tailored plans that meet all of a new business’s needs.",
           },
         ],
       }
@@ -101,10 +101,10 @@ export const sectorDetailTranslations = {
           "מסמכים מותאמים לבנקים/משקיעים",
         ],
         benefits: [
-          "היערכות טובה יותר לגיוסי הון",
-          "בהירות באסטרטגיית הצמיחה",
-          "תאימות לדרישות בנקים",
-          "תמיכה בהחלטות לאורך הדרך",
+          "היערכות מלאה לגיוסי הון ולבנקים",
+          "בהירות באסטרטגיית הצמיחה וביעדים",
+          "תוכנית מותאמת לענף (סטארטאפ, ייצור, נדל\"ן)",
+          "החלטות מבוססות נתונים שמפחיתות סיכון",
         ],
         sections: [
           {
