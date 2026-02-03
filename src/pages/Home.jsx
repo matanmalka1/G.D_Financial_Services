@@ -1,3 +1,5 @@
+import { useMemo } from "react";
+import { useNavigate } from "react-router-dom";
 import { useLanguage } from "../hooks/useLanguage";
 import { ParallaxHeader } from "../components/common/ParallaxHeader";
 import { routePaths } from "../routes/paths";
@@ -5,12 +7,12 @@ import { FeatureBubble } from "../components/ui/FeatureBubble";
 import { OwnerSpotlight } from "../components/ui/OwnerSpotlight";
 import { Button } from "../components/ui/primitives/Button";
 import { ClientsSection } from "../components/sections/ClientsSection";
-import { useAnalyticsNavigation } from "../hooks/useAnalyticsNavigation";
+import { analyticsService } from "../services/analyticsService";
 import { ITEMS_PER_PAGE } from "../constants/pagination";
 
 export const Home = () => {
   const { t, isRtl } = useLanguage();
-  const analyticsNavigate = useAnalyticsNavigation();
+  const navigate = useNavigate();
 
   const bubbles = useMemo(
     () =>
@@ -23,12 +25,12 @@ export const Home = () => {
     [t.home.bubbles],
   );
   const handleContact = () => {
-    analyticsNavigate(routePaths.contact, "owner_contact_click", {
-      source: "home",
-    });
+    analyticsService.trackEvent("owner_contact_click", { source: "home" });
+    navigate(routePaths.contact);
   };
   const handleBubbleClick = (title) => {
-    analyticsNavigate(routePaths.contact, "home_bubble_click", { title });
+    analyticsService.trackEvent("home_bubble_click", { title });
+    navigate(routePaths.contact);
   };
 
   return (

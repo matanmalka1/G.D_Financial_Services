@@ -2,16 +2,11 @@ import { useMemo, useState, useEffect, useRef, forwardRef } from "react";
 import { Search, Phone, ChevronDown } from "lucide-react";
 import { AsYouType, getExampleNumber } from "libphonenumber-js";
 import metadata from "libphonenumber-js/metadata.min.json";
-import { COUNTRIES } from "../../data/countries";
-
-const DEFAULT_COUNTRY = COUNTRIES.find((c) => c.code === "IL") || COUNTRIES[0];
-
-const findCountryByValue = (value) => {
-  const normalized = (value || "").replace(/\s+/g, "");
-  if (!normalized) return DEFAULT_COUNTRY;
-  const match = COUNTRIES.find((c) => normalized.startsWith(c.dialCode));
-  return match || DEFAULT_COUNTRY;
-};
+import {
+  COMMON_COUNTRIES,
+  DEFAULT_COUNTRY_CODE,
+  loadAllCountries,
+} from "../../data/countries";
 
 export const PhoneNumberInput = forwardRef(
   (
@@ -28,22 +23,52 @@ export const PhoneNumberInput = forwardRef(
   ) => {
     const [open, setOpen] = useState(false);
     const [query, setQuery] = useState("");
+    const [countries, setCountries] = useState(COMMON_COUNTRIES);
+    const [allLoaded, setAllLoaded] = useState(false);
     const containerRef = useRef(null);
 
-    const normalizedValue = useMemo(() => (value || "").replace(/\s+/g, ""), [value]);
-    const selected = useMemo(() => findCountryByValue(normalizedValue), [normalizedValue]);
+    const defaultCountry = useMemo(
+      () =>
+        countries.find((c) => c.code === DEFAULT_COUNTRY_CODE) ||
+        countries[0] ||
+        COMMON_COUNTRIES[0],
+      [countries],
+    );
+
+    const findCountryByValue = (val) => {
+      const normalized = (val || "").replace(/\s+/g, "");
+      if (!normalized) return defaultCountry;
+      const match = countries.find((c) => normalized.startsWith(c.dialCode));
+      return match || defaultCountry;
+    };
+
+    const normalizedValue = useMemo(
+      () => (value || "").replace(/\s+/g, ""),
+      [value],
+    );
+    const selected = useMemo(
+      () => findCountryByValue(normalizedValue),
+      [normalizedValue, countries, defaultCountry],
+    );
     const localNumber = normalizedValue.replace(selected.dialCode, "");
 
     const filtered = useMemo(() => {
-      if (!query.trim()) return COUNTRIES;
+      if (!query.trim()) return countries;
       const q = query.toLowerCase();
-      return COUNTRIES.filter(
+      return countries.filter(
         (c) =>
           c.name.toLowerCase().includes(q) ||
           c.code.toLowerCase().includes(q) ||
           c.dialCode.includes(q),
       );
-    }, [query]);
+    }, [query, countries]);
+
+    const loadAll = async () => {
+      if (allLoaded) return;
+      const all = await loadAllCountries();
+      setCountries(all);
+      setAllLoaded(true);
+    };
 
     const handleCountryChange = (country) => {
       const digits = localNumber.replace(/\D/g, "");
@@ -100,7 +125,10 @@ export const PhoneNumberInput = forwardRef(
         >
           <button
             type="button"
-            onClick={() => setOpen((p) => !p)}
+            onClick={() => {
+              setOpen((p) => !p);
+              if (!allLoaded) loadAll();
+            }}
             className={`flex items-center gap-2 px-3 py-3 min-w-[72px] ${isRtl ? "border-l border-slate-200 rounded-r-xl" : "border-r border-slate-200 rounded-l-xl"} bg-white hover:bg-slate-50 transition`}
             aria-label="Select country code"
           >
