@@ -33,10 +33,14 @@ export const Contact = () => {
 
   const onSubmit = async (data) => {
     const loadingToast = toast.loading("Sending...");
-    await new Promise((resolve) => setTimeout(resolve, 1500));
-    console.log("Form Data:", data);
-    toast.success(t.contact.success, { id: loadingToast });
-    reset();
+    try {
+      await new Promise((resolve) => setTimeout(resolve, 1500));
+      console.log("Form Data:", data);
+      toast.success(t.contact.success, { id: loadingToast });
+      setTimeout(() => reset(), 500);
+    } catch (error) {
+      toast.error(t.contact.error, { id: loadingToast });
+    }
   };
 
   const onError = () => {

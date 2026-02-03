@@ -7,6 +7,7 @@ import { Button } from '../components/ui/primitives/Button';
 import { translations } from '../i18n/translations';
 import { ClientsSection } from '../components/sections/ClientsSection';
 import { useAnalyticsNavigation } from '../hooks/useAnalyticsNavigation';
+import { ITEMS_PER_PAGE } from '../constants/pagination';
 
 export const Home = () => {
   const { t, isRtl } = useLanguage();
@@ -17,7 +18,7 @@ export const Home = () => {
     { title: t.home.bubbles.businessConsulting, icon: '💼' },
     { title: t.home.bubbles.businessPlans, icon: '📋' },
     { title: t.home.bubbles.investorPresentations, icon: '📈' },
-  ];
+  ].slice(0, ITEMS_PER_PAGE.FEATURED_ARTICLES);
   const handleContact = () => {
     analyticsNavigate(routePaths.contact, 'owner_contact_click', { source: 'home' });
   };

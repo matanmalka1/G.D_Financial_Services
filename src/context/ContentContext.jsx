@@ -55,8 +55,8 @@ export const ContentProvider = ({ children }) => {
 
       const stored = getFromStorage(STORAGE_KEYS.CONTENT);
       if (stored) {
-        setArticles(stored.articles || []);
-        setSectors(stored.sectors || []);
+        setArticles(stored?.articles ?? []);
+        setSectors(stored?.sectors ?? []);
         setLoading(false);
       }
 

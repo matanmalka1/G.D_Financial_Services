@@ -12,8 +12,9 @@ import { EmptyState } from '../components/ui/EmptyState';
 import { ErrorState } from '../components/ui/ErrorState';
 import { LoadingGrid } from '../components/ui/LoadingGrid';
 import { translations } from '../i18n/translations';
+import { ITEMS_PER_PAGE } from '../constants/pagination';
 
-const ARTICLES_PER_PAGE = 9;
+const ARTICLES_PER_PAGE = ITEMS_PER_PAGE.NEWS;
 
 export const News = () => {
   const { t, language, isRtl } = useLanguage();

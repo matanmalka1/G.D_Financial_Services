@@ -11,6 +11,7 @@ import { SectorBenefitsCard } from "../components/sector/SectorBenefitsCard";
 import { RelatedArticlesSection } from "../components/sector/RelatedArticlesSection";
 import { SectorValueBubbles } from "../components/sector/SectorValueBubbles";
 import { ErrorState } from "../components/ui/ErrorState";
+import { ITEMS_PER_PAGE } from "../constants/pagination";
 
 export const SectorDetail = () => {
   const { id } = useParams();
@@ -18,11 +19,11 @@ export const SectorDetail = () => {
   const { getSectorById, getRelatedArticles, error, refreshContent } = useContent();
 
   const sector = getSectorById(id);
-  const detail = t.sectorDetail.sectorDetails[id || ""];
+  const detail = sector ? t.sectorDetail.sectorDetails[sector.id] : null;
 
   const relatedArticles = useMemo(() => {
     if (!id) return [];
-    return getRelatedArticles(id).slice(0, 3);
+    return getRelatedArticles(id).slice(0, ITEMS_PER_PAGE.RELATED_ARTICLES);
   }, [id, getRelatedArticles]);
 
   useEffect(() => {
@@ -44,7 +45,7 @@ export const SectorDetail = () => {
     );
   }
 
-  if (!sector) {
+  if (!sector || !detail) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-slate-50">
         <div className="text-center">
@@ -64,13 +65,13 @@ export const SectorDetail = () => {
 
   const sectorTitleEn = translations.en.nav[sector.titleKey] || "";
   const sectorTitle = t.nav[sector.titleKey];
-  const mainDescription = t.sectorDetail.mainDescription.replace(
-    "{sector}",
-    sectorTitle,
+  const mainDescription = useMemo(
+    () => t.sectorDetail.mainDescription.replace(/\{sector\}/g, sectorTitle),
+    [t.sectorDetail.mainDescription, sectorTitle],
   );
-  const aboutDescription = t.sectorDetail.aboutDescription.replace(
-    "{sector}",
-    sectorTitle.toLowerCase(),
+  const aboutDescription = useMemo(
+    () => t.sectorDetail.aboutDescription.replace(/\{sector\}/g, sectorTitle.toLowerCase()),
+    [t.sectorDetail.aboutDescription, sectorTitle],
   );
   const longDescription = detail?.longDescription;
   const sections = detail?.sections;
