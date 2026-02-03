@@ -7,11 +7,10 @@ import { ParallaxHeader } from "../components/common/ParallaxHeader";
 import { Select } from "../components/ui/Select";
 import { Button } from "../components/ui/primitives/Button";
 import { translations } from "../i18n/translations";
+import { isValidPhone } from "../utils/helpers/validation";
 
 export const Contact = () => {
   const { t, isRtl } = useLanguage();
-
-  const phoneRegex = /^([+]?[\s0-9]+)?(\d{3}|[(]?[0-9]+[)])?([-]?[\s0-9])+$/;
 
   const schema = z.object({
     fullName: z.string().min(2, t.contact.validation.nameMin),
@@ -19,7 +18,7 @@ export const Contact = () => {
     phone: z
       .string()
       .optional()
-      .refine((val) => !val || phoneRegex.test(val), {
+      .refine((val) => !val || isValidPhone(val), {
         message: t.contact.validation.phoneInvalid,
       }),
     service: z.string().min(1, t.contact.validation.serviceRequired),

@@ -9,6 +9,7 @@ import { SearchBar } from '../components/ui/SearchBar';
 import { Pagination } from '../components/ui/Pagination';
 import { EmptyState } from '../components/ui/EmptyState';
 import { ErrorState } from '../components/ui/ErrorState';
+import { LoadingGrid } from '../components/ui/LoadingGrid';
 import { translations } from '../i18n/translations';
 
 const ARTICLES_PER_PAGE = 9;
@@ -16,7 +17,7 @@ const ARTICLES_PER_PAGE = 9;
 export const News = () => {
   const { t, language, isRtl } = useLanguage();
   const [search, setSearch] = useState('');
-  const { articles, error, refreshContent } = useContent();
+  const { articles, error, refreshContent, loading } = useContent();
   const [currentPage, setCurrentPage] = useState(1);
 
   const filtered = useMemo(() => {
@@ -59,6 +60,20 @@ export const News = () => {
           actionLabel={t.news.retry || "Retry"}
           onAction={refreshContent}
         />
+      </main>
+    );
+  }
+
+  if (loading) {
+    return (
+      <main className="min-h-screen bg-slate-50/30 pb-20">
+        <ParallaxHeader 
+          image="https://images.unsplash.com/photo-1504711434969-e33886168f5c?auto=format&fit=crop&q=80&w=2000"
+          title={translations.en.news.title}
+        />
+        <section className="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <LoadingGrid count={9} />
+        </section>
       </main>
     );
   }

@@ -7,11 +7,12 @@ import { translations } from "../i18n/translations";
 import { SectorTile } from "../components/ui/SectorTile";
 import { SectionHeading } from "../components/ui/SectionHeading";
 import { ErrorState } from "../components/ui/ErrorState";
+import { LoadingGrid } from "../components/ui/LoadingGrid";
 
 export const Sectors = () => {
   const { t, isRtl } = useLanguage();
   const [search, setSearch] = useState("");
-  const { sectors, error, refreshContent } = useContent();
+  const { sectors, error, refreshContent, loading } = useContent();
 
   const filteredSectors = useMemo(() => {
     const query = search.toLowerCase().trim();
@@ -37,6 +38,21 @@ export const Sectors = () => {
           actionLabel={t.news.retry || "Retry"}
           onAction={refreshContent}
         />
+      </main>
+    );
+  }
+
+  if (loading) {
+    return (
+      <main className="min-h-screen bg-slate-50/30">
+        <ParallaxHeader
+          image="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=2000"
+          title={translations.en.nav.sectors}
+          subtitle={translations.en.sectors.title}
+        />
+        <section className="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <LoadingGrid count={6} columns="md:grid-cols-2" />
+        </section>
       </main>
     );
   }
