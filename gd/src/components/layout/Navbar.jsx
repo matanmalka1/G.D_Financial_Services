@@ -11,6 +11,7 @@ export const Navbar = () => {
   const navigate = useNavigate();
 
   const sectorOptions = [
+    { value: "/sectors/business-plan", label: t.nav.businessPlans },
     {
       value: "/sectors/business-presentations",
       label: t.nav.businessPresentations,
@@ -21,7 +22,6 @@ export const Navbar = () => {
       value: "/sectors/ongoing-financial-advisory",
       label: t.nav.ongoingAdvisory,
     },
-    { value: "/sectors/business-plan", label: t.nav.businessPlans },
   ];
 
   const handleSectorChange = (val) => {

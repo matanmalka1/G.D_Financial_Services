@@ -118,6 +118,15 @@ const SectorDetail = () => {
                       .map((para, pIdx) => (
                         <p key={pIdx}>{para.trim()}</p>
                       ))}
+                    <button
+                      type="button"
+                      className="inline-flex items-center gap-2 text-sm font-bold text-indigo-600 hover:text-indigo-800 transition-colors"
+                    >
+                      <span>{t.news.readMore}</span>
+                      <svg className={`w-4 h-4 ${isRtl ? "rotate-180" : ""}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7-7 7" />
+                      </svg>
+                    </button>
                   </div>
                 ))}
               </div>

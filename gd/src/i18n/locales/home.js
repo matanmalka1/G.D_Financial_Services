@@ -34,7 +34,7 @@ export const homeTranslations = {
     },
     bubbles: {
       exitStrategy: "ייעוץ אסטרטגיית יציאה",
-      businessConsulting: "ייעוץ עסקי",
+      businessConsulting: "ליווי עסקי",
       businessPlans: "תוכניות עסקיות",
       investorPresentations: "מצגות למשקיעים",
     },
