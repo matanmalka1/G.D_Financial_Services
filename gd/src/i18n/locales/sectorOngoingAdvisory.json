@@ -1,34 +1,34 @@
-export const sectorOngoingAdvisory = {
-  en: {
+{
+  "en": {
     "ongoing-financial-advisory": {
-      services: [
+      "services": [
         "Fractional CFO Services",
         "Monthly Financial Reporting",
         "Cash Flow Management",
-        "Board Meeting Preparation",
+        "Board Meeting Preparation"
       ],
-      benefits: [
+      "benefits": [
         "Constant Financial Vigilance",
         "Informed Strategic Decisions",
         "Stable Growth Trajectory",
-        "Peace of Mind for Leadership",
-      ],
-    },
+        "Peace of Mind for Leadership"
+      ]
+    }
   },
-  he: {
+  "he": {
     "ongoing-financial-advisory": {
-      services: [
+      "services": [
         "שירותי סמנכ\"ל כספים חיצוני",
         "דיווח פיננסי חודשי",
         "ניהול תזרים מזומנים",
-        "הכנה לישיבות דירקטוריון",
+        "הכנה לישיבות דירקטוריון"
       ],
-      benefits: [
+      "benefits": [
         "ערנות פיננסית מתמדת",
         "קבלת החלטות אסטרטגיות מושכלות",
         "מסלול צמיחה יציב",
-        "שקט נפשי להנהלה",
-      ],
-    },
-  },
-};
+        "שקט נפשי להנהלה"
+      ]
+    }
+  }
+}

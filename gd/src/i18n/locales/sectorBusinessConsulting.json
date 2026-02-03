@@ -1,34 +1,34 @@
-export const sectorBusinessConsulting = {
-  en: {
+{
+  "en": {
     "business-consulting": {
-      services: [
+      "services": [
         "Strategic Growth Planning",
         "Operational Efficiency Audit",
         "Cost Optimization & Budgeting",
-        "Competitive Intelligence",
+        "Competitive Intelligence"
       ],
-      benefits: [
+      "benefits": [
         "Identified New Revenue Streams",
         "Improved Profit Margins",
         "Reduced Operational Waste",
-        "Future-Proofed Business Model",
-      ],
-    },
+        "Future-Proofed Business Model"
+      ]
+    }
   },
-  he: {
+  "he": {
     "business-consulting": {
-      services: [
+      "services": [
         "תכנון צמיחה אסטרטגי",
         "ביקורת יעילות תפעולית",
         "אופטימיזציה של עלויות ותקצוב",
-        "מודיעין תחרותי",
+        "מודיעין תחרותי"
       ],
-      benefits: [
+      "benefits": [
         "זיהוי אפיקי הכנסה חדשים",
         "שיפור שולי הרווח",
         "צמצום בזבוז תפעולי",
-        "מודל עסקי עמיד לעתיד",
-      ],
-    },
-  },
-};
+        "מודל עסקי עמיד לעתיד"
+      ]
+    }
+  }
+}

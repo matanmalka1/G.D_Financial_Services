@@ -1,10 +1,10 @@
-import { globalTranslations } from "./locales/global";
-import { homeTranslations } from "./locales/home";
-import { companyProfileTranslations } from "./locales/companyProfile";
-import { sectorsTranslations } from "./locales/sectors";
+import globalTranslations from "./locales/global.json";
+import homeTranslations from "./locales/home.json";
+import companyProfileTranslations from "./locales/companyProfile.json";
+import sectorsTranslations from "./locales/sectors.json";
 import { sectorDetailTranslations } from "./locales/sectorDetail";
-import { newsTranslations } from "./locales/news";
-import { contactTranslations } from "./locales/contact";
+import newsTranslations from "./locales/news.json";
+import contactTranslations from "./locales/contact.json";
 
 export const translations = {
   en: {
