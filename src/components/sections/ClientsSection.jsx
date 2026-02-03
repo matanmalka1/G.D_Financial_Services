@@ -1,18 +1,19 @@
+import { useMemo } from "react";
 import { useLanguage } from "../../hooks/useLanguage";
+
+const ICON_BY_KEY = {
+  retail: "🛒",
+  pharma: "💊",
+  energy: "⚡️",
+  realEstate: "🏢",
+  highTech: "💻",
+  industry: "🏭",
+};
 
 export const ClientsSection = () => {
   const { t } = useLanguage();
 
-  const iconByKey = {
-    retail: "🛒",
-    pharma: "💊",
-    energy: "⚡️",
-    realEstate: "🏢",
-    highTech: "💻",
-    industry: "🏭",
-  };
-
-  const sectors = t.home.clients.sectors || [];
+  const sectors = useMemo(() => t.home.clients.sectors || [], [t.home.clients.sectors]);
 
   return (
     <section className="py-24 bg-slate-50/70">
@@ -32,7 +33,7 @@ export const ClientsSection = () => {
               key={item.key}
               className="flex flex-col items-center justify-center bg-white rounded-2xl shadow-md shadow-slate-200/60 border border-slate-100 py-8 px-4 gap-3 transition-transform duration-200 hover:-translate-y-1 hover:shadow-lg"
             >
-              <span className="text-4xl">{iconByKey[item.key]}</span>
+              <span className="text-4xl">{ICON_BY_KEY[item.key]}</span>
               <span className="text-sm font-semibold text-slate-800">
                 {item.label}
               </span>

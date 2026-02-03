@@ -12,12 +12,16 @@ export const Home = () => {
   const { t, isRtl } = useLanguage();
   const analyticsNavigate = useAnalyticsNavigation();
 
-  const bubbles = [
-    { title: t.home.bubbles.exitStrategy, icon: "🎯" },
-    { title: t.home.bubbles.businessConsulting, icon: "💼" },
-    { title: t.home.bubbles.businessPlans, icon: "📋" },
-    { title: t.home.bubbles.investorPresentations, icon: "📈" },
-  ].slice(0, ITEMS_PER_PAGE.FEATURED_ARTICLES);
+  const bubbles = useMemo(
+    () =>
+      [
+        { title: t.home.bubbles.exitStrategy, icon: "🎯" },
+        { title: t.home.bubbles.businessConsulting, icon: "💼" },
+        { title: t.home.bubbles.businessPlans, icon: "📋" },
+        { title: t.home.bubbles.investorPresentations, icon: "📈" },
+      ].slice(0, ITEMS_PER_PAGE.FEATURED_ARTICLES),
+    [t.home.bubbles],
+  );
   const handleContact = () => {
     analyticsNavigate(routePaths.contact, "owner_contact_click", {
       source: "home",
