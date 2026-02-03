@@ -6,13 +6,14 @@ import {
   useCallback,
 } from "react";
 import { contentService } from "../services/contentService";
-import { getFromStorage, setToStorage } from "../utils/helpers/storage";
 import { STORAGE_KEYS } from "../constants";
 import { toast } from "sonner";
+import { useLocalStorage } from "../hooks/useLocalStorage";
 
 export const ContentContext = createContext(null);
 
 export const ContentProvider = ({ children }) => {
+  const { getItem, setItem } = useLocalStorage();
   const [articles, setArticles] = useState([]);
   const [sectors, setSectors] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -27,14 +28,14 @@ export const ContentProvider = ({ children }) => {
       setArticles(nextArticles);
       setSectors(nextSectors);
 
-      const cached = getFromStorage(STORAGE_KEYS.CONTENT);
+      const cached = getItem(STORAGE_KEYS.CONTENT);
       const isFresh =
         !cached ||
         JSON.stringify(cached.articles) !== JSON.stringify(nextArticles) ||
         JSON.stringify(cached.sectors) !== JSON.stringify(nextSectors);
 
       if (isFresh) {
-        setToStorage(STORAGE_KEYS.CONTENT, {
+        setItem(STORAGE_KEYS.CONTENT, {
           articles: nextArticles,
           sectors: nextSectors,
         });
@@ -53,7 +54,7 @@ export const ContentProvider = ({ children }) => {
     const initialize = async () => {
       if (!isMounted) return;
 
-      const stored = getFromStorage(STORAGE_KEYS.CONTENT);
+      const stored = getItem(STORAGE_KEYS.CONTENT);
       if (stored) {
         setArticles(stored?.articles ?? []);
         setSectors(stored?.sectors ?? []);
