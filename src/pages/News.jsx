@@ -7,8 +7,9 @@ import { NewsCard } from "../components/ui/NewsCard";
 import { SearchBar } from "../components/ui/SearchBar";
 import { Pagination } from "../components/ui/Pagination";
 import { EmptyState } from "../components/ui/EmptyState";
-import { LoadBoundary } from "../components/common/LoadBoundary";
+import { LoadBoundary, PageError, PageLoading } from "../components/common/LoadBoundary";
 import { ITEMS_PER_PAGE } from "../constants/pagination";
+import { filterBySearch } from "../utils/helpers/utils";
 
 const ARTICLES_PER_PAGE = ITEMS_PER_PAGE.NEWS;
 
@@ -25,18 +26,16 @@ export const News = () => {
     />
   );
 
-  const filtered = useMemo(() => {
-    const query = search.toLowerCase().trim();
-    if (!query) return articles;
-    return articles.filter((art) => {
-      return (
-        art.title.en.toLowerCase().includes(query) ||
-        art.title.he.toLowerCase().includes(query) ||
-        art.excerpt.en.toLowerCase().includes(query) ||
-        art.excerpt.he.toLowerCase().includes(query)
-      );
-    });
-  }, [search, articles]);
+  const filtered = useMemo(
+    () =>
+      filterBySearch(articles, search, (art) => [
+        art.title.en,
+        art.title.he,
+        art.excerpt.en,
+        art.excerpt.he,
+      ]),
+    [search, articles],
+  );
 
   const handleSearchChange = (value) => {
     setSearch(value);
@@ -67,11 +66,15 @@ export const News = () => {
       error={error}
       loading={loading}
       onRetry={refreshContent}
-      errorTitle={t.news.errorTitle || "Unable to load news"}
-      errorMessage={t.news.errorMessage || error}
-      retryLabel={t.news.retry || "Retry"}
-      loadingHeader={header}
-      loadingGridProps={{ count: 9 }}
+      errorFallback={
+        <PageError
+          title={t.news.errorTitle || "Unable to load news"}
+          message={t.news.errorMessage || error}
+          actionLabel={t.news.retry || "Retry"}
+          onRetry={refreshContent}
+        />
+      }
+      loadingFallback={<PageLoading header={header} count={9} />}
     >
       <main className="min-h-screen bg-slate-50/30 pb-20">
         {header}

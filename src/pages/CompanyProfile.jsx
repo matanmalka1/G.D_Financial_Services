@@ -6,7 +6,7 @@ import { routePaths } from "../routes/paths";
 import { Button } from "../components/ui/primitives/Button";
 import { SectionHeading } from "../components/ui/SectionHeading";
 import { Card } from "../components/ui/primitives/Card";
-import { LoadBoundary } from "../components/common/LoadBoundary";
+import { LoadBoundary, PageError } from "../components/common/LoadBoundary";
 
 export const CompanyProfile = () => {
   const { t } = useLanguage();
@@ -32,11 +32,14 @@ export const CompanyProfile = () => {
       error={error}
       loading={false}
       onRetry={refreshContent}
-      errorTitle={
-        t?.errors?.contentLoadFailed || "Unable to load company profile"
+      errorFallback={
+        <PageError
+          title={t?.errors?.contentLoadFailed || "Unable to load company profile"}
+          message={error}
+          actionLabel={t?.news?.retry || "Retry"}
+          onRetry={refreshContent}
+        />
       }
-      errorMessage={error}
-      retryLabel={t?.news?.retry || "Retry"}
     >
       <main>
       <ParallaxHeader

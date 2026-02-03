@@ -2,26 +2,19 @@ import { useState } from "react";
 import { useLanguage } from "../hooks/useLanguage";
 import { useContent } from "../hooks/useContent";
 import { ParallaxHeader } from "../components/common/ParallaxHeader";
-import { LoadBoundary } from "../components/common/LoadBoundary";
+import { LoadBoundary, PageError, PageLoading } from "../components/common/LoadBoundary";
 import { SectorTile } from "../components/ui/SectorTile";
 import { SectionHeading } from "../components/ui/SectionHeading";
 import { SearchBar } from "../components/ui/SearchBar";
-
-
-const filterSectors = (sectors, query, t) => {
-  const q = query.toLowerCase().trim();
-  if (!q) return sectors;
-  return sectors.filter((sector) => {
-    const title = (t.nav[sector.titleKey] || "").toLowerCase();
-    return title.includes(q);
-  });
-};
+import { filterBySearch } from "../utils/helpers/search";
 
 export const Sectors = () => {
   const { t, isRtl } = useLanguage();
   const [search, setSearch] = useState("");
   const { sectors, error, refreshContent, loading } = useContent();
-  const filteredSectors = filterSectors(sectors, search, t);
+  const filteredSectors = filterBySearch(sectors, search, (sector) => [
+    t.nav[sector.titleKey] || "",
+  ]);
 
   const header = (
     <ParallaxHeader
@@ -36,11 +29,17 @@ export const Sectors = () => {
       error={error}
       loading={loading}
       onRetry={refreshContent}
-      errorTitle={t.sectors.errorTitle || "Unable to load sectors"}
-      errorMessage={t.sectors.errorMessage || error}
-      retryLabel={t.news.retry || "Retry"}
-      loadingHeader={header}
-      loadingGridProps={{ count: 6, columns: "md:grid-cols-2" }}
+      errorFallback={
+        <PageError
+          title={t.sectors.errorTitle || "Unable to load sectors"}
+          message={t.sectors.errorMessage || error}
+          actionLabel={t.news.retry || "Retry"}
+          onRetry={refreshContent}
+        />
+      }
+      loadingFallback={
+        <PageLoading header={header} count={6} columns="md:grid-cols-2" />
+      }
     >
       <main className="min-h-screen bg-slate-50/30">
         {header}

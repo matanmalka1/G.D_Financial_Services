@@ -8,7 +8,7 @@ import { SectorServices } from "../components/sector/SectorServices";
 import { SectorBenefitsCard } from "../components/sector/SectorBenefitsCard";
 import { RelatedArticlesSection } from "../components/sector/RelatedArticlesSection";
 import { SectorValueBubbles } from "../components/sector/SectorValueBubbles";
-import { LoadBoundary } from "../components/common/LoadBoundary";
+import { LoadBoundary, PageError, PageLoading } from "../components/common/LoadBoundary";
 import { ITEMS_PER_PAGE } from "../constants/pagination";
 
 export const SectorDetail = () => {
@@ -69,11 +69,15 @@ export const SectorDetail = () => {
       error={error}
       loading={loading}
       onRetry={refreshContent}
-      errorTitle={t.sectorDetail.errorTitle || "Unable to load this sector"}
-      errorMessage={t.sectorDetail.errorMessage || error}
-      retryLabel={t.news.retry || "Retry"}
-      loadingHeader={header}
-      loadingGridProps={{ count: 3 }}
+      errorFallback={
+        <PageError
+          title={t.sectorDetail.errorTitle || "Unable to load this sector"}
+          message={t.sectorDetail.errorMessage || error}
+          actionLabel={t.news.retry || "Retry"}
+          onRetry={refreshContent}
+        />
+      }
+      loadingFallback={<PageLoading header={header} count={3} />}
     >
       <main className="bg-slate-50/30 min-h-screen pb-20">
         {header}
