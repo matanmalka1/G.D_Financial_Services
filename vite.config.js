@@ -10,6 +10,9 @@ export default defineConfig(({ mode }) => {
         host: '0.0.0.0',
       },
       plugins: [react()],
+      optimizeDeps: {
+        include: ['sonner'],
+      },
       define: {},
       resolve: {
         alias: {
