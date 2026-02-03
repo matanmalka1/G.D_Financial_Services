@@ -6,7 +6,7 @@ import { Button } from "../components/ui/primitives/Button";
 import { SectionHeading } from "../components/ui/SectionHeading";
 import { Card } from "../components/ui/primitives/Card";
 
-const CompanyProfile = () => {
+export const CompanyProfile = () => {
   const { t } = useLanguage();
 
   const values = [
@@ -98,5 +98,3 @@ const CompanyProfile = () => {
     </main>
   );
 };
-
-export default CompanyProfile;

@@ -8,14 +8,15 @@ import { NewsCard } from '../components/ui/NewsCard';
 import { SearchBar } from '../components/ui/SearchBar';
 import { Pagination } from '../components/ui/Pagination';
 import { EmptyState } from '../components/ui/EmptyState';
+import { ErrorState } from '../components/ui/ErrorState';
 import { translations } from '../i18n/translations';
 
 const ARTICLES_PER_PAGE = 9;
 
-const News = () => {
+export const News = () => {
   const { t, language, isRtl } = useLanguage();
   const [search, setSearch] = useState('');
-  const { articles } = useContent();
+  const { articles, error, refreshContent } = useContent();
   const [currentPage, setCurrentPage] = useState(1);
 
   const filtered = useMemo(() => {
@@ -48,6 +49,19 @@ const News = () => {
     setCurrentPage(page);
     window.scrollTo({ top: 400, behavior: 'smooth' });
   };
+
+  if (error) {
+    return (
+      <main className="min-h-screen bg-slate-50/30 flex items-center justify-center px-4">
+        <ErrorState
+          title={t.news.errorTitle || "Unable to load news"}
+          message={t.news.errorMessage || error}
+          actionLabel={t.news.retry || "Retry"}
+          onAction={refreshContent}
+        />
+      </main>
+    );
+  }
 
   return (
     <main className="min-h-screen bg-slate-50/30 pb-20">
@@ -113,5 +127,3 @@ const News = () => {
     </main>
   );
 };
-
-export default News;

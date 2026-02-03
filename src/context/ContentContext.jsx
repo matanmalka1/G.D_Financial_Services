@@ -8,6 +8,7 @@ import {
 import { contentService } from "../services/contentService";
 import { getFromStorage, setToStorage } from "../utils/helpers/storage";
 import { STORAGE_KEYS } from "../constants";
+import { toast } from "sonner";
 
 export const ContentContext = createContext(null);
 
@@ -15,8 +16,10 @@ export const ContentProvider = ({ children }) => {
   const [articles, setArticles] = useState([]);
   const [sectors, setSectors] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   const fetchContent = useCallback(async () => {
+    setError(null);
     try {
       const [nextArticles, nextSectors] = await Promise.all([
         contentService.getArticles(),
@@ -39,6 +42,8 @@ export const ContentProvider = ({ children }) => {
       }
     } catch (error) {
       console.error("Failed to fetch content:", error);
+      setError("We couldn't refresh the latest content. Showing saved data if available.");
+      toast.error("Unable to refresh content. Showing cached data.");
     } finally {
       setLoading(false);
     }
@@ -71,6 +76,7 @@ export const ContentProvider = ({ children }) => {
 
   const refreshContent = useCallback(async () => {
     setLoading(true);
+    setError(null);
     await fetchContent();
   }, [fetchContent]);
 
@@ -91,6 +97,7 @@ export const ContentProvider = ({ children }) => {
       articles,
       sectors,
       loading,
+      error,
       featuredArticles,
       getSectorById: (id) => sectors.find((sector) => sector.id === id) || null,
       searchArticles,
@@ -101,6 +108,7 @@ export const ContentProvider = ({ children }) => {
       articles,
       sectors,
       loading,
+      error,
       featuredArticles,
       refreshContent,
       searchArticles,

@@ -1,8 +1,10 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
-import App from './App';
+import { Toaster } from 'sonner';
+import { App } from './App';
 import { LanguageProvider } from './i18n/LanguageContext';
 import { ContentProvider } from './context/ContentContext';
+import { ErrorBoundary } from './components/common/ErrorBoundary';
 
 const rootElement = document.getElementById('root');
 if (!rootElement) {
@@ -11,10 +13,13 @@ if (!rootElement) {
 
 createRoot(rootElement).render(
   <StrictMode>
-    <LanguageProvider>
-      <ContentProvider>
-        <App />
-      </ContentProvider>
-    </LanguageProvider>
+    <Toaster richColors position="top-right" closeButton />
+    <ErrorBoundary>
+      <LanguageProvider>
+        <ContentProvider>
+          <App />
+        </ContentProvider>
+      </LanguageProvider>
+    </ErrorBoundary>
   </StrictMode>
 );

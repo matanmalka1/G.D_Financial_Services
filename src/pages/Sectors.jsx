@@ -6,11 +6,12 @@ import { ParallaxHeader } from "../components/common/ParallaxHeader";
 import { translations } from "../i18n/translations";
 import { SectorTile } from "../components/ui/SectorTile";
 import { SectionHeading } from "../components/ui/SectionHeading";
+import { ErrorState } from "../components/ui/ErrorState";
 
-const Sectors = () => {
+export const Sectors = () => {
   const { t, isRtl } = useLanguage();
   const [search, setSearch] = useState("");
-  const { sectors } = useContent();
+  const { sectors, error, refreshContent } = useContent();
 
   const filteredSectors = useMemo(() => {
     const query = search.toLowerCase().trim();
@@ -26,6 +27,19 @@ const Sectors = () => {
       return titleEn.includes(query) || titleHe.includes(query);
     });
   }, [search, sectors]);
+
+  if (error) {
+    return (
+      <main className="min-h-screen bg-slate-50/30 flex items-center justify-center px-4">
+        <ErrorState
+          title={t.sectors.errorTitle || "Unable to load sectors"}
+          message={t.sectors.errorMessage || error}
+          actionLabel={t.news.retry || "Retry"}
+          onAction={refreshContent}
+        />
+      </main>
+    );
+  }
 
   return (
     <main className="min-h-screen bg-slate-50/30">
@@ -83,5 +97,3 @@ const Sectors = () => {
     </main>
   );
 };
-
-export default Sectors;

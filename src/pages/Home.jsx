@@ -9,7 +9,7 @@ import { Button } from '../components/ui/primitives/Button';
 import { translations } from '../i18n/translations';
 import { ClientsSection } from '../components/sections/ClientsSection';
 
-const Home = () => {
+export const Home = () => {
   const { t, isRtl } = useLanguage();
   const navigate = useNavigate();
 
@@ -84,5 +84,3 @@ const Home = () => {
     </main>
   );
 };
-
-export default Home;

@@ -9,11 +9,12 @@ import { SectorServices } from "../components/sector/SectorServices";
 import { SectorBenefitsCard } from "../components/sector/SectorBenefitsCard";
 import { RelatedArticlesSection } from "../components/sector/RelatedArticlesSection";
 import { SectorValueBubbles } from "../components/sector/SectorValueBubbles";
+import { ErrorState } from "../components/ui/ErrorState";
 
-const SectorDetail = () => {
+export const SectorDetail = () => {
   const { id } = useParams();
   const { t, isRtl } = useLanguage();
-  const { getSectorById, getRelatedArticles } = useContent();
+  const { getSectorById, getRelatedArticles, error, refreshContent } = useContent();
 
   const sector = getSectorById(id);
   const detail = t.sectorDetail.sectorDetails[id || ""];
@@ -22,6 +23,19 @@ const SectorDetail = () => {
     if (!id) return [];
     return getRelatedArticles(id).slice(0, 3);
   }, [id, getRelatedArticles]);
+
+  if (error) {
+    return (
+      <main className="min-h-screen bg-slate-50/30 flex items-center justify-center px-4">
+        <ErrorState
+          title={t.sectorDetail.errorTitle || "Unable to load this sector"}
+          message={t.sectorDetail.errorMessage || error}
+          actionLabel={t.news.retry || "Retry"}
+          onAction={refreshContent}
+        />
+      </main>
+    );
+  }
 
   if (!sector) {
     return (
@@ -177,5 +191,3 @@ const SectorDetail = () => {
     </main>
   );
 };
-
-export default SectorDetail;

@@ -1,14 +1,14 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { Layout } from './components/layout/Layout';
 import { routePaths } from './routes/paths';
-import Home from './pages/Home';
-import CompanyProfile from './pages/CompanyProfile';
-import Sectors from './pages/Sectors';
-import SectorDetail from './pages/SectorDetail';
-import News from './pages/News';
-import Contact from './pages/Contact';
+import { Home } from './pages/Home';
+import { CompanyProfile } from './pages/CompanyProfile';
+import { Sectors } from './pages/Sectors';
+import { SectorDetail } from './pages/SectorDetail';
+import { News } from './pages/News';
+import { Contact } from './pages/Contact';
 
-const App = () => (
+export const App = () => (
   <Router>
     <Layout>
       <Routes>
@@ -23,5 +23,3 @@ const App = () => (
     </Layout>
   </Router>
 );
-
-export default App;

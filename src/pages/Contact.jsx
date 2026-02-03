@@ -1,14 +1,14 @@
 import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
-import toast, { Toaster } from "react-hot-toast";
+import { toast } from "sonner";
 import { useLanguage } from "../hooks/useLanguage";
 import { ParallaxHeader } from "../components/common/ParallaxHeader";
 import { Select } from "../components/ui/Select";
 import { Button } from "../components/ui/primitives/Button";
 import { translations } from "../i18n/translations";
 
-const Contact = () => {
+export const Contact = () => {
   const { t, isRtl } = useLanguage();
 
   const phoneRegex = /^([+]?[\s0-9]+)?(\d{3}|[(]?[0-9]+[)])?([-]?[\s0-9])+$/;
@@ -64,7 +64,6 @@ const Contact = () => {
 
   return (
     <main>
-      <Toaster position="top-right" />
       <ParallaxHeader
         image="https://images.unsplash.com/photo-1521791136064-7986c295944c?auto=format&fit=crop&q=80&w=2000"
         title={translations.en.contact.title}
@@ -182,5 +181,3 @@ const Contact = () => {
     </main>
   );
 };
-
-export default Contact;
