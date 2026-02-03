@@ -1,6 +1,6 @@
 export const DEFAULT_COUNTRY_CODE = "IL";
 
-// Commonly used markets for G.D Financial Services (keeps bundle small)
+// Commonly used markets for G.D Financial Services
 export const COMMON_COUNTRIES = [
   { code: "IL", name: "Israel", dialCode: "+972", flag: "🇮🇱" },
   { code: "US", name: "United States", dialCode: "+1", flag: "🇺🇸" },
@@ -26,9 +26,3 @@ export const COMMON_COUNTRIES = [
   { code: "IN", name: "India", dialCode: "+91", flag: "🇮🇳" },
   { code: "SG", name: "Singapore", dialCode: "+65", flag: "🇸🇬" },
 ];
-
-// Lazy-load full list only if needed
-export const loadAllCountries = async () => {
-  const { COUNTRIES } = await import("./countriesFull.js");
-  return COUNTRIES;
-};

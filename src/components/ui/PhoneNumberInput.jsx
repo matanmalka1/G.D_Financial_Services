@@ -5,11 +5,7 @@ import metadata from "libphonenumber-js/metadata.min.json";
 import { CountrySelector } from "./phone/CountrySelector";
 import { CountrySearchList } from "./phone/CountrySearchList";
 import { PhoneLocalInput } from "./phone/PhoneLocalInput";
-import {
-  COMMON_COUNTRIES,
-  DEFAULT_COUNTRY_CODE,
-  loadAllCountries,
-} from "../../data/countries";
+import { COMMON_COUNTRIES, DEFAULT_COUNTRY_CODE } from "../../data/countries";
 export const PhoneNumberInput = forwardRef(
   (
     {
@@ -25,8 +21,7 @@ export const PhoneNumberInput = forwardRef(
   ) => {
     const [open, setOpen] = useState(false);
     const [query, setQuery] = useState("");
-    const [countries, setCountries] = useState(COMMON_COUNTRIES);
-    const [allLoaded, setAllLoaded] = useState(false);
+    const [countries] = useState(COMMON_COUNTRIES);
     const containerRef = useRef(null);
 
     const defaultCountry = useMemo(
@@ -69,13 +64,6 @@ export const PhoneNumberInput = forwardRef(
           c.dialCode.includes(q),
       );
     }, [query, countries]);
-
-    const loadAll = useCallback(async () => {
-      if (allLoaded) return;
-      const all = await loadAllCountries();
-      setCountries(all);
-      setAllLoaded(true);
-    }, [allLoaded]);
 
     const handleCountryChange = useCallback(
       (country) => {
@@ -138,10 +126,7 @@ export const PhoneNumberInput = forwardRef(
           <CountrySelector
             selected={selected}
             isRtl={isRtl}
-            onToggle={() => {
-              setOpen((p) => !p);
-              if (!allLoaded) loadAll();
-            }}
+            onToggle={() => setOpen((p) => !p)}
           />
 
           {open && (
