@@ -19,7 +19,6 @@ export const ContentProvider = ({ children }) => {
   const [error, setError] = useState(null);
 
   const fetchContent = useCallback(async () => {
-    setError(null);
     try {
       const [nextArticles, nextSectors] = await Promise.all([
         contentService.getArticles(),
@@ -42,8 +41,7 @@ export const ContentProvider = ({ children }) => {
       }
     } catch (error) {
       console.error("Failed to fetch content:", error);
-      setError("We couldn't refresh the latest content. Showing saved data if available.");
-      toast.error("Unable to refresh content. Showing cached data.");
+      setError(error?.message || "Failed to fetch content");
     } finally {
       setLoading(false);
     }
@@ -55,7 +53,6 @@ export const ContentProvider = ({ children }) => {
     const initialize = async () => {
       if (!isMounted) return;
 
-      // Hydrate from storage first
       const stored = getFromStorage(STORAGE_KEYS.CONTENT);
       if (stored) {
         setArticles(stored.articles || []);
@@ -63,8 +60,39 @@ export const ContentProvider = ({ children }) => {
         setLoading(false);
       }
 
-      // Fetch fresh content
-      await fetchContent();
+      try {
+        const [nextArticles, nextSectors] = await Promise.all([
+          contentService.getArticles(),
+          contentService.getSectors(),
+        ]);
+        if (!isMounted) return;
+
+        setArticles(nextArticles);
+        setSectors(nextSectors);
+
+        const cached = getFromStorage(STORAGE_KEYS.CONTENT);
+        const isFresh =
+          !cached ||
+          JSON.stringify(cached.articles) !== JSON.stringify(nextArticles) ||
+          JSON.stringify(cached.sectors) !== JSON.stringify(nextSectors);
+
+        if (isFresh) {
+          setToStorage(STORAGE_KEYS.CONTENT, {
+            articles: nextArticles,
+            sectors: nextSectors,
+          });
+        }
+      } catch (error) {
+        console.error("Failed to fetch content:", error);
+        if (isMounted) {
+          setError(
+            "We couldn't refresh the latest content. Showing saved data if available.",
+          );
+          toast.error("Unable to refresh content. Showing cached data.");
+        }
+      } finally {
+        if (isMounted) setLoading(false);
+      }
     };
 
     initialize();
@@ -72,7 +100,7 @@ export const ContentProvider = ({ children }) => {
     return () => {
       isMounted = false;
     };
-  }, [fetchContent]);
+  }, []);
 
   const refreshContent = useCallback(async () => {
     setLoading(true);
@@ -87,6 +115,11 @@ export const ContentProvider = ({ children }) => {
     [],
   );
 
+  const getSectorById = useCallback(
+    (id) => sectors.find((sector) => sector.id === id) || null,
+    [sectors],
+  );
+
   const getRelatedArticles = useCallback(
     (sectorId) => contentService.getRelatedArticles(sectorId),
     [],
@@ -99,7 +132,7 @@ export const ContentProvider = ({ children }) => {
       loading,
       error,
       featuredArticles,
-      getSectorById: (id) => sectors.find((sector) => sector.id === id) || null,
+      getSectorById,
       searchArticles,
       getRelatedArticles,
       refreshContent,
@@ -112,6 +145,7 @@ export const ContentProvider = ({ children }) => {
       featuredArticles,
       refreshContent,
       searchArticles,
+      getSectorById,
       getRelatedArticles,
     ],
   );

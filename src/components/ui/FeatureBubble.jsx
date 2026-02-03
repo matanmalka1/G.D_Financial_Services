@@ -1,6 +1,7 @@
+import { memo } from 'react';
 import { Button } from './primitives/Button';
 
-export const FeatureBubble = ({ icon, title, onClick }) => (
+export const FeatureBubble = memo(({ icon, title, onClick }) => (
   <Button
     onClick={onClick}
     variant="ghost"
@@ -10,4 +11,4 @@ export const FeatureBubble = ({ icon, title, onClick }) => (
     <span className="text-4xl mb-4">{icon}</span>
     <h3 className="text-lg font-bold text-slate-800">{title}</h3>
   </Button>
-);
+));

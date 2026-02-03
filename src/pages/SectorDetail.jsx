@@ -1,5 +1,6 @@
-import { useMemo } from "react";
+import { useMemo, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
+import { toast } from "sonner";
 import { useLanguage } from "../hooks/useLanguage";
 import { useContent } from "../hooks/useContent";
 import { ParallaxHeader } from "../components/common/ParallaxHeader";
@@ -23,6 +24,12 @@ export const SectorDetail = () => {
     if (!id) return [];
     return getRelatedArticles(id).slice(0, 3);
   }, [id, getRelatedArticles]);
+
+  useEffect(() => {
+    if (error) {
+      toast.error(t?.errors?.contentLoadFailed || "Unable to load content");
+    }
+  }, [error, t]);
 
   if (error) {
     return (

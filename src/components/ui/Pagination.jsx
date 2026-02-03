@@ -1,6 +1,7 @@
+import { memo } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
-export const Pagination = ({ currentPage, totalPages, onChange, isRtl = false }) => {
+export const Pagination = memo(({ currentPage, totalPages, onChange, isRtl = false }) => {
   if (totalPages <= 1) return null;
 
   const goTo = (page) => {
@@ -41,4 +42,4 @@ export const Pagination = ({ currentPage, totalPages, onChange, isRtl = false })
       </button>
     </div>
   );
-};
+});

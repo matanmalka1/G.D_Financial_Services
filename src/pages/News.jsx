@@ -1,5 +1,6 @@
 
 import { useState, useMemo, useEffect } from 'react';
+import { toast } from 'sonner';
 import { useLanguage } from '../hooks/useLanguage';
 import { useContent } from '../hooks/useContent';
 import { ParallaxHeader } from '../components/common/ParallaxHeader';
@@ -34,15 +35,28 @@ export const News = () => {
     });
   }, [search, articles]);
 
-  useEffect(() => {
+  const handleSearchChange = (value) => {
+    setSearch(value);
     setCurrentPage(1);
-  }, [search]);
+  };
 
-  const totalPages = Math.ceil(filtered.length / ARTICLES_PER_PAGE);
+  useEffect(() => {
+    if (error) {
+      toast.error(t?.errors?.contentLoadFailed || "Unable to load content");
+    }
+  }, [error, t]);
+
+  const safeCurrentPage = useMemo(() => {
+    const total = Math.ceil(filtered.length / ARTICLES_PER_PAGE) || 1;
+    return Math.min(currentPage, total);
+  }, [currentPage, filtered.length]);
+
+  const totalPages = Math.ceil(filtered.length / ARTICLES_PER_PAGE) || 1;
+
   const paginatedArticles = useMemo(() => {
-    const start = (currentPage - 1) * ARTICLES_PER_PAGE;
+    const start = (safeCurrentPage - 1) * ARTICLES_PER_PAGE;
     return filtered.slice(start, start + ARTICLES_PER_PAGE);
-  }, [filtered, currentPage]);
+  }, [filtered, safeCurrentPage]);
 
   const handleClearSearch = () => setSearch('');
 
@@ -90,7 +104,7 @@ export const News = () => {
         <div className="mb-16 max-w-2xl mx-auto space-y-4">
           <SearchBar
             value={search}
-            onChange={setSearch}
+            onChange={handleSearchChange}
             onClear={handleClearSearch}
             placeholder={t.news.searchPlaceholder}
             ariaLabel={t.news.searchPlaceholder}

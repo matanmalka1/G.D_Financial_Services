@@ -1,6 +1,7 @@
+import { memo } from "react";
 import { FileQuestion } from "lucide-react";
 
-export const EmptyState = ({
+export const EmptyState = memo(({
   icon,
   title,
   actionLabel,
@@ -20,4 +21,4 @@ export const EmptyState = ({
       </button>
     )}
   </div>
-);
+));

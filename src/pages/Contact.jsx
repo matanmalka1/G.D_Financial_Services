@@ -7,6 +7,7 @@ import { Select } from "../components/ui/Select";
 import { Button } from "../components/ui/primitives/Button";
 import { translations } from "../i18n/translations";
 import { buildContactSchema } from "../validation/contactSchema";
+import { PhoneNumberInput } from "../components/ui/PhoneNumberInput";
 
 export const Contact = () => {
   const { t, isRtl } = useLanguage();
@@ -97,19 +98,19 @@ export const Contact = () => {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
-                <label className="block text-sm font-semibold text-slate-700 mb-2">
-                  {t.contact.phone}*
-                </label>
-                <input
-                  {...register("phone")}
-                  className={`w-full px-4 py-3 rounded-lg border ${errors.phone ? "border-red-500" : "border-slate-200"} focus:outline-none focus:ring-2 focus:ring-slate-900 transition-all`}
-                  placeholder="+972-50-0000000"
+                <Controller
+                  name="phone"
+                  control={control}
+                  render={({ field }) => (
+                    <PhoneNumberInput
+                      label={`${t.contact.phone}*`}
+                      value={field.value}
+                      onChange={field.onChange}
+                      error={errors.phone?.message}
+                      isRtl={isRtl}
+                    />
+                  )}
                 />
-                {errors.phone && (
-                  <p className="text-red-500 text-xs mt-1">
-                    {errors.phone.message}
-                  </p>
-                )}
               </div>
               <div>
                 <label className="block text-sm font-semibold text-slate-700 mb-2">

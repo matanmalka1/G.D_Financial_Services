@@ -1,17 +1,16 @@
-import { useNavigate } from 'react-router-dom';
 import { useLanguage } from '../hooks/useLanguage';
 import { ParallaxHeader } from '../components/common/ParallaxHeader';
 import { routePaths } from '../routes/paths';
 import { FeatureBubble } from '../components/ui/FeatureBubble';
 import { OwnerSpotlight } from '../components/ui/OwnerSpotlight';
-import { analyticsService } from '../services/analyticsService';
 import { Button } from '../components/ui/primitives/Button';
 import { translations } from '../i18n/translations';
 import { ClientsSection } from '../components/sections/ClientsSection';
+import { useAnalyticsNavigation } from '../hooks/useAnalyticsNavigation';
 
 export const Home = () => {
   const { t, isRtl } = useLanguage();
-  const navigate = useNavigate();
+  const analyticsNavigate = useAnalyticsNavigation();
 
   const bubbles = [
     { title: t.home.bubbles.exitStrategy, icon: '🎯' },
@@ -20,11 +19,10 @@ export const Home = () => {
     { title: t.home.bubbles.investorPresentations, icon: '📈' },
   ];
   const handleContact = () => {
-    analyticsService.trackEvent('owner_contact_click', { source: 'home' });
-    navigate(routePaths.contact);
+    analyticsNavigate(routePaths.contact, 'owner_contact_click', { source: 'home' });
   };
   const handleBubbleClick = (title) => {
-    analyticsService.trackEvent('home_bubble_click', { title });
+    analyticsNavigate(routePaths.contact, 'home_bubble_click', { title });
   };
 
   return (

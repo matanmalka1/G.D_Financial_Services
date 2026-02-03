@@ -1,7 +1,8 @@
+import { memo } from "react";
 import { ArrowRight } from "lucide-react";
 import { Link } from 'react-router-dom';
 
-export const SectorTile = ({ sector, title, subtitle, isRtl }) => (
+export const SectorTile = memo(({ sector, title, subtitle, isRtl }) => (
   <Link
     to={sector.path}
     className="group relative h-[350px] overflow-hidden rounded-[2.5rem] shadow-lg hover:shadow-2xl transition-all duration-500"
@@ -24,4 +25,4 @@ export const SectorTile = ({ sector, title, subtitle, isRtl }) => (
       </div>
     </div>
   </Link>
-);
+));

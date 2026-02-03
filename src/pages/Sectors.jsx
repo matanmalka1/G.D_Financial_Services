@@ -1,5 +1,6 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { Search } from "lucide-react";
+import { toast } from "sonner";
 import { useLanguage } from "../hooks/useLanguage";
 import { useContent } from "../hooks/useContent";
 import { ParallaxHeader } from "../components/common/ParallaxHeader";
@@ -13,6 +14,12 @@ export const Sectors = () => {
   const { t, isRtl } = useLanguage();
   const [search, setSearch] = useState("");
   const { sectors, error, refreshContent, loading } = useContent();
+
+  useEffect(() => {
+    if (error) {
+      toast.error(t?.errors?.contentLoadFailed || "Unable to load content");
+    }
+  }, [error, t]);
 
   const filteredSectors = useMemo(() => {
     const query = search.toLowerCase().trim();

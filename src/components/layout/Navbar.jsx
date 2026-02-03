@@ -14,30 +14,24 @@ export const Navbar = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const sectorOptions = useMemo(
+  const SECTOR_KEYS = useMemo(
     () => [
-      { value: "/sectors/business-plan", label: t.nav.businessPlans },
-      {
-        value: "/sectors/business-presentations",
-        label: t.nav.businessPresentations,
-      },
-      { value: "/sectors/sell-side-advisory", label: t.nav.sellSideAdvisory },
-      {
-        value: "/sectors/business-consulting",
-        label: t.nav.businessConsulting,
-      },
-      {
-        value: "/sectors/ongoing-financial-advisory",
-        label: t.nav.ongoingAdvisory,
-      },
+      { value: "/sectors/business-plan", labelKey: "businessPlans" },
+      { value: "/sectors/business-presentations", labelKey: "businessPresentations" },
+      { value: "/sectors/sell-side-advisory", labelKey: "sellSideAdvisory" },
+      { value: "/sectors/business-consulting", labelKey: "businessConsulting" },
+      { value: "/sectors/ongoing-financial-advisory", labelKey: "ongoingAdvisory" },
     ],
-    [
-      t.nav.businessPlans,
-      t.nav.businessPresentations,
-      t.nav.sellSideAdvisory,
-      t.nav.businessConsulting,
-      t.nav.ongoingAdvisory,
-    ],
+    [],
+  );
+
+  const sectorOptions = useMemo(
+    () =>
+      SECTOR_KEYS.map(({ value, labelKey }) => ({
+        value,
+        label: t.nav[labelKey],
+      })),
+    [t.nav, SECTOR_KEYS],
   );
 
   const handleSectorChange = (val) => {

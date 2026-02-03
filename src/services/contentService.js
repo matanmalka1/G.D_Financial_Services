@@ -1,6 +1,8 @@
 import { mockArticles, sectors } from "../data/mockData";
 import { sectorKeywords } from "../constants/sectorKeywords";
 
+const relatedArticlesCache = new Map();
+
 export const contentService = {
   getArticles: () => Promise.resolve(mockArticles.slice()),
   getSectors: () => Promise.resolve(sectors.slice()),
@@ -14,12 +16,20 @@ export const contentService = {
   },
   getSectorById: (id) => sectors.find((sector) => sector.id === id) || null,
   getRelatedArticles: (sectorId) => {
+    if (relatedArticlesCache.has(sectorId)) {
+      return relatedArticlesCache.get(sectorId);
+    }
+
     const keywords = sectorKeywords[sectorId];
     if (!keywords) return [];
-    return mockArticles.filter((article) => {
+
+    const results = mockArticles.filter((article) => {
       const haystack =
         `${article.title.en} ${article.title.he} ${article.excerpt.en} ${article.excerpt.he}`.toLowerCase();
       return keywords.some((keyword) => haystack.includes(keyword.toLowerCase()));
     });
+
+    relatedArticlesCache.set(sectorId, results);
+    return results;
   },
 };

@@ -1,5 +1,8 @@
 {
   "en": {
+    "errors": {
+      "contentLoadFailed": "We couldn't load the latest content. Please try again."
+    },
     "nav": {
       "home": "Home",
       "profile": "Company Profile",
@@ -20,6 +23,9 @@
     }
   },
   "he": {
+    "errors": {
+      "contentLoadFailed": "לא הצלחנו לטעון את התוכן. אנא נסה שוב."
+    },
     "nav": {
       "home": "דף הבית",
       "profile": "פרופיל החברה",

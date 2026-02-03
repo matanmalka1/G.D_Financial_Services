@@ -1,5 +1,6 @@
 import * as z from "zod";
-import { isValidPhone } from "../utils/helpers/validation";
+import { parsePhoneNumberFromString } from "libphonenumber-js";
+import metadata from "libphonenumber-js/metadata.min.json";
 
 export const buildContactSchema = (t) =>
   z.object({
@@ -8,7 +9,9 @@ export const buildContactSchema = (t) =>
     phone: z
       .string()
       .min(1, t.contact.validation.phoneRequired)
-      .refine((val) => isValidPhone(val), {
+      .refine((val) => {
+        return parsePhoneNumberFromString(val, metadata)?.isValid();
+      }, {
         message: t.contact.validation.phoneInvalid,
       }),
     service: z.string().min(1, t.contact.validation.serviceRequired),

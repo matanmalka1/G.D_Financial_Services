@@ -23,7 +23,9 @@ export const Select = ({
   return (
     <SelectPrimitive.Root value={value} onValueChange={onValueChange} dir={dir}>
       <SelectPrimitive.Trigger className={triggerClasses}>
-        <span className="text-slate-700">{placeholder}</span>
+        <SelectPrimitive.Value
+          placeholder={<span className="text-slate-400">{placeholder}</span>}
+        />
         <SelectPrimitive.Icon>
           <ChevronDown
             className={`w-4 h-4 ${iconColor}`}

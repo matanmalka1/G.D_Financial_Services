@@ -1,6 +1,7 @@
+import { memo } from 'react';
 import { Card } from './primitives/Card';
 
-export const NewsCard = ({ article, language }) => {
+export const NewsCard = memo(({ article, language }) => {
   const title = language === 'en' ? article.title.en : article.title.he;
   const excerpt = language === 'en' ? article.excerpt.en : article.excerpt.he;
 
@@ -19,4 +20,4 @@ export const NewsCard = ({ article, language }) => {
       <p className="text-sm text-slate-500 leading-relaxed line-clamp-3">{excerpt}</p>
     </Card>
   );
-};
+});
