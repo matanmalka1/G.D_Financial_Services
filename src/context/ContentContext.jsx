@@ -71,14 +71,14 @@ export const ContentProvider = ({ children }) => {
         setArticles(nextArticles);
         setSectors(nextSectors);
 
-        const cached = getFromStorage(STORAGE_KEYS.CONTENT);
+        const cached = getItem(STORAGE_KEYS.CONTENT);
         const isFresh =
           !cached ||
           JSON.stringify(cached.articles) !== JSON.stringify(nextArticles) ||
           JSON.stringify(cached.sectors) !== JSON.stringify(nextSectors);
 
         if (isFresh) {
-          setToStorage(STORAGE_KEYS.CONTENT, {
+          setItem(STORAGE_KEYS.CONTENT, {
             articles: nextArticles,
             sectors: nextSectors,
           });
