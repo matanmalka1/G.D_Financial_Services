@@ -67,6 +67,16 @@ export const ContentProvider = ({ children }) => {
 
   const featuredArticles = useMemo(() => articles.slice(0, 4), [articles]);
 
+  const searchArticles = useCallback(
+    (query) => contentService.filterArticles(query),
+    [],
+  );
+
+  const getRelatedArticles = useCallback(
+    (sectorId) => contentService.getRelatedArticles(sectorId),
+    [],
+  );
+
   const value = useMemo(
     () => ({
       articles,
@@ -74,12 +84,19 @@ export const ContentProvider = ({ children }) => {
       loading,
       featuredArticles,
       getSectorById: (id) => sectors.find((sector) => sector.id === id) || null,
-      searchArticles: (query) => contentService.filterArticles(query),
-      getRelatedArticles: (sectorId) =>
-        contentService.getRelatedArticles(sectorId),
+      searchArticles,
+      getRelatedArticles,
       refreshContent,
     }),
-    [articles, sectors, loading, featuredArticles, refreshContent],
+    [
+      articles,
+      sectors,
+      loading,
+      featuredArticles,
+      refreshContent,
+      searchArticles,
+      getRelatedArticles,
+    ],
   );
 
   return (

@@ -19,7 +19,7 @@ export const RelatedArticlesSection = ({ articles = [], t, isRtl }) => {
           className="inline-flex items-center gap-2 text-sm font-bold text-slate-900 hover:text-slate-600 transition-colors group"
         >
           <span>{t.sectorDetail.viewAllNews}</span>
-          <svg
+          <ArrowRight
             className={`w-4 h-4 transform group-hover:translate-x-1 ${
               isRtl ? "rotate-180 group-hover:-translate-x-1" : ""
             }`}

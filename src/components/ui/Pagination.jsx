@@ -16,7 +16,7 @@ export const Pagination = ({ currentPage, totalPages, onChange, isRtl = false })
         className={`p-3 rounded-xl border border-slate-200 transition-all ${currentPage === 1 ? 'opacity-30 cursor-not-allowed' : 'hover:bg-slate-900 hover:text-white'}`}
         aria-label="Previous Page"
       >
-        <ChevronLeft className={`w-5 h-5 ${isRtl ? 'rotate-180' : ''}`} strokeWidth={2} />
+        <ChevronLeft className="w-5 h-5" strokeWidth={2} />
       </button>
 
       <div className="flex items-center gap-2">
@@ -37,7 +37,7 @@ export const Pagination = ({ currentPage, totalPages, onChange, isRtl = false })
         className={`p-3 rounded-xl border border-slate-200 transition-all ${currentPage === totalPages ? 'opacity-30 cursor-not-allowed' : 'hover:bg-slate-900 hover:text-white'}`}
         aria-label="Next Page"
       >
-        <ChevronRight className={`w-5 h-5 ${isRtl ? 'rotate-0' : 'rotate-180'}`} strokeWidth={2} />
+        <ChevronRight className="w-5 h-5" strokeWidth={2} />
       </button>
     </div>
   );

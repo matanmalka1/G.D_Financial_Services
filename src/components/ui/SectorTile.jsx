@@ -1,3 +1,4 @@
+import { ArrowRight } from "lucide-react";
 import { Link } from 'react-router-dom';
 
 export const SectorTile = ({ sector, title, subtitle, isRtl }) => (
@@ -15,14 +16,10 @@ export const SectorTile = ({ sector, title, subtitle, isRtl }) => (
       <h3 className="text-3xl font-bold text-white mb-4">{title}</h3>
       <div className="flex items-center gap-3 text-white/80 font-medium group-hover:gap-5 transition-all">
         <span>{subtitle}</span>
-        <svg
+        <ArrowRight
           className={`w-5 h-5 ${isRtl ? 'rotate-180' : ''}`}
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-        >
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-        </svg>
+          strokeWidth={2}
+        />
       </div>
     </div>
   </Link>
