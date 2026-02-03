@@ -8,16 +8,32 @@ import {
 import { contentService } from "../services/contentService";
 import { STORAGE_KEYS } from "../constants";
 import { toast } from "sonner";
-import { useLocalStorage } from "../hooks/useLocalStorage";
 
 export const ContentContext = createContext(null);
 
 export const ContentProvider = ({ children }) => {
-  const { getItem, setItem } = useLocalStorage();
   const [articles, setArticles] = useState([]);
   const [sectors, setSectors] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+
+  const readCachedContent = () => {
+    try {
+      const raw = window?.localStorage?.getItem(STORAGE_KEYS.CONTENT);
+      return raw ? JSON.parse(raw) : null;
+    } catch (storageError) {
+      console.warn("Failed to read cached content", storageError);
+      return null;
+    }
+  };
+
+  const writeCachedContent = (payload) => {
+    try {
+      window?.localStorage?.setItem(STORAGE_KEYS.CONTENT, JSON.stringify(payload));
+    } catch (storageError) {
+      console.warn("Failed to write cached content", storageError);
+    }
+  };
 
   const fetchContent = useCallback(async () => {
     try {
@@ -28,14 +44,14 @@ export const ContentProvider = ({ children }) => {
       setArticles(nextArticles);
       setSectors(nextSectors);
 
-      const cached = getItem(STORAGE_KEYS.CONTENT);
+      const cached = readCachedContent();
       const isFresh =
         !cached ||
         JSON.stringify(cached.articles) !== JSON.stringify(nextArticles) ||
         JSON.stringify(cached.sectors) !== JSON.stringify(nextSectors);
 
       if (isFresh) {
-        setItem(STORAGE_KEYS.CONTENT, {
+        writeCachedContent({
           articles: nextArticles,
           sectors: nextSectors,
         });
@@ -54,7 +70,7 @@ export const ContentProvider = ({ children }) => {
     const initialize = async () => {
       if (!isMounted) return;
 
-      const stored = getItem(STORAGE_KEYS.CONTENT);
+      const stored = readCachedContent();
       if (stored) {
         setArticles(stored?.articles ?? []);
         setSectors(stored?.sectors ?? []);
@@ -71,14 +87,14 @@ export const ContentProvider = ({ children }) => {
         setArticles(nextArticles);
         setSectors(nextSectors);
 
-        const cached = getItem(STORAGE_KEYS.CONTENT);
+        const cached = readCachedContent();
         const isFresh =
           !cached ||
           JSON.stringify(cached.articles) !== JSON.stringify(nextArticles) ||
           JSON.stringify(cached.sectors) !== JSON.stringify(nextSectors);
 
         if (isFresh) {
-          setItem(STORAGE_KEYS.CONTENT, {
+          writeCachedContent({
             articles: nextArticles,
             sectors: nextSectors,
           });
@@ -111,10 +127,7 @@ export const ContentProvider = ({ children }) => {
 
   const featuredArticles = useMemo(() => articles.slice(0, 4), [articles]);
 
-  const searchArticles = useCallback(
-    (query) => contentService.filterArticles(query),
-    [],
-  );
+  const searchArticles = contentService.filterArticles;
 
   const getSectorById = useCallback(
     (id) => sectors.find((sector) => sector.id === id) || null,
@@ -145,7 +158,6 @@ export const ContentProvider = ({ children }) => {
       error,
       featuredArticles,
       refreshContent,
-      searchArticles,
       getSectorById,
       getRelatedArticles,
     ],
