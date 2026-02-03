@@ -1,5 +1,6 @@
 export const ParallaxHeader = ({
   image,
+  mobileImage = image,
   title,
   subtitle,
   height = "h-[500px]",
@@ -8,8 +9,17 @@ export const ParallaxHeader = ({
   return (
     <div
       className={`relative w-full ${height} parallax flex items-center justify-center overflow-hidden`}
-      style={{ backgroundImage: `url(${image})` }}
     >
+      <picture className="absolute inset-0 w-full h-full">
+        <source media="(max-width: 768px)" srcSet={mobileImage} />
+        <img
+          src={image}
+          alt=""
+          className="w-full h-full object-cover"
+          loading="lazy"
+          aria-hidden="true"
+        />
+      </picture>
       <div className={`absolute inset-0 ${overlayOpacity}`} />
       <div className="relative z-10 text-center px-4">
         <h1 className="text-4xl md:text-6xl text-white font-bold mb-4 drop-shadow-lg tracking-tight">

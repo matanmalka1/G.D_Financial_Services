@@ -90,6 +90,7 @@ const CompanyProfile = () => {
               src="https://picsum.photos/seed/company/600/400"
               className="rounded-2xl shadow-lg"
               alt="Company office"
+              loading="lazy"
             />
           </div>
         </div>
