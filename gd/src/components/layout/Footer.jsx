@@ -1,6 +1,8 @@
+import { Link } from 'react-router-dom';
 import { useLanguage } from '../../hooks/useLanguage';
 import { Logo } from '../common/Logo';
 import { InstagramLogo, FacebookLogo, LinkedInLogo } from '../common/SocialLogos';
+import { routePaths } from '../../routes/paths';
 
 export const Footer = () => {
   const { t } = useLanguage();
@@ -32,10 +34,26 @@ export const Footer = () => {
               Quick Links
             </h3>
             <ul className="text-sm text-slate-600 space-y-2">
-              <li>{t.nav.home}</li>
-              <li>{t.nav.profile}</li>
-              <li>{t.nav.news}</li>
-              <li>{t.nav.contact}</li>
+              <li>
+                <Link className="hover:text-slate-900" to={routePaths.home}>
+                  {t.nav.home}
+                </Link>
+              </li>
+              <li>
+                <Link className="hover:text-slate-900" to={routePaths.companyProfile}>
+                  {t.nav.profile}
+                </Link>
+              </li>
+              <li>
+                <Link className="hover:text-slate-900" to={routePaths.news}>
+                  {t.nav.news}
+                </Link>
+              </li>
+              <li>
+                <Link className="hover:text-slate-900" to={routePaths.contact}>
+                  {t.nav.contact}
+                </Link>
+              </li>
             </ul>
           </div>
           <div>

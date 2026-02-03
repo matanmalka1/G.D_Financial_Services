@@ -161,5 +161,12 @@ export const sectors = [
     titleKey: 'ongoingAdvisory',
     image: 'https://picsum.photos/seed/advisory/1200/600',
     descriptionKey: 'ongoingAdvisoryDesc'
+  },
+  {
+    id: 'business-plan',
+    path: '/sectors/business-plan',
+    titleKey: 'businessPlans',
+    image: 'https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?auto=format&fit=crop&w=1400&q=80',
+    descriptionKey: 'businessPlansDesc'
   }
 ];

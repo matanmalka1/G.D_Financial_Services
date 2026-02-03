@@ -10,6 +10,7 @@ export const globalTranslations = {
       sellSideAdvisory: "Sell-side Advisory",
       businessConsulting: "Business Consulting",
       ongoingAdvisory: "Ongoing Financial Advisory",
+      businessPlans: "Business Plans",
     },
     footer: {
       addressTitle: "Address",
@@ -29,6 +30,7 @@ export const globalTranslations = {
       sellSideAdvisory: "ייעוץ לצד המכירה",
       businessConsulting: "ייעוץ עסקי",
       ongoingAdvisory: "ייעוץ פיננסי שוטף",
+      businessPlans: "תוכנית עסקית",
     },
     footer: {
       addressTitle: "כתובת",

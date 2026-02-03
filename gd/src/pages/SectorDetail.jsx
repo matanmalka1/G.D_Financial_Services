@@ -50,6 +50,8 @@ const SectorDetail = () => {
     "{sector}",
     sectorTitle.toLowerCase(),
   );
+  const longDescription = detail?.longDescription;
+  const sections = detail?.sections;
 
   return (
     <main className="bg-slate-50/30 min-h-screen pb-20">
@@ -103,6 +105,29 @@ const SectorDetail = () => {
             <p className="text-lg text-slate-600 leading-relaxed">
               {aboutDescription}
             </p>
+            {sections && sections.length > 0 ? (
+              <div className="space-y-6">
+                {sections.map((sec, idx) => (
+                  <div
+                    key={idx}
+                    className="bg-white p-8 rounded-[1.5rem] border border-slate-100 shadow-sm text-slate-700 text-base leading-relaxed space-y-3"
+                  >
+                    <h4 className="text-xl font-bold text-slate-900">{sec.title}</h4>
+                    {sec.body
+                      .split(/\n\s*\n/)
+                      .map((para, pIdx) => (
+                        <p key={pIdx}>{para.trim()}</p>
+                      ))}
+                  </div>
+                ))}
+              </div>
+            ) : longDescription ? (
+              <div className="bg-white p-8 rounded-[1.5rem] border border-slate-100 shadow-sm text-slate-700 text-base leading-relaxed space-y-4">
+                {longDescription.split('\n').map((para, idx) => (
+                  <p key={idx}>{para.trim()}</p>
+                ))}
+              </div>
+            ) : null}
             <SectorServices title={t.sectors.ourServices} services={detail?.services} />
           </div>
 

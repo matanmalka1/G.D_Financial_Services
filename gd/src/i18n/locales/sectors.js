@@ -7,6 +7,7 @@ export const sectorsTranslations = {
     aboutSector: "About {name}",
     ourServices: "Our Services",
     clientBenefits: "Client Benefits",
+    businessPlansDesc: "Tailored business plans with market analysis, financial forecasts, and bank/investor-ready documentation.",
   },
   he: {
     title: "מומחיותנו",
@@ -16,5 +17,6 @@ export const sectorsTranslations = {
     aboutSector: "אודות {name}",
     ourServices: "השירותים שלנו",
     clientBenefits: "יתרונות ללקוחות",
+    businessPlansDesc: "כתיבת תוכניות עסקיות מותאמות עם ניתוח שוק, תחזיות פיננסיות ומסמכים מוכנים לבנק ולמשקיעים.",
   },
 };

@@ -1,9 +1,10 @@
 import { Link } from "react-router-dom";
 import { useLanguage } from "../hooks/useLanguage";
 import { ParallaxHeader } from "../components/common/ParallaxHeader";
-import { translations } from "../i18n/translations";
 import { routePaths } from "../routes/paths";
 import { Button } from "../components/ui/primitives/Button";
+import { SectionHeading } from "../components/ui/SectionHeading";
+import { Card } from "../components/ui/primitives/Card";
 
 const CompanyProfile = () => {
   const { t } = useLanguage();
@@ -32,23 +33,18 @@ const CompanyProfile = () => {
       />
 
       <section className="py-24 max-w-4xl mx-auto px-4">
-        <h2 className="text-3xl font-bold mb-10 text-center">
-          {t.companyProfile.missionTitle}
-        </h2>
+        <SectionHeading title={t.companyProfile.missionTitle} />
         <p className="text-lg text-slate-600 leading-loose mb-12 text-center italic">
           "{t.companyProfile.missionStatement}"
         </p>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16">
           {values.map((v, i) => (
-            <div
-              key={i}
-              className="p-8 border border-slate-100 rounded-2xl bg-slate-50 text-center shadow-sm"
-            >
+            <Card key={i} className="p-8 bg-slate-50 text-center">
               <h3 className="text-xl font-bold mb-4 text-slate-900">
                 {v.title}
               </h3>
               <p className="text-sm text-slate-500 leading-relaxed">{v.desc}</p>
-            </div>
+            </Card>
           ))}
         </div>
         {t.companyProfile.aboutText && (
@@ -72,7 +68,7 @@ const CompanyProfile = () => {
               </p>
               <div className="pt-4">
                 <Link to={routePaths.contact} className="inline-block">
-                  <Button className="px-6 py-3 bg-slate-900 text-white rounded-full hover:bg-slate-800 transition-colors">
+                  <Button size="lg" className="rounded-full">
                     {t.nav.contact}
                   </Button>
                 </Link>
@@ -85,9 +81,7 @@ const CompanyProfile = () => {
       <section className="py-24 bg-white">
         <div className="max-w-4xl mx-auto px-4 flex flex-col md:flex-row items-center gap-12">
           <div className="flex-1 space-y-6 text-slate-600">
-            <h2 className="text-2xl font-bold text-slate-900">
-              {t.companyProfile.storyTitle}
-            </h2>
+            <SectionHeading title={t.companyProfile.storyTitle} />
             <p>{t.companyProfile.storyP1}</p>
             <p>{t.companyProfile.storyP2}</p>
           </div>
