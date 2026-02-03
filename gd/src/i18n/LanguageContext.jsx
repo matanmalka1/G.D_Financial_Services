@@ -1,13 +1,18 @@
 
 import { createContext, useState, useEffect } from "react";
-import { translations } from './translations';
-import { setDocumentMetadata } from '../utils/helpers/dom';
-import { LANGUAGES, DEFAULT_LANGUAGE } from '../constants';
+import { translations } from "./translations";
+import { setDocumentMetadata } from "../utils/helpers/dom";
+import { LANGUAGES, DEFAULT_LANGUAGE, STORAGE_KEYS } from "../constants";
 
 const LanguageContext = createContext();
 
 export const LanguageProvider = ({ children }) => {
-  const [language, setLanguageState] = useState(DEFAULT_LANGUAGE);
+  const [language, setLanguageState] = useState(() => {
+    if (typeof window === "undefined") return DEFAULT_LANGUAGE;
+    return (
+      window.localStorage.getItem(STORAGE_KEYS.LANGUAGE) || DEFAULT_LANGUAGE
+    );
+  });
 
   const isRtl = language === LANGUAGES.HE;
 
@@ -20,6 +25,11 @@ export const LanguageProvider = ({ children }) => {
       setLanguageState(newLanguage);
     }
   };
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    window.localStorage.setItem(STORAGE_KEYS.LANGUAGE, language);
+  }, [language]);
 
   const t = translations[language];
 
