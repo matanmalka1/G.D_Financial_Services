@@ -24,14 +24,34 @@
     },
     "clients": {
       "title": "Our Clients",
-      "body": "Our clients come from a wide range of fields from early-stage exempt businesses and entrepreneurs to incorporated companies and independent professionals. Our approach is based on personal, professional, and responsive guidance, with a deep understanding that there is no one-size-fits-all. Every client receives tailored support based on their unique needs, business goals, and stage—so we can create real growth together.",
+      "body": [
+        "Our clients come from a wide range of fields from early-stage exempt businesses and entrepreneurs to incorporated companies and independent professionals. Our approach is based on personal, professional, and responsive guidance, with a deep understanding that there is no one-size-fits-all. Every client receives tailored support based on their unique needs, business goals, and stage—so we can create real growth together."
+      ],
       "sectors": [
-        { "key": "retail", "label": "Retail" },
-        { "key": "pharma", "label": "Pharma" },
-        { "key": "energy", "label": "Energy" },
-        { "key": "realEstate", "label": "Real Estate" },
-        { "key": "highTech", "label": "High-Tech" },
-        { "key": "industry", "label": "Industry" }
+        {
+          "key": "retail",
+          "label": "Retail"
+        },
+        {
+          "key": "pharma",
+          "label": "Pharma"
+        },
+        {
+          "key": "energy",
+          "label": "Energy"
+        },
+        {
+          "key": "realEstate",
+          "label": "Real Estate"
+        },
+        {
+          "key": "highTech",
+          "label": "High-Tech"
+        },
+        {
+          "key": "industry",
+          "label": "Industry"
+        }
       ]
     }
   },
@@ -60,14 +80,34 @@
     },
     "clients": {
       "title": "לקוחות המשרד",
-      "body": "לקוחותינו מגיעים ממגוון רחב של תחומים החל מעוסקים פטורים בראשית דרכם, יזמים, ועד לחברות בע״מ ובעלי מקצועות חופשיים. הגישה שלנו מבוססת על ליווי אישי, מקצועי וזמין, מתוך הבנה עמוקה שאין פתרון אחד שמתאים לכולם. כל לקוח מקבל מענה מותאם אישי, שמבוסס על צרכיו הייחודיים, יעדיו העסקיים, והשלב שבו הוא נמצא כדי לייצר יחד צמיחה אמיתי.",
+      "body": [
+        "לקוחותינו מגיעים ממגוון רחב של תחומים החל מעוסקים פטורים בראשית דרכם, יזמים, ועד לחברות בע״מ ובעלי מקצועות חופשיים. הגישה שלנו מבוססת על ליווי אישי, מקצועי וזמין, מתוך הבנה עמוקה שאין פתרון אחד שמתאים לכולם. כל לקוח מקבל מענה מותאם אישי, שמבוסס על צרכיו הייחודיים, יעדיו העסקיים, והשלב שבו הוא נמצא כדי לייצר יחד צמיחה אמיתי."
+      ],
       "sectors": [
-        { "key": "retail", "label": "מסחר" },
-        { "key": "pharma", "label": "תרופות" },
-        { "key": "energy", "label": "אנרגיה" },
-        { "key": "realEstate", "label": "נדל״ן" },
-        { "key": "highTech", "label": "הייטק" },
-        { "key": "industry", "label": "תעשייה" }
+        {
+          "key": "retail",
+          "label": "מסחר"
+        },
+        {
+          "key": "pharma",
+          "label": "תרופות"
+        },
+        {
+          "key": "energy",
+          "label": "אנרגיה"
+        },
+        {
+          "key": "realEstate",
+          "label": "נדל״ן"
+        },
+        {
+          "key": "highTech",
+          "label": "הייטק"
+        },
+        {
+          "key": "industry",
+          "label": "תעשייה"
+        }
       ]
     }
   }
