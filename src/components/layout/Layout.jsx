@@ -8,13 +8,13 @@ export const Layout = ({ children }) => {
   const [leadModalOpen, setLeadModalOpen] = useState(false);
 
   useEffect(() => {
-    const timer = setTimeout(() => setLeadModalOpen(true), 10_000);
+    const timer = setTimeout(() => setLeadModalOpen(true), 10000);
     return () => clearTimeout(timer);
   }, []);
 
   const handleLeadClose = () => setLeadModalOpen(false);
+  
   const handleLeadSubmit = (data) => {
-    // Hook up to backend/analytics as needed
     console.log("lead modal submission", data);
     setLeadModalOpen(false);
   };

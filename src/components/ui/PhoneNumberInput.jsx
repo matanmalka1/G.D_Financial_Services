@@ -1,9 +1,8 @@
-import { forwardRef, useMemo, useState, useEffect, useRef, useCallback } from "react";
-import { Phone } from "lucide-react";
+import { Fragment, forwardRef, useMemo, useState, useEffect, useRef, useCallback } from "react";
+import { Phone, ChevronDown, Search } from "lucide-react";
+import { Listbox, Transition, Portal } from "@headlessui/react";
 import { AsYouType, getExampleNumber } from "libphonenumber-js";
 import metadata from "libphonenumber-js/metadata.min.json";
-import { CountrySelector } from "./phone/CountrySelector";
-import { CountrySearchList } from "./phone/CountrySearchList";
 import { PhoneLocalInput } from "./phone/PhoneLocalInput";
 import { COMMON_COUNTRIES, DEFAULT_COUNTRY_CODE } from "../../data/countries";
 export const PhoneNumberInput = forwardRef(
@@ -89,14 +88,25 @@ export const PhoneNumberInput = forwardRef(
 
     useEffect(() => {
       const handleClickOutside = (event) => {
-        if (!containerRef.current) return;
-        if (!containerRef.current.contains(event.target)) {
-          setOpen(false);
-        }
+        if (!open) return;
+        const inContainer =
+          containerRef.current && containerRef.current.contains(event.target);
+        const inOptions =
+          optionsRef.current && optionsRef.current.contains(event.target);
+        if (!inContainer && !inOptions) setOpen(false);
       };
       document.addEventListener("mousedown", handleClickOutside);
       return () => document.removeEventListener("mousedown", handleClickOutside);
-    }, []);
+    }, [open]);
+
+    useEffect(() => {
+      if (!open) return;
+      const onKey = (e) => {
+        if (e.key === "Escape") setOpen(false);
+      };
+      window.addEventListener("keydown", onKey);
+      return () => window.removeEventListener("keydown", onKey);
+    }, [open]);
 
     const computedPlaceholder = useMemo(() => {
       if (placeholder) return placeholder;
@@ -112,6 +122,15 @@ export const PhoneNumberInput = forwardRef(
       return formatter.getNationalNumber() || localNumber;
     }, [localNumber, selected]);
 
+    const [buttonRect, setButtonRect] = useState(null);
+    const buttonRef = useRef(null);
+    const optionsRef = useRef(null);
+
+    useEffect(() => {
+      if (!open || !buttonRef.current) return;
+      setButtonRect(buttonRef.current.getBoundingClientRect());
+    }, [open, selected]);
+
     return (
       <div className={`space-y-2 ${className}`} ref={containerRef}>
         {label ? (
@@ -121,23 +140,90 @@ export const PhoneNumberInput = forwardRef(
         ) : null}
 
         <div
-          className={`relative flex ${isRtl ? "flex-row-reverse" : "flex-row"} rounded-2xl border border-slate-200 bg-white shadow-sm hover:shadow-md transition focus-within:ring-2 focus-within:ring-slate-900/80 focus-within:border-slate-900/40`}
+          className={`relative flex ${isRtl ? "flex-row-reverse" : "flex-row"} rounded-xl border border-slate-200 bg-white shadow-sm hover:shadow-md transition focus-within:ring-2 focus-within:ring-slate-900/80 focus-within:border-slate-900/40`}
         >
-          <CountrySelector
-            selected={selected}
-            isRtl={isRtl}
-            onToggle={() => setOpen((p) => !p)}
-          />
+          <Listbox
+            value={selected}
+            onChange={(country) => handleCountryChange(country)}
+            as="div"
+          >
+            <Listbox.Button
+              ref={buttonRef}
+              className={`flex items-center gap-2 h-12 px-3 min-w-[72px] ${isRtl ? "border-l border-slate-200 rounded-r-xl" : "border-r border-slate-200 rounded-l-xl"} bg-white hover:bg-slate-50 transition`}
+              onClick={() => setOpen((p) => !p)}
+            >
+              <span className="text-xl">{selected.flag}</span>
+              <ChevronDown className="w-4 h-4 text-slate-500" />
+            </Listbox.Button>
 
-          {open && (
-            <CountrySearchList
-              isRtl={isRtl}
-              query={query}
-              onQueryChange={setQuery}
-              countries={filteredCountries}
-              onSelect={handleCountryChange}
-            />
-          )}
+            <Transition
+              show={open}
+              as={Fragment}
+              leave="transition ease-in duration-75"
+              leaveFrom="opacity-100"
+              leaveTo="opacity-0"
+            >
+              {/* Portal keeps options out of the modal stacking/overflow context */}
+              <Portal>
+                {buttonRect ? (
+                  <Listbox.Options
+                    ref={optionsRef}
+                    static
+                    className="absolute z-[80] mt-2 w-80 bg-white border border-slate-200 rounded-2xl shadow-2xl overflow-hidden"
+                    style={{
+                      position: "fixed",
+                      top: buttonRect.bottom + 8,
+                      left: isRtl
+                        ? buttonRect.right - 320
+                        : buttonRect.left,
+                      width: 320,
+                    }}
+                  >
+                    <div className="sticky top-0 flex items-center gap-2 px-3 py-2 border-b border-slate-100 bg-slate-50">
+                      <Search className="w-4 h-4 text-slate-400" />
+                      <input
+                        autoFocus
+                        className="w-full bg-transparent text-sm focus:outline-none placeholder:text-slate-400"
+                        placeholder="Search country or dial code"
+                        value={query}
+                        onChange={(e) => setQuery(e.target.value)}
+                      />
+                    </div>
+                    <div className="max-h-80 overflow-y-auto">
+                      {filteredCountries.map((country) => (
+                        <Listbox.Option
+                          key={country.code + country.dialCode}
+                          value={country}
+                          className="cursor-pointer"
+                        >
+                          {({ active }) => (
+                            <div
+                              className={`w-full text-left px-3 py-2 flex items-center gap-2 ${active ? "bg-slate-50" : ""}`}
+                            >
+                              <span className="text-lg">{country.flag}</span>
+                              <div className="flex-1">
+                                <div className="text-sm font-medium text-slate-900">
+                                  {country.name}
+                                </div>
+                                <div className="text-xs text-slate-500">
+                                  {country.dialCode}
+                                </div>
+                              </div>
+                            </div>
+                          )}
+                        </Listbox.Option>
+                      ))}
+                      {!filteredCountries.length && (
+                        <div className="px-3 py-3 text-xs text-slate-500">
+                          No results
+                        </div>
+                      )}
+                    </div>
+                  </Listbox.Options>
+                ) : null}
+              </Portal>
+            </Transition>
+          </Listbox>
 
           <div className="flex-1 relative">
             <Phone

@@ -2,10 +2,10 @@ import * as SelectPrimitive from "@radix-ui/react-select";
 import { ChevronDown, Check } from "lucide-react";
 
 const baseTrigger =
-  "flex items-center justify-between w-full text-sm rounded-md focus:outline-none focus:ring-2 focus:ring-slate-500";
+  "flex items-center justify-between w-full text-sm rounded-xl h-12 px-4 focus:outline-none focus:ring-2 focus:ring-slate-500";
 const variants = {
-  default: "px-4 py-2 bg-gray-50 border border-gray-200 text-slate-700 hover:bg-gray-100 transition-colors",
-  ghost: "px-3 py-1.5 bg-transparent border border-transparent hover:border-slate-200 text-slate-700",
+  default: "bg-gray-50 border border-gray-200 text-slate-700 hover:bg-gray-100 transition-colors",
+  ghost: "px-3 bg-transparent border border-transparent hover:border-slate-200 text-slate-700",
 };
 
 export const Select = ({
