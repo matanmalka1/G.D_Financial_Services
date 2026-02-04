@@ -6,7 +6,7 @@ import { routePaths } from "../routes/paths";
 import { FeatureBubble } from "../components/ui/FeatureBubble";
 import { OwnerSpotlight } from "../components/ui/OwnerSpotlight";
 import { Button } from "../components/ui/primitives/Button";
-import { ClientsSection } from "../components/sections/ClientsSection";
+import { ClientsSection } from "../components/common/sections/ClientsSection";
 import { analyticsService } from "../services/analyticsService";
 import { ITEMS_PER_PAGE } from "../constants/pagination";
 

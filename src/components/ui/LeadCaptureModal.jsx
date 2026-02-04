@@ -1,13 +1,12 @@
 import { useMemo, useCallback } from "react";
-import { useForm, Controller } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
+import { Controller } from "react-hook-form";
 import { Sparkles } from "lucide-react";
 import { PhoneNumberInput } from "./PhoneNumberInput";
 import { Select } from "./Select";
 import { Button } from "./primitives/Button";
 import { Modal } from "./primitives/Modal";
 import { useLanguage } from "../../hooks/useLanguage";
-import { buildLeadCaptureSchema } from "../../validation/leadCaptureSchema";
+import { useContactForm } from "../../hooks/useContactForm";
 const TextField = ({ label, placeholder, register, name, error }) => (
   <div>
     <label className="block text-sm font-semibold text-slate-700 mb-1.5">
@@ -32,21 +31,20 @@ export const LeadCaptureModal = ({
   const { t, isRtl: contextIsRtl } = useLanguage();
   const isRtl = typeof isRtlProp === "boolean" ? isRtlProp : contextIsRtl;
   const copy = t?.modalForm || {};
+  const { form, handleSubmit: submitLeadForm } = useContactForm(
+    t,
+    async (data) => {
+      await onSubmit?.(data);
+    },
+    { includeMessage: false },
+  );
+
   const {
     control,
-    handleSubmit,
     register,
     formState: { errors },
     reset,
-  } = useForm({
-    resolver: zodResolver(buildLeadCaptureSchema(t)),
-    defaultValues: {
-      fullName: "",
-      email: "",
-      phone: "",
-      service: "",
-    },
-  });
+  } = form;
 
   const serviceOptions = useMemo(() => {
     if (services?.length) return services;
@@ -59,11 +57,6 @@ export const LeadCaptureModal = ({
       ].filter((opt) => Boolean(opt.label));
     return [];
   }, [services, t]);
-
-  const submitLeadForm = (data) => {
-    onSubmit?.(data);
-    reset();
-  };
 
   const handleClose = useCallback(() => {
     reset();
@@ -90,7 +83,7 @@ export const LeadCaptureModal = ({
 
       <form
         className="mt-8 space-y-6"
-        onSubmit={handleSubmit(submitLeadForm)}
+        onSubmit={form.handleSubmit(submitLeadForm)}
         noValidate
       >
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">

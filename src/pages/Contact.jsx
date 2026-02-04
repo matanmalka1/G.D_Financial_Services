@@ -1,46 +1,35 @@
-import { useForm, Controller } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
+import { Controller } from "react-hook-form";
 import { toast } from "sonner";
 import { useLanguage } from "../hooks/useLanguage";
+import { useContactForm } from "../hooks/useContactForm";
 import { ParallaxHeader } from "../components/common/ParallaxHeader";
 import { Select } from "../components/ui/Select";
 import { Button } from "../components/ui/primitives/Button";
-import { buildContactSchema } from "../validation/contactSchema";
 import { PhoneNumberInput } from "../components/ui/PhoneNumberInput";
 
 export const Contact = () => {
   const { t, isRtl } = useLanguage();
 
-  const schema = buildContactSchema(t);
+  const { form, handleSubmit: submitContact } = useContactForm(
+    t,
+    async (data) => {
+      const loadingToast = toast.loading("Sending...");
+      try {
+        await new Promise((resolve) => setTimeout(resolve, 1500));
+        console.log("Form Data:", data);
+        toast.success(t.contact.success, { id: loadingToast });
+      } catch (error) {
+        toast.error(t.contact.error, { id: loadingToast });
+        throw error;
+      }
+    },
+  );
 
   const {
     register,
-    handleSubmit,
     control,
-    reset,
     formState: { errors },
-  } = useForm({
-    resolver: zodResolver(schema),
-    defaultValues: {
-      fullName: "",
-      email: "",
-      phone: "",
-      service: "",
-      message: "",
-    },
-  });
-
-  const onSubmit = async (data) => {
-    const loadingToast = toast.loading("Sending...");
-    try {
-      await new Promise((resolve) => setTimeout(resolve, 1500));
-      console.log("Form Data:", data);
-      toast.success(t.contact.success, { id: loadingToast });
-      setTimeout(() => reset(), 500);
-    } catch (error) {
-      toast.error(t.contact.error, { id: loadingToast });
-    }
-  };
+  } = form;
 
   const onError = () => {
     toast.error(t.contact.error);
@@ -63,7 +52,7 @@ export const Contact = () => {
       <section className="py-24 max-w-3xl mx-auto px-4">
         <div className="bg-white p-10 rounded-3xl shadow-2xl shadow-slate-200 border border-slate-50">
           <form
-            onSubmit={handleSubmit(onSubmit, onError)}
+            onSubmit={form.handleSubmit(submitContact, onError)}
             className="space-y-6"
           >
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

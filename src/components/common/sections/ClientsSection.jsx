@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { useLanguage } from "../../hooks/useLanguage";
+import { useLanguage } from "../../../hooks/useLanguage";
 
 const ICON_BY_KEY = {
   retail: "🛒",

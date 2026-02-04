@@ -4,10 +4,10 @@ import { useLanguage } from "../hooks/useLanguage";
 import { useContent } from "../hooks/useContent";
 import { ParallaxHeader } from "../components/common/ParallaxHeader";
 import { routePaths } from "../routes/paths";
-import { SectorServices } from "../components/sector/SectorServices";
-import { SectorBenefitsCard } from "../components/sector/SectorBenefitsCard";
-import { RelatedArticlesSection } from "../components/sector/RelatedArticlesSection";
-import { SectorValueBubbles } from "../components/sector/SectorValueBubbles";
+import { SectorServices } from "../components/common/sector/SectorServices";
+import { SectorBenefitsCard } from "../components/common/sector/SectorBenefitsCard";
+import { RelatedArticlesSection } from "../components/common/sector/RelatedArticlesSection";
+import { SectorValueBubbles } from "../components/common/sector/SectorValueBubbles";
 import { LoadBoundary, PageError, PageLoading } from "../components/common/LoadBoundary";
 import { ITEMS_PER_PAGE } from "../constants/pagination";
 

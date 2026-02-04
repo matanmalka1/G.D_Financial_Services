@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { routePaths } from "../../routes/paths";
+import { routePaths } from "../../../routes/paths";
 import { ArrowRight } from "lucide-react";
 
 export const RelatedArticlesSection = ({ articles = [], t, isRtl }) => {
