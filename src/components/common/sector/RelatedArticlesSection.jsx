@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { routePaths } from "../../../routes/paths";
+import { routePaths, routes } from "../../../routes/paths";
 import { ArrowRight } from "lucide-react";
 
 export const RelatedArticlesSection = ({ articles = [], t, isRtl }) => {
@@ -31,7 +31,7 @@ export const RelatedArticlesSection = ({ articles = [], t, isRtl }) => {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
         {articles.map((article) => (
           <Link
-            to={routePaths.news}
+            to={routes.newsDetail(article.id)}
             key={article.id}
             className="group bg-white p-8 rounded-[2rem] border border-slate-100 shadow-sm hover:shadow-2xl hover:-translate-y-1 transition-all duration-500 flex flex-col"
           >

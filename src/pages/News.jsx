@@ -33,6 +33,8 @@ export const News = () => {
         art.title.he,
         art.excerpt.en,
         art.excerpt.he,
+        art.content?.en?.join(" "),
+        art.content?.he?.join(" "),
       ]),
     [search, articles],
   );

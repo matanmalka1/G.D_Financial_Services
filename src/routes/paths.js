@@ -4,6 +4,7 @@ export const routePaths = {
   sectors: '/sectors',
   sectorDetail: '/sectors/:id',
   news: '/news',
+  newsDetail: '/news/:id',
   contact: '/contact',
 };
 
@@ -14,5 +15,6 @@ export const routes = {
   sectors: () => routePaths.sectors,
   sectorDetail: (id) => `/sectors/${id}`,
   news: () => routePaths.news,
+  newsDetail: (id) => `/news/${id}`,
   contact: () => routePaths.contact,
 };

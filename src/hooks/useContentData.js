@@ -115,6 +115,11 @@ export const useContentData = () => {
     [state.sectors],
   );
 
+  const getArticleById = useCallback(
+    (id) => state.articles.find((article) => article.id === id) || null,
+    [state.articles],
+  );
+
   const getRelatedArticles = useCallback(
     (sectorId) => contentService.getRelatedArticles(sectorId),
     [],
@@ -125,6 +130,7 @@ export const useContentData = () => {
     featuredArticles,
     searchArticles,
     getSectorById,
+    getArticleById,
     getRelatedArticles,
     refreshContent,
   };

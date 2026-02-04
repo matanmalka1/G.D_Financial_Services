@@ -13,9 +13,12 @@ export const contentService = {
       article.title.he,
       article.excerpt.en,
       article.excerpt.he,
+      article.content?.en?.join(" "),
+      article.content?.he?.join(" "),
     ]);
   },
   getSectorById: (id) => sectors.find((sector) => sector.id === id) || null,
+  getArticleById: (id) => mockArticles.find((article) => article.id === id) || null,
   getRelatedArticles: (sectorId) => {
     if (relatedArticlesCache.has(sectorId)) {
       return relatedArticlesCache.get(sectorId);
