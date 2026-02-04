@@ -2,7 +2,18 @@ import { NavLink } from "react-router-dom";
 import { Select } from "../../ui/Select";
 import { routePaths } from "../../../routes/paths";
 
-export const NavbarDesktopNav = ({ t, sectorOptions, onSectorChange, isRtl }) => (
+
+
+
+
+
+export const NavbarDesktopNav = ({
+  t,
+  sectorOptions,
+  onSectorChange,
+  isRtl,
+  navigate,
+}) => (
   <div className="hidden md:flex items-center flex-1 justify-center gap-10 rtl:space-x-reverse">
     <NavLink
       to={routePaths.companyProfile}
@@ -25,15 +36,17 @@ export const NavbarDesktopNav = ({ t, sectorOptions, onSectorChange, isRtl }) =>
         />
       </div>
     </div>
-    <NavLink
-      to={routePaths.news}
-      className={({ isActive }) =>
-        `text-sm font-medium transition-colors ${
-          isActive ? "text-slate-900" : "text-slate-700 hover:text-slate-900"
-        }`
-      }
-    >
-      {t.nav.news}
-    </NavLink>
+    <div className="min-w-[160px]">
+      <Select
+        placeholder={t.nav.news}
+        options={[
+          { value: routePaths.financialNews, label: t.nav.financialNews },
+          { value: routePaths.news, label: t.nav.articles },
+        ]}
+        onValueChange={(path) => navigate(path)}
+        dir={isRtl ? "rtl" : "ltr"}
+        className="border-none bg-transparent"
+      />
+    </div>
   </div>
 );

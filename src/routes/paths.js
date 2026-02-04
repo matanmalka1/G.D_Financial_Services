@@ -1,11 +1,12 @@
 export const routePaths = {
-  home: '/',
-  companyProfile: '/company-profile',
-  sectors: '/sectors',
-  sectorDetail: '/sectors/:id',
-  news: '/news',
-  newsDetail: '/news/:id',
-  contact: '/contact',
+  home: "/",
+  companyProfile: "/company-profile",
+  sectors: "/sectors",
+  sectorDetail: "/sectors/:id",
+  news: "/news",
+  newsDetail: "/news/:id",
+  financialNews: "/financial-news",
+  contact: "/contact",
 };
 
 // Helper builders to avoid manual string concatenation in components.
@@ -16,5 +17,6 @@ export const routes = {
   sectorDetail: (id) => `/sectors/${id}`,
   news: () => routePaths.news,
   newsDetail: (id) => `/news/${id}`,
+  financialNews: () => routePaths.financialNews,
   contact: () => routePaths.contact,
 };

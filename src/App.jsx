@@ -1,13 +1,19 @@
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import { Layout } from './components/layout/Layout';
-import { routePaths } from './routes/paths';
-import { Home } from './pages/Home';
-import { CompanyProfile } from './pages/CompanyProfile';
-import { Sectors } from './pages/Sectors';
-import { SectorDetail } from './pages/SectorDetail';
-import { News } from './pages/News';
-import { Article } from './pages/Article';
-import { Contact } from './pages/Contact';
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
+import { Layout } from "./components/layout/Layout";
+import { routePaths } from "./routes/paths";
+import { Home } from "./pages/Home";
+import { CompanyProfile } from "./pages/CompanyProfile";
+import { Sectors } from "./pages/Sectors";
+import { SectorDetail } from "./pages/SectorDetail";
+import { News } from "./pages/News";
+import { Article } from "./pages/Article";
+import { FinancialNews } from "./pages/FinancialNews";
+import { Contact } from "./pages/Contact";
 
 export const App = () => (
   <Router>
@@ -19,6 +25,7 @@ export const App = () => (
         <Route path={routePaths.sectorDetail} element={<SectorDetail />} />
         <Route path={routePaths.news} element={<News />} />
         <Route path={routePaths.newsDetail} element={<Article />} />
+        <Route path={routePaths.financialNews} element={<FinancialNews />} />
         <Route path={routePaths.contact} element={<Contact />} />
         <Route path="*" element={<Navigate to={routePaths.home} replace />} />
       </Routes>

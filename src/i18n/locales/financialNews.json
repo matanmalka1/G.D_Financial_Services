@@ -1,0 +1,52 @@
+{
+  "en": {
+    "title": "Financial News",
+    "retry": "Try Again",
+    "regionSelector": {
+      "label": "Region",
+      "global": "Global Financial News",
+      "israel": "Local Financial News - Israel"
+    },
+    "loading": "Loading financial news...",
+    "error": {
+      "title": "Failed to load news",
+      "apiKeyMissing": "API key not configured. Please add VITE_GNEWS_API_KEY to your environment.",
+      "fetchFailed": "Unable to fetch news. Please try again later.",
+      "retry": "Retry"
+    },
+    "empty": {
+      "title": "No news available",
+      "description": "There are no articles available for this region at the moment."
+    },
+    "card": {
+      "source": "Source",
+      "readMore": "Read on source site",
+      "openInNewTab": "Opens in new tab"
+    }
+  },
+  "he": {
+    "title": "חדשות פיננסיות",
+    "retry": "נסה שוב",
+    "regionSelector": {
+      "label": "אזור",
+      "global": "חדשות פיננסיות גלובליות",
+      "israel": "חדשות פיננסיות מקומיות - ישראל"
+    },
+    "loading": "טוען חדשות פיננסיות...",
+    "error": {
+      "title": "טעינת החדשות נכשלה",
+      "apiKeyMissing": "מפתח API לא מוגדר. אנא הוסף VITE_GNEWS_API_KEY לסביבה שלך.",
+      "fetchFailed": "לא ניתן לטעון חדשות. אנא נסה שוב מאוחר יותר.",
+      "retry": "נסה שוב"
+    },
+    "empty": {
+      "title": "אין חדשות זמינות",
+      "description": "אין מאמרים זמינים לאזור זה כרגע."
+    },
+    "card": {
+      "source": "מקור",
+      "readMore": "קרא באתר המקור",
+      "openInNewTab": "נפתח בכרטיסייה חדשה"
+    }
+  }
+}
