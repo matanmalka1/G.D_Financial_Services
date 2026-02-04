@@ -1,7 +1,7 @@
 import { useMemo, useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useLanguage } from "../../hooks/useLanguage";
-import { routePaths } from "../../routes/paths";
+import { routePaths, routes } from "../../routes/paths";
 import { NavbarBrand } from "./navbar/NavbarBrand";
 import { NavbarDesktopNav } from "./navbar/NavbarDesktopNav";
 import { NavbarDesktopActions } from "./navbar/NavbarDesktopActions";
@@ -16,19 +16,19 @@ export const Navbar = () => {
 
   const SECTOR_KEYS = useMemo(
     () => [
-      { value: "/sectors/business-plan", labelKey: "businessPlans" },
-      { value: "/sectors/business-presentations", labelKey: "businessPresentations" },
-      { value: "/sectors/sell-side-advisory", labelKey: "sellSideAdvisory" },
-      { value: "/sectors/business-consulting", labelKey: "businessConsulting" },
-      { value: "/sectors/ongoing-financial-advisory", labelKey: "ongoingAdvisory" },
+      { id: "business-plan", labelKey: "businessPlans" },
+      { id: "business-presentations", labelKey: "businessPresentations" },
+      { id: "sell-side-advisory", labelKey: "sellSideAdvisory" },
+      { id: "business-consulting", labelKey: "businessConsulting" },
+      { id: "ongoing-financial-advisory", labelKey: "ongoingAdvisory" },
     ],
     [],
   );
 
   const sectorOptions = useMemo(
     () =>
-      SECTOR_KEYS.map(({ value, labelKey }) => ({
-        value,
+      SECTOR_KEYS.map(({ id, labelKey }) => ({
+        value: routes.sectorDetail(id),
         label: t.nav[labelKey],
       })),
     [t.nav, SECTOR_KEYS],

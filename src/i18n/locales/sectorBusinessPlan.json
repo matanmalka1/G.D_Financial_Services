@@ -1,18 +1,6 @@
 {
   "en": {
     "business-plan": {
-      "services": [
-        "Custom Business Plan Drafting",
-        "Market & Competitive Analysis",
-        "Financial Modeling & Forecasts",
-        "Bank / Investor Ready Decks"
-      ],
-      "benefits": [
-        "Funding-ready documentation (banks & investors)",
-        "Clarity on growth strategy and milestones",
-        "Plans tailored to industry context (startup, manufacturing, real estate)",
-        "Data-driven decisions that reduce risk"
-      ],
       "bubbleTitle": "What Your Business Plan Delivers",
       "bubbles": [
         {
@@ -88,18 +76,6 @@
   },
   "he": {
     "business-plan": {
-      "services": [
-        "כתיבת תוכנית עסקית מותאמת",
-        "ניתוח שוק ותחרות",
-        "מודלים פיננסיים ותחזיות",
-        "מסמכים מותאמים לבנקים/משקיעים"
-      ],
-      "benefits": [
-        "היערכות מלאה לגיוסי הון ולבנקים",
-        "בהירות באסטרטגיית הצמיחה וביעדים",
-        "תוכנית מותאמת לענף (סטארטאפ, ייצור, נדל\"ן)",
-        "החלטות מבוססות נתונים שמפחיתות סיכון"
-      ],
       "bubbleTitle": "מה התוכנית העסקית מספקת לכם",
       "bubbles": [
         {

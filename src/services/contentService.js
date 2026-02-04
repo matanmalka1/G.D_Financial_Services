@@ -1,5 +1,5 @@
 import { mockArticles, sectors } from "../data/mockData";
-import { sectorKeywords } from "../constants/sectorKeywords";
+import { sectorKeywords } from "../constants.js";
 import { filterBySearch } from "../utils/helpers/utils";
 
 const relatedArticlesCache = new Map();

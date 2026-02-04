@@ -1,0 +1,134 @@
+{
+  "en": {
+    "services": {
+      "business-plan": [
+        "Custom Business Plan Drafting",
+        "Market & Competitive Analysis",
+        "Financial Modeling & Forecasts",
+        "Bank / Investor Ready Decks"
+      ],
+      "business-presentations": [
+        "Investor Pitch Deck Design",
+        "Narrative & Storytelling Development",
+        "Financial Modeling & Visualizations",
+        "Market Analysis Summary"
+      ],
+      "business-consulting": [
+        "Strategic Growth Planning",
+        "Operational Efficiency Audit",
+        "Cost Optimization & Budgeting",
+        "Competitive Intelligence"
+      ],
+      "ongoing-financial-advisory": [
+        "Fractional CFO Services",
+        "Monthly Financial Reporting",
+        "Cash Flow Management",
+        "Board Meeting Preparation"
+      ],
+      "sell-side-advisory": [
+        "Company Valuation & Positioning",
+        "Data Room Preparation",
+        "Buyer Identification & Outreach",
+        "Negotiation Strategy & Support"
+      ]
+    },
+    "benefits": {
+      "business-plan": [
+        "Funding-ready documentation (banks & investors)",
+        "Clarity on growth strategy and milestones",
+        "Plans tailored to industry context (startup, manufacturing, real estate)",
+        "Data-driven decisions that reduce risk"
+      ],
+      "business-presentations": [
+        "High Investor Conversion Rates",
+        "Clarity in Complex Business Models",
+        "Professional Brand Image",
+        "Saves Valuable Executive Time"
+      ],
+      "business-consulting": [
+        "Identified New Revenue Streams",
+        "Improved Profit Margins",
+        "Reduced Operational Waste",
+        "Future-Proofed Business Model"
+      ],
+      "ongoing-financial-advisory": [
+        "Constant Financial Vigilance",
+        "Informed Strategic Decisions",
+        "Stable Growth Trajectory",
+        "Peace of Mind for Leadership"
+      ],
+      "sell-side-advisory": [
+        "Maximizes Sale Multiples",
+        "Seamless Due Diligence Process",
+        "Confidentiality Management",
+        "Optimized Tax Structures"
+      ]
+    }
+  },
+  "he": {
+    "services": {
+      "business-plan": [
+        "כתיבת תוכנית עסקית מותאמת",
+        "ניתוח שוק ותחרות",
+        "מודלים פיננסיים ותחזיות",
+        "מסמכים מותאמים לבנקים/משקיעים"
+      ],
+      "business-presentations": [
+        "עיצוב מצגות למשקיעים",
+        "פיתוח נרטיב וסיפור עסקי",
+        "מודלים פיננסיים והדמיות",
+        "סיכום ניתוח שוק"
+      ],
+      "business-consulting": [
+        "תכנון צמיחה אסטרטגי",
+        "ביקורת יעילות תפעולית",
+        "אופטימיזציה של עלויות ותקצוב",
+        "מודיעין תחרותי"
+      ],
+      "ongoing-financial-advisory": [
+        "שירותי סמנכ\"ל כספים חיצוני",
+        "דיווח פיננסי חודשי",
+        "ניהול תזרים מזומנים",
+        "הכנה לישיבות דירקטוריון"
+      ],
+      "sell-side-advisory": [
+        "הערכת שווי ומיצוי פוטנציאל",
+        "הכנת חדר מידע (Data Room)",
+        "זיהוי ופנייה לקונים פוטנציאליים",
+        "אסטרטגיית משא ומתן ותמיכה"
+      ]
+    },
+    "benefits": {
+      "business-plan": [
+        "היערכות מלאה לגיוסי הון ולבנקים",
+        "בהירות באסטרטגיית הצמיחה וביעדים",
+        "תוכנית מותאמת לענף (סטארטאפ, ייצור, נדל\"ן)",
+        "החלטות מבוססות נתונים שמפחיתות סיכון"
+      ],
+      "business-presentations": [
+        "שיעורי המרה גבוהים מול משקיעים",
+        "בהירות במודלים עסקיים מורכבים",
+        "תדמית מותג מקצועית",
+        "חוסך זמן ניהולי יקר"
+      ],
+      "business-consulting": [
+        "זיהוי אפיקי הכנסה חדשים",
+        "שיפור שולי הרווח",
+        "צמצום בזבוז תפעולי",
+        "מודל עסקי עמיד לעתיד"
+      ],
+      "ongoing-financial-advisory": [
+        "ערנות פיננסית מתמדת",
+        "קבלת החלטות אסטרטגיות מושכלות",
+        "מסלול צמיחה יציב",
+        "שקט נפשי להנהלה"
+      ],
+      "sell-side-advisory": [
+        "מיקסום מכפילים בעת מכירה",
+        "תהליך בדיקת נאותות חלק",
+        "ניהול סודיות קפדני",
+        "מבני מס אופטימליים"
+      ]
+    }
+  }
+}

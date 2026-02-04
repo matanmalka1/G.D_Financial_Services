@@ -9,7 +9,7 @@ import { SectorBenefitsCard } from "../components/common/sector/SectorBenefitsCa
 import { RelatedArticlesSection } from "../components/common/sector/RelatedArticlesSection";
 import { SectorValueBubbles } from "../components/common/sector/SectorValueBubbles";
 import { LoadBoundary, PageError, PageLoading } from "../components/common/LoadBoundary";
-import { ITEMS_PER_PAGE } from "../constants/pagination";
+import { ITEMS_PER_PAGE } from "../constants.js";
 
 export const SectorDetail = () => {
   const { id } = useParams();

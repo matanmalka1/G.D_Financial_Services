@@ -8,7 +8,7 @@ import { SearchBar } from "../components/ui/SearchBar";
 import { Pagination } from "../components/ui/Pagination";
 import { EmptyState } from "../components/ui/EmptyState";
 import { LoadBoundary, PageError, PageLoading } from "../components/common/LoadBoundary";
-import { ITEMS_PER_PAGE } from "../constants/pagination";
+import { ITEMS_PER_PAGE } from "../constants.js";
 import { filterBySearch } from "../utils/helpers/utils";
 
 const ARTICLES_PER_PAGE = ITEMS_PER_PAGE.NEWS;

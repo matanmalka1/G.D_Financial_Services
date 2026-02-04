@@ -1,5 +1,0 @@
-export const ITEMS_PER_PAGE = {
-  NEWS: 9,
-  RELATED_ARTICLES: 3,
-  FEATURED_ARTICLES: 4,
-};

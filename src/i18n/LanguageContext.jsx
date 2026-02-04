@@ -2,7 +2,7 @@
 import { createContext, useState, useEffect } from "react";
 import { translations } from "./translations";
 import { setDocumentMetadata } from "../utils/helpers/dom";
-import { LANGUAGES, DEFAULT_LANGUAGE, STORAGE_KEYS } from "../constants";
+import { LANGUAGES, DEFAULT_LANGUAGE, STORAGE_KEYS } from "../constants.js";
 
 const LanguageContext = createContext();
 

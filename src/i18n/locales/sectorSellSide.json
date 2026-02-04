@@ -1,18 +1,6 @@
 {
   "en": {
     "sell-side-advisory": {
-      "services": [
-        "Company Valuation & Positioning",
-        "Data Room Preparation",
-        "Buyer Identification & Outreach",
-        "Negotiation Strategy & Support"
-      ],
-      "benefits": [
-        "Maximizes Sale Multiples",
-        "Seamless Due Diligence Process",
-        "Confidentiality Management",
-        "Optimized Tax Structures"
-      ],
       "bubbleTitle": "What our sell-side process gives you",
       "bubbles": [
         {
@@ -128,18 +116,6 @@
   },
   "he": {
     "sell-side-advisory": {
-      "services": [
-        "הערכת שווי ומיצוי פוטנציאל",
-        "הכנת חדר מידע (Data Room)",
-        "זיהוי ופנייה לקונים פוטנציאליים",
-        "אסטרטגיית משא ומתן ותמיכה"
-      ],
-      "benefits": [
-        "מיקסום מכפילים בעת מכירה",
-        "תהליך בדיקת נאותות חלק",
-        "ניהול סודיות קפדני",
-        "מבני מס אופטימליים"
-      ],
       "bubbleTitle": "מה תהליך המכירה נותן לכם",
       "bubbles": [
         {

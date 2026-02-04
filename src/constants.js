@@ -1,3 +1,22 @@
+export const STORAGE_KEYS = {
+  CONTENT: "gd-content",
+  LANGUAGE: "gd-language",
+  THEME: "gd-theme",
+};
+
+export const LANGUAGES = {
+  EN: "en",
+  HE: "he",
+};
+
+export const DEFAULT_LANGUAGE = LANGUAGES.EN;
+
+export const ITEMS_PER_PAGE = {
+  NEWS: 9,
+  RELATED_ARTICLES: 3,
+  FEATURED_ARTICLES: 4,
+};
+
 export const sectorKeywords = {
   "business-presentations": [
     "presentation",

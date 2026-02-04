@@ -1,18 +1,6 @@
 {
   "en": {
     "business-presentations": {
-      "services": [
-        "Investor Pitch Deck Design",
-        "Narrative & Storytelling Development",
-        "Financial Modeling & Visualizations",
-        "Market Analysis Summary"
-      ],
-      "benefits": [
-        "High Investor Conversion Rates",
-        "Clarity in Complex Business Models",
-        "Professional Brand Image",
-        "Saves Valuable Executive Time"
-      ],
       "bubbleTitle": "What your presentation delivers",
       "bubbles": [
         {
@@ -66,18 +54,6 @@
   },
   "he": {
     "business-presentations": {
-      "services": [
-        "עיצוב מצגות למשקיעים",
-        "פיתוח נרטיב וסיפור עסקי",
-        "מודלים פיננסיים והדמיות",
-        "סיכום ניתוח שוק"
-      ],
-      "benefits": [
-        "שיעורי המרה גבוהים מול משקיעים",
-        "בהירות במודלים עסקיים מורכבים",
-        "תדמית מותג מקצועית",
-        "חוסך זמן ניהולי יקר"
-      ],
       "bubbleTitle": "מה המצגת העסקית מספקת לכם",
       "bubbles": [
         {
