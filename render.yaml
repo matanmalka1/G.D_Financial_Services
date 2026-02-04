@@ -1,9 +1,0 @@
-services:
-  - type: static
-    name: gd-financial-services
-    buildCommand: npm install && npm run build
-    staticPublishPath: ./dist
-    routes:
-      - type: rewrite
-        source: /*
-        destination: /index.html
