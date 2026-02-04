@@ -1,4 +1,4 @@
-const logoSrc = "/logo.avif";
+import logoSrc from "../../assets/logo.avif";
 
 export const Logo = ({ size = 40, className = "" }) => (
   <img
