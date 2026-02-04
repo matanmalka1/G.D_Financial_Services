@@ -7,11 +7,13 @@ import {
   TransitionChild,
 } from "@headlessui/react";
 import { useForm, Controller } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { X, Sparkles } from "lucide-react";
 import { PhoneNumberInput } from "./PhoneNumberInput";
 import { Select } from "./Select";
 import { Button } from "./primitives/Button";
 import { useLanguage } from "../../hooks/useLanguage";
+import { buildLeadCaptureSchema } from "../../validation/leadCaptureSchema";
 
 export const LeadCaptureModal = ({
   open,
@@ -31,6 +33,7 @@ export const LeadCaptureModal = ({
     formState: { errors },
     reset,
   } = useForm({
+    resolver: zodResolver(buildLeadCaptureSchema(t)),
     defaultValues: {
       fullName: "",
       email: "",
@@ -101,17 +104,16 @@ export const LeadCaptureModal = ({
                 <div className="flex items-start gap-4 sm:gap-6">
                   <div className="mt-1 inline-flex items-center gap-2 rounded-full bg-slate-900 text-white px-3 py-1 text-xs font-semibold tracking-tight shadow-md shadow-slate-900/20">
                     <Sparkles className="h-4 w-4" />
-                    <span>{copy.badge || "ייעוץ ראשוני ללא התחייבות"}</span>
+                    <span>{copy.badge || ""}</span>
                   </div>
                 </div>
 
                 <div className="mt-4 space-y-3">
                   <DialogTitle className="text-2xl sm:text-3xl font-semibold leading-snug text-slate-900">
-                    {copy.title || "רוצים לקחת את העסק שלכם צעד קדימה?"}
+                    {copy.title || ""}
                   </DialogTitle>
                   <p className="text-sm sm:text-base leading-relaxed text-slate-600">
-                    {copy.description ||
-                      "אנו מציעים ללקוחותינו מגוון שירותים כגון: בניית תוכניות עסקיות, ליווי עסקי, ליווי בתהליך מכירה, ליווי מול בנקים ומצגות חברה ומשקיעים. השאירו פרטים ונחזור אליכם עם ייעוץ ראשוני ללא התחייבות."}
+                    {copy.description || ""}
                   </p>
                 </div>
 
@@ -123,14 +125,14 @@ export const LeadCaptureModal = ({
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
                       <label className="block text-sm font-semibold text-slate-700 mb-1.5">
-                        {copy.fullNameLabel || "שם מלא"}
+                        {copy.fullNameLabel || ""}
                       </label>
                       <input
-                        {...register("fullName", {
-                          required: copy.fullNameError || "חובה למלא שם",
-                        })}
+                        {...register("fullName")}
                         className={`w-full rounded-xl border px-4 py-3 text-slate-900 shadow-inner shadow-slate-900/5 focus:outline-none focus:ring-2 focus:ring-slate-900/70 ${errors.fullName ? "border-red-400" : "border-slate-200"}`}
-                        placeholder="דוגמה: יעל לוי"
+                        placeholder={
+                          copy.fullNamePlaceholder || ""
+                        }
                       />
                       {errors.fullName && (
                         <p className="mt-1 text-xs text-red-500">
@@ -141,18 +143,12 @@ export const LeadCaptureModal = ({
 
                     <div>
                       <label className="block text-sm font-semibold text-slate-700 mb-1.5">
-                        {copy.emailLabel || "אימייל"}
+                        {copy.emailLabel || ""}
                       </label>
                       <input
-                        {...register("email", {
-                          required: copy.emailError || "חובה למלא אימייל",
-                          pattern: {
-                            value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-                            message: copy.emailInvalid || "כתובת אימייל לא תקינה",
-                          },
-                        })}
+                        {...register("email")}
                         className={`w-full rounded-xl border px-4 py-3 text-slate-900 shadow-inner shadow-slate-900/5 focus:outline-none focus:ring-2 focus:ring-slate-900/70 ${errors.email ? "border-red-400" : "border-slate-200"}`}
-                        placeholder="name@email.com"
+                        placeholder={copy.emailPlaceholder || ""}
                         inputMode="email"
                       />
                       {errors.email && (
@@ -167,13 +163,9 @@ export const LeadCaptureModal = ({
                     <Controller
                       name="phone"
                       control={control}
-                      rules={{
-                        required:
-                          copy.phoneError || "נשמח לקבל מספר ליצירת קשר",
-                      }}
                       render={({ field }) => (
                         <PhoneNumberInput
-                          label={copy.phoneLabel || "טלפון נייד"}
+                          label={copy.phoneLabel || ""}
                           value={field.value}
                           onChange={field.onChange}
                           error={errors.phone?.message}
@@ -185,21 +177,17 @@ export const LeadCaptureModal = ({
 
                     <div className="flex flex-col justify-end">
                       <label className="block text-sm font-semibold text-slate-700 mb-1.5">
-                        {copy.serviceLabel || "תחום עניין"}
+                        {copy.serviceLabel || ""}
                       </label>
                       <Controller
                         name="service"
                         control={control}
-                        rules={{
-                          required:
-                            copy.serviceError || "בחרו שירות שמעניין אתכם",
-                        }}
                         render={({ field }) => (
                           <Select
                             value={field.value}
                             onValueChange={field.onChange}
                             options={serviceOptions}
-                            placeholder={copy.servicePlaceholder || "בחרו שירות"}
+                            placeholder={copy.servicePlaceholder || ""}
                             dir={isRtl ? "rtl" : "ltr"}
                             className={errors.service ? "border-red-400" : ""}
                           />
@@ -219,7 +207,7 @@ export const LeadCaptureModal = ({
                     size="lg"
                     className="w-full rounded-xl bg-slate-900 text-white shadow-xl shadow-slate-900/15 hover:bg-slate-800"
                   >
-                    {copy.submit || "שלחו לי ייעוץ ראשוני"}
+                    {copy.submit || ""}
                   </Button>
                 </form>
               </DialogPanel>
