@@ -6,7 +6,7 @@ import { LoadBoundary, PageError, PageLoading } from "../components/common/LoadB
 import { SectorTile } from "../components/ui/SectorTile";
 import { SectionHeading } from "../components/ui/SectionHeading";
 import { SearchBar } from "../components/ui/SearchBar";
-import { filterBySearch } from "../utils/helpers/search";
+import { filterBySearch } from "../utils/helpers/utils";
 
 export const Sectors = () => {
   const { t, isRtl } = useLanguage();

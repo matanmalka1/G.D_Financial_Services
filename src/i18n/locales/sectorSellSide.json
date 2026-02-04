@@ -44,44 +44,38 @@
         {
           "title": "Our Five-Step Process",
           "stepLinks": [
-            { "id": "sell-step-1", "label": "Valuation and exit strategy" },
-            { "id": "sell-step-2", "label": "Financial and legal preparation" },
-            {
-              "id": "sell-step-3",
-              "label": "Identifying potential buyers or investors"
-            },
-            { "id": "sell-step-4", "label": "Negotiation and deal closing" },
-            {
-              "id": "sell-step-5",
-              "label": "Investor presentations and reports"
-            }
+            { "id": "sell-step-1", "label": "1. Valuation and exit strategy" },
+            { "id": "sell-step-2", "label": "2. Financial and legal preparation" },
+            { "id": "sell-step-3", "label": "3. Identifying potential buyers or investors" },
+            { "id": "sell-step-4", "label": "4. Negotiation and deal closing" },
+            { "id": "sell-step-5", "label": "5. Investor presentations and reports" }
           ],
           "body": ""
         },
         {
           "id": "sell-step-1",
-          "title": "Valuation and Exit Strategy",
-          "body": "DCF, multiples, and market comps with sensitivity simulations; analysis of performance, profitability, cash flow, risks, and value-uplift opportunities; tailored exit path (full/partial sale, strategic partner, merger) with financing options."
+          "title": "Phase 1: Valuation and Exit Strategy",
+          "body": "In the first phase we run a comprehensive valuation using several market-standard methods:\n\n• Discounted Cash Flow (DCF): valuing future cash flows discounted to today, calibrated for business risk, regulatory changes, and sector growth.\n\n• Trading multiples: earnings, EBITDA, and revenue multiples benchmarked to comparable companies.\n\n• Transaction comps: recent M&A deals in the sector, including price and key terms.\n\nBeyond the quantitative work we analyze operating and financial performance, profitability by segment, cash flow, business risks, and upside levers. Together with you we craft a tailored exit strategy—full/partial sale, strategic partner, merger, or minority deal—and run sensitivity simulations plus appropriate financing options to guide decisions."
         },
         {
           "id": "sell-step-2",
-          "title": "Financial and Legal Preparation",
-          "body": "IFRS/US GAAP statements, profitability by activity/customer/product, organized data room (agreements, budgets, forecasts, tax, IP, leases, HR). Clear narrative with accounting, legal, and tax advisors to clear red flags."
+          "title": "Phase 2: Financial and Legal Preparation",
+          "body": "Professional, credible presentation of the company is a prerequisite for a successful deal. We prepare:\n\n• IFRS / US GAAP financial statements with deal-specific adjustments.\n\n• Profitability reports by line of business, customer, and product.\n\n• A clean data room: agreements, budgets, forecasts, tax filings, IP records, leases and HR documents—everything needed for diligence.\n\nIn parallel we co-develop a clear business narrative that strengthens the company’s positioning, backed by accountants, legal counsel, and tax advisors to keep the process free of red flags."
         },
         {
           "id": "sell-step-3",
-          "title": "Identifying Buyers or Investors",
-          "body": "Confidential teaser, targeted outreach, meetings and screening; focusing on strategic/financial/local/international parties that add real value—not just price—identifying the right potential buyers or investors for the deal."
+          "title": "Phase 3: Identifying Buyers or Investors",
+          "body": "With a broad network, deep market knowledge, and quality databases, we map the most relevant strategic and financial buyers—local and international. The process includes:\n\n• Full confidentiality and anonymity in the early stage.\n\n• Crafting an anonymous teaser for initial distribution.\n\n• Proactive outreach to screened targets.\n\n• Meeting coordination, fit checks, and first-pass filtering.\n\nWe prioritize parties who bring real added value to the business—not just the highest bid."
         },
         {
           "id": "sell-step-4",
-          "title": "Negotiation and Deal Closing",
-          "body": "Tailored teaser/CIM, parallel negotiations, term sheet review, diligence responses, legal edits, coordination with banks/investors through signing and funds flow—creating controlled competition to optimize terms."
+          "title": "Phase 4: Negotiation and Deal Closing",
+          "body": "During negotiations we produce all materials needed to advance the deal: an anonymous teaser, a full CIM with financial, business, and strategic data, and tailored versions by buyer type (strategic, financial, local, international).\n\nIn parallel we analyze incoming offers with you, including legal and financial terms in the term sheet, explain implications, and run parallel negotiations to create controlled competition and secure optimal terms.\n\nWe also orchestrate the entire closing phase: organized responses to diligence requests, legal comments and agreement edits, drafting key purchase-agreement clauses, coordination with advisors, and support in bank/investor meetings—through signing and funds flow—while keeping timelines, transparency, and operational calm."
         },
         {
           "id": "sell-step-5",
-          "title": "Investor Presentations and Reports",
-          "body": "Business/investor decks and reports with financial, strategic, and market content tailored to the audience (funds, strategic partners, private investors); highlighting advantages, KPIs, forecasts, and competitive mapping, plus supplemental market and competitor analysis for informed decisions."
+          "title": "Phase 5: Investor Presentations and Reports",
+          "body": "For capital raises or sale processes we build business decks that blend financial, strategic, and marketing content, tailored to each audience—funds, strategic partners, or private investors.\n\nThe decks highlight the company’s advantages, key KPIs, revenue and profitability forecasts, and a strategic competitive map. Each narrative is clear, data-backed, and focused on the company’s potential.\n\nAlongside the deck we provide companion reports: market analysis, industry trends, competitor profiles, and forward-looking projections to enable informed decisions."
         }
       ]
     }
@@ -131,41 +125,41 @@
         {
           "title": "תוכנית הליווי שלנו – חמישה שלבים",
           "stepLinks": [
-            { "id": "sell-step-1", "label": "הערכת שווי ואסטרטגיית אקזיט" },
-            { "id": "sell-step-2", "label": "הכנת תשתית פיננסית ומשפטית" },
+            { "id": "sell-step-1", "label": "1. הערכת שווי ואסטרטגיית אקזיט" },
+            { "id": "sell-step-2", "label": "2. הכנת תשתית פיננסית ומשפטית" },
             {
               "id": "sell-step-3",
-              "label": "איתור רוכשים או משקיעים פוטנציאליים"
+              "label": "3. איתור רוכשים או משקיעים פוטנציאליים"
             },
-            { "id": "sell-step-4", "label": "ליווי משא ומתן וסגירת עסקה" },
-            { "id": "sell-step-5", "label": "מצגת ודוחות למשקיעים" }
+            { "id": "sell-step-4", "label": "4. ליווי משא ומתן וסגירת עסקה" },
+            { "id": "sell-step-5", "label": "5. מצגת ודוחות למשקיעים" }
           ],
           "body": ""
         },
         {
           "id": "sell-step-1",
           "title": "הערכת שווי ואסטרטגיית אקזיט",
-          "body": "הערכת שווי מבוססת DCF, מכפילים ועסקאות דומות, כולל ניתוח ביצועים, רווחיות, תזרים, סיכונים והזדמנויות, ובחירת אסטרטגיית יציאה מותאמת (מכירה מלאה/חלקית, שותף אסטרטגי, מיזוג) עם סימולציות רגישות ומימון מתאים."
+          "body": "בשלב הראשון, אנו מבצעים הערכת שווי מקיפה המבוססת על מספר מתודולוגיות המקובלות בשוק:\n\n• שיטת היוון תזרים מזומנים (Discount Cash Flow - DCF): הערכת השווי מבוססת על תחזית תזרימי המזומנים העתידיים המהוונים להיום, תוך התאמה לסיכון העסקי, שינויים רגולטוריים וצמיחה בענף.\n\n• השוואות מכפילים (Multiples): ניתוח של מכפילי רווח, מכפילי EBITDA והכנסות, תוך השוואה לחברות דומות בענף.\n\n• השוואות עסקאות (Market Comparables): בחינת עסקאות רכישה קודמות בענף, כולל ניתוח של שווי העסקאות ותנאיהן.\n\nמעבר לשיטות הכמותיות, אנו מנתחים לעומק את הביצועים הפיננסיים והתפעוליים של החברה, הרווחיות לפי מגזרים, תזרים המזומנים, הסיכונים העסקיים, וההזדמנויות להצפת ערך עתידי.\n\nבהתאם לניתוח, אנו מגבשים יחד עם הלקוח אסטרטגיית אקזיט מותאמת אישית – בין אם מדובר במכירה מלאה, הכנסת שותף אסטרטגי, מיזוג עם גוף משלים או מכירה חלקית תוך שמירה על שליטה. לצורך קבלת החלטות מושכלות, אנו מבצעים סימולציות רגישות המעריכות את ההשפעה של שינויים בפרמטרים עסקיים מרכזיים על שווי החברה, ומציעים פתרונות מימון מתאימים לתנאי העסקה."
         },
         {
           "id": "sell-step-2",
           "title": "הכנת תשתית פיננסית ומשפטית",
-          "body": "דוחות IFRS/US GAAP, רווחיות לפי פעילות/לקוחות/מוצרים, DATA ROOM מסודר (הסכמים, תקציבים, תחזיות, מס, IP, חוזי שכירות והעסקה). נרטיב עסקי מגובה בשיתוף רו\"ח/משפטי/מס למניעת דגלים אדומים."
+          "body": "הצגת החברה בצורה מקצועית ואמינה מהווה תנאי מקדים להצלחת עסקה. אנו מלווים את הלקוח בהכנה של:\n\n• דוחות כספיים תקניים (IFRS / US GAAP) עם התאמות לפי צורכי העסקה.\n\n• דוחות רווחיות לפי פעילות, לקוחות ומוצרים.\n\n• DATA ROOM מסודר הכולל הסכמים, תקציבים, תחזיות, דו\"חות מס, רישומי קניין רוחני, חוזי שכירות והעסקה, וכל מסמך נדרש לבדיקת נאותות.\n\nבמקביל, אנו מגבשים יחד עם הלקוח נרטיב עסקי ברור שמחזק את מיצוב החברה כיעד השקעה. הנרטיב נתמך בשיתוף פעולה עם רואי חשבון, יועצים משפטיים ומומחי מס כדי לוודא שהחברה \"נקייה\" משאלות משפטיות או בעיות רגולטוריות (\"דגלים אדומים\")."
         },
         {
           "id": "sell-step-3",
           "title": "איתור רוכשים או משקיעים פוטנציאליים",
-          "body": "שמירת סודיות, Teaser אנונימי, פנייה יזומה, תיאום פגישות וסינון. מיקוד בגורמים שמביאים ערך מוסף, לא רק מחיר."
+          "body": "בזכות רשת קשרים רחבה, היכרות עמוקה עם השוק ומאגרי מידע איכותיים, אנו ממפים את הרוכשים והמשקיעים המתאימים ביותר לעסק – בין אם מדובר ברוכשים אסטרטגיים, קרנות השקעה, חברות בינלאומיות או משקיעים פרטיים. התהליך כולל:\n\n• שמירה מלאה על סודיות וזהות העסק בשלב הראשוני.\n\n• ניסוח חומר שיווקי ראשון (Teaser) להפצה אנונימית.\n\n• ניהול תהליך פניה יזום לגורמים מתאימים.\n\n• תיאום פגישות, בדיקת התאמה וסינון ראשוני.\n\nאנו מתמקדים בגורמים שיכולים להביא ערך מוסף אמיתי לעסק, ולא רק הצעה כספית גבוהה."
         },
         {
           "id": "sell-step-4",
           "title": "ליווי משא ומתן וסגירת עסקה",
-          "body": "הפקת Teaser/CIM מותאמים, ניתוח הצעות ו-Term Sheet, ניהול מקביל ליצירת תחרות, מענה לדיליג'נס, תיקוני הסכמים, תיאום עם בנקים/משקיעים עד חתימה והעברת תמורה."
+          "body": "בשלב המשא ומתן אנו מפיקים את כלל חומרי ההצגה הנדרשים לצורך קידום העסקה – לרבות Teaser אנונימי שמציג את עיקרי ההזדמנות ללא חשיפת פרטי החברה, מצגת CIM מלאה הכוללת את כלל הנתונים הפיננסיים, העסקיים והאסטרטגיים, וכן גרסאות מותאמות של החומרים בהתאם לסוג הרוכש או המשקיע (אסטרטגי, פיננסי, מקומי או בינלאומי).\n\nבמקביל, אנו מנתחים יחד עם הלקוח את ההצעות המתקבלות, כולל התנאים המשפטיים והפיננסיים של מסמכי ה-Term Sheet, מסבירים את ההשלכות האפשריות של כל סעיף, ומנהלים את המגעים מול מספר גורמים במקביל – תוך יצירת תחרות מבוקרת – במטרה להשיג את התנאים האופטימליים לעסקה.\n\nבנוסף, אנו מרכזים ומתכללים את שלב הסגירה כולו: מתן מענה מסודר לדרישות שעולות במסגרת בדיקת הנאותות (Due Diligence), טיפול בהסתייגויות משפטיות ותיקונים להסכמים, ניסוח סעיפי מפתח בחוזה הרכישה, תיאום עם היועצים השונים וליווי בפגישות מול הבנקים או המשקיעים. הליווי נמשך עד לחתימה הסופית על ההסכם ולהעברת התמורה בפועל – תוך שמירה על לוחות זמנים, שקיפות מלאה ושקט תפעולי ללקוח לאורך כל הדרך."
         },
         {
           "id": "sell-step-5",
           "title": "מצגת ודוחות למשקיעים",
-          "body": "מצגות עסקיות עם תוכן פיננסי/אסטרטגי/שיווקי מותאם לקהל (קרנות, שותף אסטרטגי, משקיע פרטי), הדגשת יתרונות יחסיים, KPIs, תחזיות ומיפוי תחרותי; דוחות משלימים על שוק, מגמות, פרופיל מתחרים ותחזיות להחלטה מושכלת."
+          "body": "במסגרת גיוס הון או מו\"מ למכירת החברה, אנו מכינים מצגות עסקיות, המשלבות תוכן פיננסי, אסטרטגי ושיווקי – ומותאמות לקהל היעד הרלוונטי, בין אם מדובר בקרן השקעות, שותף אסטרטגי או משקיע פרטי.\n\nהמצגות מדגישות את היתרונות היחסיים של החברה, מציגות מדדי ביצוע מרכזיים (KPIs), תחזיות הכנסות ורווחיות, ומציגות מיפוי אסטרטגי מול המתחרים בענף. כל מצגת נבנית על בסיס נרטיב עסקי ברור ומגובה בנתונים, במטרה לשקף את הפוטנציאל הגלום בחברה ולהעביר מסר חד, מקצועי ומשכנע.\n\nלצד המצגת אנו מספקים דוחות משלימים הכוללים ניתוח שוק, מגמות בענף, פרופיל מתחרים ותחזיות עתידיות – שמאפשרים למשקיעים לקבל החלטות מושכלות ומבוססות."
         }
       ]
     }
