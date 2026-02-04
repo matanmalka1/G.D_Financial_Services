@@ -1,256 +1,329 @@
 # G.D Financial Services
 
-A modern, responsive website for G.D Financial Services built with React, Vite, and Tailwind CSS. The site showcases financial advisory services, business consulting solutions, and company information with a multilingual interface.
+A modern, responsive website for G.D Financial Services built with React, Vite, and Tailwind CSS. The site showcases financial advisory services, business consulting solutions, and company information with a professional multilingual interface supporting English and Hebrew.
+
+> **Note**: This is a proprietary website for G.D Financial Services. All content and code are protected intellectual property.
 
 ## 🌟 Features
 
-- **Responsive Design**: Mobile-first approach with Tailwind CSS for beautiful UI across all devices
-- **Multilingual Support**: Full internationalization (i18n) support for multiple languages
-- **Modern Components**: Reusable React components with best practices
-- **Fast Performance**: Built with Vite for optimized development and production builds
-- **Form Validation**: Robust form handling with React Hook Form and Zod validation
-- **Accessibility**: Accessible UI components using Radix UI
-- **Analytics Integration**: Built-in analytics service for tracking user interactions
-- **Dynamic Content**: Content management system with context API for state management
+- **🎨 Responsive Design**: Mobile-first approach with Tailwind CSS for beautiful UI across all devices
+- **🌐 Multilingual Support**: Full internationalization (i18n) with English and Hebrew language support
+- **⚡ Modern Components**: Reusable React components with best practices and hooks
+- **🚀 Fast Performance**: Built with Vite for optimized development and production builds
+- **✅ Form Validation**: Robust form handling with React Hook Form and Zod schema validation
+- **♿ Accessibility**: Accessible UI components using Radix UI
+- **📊 Analytics Integration**: Built-in analytics service for tracking user interactions
+- **🎯 Dynamic Content**: Content management system with Context API for global state management
+- **🔍 Search & Filtering**: Search functionality for articles and sectors with keyword-based filtering
+- **📱 Mobile Optimization**: Optimized touch interactions and responsive layouts for all screen sizes
 
 ## 📋 Table of Contents
 
 - [Tech Stack](#tech-stack)
 - [Project Structure](#project-structure)
 - [Getting Started](#getting-started)
-- [Development](#development)
 - [Build](#build)
 - [Project Structure Details](#project-structure-details)
 - [Key Features](#key-features)
+- [Page Routes](#page-routes)
+- [Contributing](#contributing)
+- [License](#license)
 
 ## 🛠️ Tech Stack
 
-- **Frontend Framework**: React 19.2.3
-- **Build Tool**: Vite 7.3.1
-- **Styling**: Tailwind CSS 4.1.18
-- **Routing**: React Router DOM 7.12.0
-- **Forms**: React Hook Form 7.71.0 with Zod 4.3.5 validation
-- **UI Components**: Radix UI (Select), Lucide React (Icons)
-- **Notifications**: React Hot Toast
-- **Language Support**: Custom i18n implementation with JSON locale files
-- **Development**: Vite React plugin with Fast Refresh
+### Core Framework
+
+- **Frontend Framework**: React 19.2.3 - Modern UI library with hooks
+- **Build Tool**: Vite 7.3.1 - Lightning-fast build tool with instant HMR
+- **Styling**: Tailwind CSS 4.1.18 - Utility-first CSS framework
+- **TypeScript Support**: Type safety with React types (optional)
+
+### Routing & State
+
+- **Routing**: React Router DOM 7.12.0 - Client-side routing with nested routes
+- **State Management**: React Context API - Global state management for content and language
+- **Custom Hooks**: useContent, useLanguage - Domain-specific custom hooks
+
+### Forms & Validation
+
+- **Forms**: React Hook Form 7.71.0 - Efficient form state management
+- **Validation**: Zod 4.3.5 - TypeScript-first schema validation
+- **Phone Input**: libphonenumber-js 1.12.36 - International phone number handling
+
+### UI Components & Styling
+
+- **UI Library**: Radix UI (Select component) - Unstyled, accessible components
+- **Icons**: Lucide React 0.562.0 - Beautiful, consistent icon library
+- **Notifications**: Sonner 2.0.7 - Toast notifications and alerts
 
 ## 📁 Project Structure
 
 ```
-src/
-├── components/
-│   ├── common/              # Shared components (Logo, Header, etc.)
-│   ├── layout/              # Layout components (Navbar, Footer, Layout wrapper)
-│   ├── sections/            # Page sections (Clients, etc.)
-│   ├── sector/              # Sector-specific components
-│   └── ui/                  # UI components (Cards, Buttons, etc.)
-├── config/
-│   └── contexts.js          # Context configuration
-├── constants/
-│   └── index.js             # Application constants
-├── context/
-│   └── ContentContext.jsx   # Global content context
-├── data/
-│   └── mockData.js          # Mock data for development
-├── hooks/
-│   ├── useContent.js        # Content management hook
-│   └── useLanguage.js       # Language/i18n hook
-├── i18n/
-│   ├── LanguageContext.jsx  # Language context provider
-│   ├── translations.js      # Translation utilities
-│   └── locales/             # JSON translation files for each page
-├── pages/
-│   ├── CompanyProfile.jsx
-│   ├── Contact.jsx
-│   ├── Home.jsx
-│   ├── News.jsx
-│   ├── SectorDetail.jsx
-│   └── Sectors.jsx
-├── routes/
-│   └── paths.js             # Route definitions
-├── services/
-│   ├── analyticsService.js  # Analytics tracking
-│   └── contentService.js    # Content fetching/management
-├── utils/
-│   ├── helpers/             # Helper functions
-│   └── validators/          # Form validators
-├── App.jsx                  # Root component
-└── main.jsx                 # Application entry point
-
-public/
-├── logo.avif                # Company logo
-└── owner_photo.avif         # Owner spotlight image
+.
+├── index.html                          # HTML entry point
+├── vite.config.js                      # Vite configuration
+├── tailwind.config.js                  # Tailwind CSS configuration
+├── package.json                        # Project dependencies and scripts
+├── metadata.json                       # Project metadata
+├── public/                             # Static assets
+│   ├── logo.avif                      # Company logo
+│   ├── owner_photo.avif               # Owner spotlight image
+│   └── *.avif                         # Service and feature images
+│
+├── src/
+│   ├── components/
+│   │   ├── common/                    # Shared utility components
+│   │   │   ├── ErrorBoundary.jsx
+│   │   │   ├── LoadBoundary.jsx
+│   │   │   ├── Logo.jsx
+│   │   │   ├── ParallaxHeader.jsx
+│   │   │   ├── ScrollToTop.jsx
+│   │   │   └── SocialLogos.jsx
+│   │   │
+│   │   ├── layout/                    # Layout structure components
+│   │   │   ├── Layout.jsx             # Root layout wrapper
+│   │   │   ├── Navbar.jsx             # Main navigation
+│   │   │   ├── Footer.jsx             # Footer section
+│   │   │   ├── navbar/                # Navbar sub-components
+│   │   │   └── footer/                # Footer sub-components
+│   │   │
+│   │   ├── sections/                  # Full-width page sections
+│   │   │   └── ClientsSection.jsx
+│   │   │
+│   │   ├── sector/                    # Sector-specific components
+│   │   │   ├── SectorBenefitsCard.jsx
+│   │   │   ├── SectorServices.jsx
+│   │   │   ├── SectorValueBubbles.jsx
+│   │   │   ├── SectorTile.jsx
+│   │   │   └── RelatedArticlesSection.jsx
+│   │   │
+│   │   └── ui/                        # Reusable UI components
+│   │       ├── EmptyState.jsx
+│   │       ├── ErrorState.jsx
+│   │       ├── FeatureBubble.jsx
+│   │       ├── LoadingGrid.jsx
+│   │       ├── NewsCard.jsx
+│   │       ├── OwnerSpotlight.jsx
+│   │       ├── Pagination.jsx
+│   │       ├── PhoneNumberInput.jsx
+│   │       ├── SearchBar.jsx
+│   │       ├── SectionHeading.jsx
+│   │       ├── Select.jsx
+│   │       ├── phone/                 # Phone input sub-components
+│   │       └── primitives/            # Basic UI primitives
+│   │
+│   ├── constants/
+│   │   ├── index.js                   # Application constants
+│   │   ├── pagination.js              # Pagination configuration
+│   │   └── sectorKeywords.js          # Keywords for sector filtering
+│   │
+│   ├── context/
+│   │   └── ContentContext.jsx         # Global content context provider
+│   │
+│   ├── data/
+│   │   ├── mockData.js                # Mock articles and sectors
+│   │   └── countries.js               # Country list data
+│   │
+│   ├── hooks/
+│   │   ├── useContent.js              # Hook for accessing content context
+│   │   └── useLanguage.js             # Hook for i18n and language management
+│   │
+│   ├── i18n/                          # Internationalization
+│   │   ├── LanguageContext.jsx        # Language context provider
+│   │   ├── translations.js            # Translation utility functions
+│   │   └── locales/                   # Translation files by language
+│   │       ├── global.json            # Shared translations
+│   │       ├── home.json              # Home page
+│   │       ├── contact.json           # Contact page
+│   │       ├── news.json              # News page
+│   │       ├── companyProfile.json    # Company profile page
+│   │       ├── sectorBusinessConsulting.json
+│   │       ├── sectorBusinessPlan.json
+│   │       ├── sectorBusinessPresentations.json
+│   │       ├── sectorDetailCommon.json
+│   │       ├── sectorOngoingAdvisory.json
+│   │       └── ... (more sector translations)
+│   │
+│   ├── pages/                         # Page components (top-level routes)
+│   │   ├── Home.jsx                   # Landing page
+│   │   ├── CompanyProfile.jsx         # About company
+│   │   ├── Sectors.jsx                # Services/sectors listing
+│   │   ├── SectorDetail.jsx           # Individual sector details
+│   │   ├── News.jsx                   # News/insights page
+│   │   └── Contact.jsx                # Contact form page
+│   │
+│   ├── routes/
+│   │   └── paths.js                   # Route path definitions
+│   │
+│   ├── services/
+│   │   ├── analyticsService.js        # Analytics tracking
+│   │   └── contentService.js          # Content fetching and filtering
+│   │
+│   ├── utils/
+│   │   ├── helpers/                   # Utility functions
+│   │   └── validators/                # Custom validators
+│   │
+│   ├── validation/
+│   │   └── contactSchema.js           # Zod schema for contact form
+│   │
+│   ├── App.jsx                        # Root component with routes
+│   └── main.jsx                       # Application entry point and React initialization
+│
+└── dist/                              # Production build output (generated)
 ```
 
 ## 🚀 Getting Started
 
 ### Prerequisites
 
-- Node.js 16+ and npm or yarn
-- Git
+- **Node.js**: Version 16 or higher (v18+ recommended)
+- **npm** or **yarn**: Package manager (npm comes with Node.js)
+- **Git**: For version control
+- **Code Editor**: VS Code or your preferred editor (with optional Vite and React plugins)
 
 ### Installation
 
-1. **Clone the repository**
+#### 1. Clone the Repository
 
 ```bash
 git clone https://github.com/matanmalka1/G.D_Financial_Services.git
 cd G.D_Financial_Services
 ```
 
-2. **Install dependencies**
+#### 2. Install Dependencies
+
+Install all project dependencies using npm or yarn:
 
 ```bash
 npm install
+# or
+yarn install
 ```
 
-3. **Start the development server**
+#### 3. Start the Development Server
+
+Start the Vite development server with hot module replacement:
 
 ```bash
 npm run dev
+# or
+yarn dev
 ```
 
-The application will be available at `http://localhost:5173` (or the next available port).
+The application will be available at:
 
-## 💻 Development
+- **Local**: `http://localhost:5173` (default Vite port)
+- **Network**: Check terminal output for network URL to access from other devices
 
-### Available Scripts
+> If port 5173 is in use, Vite will automatically use the next available port. Check the terminal output for the correct URL.
 
-- `npm run dev` - Start the development server with hot module replacement
-- `npm run build` - Build the production bundle
-- `npm run preview` - Preview the production build locally
-
-### Development Workflow
-
-1. Make changes to components/pages in the `src/` directory
-2. Changes are automatically reflected in the browser with hot refresh
-3. Use React DevTools for component debugging
-
-### Adding New Pages
-
-1. Create a new component in `src/pages/`
-2. Define the route in `src/routes/paths.js`
-3. Add translations to `src/i18n/locales/` for each language
-4. Import and use the `useLanguage()` hook for translated content
-
-### Adding New Components
-
-Place reusable components in the appropriate folder under `src/components/`:
-
-- **common/**: UI elements shared across multiple pages
-- **layout/**: Layout wrappers and structure
-- **ui/**: Atomic UI components (buttons, cards, etc.)
-- **sections/**: Page-specific sections
-- **sector/**: Sector-specific components
+````
 
 ## 🔨 Build
-
 ### Production Build
 
 ```bash
 npm run build
-```
-
-This generates an optimized production build in the `dist/` directory.
-
-### Preview Build
-
-```bash
-npm run preview
-```
-
-Serves the production build locally for testing before deployment.
+````
 
 ## 📚 Project Structure Details
 
-### Components
+### Pages Overview
 
-- **Layout**: Main layout wrapper with Navbar and Footer
-- **Navbar**: Responsive navigation with language toggle and mobile menu
-- **Footer**: Multi-section footer with brand, links, contact info, and social media
-- **Sections**: Page-specific content sections (Clients, Related Articles, etc.)
-- **UI**: Reusable components like Cards, Buttons, Search bars, etc.
-
-### Pages
-
-- **Home**: Landing page with hero section, features, and CTA
-- **Sectors**: Displays available business sectors with filtering
-- **SectorDetail**: Individual sector information and related services
-- **News**: News and insights listing with pagination
-- **CompanyProfile**: About the company and team information
-- **Contact**: Contact form and company information
+| Page                | Route              | Purpose                                   |
+| ------------------- | ------------------ | ----------------------------------------- |
+| **Home**            | `/`                | Landing page with hero, features, and CTA |
+| **Sectors**         | `/sectors`         | Browse all business services/sectors      |
+| **Sector Detail**   | `/sectors/:id`     | Individual sector information             |
+| **News**            | `/news`            | Articles and insights with pagination     |
+| **Company Profile** | `/company-profile` | About company and team                    |
+| **Contact**         | `/contact`         | Contact form and company information      |
 
 ### i18n (Internationalization)
 
-The project supports multiple languages through JSON locale files:
+The application supports multiple languages with JSON locale files:
 
-- `global.json` - Global/shared translations
-- `home.json` - Home page translations
-- `sectors.json`, `sectorDetail*.json` - Sector-related translations
-- `news.json` - News page translations
-- `contact.json` - Contact page translations
-- `companyProfile.json` - Company profile translations
+**Language Support**: English (`en`) and Hebrew (`he`)
 
 ## 🎯 Key Features
 
 ### Responsive Navigation
 
-- Desktop and mobile-optimized navigation
-- Language toggle for multilingual support
-- Sticky header with parallax effects
+- ✅ Desktop and mobile-optimized
+- ✅ Language toggle (English/Hebrew)
+- ✅ Sticky header with scroll effects
+- ✅ Mobile hamburger menu
+- ✅ Smooth transitions and animations
 
 ### Content Management
 
-- Context API for global state management
-- Custom hooks for content and language
-- Mock data integration for development
-
-### Form Handling
-
-- React Hook Form for efficient form management
-- Zod schema validation
-- Toast notifications for user feedback
-
-### Analytics
-
-- Built-in analytics service for tracking user interactions
-- Event logging and monitoring
-
-### Performance
-
-- Optimized with Vite's fast build and dev server
-- Code splitting and lazy loading ready
-- Tailwind CSS for minimal CSS output
+- ✅ Context API for global state
+- ✅ Custom hooks for content and language
+- ✅ Mock data for development
+- ✅ Easy to migrate to API
+- ✅ Caching for performance
 
 ## 📦 Dependencies
 
-See `package.json` for the complete list of dependencies. Key packages include:
+### Production Dependencies
 
-- React & React DOM (UI library)
-- Vite (Build tool)
-- Tailwind CSS (Styling)
-- React Router DOM (Client-side routing)
-- React Hook Form (Form management)
-- Zod (Schema validation)
-- Radix UI (Accessible components)
+```json
+{
+  "react": "19.2.3",
+  "react-dom": "19.2.3",
+  "react-router-dom": "7.12.0",
+  "react-hook-form": "7.71.0",
+  "zod": "4.3.5",
+  "@hookform/resolvers": "5.2.2",
+  "tailwindcss": "4.1.18",
+  "@tailwindcss/vite": "4.1.18",
+  "@radix-ui/react-select": "2.2.6",
+  "lucide-react": "0.562.0",
+  "sonner": "2.0.7",
+  "libphonenumber-js": "1.12.36"
+}
 
 ## 🤝 Contributing
 
-1. Create a feature branch from `main`
-2. Make your changes with clear commit messages
-3. Push to your branch
-4. Submit a pull request
+### Development Standards
 
+1. **Branch Naming**: `feature/my-feature` or `fix/my-fix`
+2. **Commit Messages**: Clear and descriptive
+3. **Code Style**: Follow existing patterns
+4. **Components**: Use functional components with hooks
+5. **Styling**: Use Tailwind CSS utility classes
+6. **i18n**: Always add translations for new strings
 ## 📄 License
 
-This project is proprietary software for G.D Financial Services.
+This project is **proprietary software** for G.D Financial Services.
 
-## 📞 Contact
+- ✅ Privately licensed
+- ✅ All content protected
+- ✅ Code protected under MIT license (see LICENSE file)
+- ❌ Not for public redistribution
 
-For inquiries, please visit the Contact page or reach out through the company website.
+## 🔒 Security
+
+- Keep dependencies updated: `npm audit`
+- Review dependencies for vulnerabilities
+- Use `.gitignore` for local files
+
+## 📞 Contact & Support
+
+For inquiries or support:
+- **Website**: Visit the Contact page
+- **Email**: Use contact form on the website
+- **Social Media**: Links in footer
 
 ---
 
-**Last Updated**: February 2026
-**Version**: 0.0.0
+## 📊 Quick Stats
+
+- **React Version**: 19.2.3 (Latest)
+- **Build Tool**: Vite 7.3.1 (Lightning fast)
+- **Languages Supported**: 2 (English, Hebrew)
+- **Pages**: 6 (Home, Sectors, News, Company, Contact, Sector Detail)
+- **Components**: 20+ reusable components
+- **Last Updated**: February 2026
+- **Version**: 0.0.0 (Development)
+```
