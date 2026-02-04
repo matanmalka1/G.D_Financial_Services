@@ -5,6 +5,7 @@ import sectorsTranslations from "./locales/sectors.json";
 import { sectorDetailTranslations } from "./locales/sectorDetail";
 import newsTranslations from "./locales/news.json";
 import contactTranslations from "./locales/contact.json";
+import modalFormTranslations from "./locales/modalForm.json";
 
 export const translations = {
   en: {
@@ -15,6 +16,7 @@ export const translations = {
     sectorDetail: sectorDetailTranslations.en,
     news: newsTranslations.en,
     contact: contactTranslations.en,
+    modalForm: modalFormTranslations.en,
   },
   he: {
     ...globalTranslations.he,
@@ -24,5 +26,6 @@ export const translations = {
     sectorDetail: sectorDetailTranslations.he,
     news: newsTranslations.he,
     contact: contactTranslations.he,
+    modalForm: modalFormTranslations.he,
   },
 };

@@ -1,0 +1,34 @@
+{
+  "en": {
+    "badge": "No-commitment first consultation",
+    "title": "Want to take your business a step forward?",
+    "description": "We offer our clients a variety of services such as: building business plans, business consulting, guidance through sale processes, banking support, and company & investor presentations. Leave your details and we'll get back to you with an initial consultation at no commitment.",
+    "fullNameLabel": "Full name",
+    "fullNameError": "Full name is required",
+    "emailLabel": "Email",
+    "emailError": "Email is required",
+    "emailInvalid": "Invalid email address",
+    "phoneLabel": "Mobile phone",
+    "phoneError": "Please provide a phone number",
+    "serviceLabel": "Service of interest",
+    "servicePlaceholder": "Select a service",
+    "serviceError": "Choose a service that interests you",
+    "submit": "Send me a first consultation"
+  },
+  "he": {
+    "badge": "ייעוץ ראשוני ללא התחייבות",
+    "title": "רוצים לקחת את העסק שלכם צעד קדימה?",
+    "description": "אנו מציעים ללקוחותינו מגוון שירותים כגון: בניית תוכניות עסקיות, ליווי עסקי, ליווי בתהליך מכירה, ליווי מול בנקים ומצגות חברה ומשקיעים. השאירו פרטים ונחזור אליכם עם ייעוץ ראשוני ללא התחייבות.",
+    "fullNameLabel": "שם מלא",
+    "fullNameError": "חובה למלא שם",
+    "emailLabel": "אימייל",
+    "emailError": "חובה למלא אימייל",
+    "emailInvalid": "כתובת אימייל לא תקינה",
+    "phoneLabel": "טלפון נייד",
+    "phoneError": "נשמח לקבל מספר ליצירת קשר",
+    "serviceLabel": "תחום עניין",
+    "servicePlaceholder": "בחרו שירות",
+    "serviceError": "בחרו שירות שמעניין אתכם",
+    "submit": "שלחו לי ייעוץ ראשוני"
+  }
+}
