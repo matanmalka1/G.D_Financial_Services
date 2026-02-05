@@ -14,6 +14,12 @@ const clearCache = () => {
 // Fetch financial news from GNews API with caching and batch logic
 const fetchFinancialNews = async (language, region, batchNumber = 1, signal) => {
   const apiKey = import.meta.env.VITE_GNEWS_API_KEY;
+  console.log("[financial-news] fetchFinancialNews called", {
+    hasKey: Boolean(apiKey),
+    language,
+    region,
+    batchNumber,
+  });
 
   // Check for API key
   if (!apiKey || apiKey === "your_api_key_here") {
@@ -57,6 +63,7 @@ const fetchFinancialNews = async (language, region, batchNumber = 1, signal) => 
     }
 
     const url = `${baseUrl}?${params.toString()}`;
+    console.log("[financial-news] requesting URL", url);
     const response = await fetch(url, { signal });
 
     if (!response.ok) {

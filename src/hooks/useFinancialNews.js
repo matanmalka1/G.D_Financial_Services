@@ -16,6 +16,7 @@ export const useFinancialNews = (language) => {
   // Load a batch of news from API
   const loadBatch = useCallback(
     async (batchNumber, signal, targetPage = null) => {
+      console.log("[financial-news] loadBatch start", { batchNumber, language, region });
       let shouldLoad = false;
       setIsLoading((current) => {
         if (current) return true;
@@ -38,9 +39,14 @@ export const useFinancialNews = (language) => {
         if (signal?.aborted) return;
 
         if (result.error) {
+          console.warn("[financial-news] fetch returned error", result.error);
           setError(result.error);
           setHasMore(false);
         } else {
+          console.log("[financial-news] fetch returned items", {
+            count: result.newsItems.length,
+            hasMore: result.hasMore,
+          });
           setNewsItems(result.newsItems);
           setHasMore(result.hasMore);
           setLoadedBatches(batchNumber);
@@ -66,6 +72,7 @@ export const useFinancialNews = (language) => {
     setCurrentPage(1);
     setError(null);
     setHasMore(true);
+    console.log("[financial-news] effect trigger", { language, region });
     loadBatch(1, abortController.signal, 1);
 
     return () => abortController.abort();
