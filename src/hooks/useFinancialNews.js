@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import { newsApiService } from "../services/newsApiService";
 import { FINANCIAL_NEWS_CONFIG } from "../constants/financialNews";
 
@@ -12,31 +12,102 @@ export const useFinancialNews = (language) => {
   const [error, setError] = useState(null);
 
   const { ITEMS_PER_PAGE, API_BATCH_SIZE } = FINANCIAL_NEWS_CONFIG;
+  
+  // Track if component is mounted
+  const isMountedRef = useRef(true);
 
-  // Load a batch of news from API
-  const loadBatch = useCallback(
-    async (batchNumber, signal, targetPage = null) => {
-      console.log("[financial-news] loadBatch start", { batchNumber, language, region });
-      let shouldLoad = false;
-      setIsLoading((current) => {
-        if (current) return true;
-        shouldLoad = true;
-        return true;
-      });
+  // Initial fetch when language or region changes
+  useEffect(() => {
+    const abortController = new AbortController();
+    isMountedRef.current = true;
 
-      if (!shouldLoad) return;
+    setNewsItems([]);
+    setLoadedBatches(0);
+    setCurrentPage(1);
+    setError(null);
+    setHasMore(true);
+    console.log("[financial-news] effect trigger", { language, region });
 
+    const fetchInitialBatch = async () => {
+      if (!isMountedRef.current) return;
+      
+      setIsLoading(true);
       setError(null);
 
-      const result = await newsApiService.fetchFinancialNews(
-        language,
-        region,
-        batchNumber,
-        signal,
-      );
+      try {
+        const result = await newsApiService.fetchFinancialNews(
+          language,
+          region,
+          1,
+          abortController.signal,
+        );
+
+        // Only update state if still mounted and not aborted
+        if (!isMountedRef.current || abortController.signal.aborted) {
+          return;
+        }
+
+        if (result.error) {
+          console.warn("[financial-news] fetch returned error", result.error);
+          setError(result.error);
+          setHasMore(false);
+        } else {
+          console.log("[financial-news] fetch returned items", {
+            count: result.newsItems.length,
+            hasMore: result.hasMore,
+          });
+          setNewsItems(result.newsItems);
+          setHasMore(result.hasMore);
+          setLoadedBatches(1);
+          setCurrentPage(1);
+        }
+
+        setIsLoading(false);
+      } catch (err) {
+        if (err.name === 'AbortError') {
+          console.log("[financial-news] fetch aborted (expected during cleanup)");
+          return;
+        }
+        console.error("[financial-news] fetch error", err);
+        if (isMountedRef.current) {
+          setError("FETCH_FAILED");
+          setHasMore(false);
+          setIsLoading(false);
+        }
+      }
+    };
+
+    fetchInitialBatch();
+
+    return () => {
+      console.log("[financial-news] cleanup - aborting fetch");
+      isMountedRef.current = false;
+      abortController.abort();
+    };
+  }, [language, region]);
+
+  // Load additional batches
+  const loadBatch = useCallback(
+    async (batchNumber) => {
+      console.log("[financial-news] loadBatch start", { batchNumber, language, region });
+      
+      if (isLoading || !isMountedRef.current) {
+        console.log("[financial-news] skipping batch load", { isLoading, mounted: isMountedRef.current });
+        return;
+      }
+
+      setIsLoading(true);
+      setError(null);
 
       try {
-        if (signal?.aborted) return;
+        const result = await newsApiService.fetchFinancialNews(
+          language,
+          region,
+          batchNumber,
+          null, // No abort signal for pagination fetches
+        );
+
+        if (!isMountedRef.current) return;
 
         if (result.error) {
           console.warn("[financial-news] fetch returned error", result.error);
@@ -50,77 +121,81 @@ export const useFinancialNews = (language) => {
           setNewsItems(result.newsItems);
           setHasMore(result.hasMore);
           setLoadedBatches(batchNumber);
-          if (targetPage !== null) {
-            setCurrentPage(targetPage);
-          }
         }
-      } finally {
-        if (!signal?.aborted) {
+
+        setIsLoading(false);
+      } catch (err) {
+        console.error("[financial-news] loadBatch error", err);
+        if (isMountedRef.current) {
+          setError("FETCH_FAILED");
+          setHasMore(false);
           setIsLoading(false);
         }
       }
     },
-    [language, region],
+    [language, region, isLoading],
   );
 
-  // Reset and fetch initial data when language or region changes
-  useEffect(() => {
-    const abortController = new AbortController();
-
+  // Retry function
+  const retry = useCallback(async () => {
+    if (!isMountedRef.current) return;
+    
+    setError(null);
     setNewsItems([]);
     setLoadedBatches(0);
     setCurrentPage(1);
-    setError(null);
     setHasMore(true);
-    console.log("[financial-news] effect trigger", { language, region });
-    loadBatch(1, abortController.signal, 1);
+    setIsLoading(true);
 
-    return () => abortController.abort();
-  }, [language, region, loadBatch]);
+    try {
+      const result = await newsApiService.fetchFinancialNews(language, region, 1, null);
+
+      if (!isMountedRef.current) return;
+
+      if (result.error) {
+        setError(result.error);
+        setHasMore(false);
+      } else {
+        setNewsItems(result.newsItems);
+        setHasMore(result.hasMore);
+        setLoadedBatches(1);
+      }
+
+      setIsLoading(false);
+    } catch (err) {
+      console.error("[financial-news] retry error", err);
+      if (isMountedRef.current) {
+        setError("FETCH_FAILED");
+        setHasMore(false);
+        setIsLoading(false);
+      }
+    }
+  }, [language, region]);
 
   // Change region handler
   const changeRegion = useCallback((newRegion) => {
     setRegion(newRegion);
   }, []);
 
-  const retry = useCallback(() => {
-    setError(null);
-    setNewsItems([]);
-    setLoadedBatches(0);
-    setCurrentPage(1);
-    setHasMore(true);
-    loadBatch(1);
-  }, [loadBatch]);
-
-  // Page change handler with smart fetch triggering
+  // Page change handler
   const goToPage = useCallback(
     (page) => {
-      // Calculate required batches for this page
       const requiredBatches = Math.ceil((page * ITEMS_PER_PAGE) / API_BATCH_SIZE);
 
-      // Trigger fetch if we need more data, using functional state to avoid stale closures
-      setLoadedBatches((current) => {
-        if (requiredBatches > current && hasMore && !isLoading) {
-          loadBatch(requiredBatches, undefined, page);
-        }
-        return current;
-      });
-
-      // If we already have the data, move to the page immediately
-      if (requiredBatches <= loadedBatches) {
-        setCurrentPage(page);
+      if (requiredBatches > loadedBatches && hasMore && !isLoading) {
+        loadBatch(requiredBatches);
       }
+
+      setCurrentPage(page);
       window.scrollTo({ top: 400, behavior: "smooth" });
     },
     [hasMore, isLoading, loadBatch, ITEMS_PER_PAGE, API_BATCH_SIZE, loadedBatches],
   );
 
-  // Compute paginated items for current page
+  // Compute paginated items
   const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
   const endIndex = startIndex + ITEMS_PER_PAGE;
   const paginatedItems = newsItems.slice(startIndex, endIndex);
-
-  // Calculate total pages based on loaded items
   const totalPages = Math.ceil(newsItems.length / ITEMS_PER_PAGE);
 
   return {

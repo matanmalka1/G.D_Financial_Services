@@ -83,12 +83,21 @@ const fetchFinancialNews = async (language, region, batchNumber = 1, signal) => 
       image: article.image,
     }));
 
-    // Deduplicate with existing cache
+    // Deduplicate within this batch and against existing cache
     const existingItems = cached?.newsItems || [];
-    const existingUrls = new Set(existingItems.map((item) => item.url));
-    const uniqueNewItems = freshItems.filter(
-      (item) => !existingUrls.has(item.url),
+    const existingKeys = new Set(
+      existingItems.map(
+        (item) =>
+          `${(item.title || "").toLowerCase()}|${item.publishedAt || ""}|${item.url}`,
+      ),
     );
+    const uniqueNewItems = [];
+    for (const item of freshItems) {
+      const key = `${(item.title || "").toLowerCase()}|${item.publishedAt || ""}|${item.url}`;
+      if (existingKeys.has(key)) continue;
+      existingKeys.add(key);
+      uniqueNewItems.push(item);
+    }
 
     // Merge with existing items
     const allItems = [...existingItems, ...uniqueNewItems];
@@ -110,6 +119,15 @@ const fetchFinancialNews = async (language, region, batchNumber = 1, signal) => 
       error: null,
     };
   } catch (error) {
+    if (error.name === "AbortError") {
+      console.log("[financial-news] fetch aborted");
+      return {
+        newsItems: cached?.newsItems || [],
+        hasMore: cached?.hasMore ?? false,
+        error: null,
+      };
+    }
+
     console.error("Failed to fetch financial news:", error);
 
     // Return cached data if available, otherwise error
