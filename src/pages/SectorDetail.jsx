@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { useLanguage } from "../hooks/useLanguage";
 import { useContent } from "../hooks/useContent";
@@ -17,6 +17,8 @@ export const SectorDetail = () => {
   const { t, isRtl } = useLanguage();
   const { getSectorById, getRelatedArticles, error, refreshContent, loading } =
     useContent();
+
+  const [loadedImages, setLoadedImages] = useState({});
 
   const sector = getSectorById(id);
   const detail = sector ? t.sectorDetail.sectorDetails[sector.id] : null;
@@ -133,6 +135,7 @@ export const SectorDetail = () => {
                           sector?.id === "business-presentations";
                         const isSellSide = sector?.id === "sell-side-advisory";
                         const isOngoing = sector?.id === "ongoing-financial-advisory";
+                        const imgKey = `${sector?.id || "sector"}-${idx}`;
                         const skipImage =
                           (isBusinessPlan && (idx === 0 || idx === 2)) ||
                           (isBusinessPresentations && idx === 2) ||
@@ -151,19 +154,20 @@ export const SectorDetail = () => {
                             : isSellSide && idx === 2
                               ? "/sectorSellSide/valuation_exit_starategy.avif"
                               : isSellSide && idx === 3
-                                ? "/sectorSellSide/financial_&_legal_preparation.avif"
-                                : isSellSide && idx === 4
-                                  ? "/sectorSellSide/identifying_potential_buyers.avif"
-                                  : isSellSide && idx === 5
-                                    ? "/sectorSellSide/assistance_till_negotiation.avif"
-                                    : isSellSide && idx === 6
-                                      ? "/sectorSellSide/investor_presentations_kpi.avif"
-                                    : null;
+                            ? "/sectorSellSide/financial_&_legal_preparation.avif"
+                            : isSellSide && idx === 4
+                              ? "/sectorSellSide/identifying_potential_buyers.avif"
+                              : isSellSide && idx === 5
+                                ? "/sectorSellSide/assistance_till_negotiation.avif"
+                              : isSellSide && idx === 6
+                                ? "/sectorSellSide/investor_presentations_kpi.avif"
+                                : null;
                         const imageSrc =
                           overrideImage ||
                           (imagesForSector.length > 0
                             ? imagesForSector[idx % imagesForSector.length]
                             : null);
+                        const isLoaded = loadedImages[imgKey];
 
                         return (
                           <div
@@ -171,7 +175,7 @@ export const SectorDetail = () => {
                             id={sec.id || undefined}
                             className="bg-white p-8 rounded-[1.5rem] border border-slate-100 shadow-sm text-slate-700 text-base leading-relaxed"
                           >
-                            <div className="grid grid-cols-1 lg:grid-cols-[2fr,1fr] gap-6 items-start">
+                            <div className="grid grid-cols-1 lg:grid-cols-[2fr,1fr] gap-10 items-start">
                               <div className="space-y-3">
                                 <h4 className="text-xl font-bold text-slate-900">
                                   {sec.title}
@@ -199,12 +203,17 @@ export const SectorDetail = () => {
                                 {sec.extra && <p className="text-slate-600">{sec.extra}</p>}
                               </div>
                               {!skipImage && imageSrc ? (
-                                <div className="rounded-2xl overflow-hidden border border-slate-100 shadow-sm">
+                                <div className="rounded-2xl overflow-hidden border border-slate-100 shadow-sm group transition duration-500 ease-out hover:-translate-y-1 hover:shadow-md">
                                   <img
                                     src={imageSrc}
                                     alt={`${sectorTitle} illustration ${idx + 1}`}
-                                    className="w-full h-full object-cover"
+                                    className={`w-full h-full object-cover transition duration-700 ease-out ${
+                                      isLoaded ? "opacity-100 scale-100" : "opacity-0 scale-105"
+                                    } group-hover:scale-105`}
                                     loading="lazy"
+                                    onLoad={() =>
+                                      setLoadedImages((prev) => ({ ...prev, [imgKey]: true }))
+                                    }
                                   />
                                 </div>
                               ) : null}

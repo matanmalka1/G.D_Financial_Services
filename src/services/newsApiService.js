@@ -1,30 +1,30 @@
-// Session-level in-memory cache for financial news
-const newsCache = new Map();
-// Default TTL is defined in FINANCIAL_NEWS_CONFIG but duplicated here to avoid circular import.
-const CACHE_TTL_MS = 10 * 60 * 1000; // 10 minutes
+import { FINANCIAL_NEWS_CONFIG } from "../constants/financialNews";
 
-// Generate cache key (single entry for global English news)
+const newsCache = new Map();
+const CACHE_TTL_MS = FINANCIAL_NEWS_CONFIG.CACHE_TTL_MS;
+
 const getCacheKey = () => "financial-news";
 
-// Clear all cached news data
 const clearCache = () => {
   newsCache.clear();
 };
 
-// Fetch financial news from GNews API with caching and batch logic
-const fetchFinancialNews = async (_language = "en", _region = "global", batchNumber = 1, signal) => {
-  // Always use English/global regardless of arguments
+const normalizeForDedup = (article) => {
+  const titleNorm = (article.title || "").toLowerCase().trim();
+  const descNorm = (article.description || "").toLowerCase().trim();
+  return `${titleNorm}|${descNorm}`;
+};
+
+const fetchFinancialNews = async (
+  _language = "en",
+  _region = "global",
+  batchNumber = 1,
+  signal,
+) => {
   const language = "en";
   const region = "global";
   const apiKey = import.meta.env.VITE_GNEWS_API_KEY;
-  console.log("[financial-news] fetchFinancialNews called", {
-    hasKey: Boolean(apiKey),
-    language,
-    region,
-    batchNumber,
-  });
 
-  // Check for API key
   if (!apiKey || apiKey === "your_api_key_here") {
     return {
       error: "API_KEY_MISSING",
@@ -33,35 +33,40 @@ const fetchFinancialNews = async (_language = "en", _region = "global", batchNum
     };
   }
 
+  if (batchNumber > FINANCIAL_NEWS_CONFIG.MAX_BATCHES) {
+    const cached = newsCache.get(getCacheKey());
+    return {
+      newsItems: cached?.newsItems || [],
+      hasMore: false,
+      error: null,
+    };
+  }
+
   const cacheKey = getCacheKey();
   const cached = newsCache.get(cacheKey);
 
-  // Validate cache freshness (per language-region)
   const isFresh =
     cached && cached.timestamp && Date.now() - cached.timestamp < CACHE_TTL_MS;
 
-  // Check if we already have data for this batch and cache is fresh
   if (isFresh && cached.lastBatch >= batchNumber) {
     return {
       newsItems: cached.newsItems,
-      hasMore: cached.hasMore,
+      hasMore: cached.lastBatch < FINANCIAL_NEWS_CONFIG.MAX_BATCHES,
       error: null,
     };
   }
 
   try {
-    // Build GNews API URL
     const baseUrl = "https://gnews.io/api/v4/search";
     const params = new URLSearchParams({
       q: "financial OR economy OR market OR business",
       lang: "en",
-      max: "35",
+      max: FINANCIAL_NEWS_CONFIG.API_BATCH_SIZE.toString(),
       page: batchNumber.toString(),
       apikey: apiKey,
     });
 
     const url = `${baseUrl}?${params.toString()}`;
-    console.log("[financial-news] requesting URL", url);
     const response = await fetch(url, { signal });
 
     if (!response.ok) {
@@ -70,7 +75,6 @@ const fetchFinancialNews = async (_language = "en", _region = "global", batchNum
 
     const data = await response.json();
 
-    // Transform API response to normalized structure
     const freshItems = (data.articles || []).map((article) => ({
       id: article.url,
       title: article.title,
@@ -81,44 +85,36 @@ const fetchFinancialNews = async (_language = "en", _region = "global", batchNum
       image: article.image,
     }));
 
-    // Deduplicate within this batch and against existing cache
     const existingItems = cached?.newsItems || [];
-    const existingKeys = new Set(
-      existingItems.map(
-        (item) =>
-          `${(item.title || "").toLowerCase()}|${item.publishedAt || ""}|${item.url}`,
-      ),
+    const existingKeys = new Set(existingItems.map(normalizeForDedup));
+    const uniqueNewItems = freshItems.filter(
+      (item) => !existingKeys.has(normalizeForDedup(item)),
     );
-    const uniqueNewItems = [];
-    for (const item of freshItems) {
-      const key = `${(item.title || "").toLowerCase()}|${item.publishedAt || ""}|${item.url}`;
-      if (existingKeys.has(key)) continue;
-      existingKeys.add(key);
-      uniqueNewItems.push(item);
-    }
 
-    // Merge with existing items
     const allItems = [...existingItems, ...uniqueNewItems];
+    const cappedItems = allItems.slice(
+      0,
+      FINANCIAL_NEWS_CONFIG.MAX_TOTAL_ITEMS,
+    );
 
-    // Determine if more data is available
-    const hasMore = freshItems.length >= 35;
+    const hasMore =
+      batchNumber < FINANCIAL_NEWS_CONFIG.MAX_BATCHES &&
+      freshItems.length >= FINANCIAL_NEWS_CONFIG.API_BATCH_SIZE;
 
-    // Update cache with timestamp
     newsCache.set(cacheKey, {
-      newsItems: allItems,
+      newsItems: cappedItems,
       hasMore,
       lastBatch: batchNumber,
       timestamp: Date.now(),
     });
 
     return {
-      newsItems: allItems,
+      newsItems: cappedItems,
       hasMore,
       error: null,
     };
   } catch (error) {
     if (error.name === "AbortError") {
-      console.log("[financial-news] fetch aborted");
       return {
         newsItems: cached?.newsItems || [],
         hasMore: cached?.hasMore ?? false,
@@ -126,9 +122,6 @@ const fetchFinancialNews = async (_language = "en", _region = "global", batchNum
       };
     }
 
-    console.error("Failed to fetch financial news:", error);
-
-    // Return cached data if available, otherwise error
     if (cached && isFresh) {
       return {
         newsItems: cached.newsItems,

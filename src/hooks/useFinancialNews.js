@@ -15,12 +15,11 @@ export const useFinancialNews = () => {
   const [hasMore, setHasMore] = useState(true);
   const [error, setError] = useState(null);
 
-  const { ITEMS_PER_PAGE, API_BATCH_SIZE } = FINANCIAL_NEWS_CONFIG;
-  
-  // Track if component is mounted
+  const { ITEMS_PER_PAGE, API_BATCH_SIZE, MAX_BATCHES, MAX_TOTAL_ITEMS } =
+    FINANCIAL_NEWS_CONFIG;
+
   const isMountedRef = useRef(true);
 
-  // Initial fetch on mount
   useEffect(() => {
     const abortController = new AbortController();
     isMountedRef.current = true;
@@ -30,11 +29,10 @@ export const useFinancialNews = () => {
     setCurrentPage(1);
     setError(null);
     setHasMore(true);
-    console.log("[financial-news] effect trigger", { language, region });
 
     const fetchInitialBatch = async () => {
       if (!isMountedRef.current) return;
-      
+
       setIsLoading(true);
       setError(null);
 
@@ -46,33 +44,27 @@ export const useFinancialNews = () => {
           abortController.signal,
         );
 
-        // Only update state if still mounted and not aborted
         if (!isMountedRef.current || abortController.signal.aborted) {
           return;
         }
 
         if (result.error) {
-          console.warn("[financial-news] fetch returned error", result.error);
           setError(result.error);
           setHasMore(false);
         } else {
-          console.log("[financial-news] fetch returned items", {
-            count: result.newsItems.length,
-            hasMore: result.hasMore,
-          });
           setNewsItems(result.newsItems);
-          setHasMore(result.hasMore);
+          setHasMore(
+            result.hasMore && result.newsItems.length < MAX_TOTAL_ITEMS,
+          );
           setLoadedBatches(1);
           setCurrentPage(1);
         }
 
         setIsLoading(false);
       } catch (err) {
-        if (err.name === 'AbortError') {
-          console.log("[financial-news] fetch aborted (expected during cleanup)");
+        if (err.name === "AbortError") {
           return;
         }
-        console.error("[financial-news] fetch error", err);
         if (isMountedRef.current) {
           setError("FETCH_FAILED");
           setHasMore(false);
@@ -84,19 +76,14 @@ export const useFinancialNews = () => {
     fetchInitialBatch();
 
     return () => {
-      console.log("[financial-news] cleanup - aborting fetch");
       isMountedRef.current = false;
       abortController.abort();
     };
   }, []);
 
-  // Load additional batches
   const loadBatch = useCallback(
     async (batchNumber) => {
-      console.log("[financial-news] loadBatch start", { batchNumber, language, region });
-      
-      if (isLoading || !isMountedRef.current) {
-        console.log("[financial-news] skipping batch load", { isLoading, mounted: isMountedRef.current });
+      if (isLoading || !isMountedRef.current || batchNumber > MAX_BATCHES) {
         return;
       }
 
@@ -108,28 +95,24 @@ export const useFinancialNews = () => {
           language,
           region,
           batchNumber,
-          null, // No abort signal for pagination fetches
+          null,
         );
 
         if (!isMountedRef.current) return;
 
         if (result.error) {
-          console.warn("[financial-news] fetch returned error", result.error);
           setError(result.error);
           setHasMore(false);
         } else {
-          console.log("[financial-news] fetch returned items", {
-            count: result.newsItems.length,
-            hasMore: result.hasMore,
-          });
           setNewsItems(result.newsItems);
-          setHasMore(result.hasMore);
+          setHasMore(
+            result.hasMore && result.newsItems.length < MAX_TOTAL_ITEMS,
+          );
           setLoadedBatches(batchNumber);
         }
 
         setIsLoading(false);
       } catch (err) {
-        console.error("[financial-news] loadBatch error", err);
         if (isMountedRef.current) {
           setError("FETCH_FAILED");
           setHasMore(false);
@@ -137,13 +120,12 @@ export const useFinancialNews = () => {
         }
       }
     },
-    [isLoading],
+    [isLoading, MAX_BATCHES, MAX_TOTAL_ITEMS],
   );
 
-  // Retry function
   const retry = useCallback(async () => {
     if (!isMountedRef.current) return;
-    
+
     setError(null);
     setNewsItems([]);
     setLoadedBatches(0);
@@ -152,7 +134,12 @@ export const useFinancialNews = () => {
     setIsLoading(true);
 
     try {
-      const result = await newsApiService.fetchFinancialNews(language, region, 1, null);
+      const result = await newsApiService.fetchFinancialNews(
+        language,
+        region,
+        1,
+        null,
+      );
 
       if (!isMountedRef.current) return;
 
@@ -161,45 +148,49 @@ export const useFinancialNews = () => {
         setHasMore(false);
       } else {
         setNewsItems(result.newsItems);
-        setHasMore(result.hasMore);
+        setHasMore(result.hasMore && result.newsItems.length < MAX_TOTAL_ITEMS);
         setLoadedBatches(1);
       }
 
       setIsLoading(false);
     } catch (err) {
-      console.error("[financial-news] retry error", err);
       if (isMountedRef.current) {
         setError("FETCH_FAILED");
         setHasMore(false);
         setIsLoading(false);
       }
     }
-  }, []);
+  }, [MAX_TOTAL_ITEMS]);
 
-  // Page change handler
   const goToPage = useCallback(
     (page) => {
-      const requiredBatches = Math.ceil((page * ITEMS_PER_PAGE) / API_BATCH_SIZE);
+      if (page < 1 || page > 9) {
+        return;
+      }
 
-      const needsMoreData =
-        requiredBatches > loadedBatches ||
-        newsItems.length < page * ITEMS_PER_PAGE;
+      const triggerPages = [3, 6];
+      const shouldFetch = triggerPages.includes(page);
 
-      if (needsMoreData && hasMore && !isLoading) {
-        loadBatch(requiredBatches);
+      if (shouldFetch) {
+        const batchNumber = page === 3 ? 2 : 3;
+        if (batchNumber > loadedBatches && hasMore && !isLoading) {
+          loadBatch(batchNumber);
+        }
       }
 
       setCurrentPage(page);
       window.scrollTo({ top: 400, behavior: "smooth" });
     },
-    [hasMore, isLoading, loadBatch, ITEMS_PER_PAGE, API_BATCH_SIZE, loadedBatches, newsItems.length],
+    [hasMore, isLoading, loadBatch, loadedBatches],
   );
 
-  // Compute paginated items
   const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
   const endIndex = startIndex + ITEMS_PER_PAGE;
   const paginatedItems = newsItems.slice(startIndex, endIndex);
-  const totalPages = Math.ceil(newsItems.length / ITEMS_PER_PAGE);
+
+  const calculatedPages = Math.ceil(newsItems.length / ITEMS_PER_PAGE);
+  const totalPages =
+    loadedBatches < MAX_BATCHES ? 9 : Math.min(9, calculatedPages);
 
   return {
     region,
