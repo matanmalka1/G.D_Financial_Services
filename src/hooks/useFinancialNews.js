@@ -182,14 +182,18 @@ export const useFinancialNews = (language) => {
     (page) => {
       const requiredBatches = Math.ceil((page * ITEMS_PER_PAGE) / API_BATCH_SIZE);
 
-      if (requiredBatches > loadedBatches && hasMore && !isLoading) {
+      const needsMoreData =
+        requiredBatches > loadedBatches ||
+        newsItems.length < page * ITEMS_PER_PAGE;
+
+      if (needsMoreData && hasMore && !isLoading) {
         loadBatch(requiredBatches);
       }
 
       setCurrentPage(page);
       window.scrollTo({ top: 400, behavior: "smooth" });
     },
-    [hasMore, isLoading, loadBatch, ITEMS_PER_PAGE, API_BATCH_SIZE, loadedBatches],
+    [hasMore, isLoading, loadBatch, ITEMS_PER_PAGE, API_BATCH_SIZE, loadedBatches, newsItems.length],
   );
 
   // Compute paginated items
