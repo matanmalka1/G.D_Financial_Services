@@ -3,8 +3,8 @@ const newsCache = new Map();
 // Default TTL is defined in FINANCIAL_NEWS_CONFIG but duplicated here to avoid circular import.
 const CACHE_TTL_MS = 10 * 60 * 1000; // 10 minutes
 
-// Generate cache key from language and region
-const getCacheKey = (language, region) => `${language}-${region}`;
+// Generate cache key (single entry for global English news)
+const getCacheKey = () => "financial-news";
 
 // Clear all cached news data
 const clearCache = () => {
@@ -12,7 +12,10 @@ const clearCache = () => {
 };
 
 // Fetch financial news from GNews API with caching and batch logic
-const fetchFinancialNews = async (language, region, batchNumber = 1, signal) => {
+const fetchFinancialNews = async (_language = "en", _region = "global", batchNumber = 1, signal) => {
+  // Always use English/global regardless of arguments
+  const language = "en";
+  const region = "global";
   const apiKey = import.meta.env.VITE_GNEWS_API_KEY;
   console.log("[financial-news] fetchFinancialNews called", {
     hasKey: Boolean(apiKey),
@@ -30,7 +33,7 @@ const fetchFinancialNews = async (language, region, batchNumber = 1, signal) => 
     };
   }
 
-  const cacheKey = getCacheKey(language, region);
+  const cacheKey = getCacheKey();
   const cached = newsCache.get(cacheKey);
 
   // Validate cache freshness (per language-region)
@@ -51,16 +54,11 @@ const fetchFinancialNews = async (language, region, batchNumber = 1, signal) => 
     const baseUrl = "https://gnews.io/api/v4/search";
     const params = new URLSearchParams({
       q: "financial OR economy OR market OR business",
-      lang: language,
-      max: "27",
+      lang: "en",
+      max: "35",
       page: batchNumber.toString(),
       apikey: apiKey,
     });
-
-    // Add country parameter for Israel region
-    if (region === "israel") {
-      params.append("country", "il");
-    }
 
     const url = `${baseUrl}?${params.toString()}`;
     console.log("[financial-news] requesting URL", url);
@@ -103,7 +101,7 @@ const fetchFinancialNews = async (language, region, batchNumber = 1, signal) => 
     const allItems = [...existingItems, ...uniqueNewItems];
 
     // Determine if more data is available
-    const hasMore = freshItems.length >= 27;
+    const hasMore = freshItems.length >= 35;
 
     // Update cache with timestamp
     newsCache.set(cacheKey, {

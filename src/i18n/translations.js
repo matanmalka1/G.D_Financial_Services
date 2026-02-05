@@ -27,7 +27,8 @@ export const translations = {
     sectors: sectorsTranslations.he,
     sectorDetail: sectorDetailTranslations.he,
     news: newsTranslations.he,
-    financialNews: financialNewsTranslations.he,
+    // Financial news is English-only now; reuse English copy for Hebrew locale.
+    financialNews: financialNewsTranslations.en,
     contact: contactTranslations.he,
     modalForm: modalFormTranslations.he,
   },

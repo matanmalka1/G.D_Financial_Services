@@ -1,5 +1,5 @@
 export const FINANCIAL_NEWS_CONFIG = {
   ITEMS_PER_PAGE: 9,
-  API_BATCH_SIZE: 27,
+  API_BATCH_SIZE: 35,
   CACHE_TTL_MS: 10 * 60 * 1000, // 10 minutes
 };

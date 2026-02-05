@@ -2,8 +2,12 @@ import { useState, useEffect, useCallback, useRef } from "react";
 import { newsApiService } from "../services/newsApiService";
 import { FINANCIAL_NEWS_CONFIG } from "../constants/financialNews";
 
-export const useFinancialNews = (language) => {
-  const [region, setRegion] = useState("global");
+const DEFAULT_LANGUAGE = "en";
+const DEFAULT_REGION = "global";
+
+export const useFinancialNews = () => {
+  const language = DEFAULT_LANGUAGE;
+  const region = DEFAULT_REGION;
   const [currentPage, setCurrentPage] = useState(1);
   const [newsItems, setNewsItems] = useState([]);
   const [loadedBatches, setLoadedBatches] = useState(0);
@@ -16,7 +20,7 @@ export const useFinancialNews = (language) => {
   // Track if component is mounted
   const isMountedRef = useRef(true);
 
-  // Initial fetch when language or region changes
+  // Initial fetch on mount
   useEffect(() => {
     const abortController = new AbortController();
     isMountedRef.current = true;
@@ -84,7 +88,7 @@ export const useFinancialNews = (language) => {
       isMountedRef.current = false;
       abortController.abort();
     };
-  }, [language, region]);
+  }, []);
 
   // Load additional batches
   const loadBatch = useCallback(
@@ -133,7 +137,7 @@ export const useFinancialNews = (language) => {
         }
       }
     },
-    [language, region, isLoading],
+    [isLoading],
   );
 
   // Retry function
@@ -170,11 +174,6 @@ export const useFinancialNews = (language) => {
         setIsLoading(false);
       }
     }
-  }, [language, region]);
-
-  // Change region handler
-  const changeRegion = useCallback((newRegion) => {
-    setRegion(newRegion);
   }, []);
 
   // Page change handler
@@ -211,7 +210,6 @@ export const useFinancialNews = (language) => {
     isLoading,
     hasMore,
     error,
-    changeRegion,
     goToPage,
     retry,
   };

@@ -1,6 +1,5 @@
 import { useLanguage } from "../hooks/useLanguage";
 import { useFinancialNews } from "../hooks/useFinancialNews";
-import { Select } from "../components/ui/Select";
 import { Pagination } from "../components/ui/Pagination";
 import { LoadingGrid } from "../components/ui/LoadingGrid";
 import { ErrorState } from "../components/ui/ErrorState";
@@ -9,42 +8,24 @@ import { NewsItemCard } from "../components/ui/NewsItemCard";
 import { SectionHeading } from "../components/ui/SectionHeading";
 
 export const FinancialNews = () => {
-  const { t, language, isRtl } = useLanguage();
+  const { t, isRtl } = useLanguage();
   const {
-    region,
     currentPage,
     newsItems,
     totalPages,
     isLoading,
-    hasMore,
     error,
-    changeRegion,
     goToPage,
     retry,
-  } = useFinancialNews(language);
-
-  const regionOptions = [
-    { value: "global", label: t.financialNews.regionSelector.global },
-    { value: "israel", label: t.financialNews.regionSelector.israel },
-  ];
+  } = useFinancialNews();
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
         <SectionHeading
           title={t.financialNews.title}
-          subtitle={t.financialNews.regionSelector.label}
+          subtitle={t.financialNews.subtitle}
         />
-
-        <div className="flex justify-center mb-12">
-          <Select
-            value={region}
-            onValueChange={changeRegion}
-            options={regionOptions}
-            dir={isRtl ? "rtl" : "ltr"}
-            className="min-w-[240px]"
-          />
-        </div>
 
         {error && (
           <ErrorState
@@ -74,7 +55,7 @@ export const FinancialNews = () => {
           <>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
               {newsItems.map((item) => (
-                <NewsItemCard key={item.id} item={item} language={language} />
+                <NewsItemCard key={item.id} item={item} />
               ))}
             </div>
 
@@ -83,7 +64,8 @@ export const FinancialNews = () => {
                 currentPage={currentPage}
                 totalPages={totalPages}
                 onChange={goToPage}
-                isRtl={isRtl}
+                // Keep pagination direction stable (LTR) even when UI is in Hebrew
+                isRtl={false}
               />
             </div>
 

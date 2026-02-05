@@ -1,12 +1,19 @@
+import { useState } from "react";
 import { Calendar, ExternalLink } from "lucide-react";
 
-export const NewsItemCard = ({ item, language }) => {
-  const formatDate = (dateString) => {
+export const NewsItemCard = ({ item }) => {
+  const fallbackImage = "/noPhotoFallback.png";
+  const [imageSrc, setImageSrc] = useState(item.image || fallbackImage);
+
+  const formatDateTime = (dateString) => {
     const date = new Date(dateString);
-    return new Intl.DateTimeFormat(language === "he" ? "he-IL" : "en-US", {
+    return new Intl.DateTimeFormat("en-US", {
       year: "numeric",
       month: "long",
       day: "numeric",
+      hour: "numeric",
+      minute: "2-digit",
+      hour12: true,
     }).format(date);
   };
 
@@ -17,22 +24,21 @@ export const NewsItemCard = ({ item, language }) => {
       rel="noopener noreferrer"
       className="group block bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden"
     >
-      {item.image && (
-        <div className="aspect-video w-full overflow-hidden">
-          <img
-            src={item.image}
-            alt={item.title}
-            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-          />
-        </div>
-      )}
+      <div className="aspect-video w-full overflow-hidden bg-slate-100">
+        <img
+          src={imageSrc}
+          alt={item.title || "News article image"}
+          onError={() => setImageSrc(fallbackImage)}
+          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+        />
+      </div>
 
       <div className="p-6">
         <div className="flex items-center justify-between text-xs text-slate-500 mb-3">
           <div className="flex items-center gap-1">
             <Calendar className="w-3 h-3" />
             <time dateTime={item.publishedAt}>
-              {formatDate(item.publishedAt)}
+              {formatDateTime(item.publishedAt)}
             </time>
           </div>
           {item.source && (
