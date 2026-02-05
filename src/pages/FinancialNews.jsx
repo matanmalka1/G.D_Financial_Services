@@ -59,12 +59,12 @@ export const FinancialNews = () => {
               ))}
             </div>
 
-            <div className="mt-16">
+            <div className="mt-16" dir="ltr">
               <Pagination
                 currentPage={currentPage}
                 totalPages={totalPages}
                 onChange={goToPage}
-                // Keep pagination direction stable (LTR) even when UI is in Hebrew
+                // Force LTR layout even when the page is RTL
                 isRtl={false}
               />
             </div>
