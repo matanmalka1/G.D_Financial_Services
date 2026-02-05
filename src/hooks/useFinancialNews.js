@@ -15,10 +15,11 @@ export const useFinancialNews = () => {
   const [hasMore, setHasMore] = useState(true);
   const [error, setError] = useState(null);
 
-  const { ITEMS_PER_PAGE, API_BATCH_SIZE, MAX_BATCHES, MAX_TOTAL_ITEMS } =
+  const { ITEMS_PER_PAGE, MAX_BATCHES, MAX_TOTAL_ITEMS } =
     FINANCIAL_NEWS_CONFIG;
 
   const isMountedRef = useRef(true);
+  const loadingBatchRef = useRef(0);
 
   useEffect(() => {
     const abortController = new AbortController();
@@ -35,6 +36,7 @@ export const useFinancialNews = () => {
 
       setIsLoading(true);
       setError(null);
+      loadingBatchRef.current = 1;
 
       try {
         const result = await newsApiService.fetchFinancialNews(
@@ -61,6 +63,7 @@ export const useFinancialNews = () => {
         }
 
         setIsLoading(false);
+        loadingBatchRef.current = 0;
       } catch (err) {
         if (err.name === "AbortError") {
           return;
@@ -69,6 +72,7 @@ export const useFinancialNews = () => {
           setError("FETCH_FAILED");
           setHasMore(false);
           setIsLoading(false);
+          loadingBatchRef.current = 0;
         }
       }
     };
@@ -83,12 +87,18 @@ export const useFinancialNews = () => {
 
   const loadBatch = useCallback(
     async (batchNumber) => {
-      if (isLoading || !isMountedRef.current || batchNumber > MAX_BATCHES) {
+      if (
+        loadingBatchRef.current === batchNumber ||
+        !isMountedRef.current ||
+        batchNumber > MAX_BATCHES ||
+        batchNumber <= loadedBatches
+      ) {
         return;
       }
 
       setIsLoading(true);
       setError(null);
+      loadingBatchRef.current = batchNumber;
 
       try {
         const result = await newsApiService.fetchFinancialNews(
@@ -112,15 +122,17 @@ export const useFinancialNews = () => {
         }
 
         setIsLoading(false);
+        loadingBatchRef.current = 0;
       } catch (err) {
         if (isMountedRef.current) {
           setError("FETCH_FAILED");
           setHasMore(false);
           setIsLoading(false);
+          loadingBatchRef.current = 0;
         }
       }
     },
-    [isLoading, MAX_BATCHES, MAX_TOTAL_ITEMS],
+    [loadedBatches, MAX_BATCHES, MAX_TOTAL_ITEMS],
   );
 
   const retry = useCallback(async () => {
@@ -132,6 +144,7 @@ export const useFinancialNews = () => {
     setCurrentPage(1);
     setHasMore(true);
     setIsLoading(true);
+    loadingBatchRef.current = 1;
 
     try {
       const result = await newsApiService.fetchFinancialNews(
@@ -153,44 +166,45 @@ export const useFinancialNews = () => {
       }
 
       setIsLoading(false);
+      loadingBatchRef.current = 0;
     } catch (err) {
       if (isMountedRef.current) {
         setError("FETCH_FAILED");
         setHasMore(false);
         setIsLoading(false);
+        loadingBatchRef.current = 0;
       }
     }
   }, [MAX_TOTAL_ITEMS]);
 
   const goToPage = useCallback(
     (page) => {
-      if (page < 1 || page > 9) {
+      if (page < 1 || page > 5) {
         return;
       }
 
-      const triggerPages = [3, 6];
-      const shouldFetch = triggerPages.includes(page);
+      setCurrentPage(page);
 
-      if (shouldFetch) {
-        const batchNumber = page === 3 ? 2 : 3;
-        if (batchNumber > loadedBatches && hasMore && !isLoading) {
-          loadBatch(batchNumber);
-        }
+      if (page === 2 && loadedBatches < 2) {
+        loadBatch(2);
+      } else if (page === 3 && loadedBatches < 3) {
+        loadBatch(3);
+      } else if (page === 4 && loadedBatches < 4) {
+        loadBatch(4);
+      } else if (page === 5 && loadedBatches < 5) {
+        loadBatch(5);
       }
 
-      setCurrentPage(page);
       window.scrollTo({ top: 400, behavior: "smooth" });
     },
-    [hasMore, isLoading, loadBatch, loadedBatches],
+    [loadBatch, loadedBatches],
   );
 
   const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
   const endIndex = startIndex + ITEMS_PER_PAGE;
   const paginatedItems = newsItems.slice(startIndex, endIndex);
 
-  const calculatedPages = Math.ceil(newsItems.length / ITEMS_PER_PAGE);
-  const totalPages =
-    loadedBatches < MAX_BATCHES ? 9 : Math.min(9, calculatedPages);
+  const totalPages = 5;
 
   return {
     region,

@@ -65,7 +65,7 @@ export const SectorDetail = () => {
       <main className="bg-slate-50/30 min-h-screen pb-20">
         {header}
 
-        <section className="py-24 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <section className="py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {!sector || !detail ? (
             <div className="min-h-[40vh] flex items-center justify-center">
               <div className="text-center">
@@ -96,7 +96,7 @@ export const SectorDetail = () => {
                 <h2 className="text-3xl md:text-4xl font-bold mb-8 text-slate-900">
                   {sectorTitle}
                 </h2>
-                <p className="text-xl text-slate-600 leading-relaxed mb-12 max-w-4xl">
+                <p className="text-xl text-slate-600 leading-relaxed mb-12 max-w-5xl">
                   {mainDescription}
                 </p>
 
@@ -175,7 +175,7 @@ export const SectorDetail = () => {
                             id={sec.id || undefined}
                             className="bg-white p-8 rounded-[1.5rem] border border-slate-100 shadow-sm text-slate-700 text-base leading-relaxed"
                           >
-                            <div className="grid grid-cols-1 lg:grid-cols-[2fr,1fr] gap-10 items-start">
+                            <div className="grid grid-cols-1 lg:grid-cols-[3fr,1fr] gap-10 items-start">
                               <div className="space-y-3">
                                 <h4 className="text-xl font-bold text-slate-900">
                                   {sec.title}
@@ -232,13 +232,13 @@ export const SectorDetail = () => {
                       ))}
                     </div>
                   ) : null}
+                </div>
+
+                <div className="lg:col-span-1 space-y-8">
                   <SectorServices
                     title={t.sectors.ourServices}
                     services={detail?.services}
                   />
-                </div>
-
-                <div className="lg:col-span-1">
                   <SectorBenefitsCard
                     title={t.sectors.clientBenefits}
                     benefits={detail?.benefits}

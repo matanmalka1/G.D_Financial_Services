@@ -12,7 +12,11 @@ const clearCache = () => {
 const normalizeForDedup = (article) => {
   const titleNorm = (article.title || "").toLowerCase().trim();
   const descNorm = (article.description || "").toLowerCase().trim();
-  return `${titleNorm}|${descNorm}`;
+  const contentNorm = (article.content || "")
+    .toLowerCase()
+    .trim()
+    .slice(0, 100);
+  return `${titleNorm}|${descNorm}|${contentNorm}`;
 };
 
 const fetchFinancialNews = async (
@@ -21,8 +25,6 @@ const fetchFinancialNews = async (
   batchNumber = 1,
   signal,
 ) => {
-  const language = "en";
-  const region = "global";
   const apiKey = import.meta.env.VITE_GNEWS_API_KEY;
 
   if (!apiKey || apiKey === "your_api_key_here") {
@@ -58,11 +60,17 @@ const fetchFinancialNews = async (
 
   try {
     const baseUrl = "https://gnews.io/api/v4/search";
+    const hoursAgo = 12 * (batchNumber - 1);
+    const toDate = new Date(Date.now() - hoursAgo * 60 * 60 * 1000);
+    const fromDate = new Date(toDate.getTime() - 30 * 24 * 60 * 60 * 1000);
+
     const params = new URLSearchParams({
       q: "financial OR economy OR market OR business",
       lang: "en",
-      max: FINANCIAL_NEWS_CONFIG.API_BATCH_SIZE.toString(),
-      page: batchNumber.toString(),
+      max: "10",
+      from: fromDate.toISOString(),
+      to: toDate.toISOString(),
+      sortby: "publishedAt",
       apikey: apiKey,
     });
 
@@ -79,6 +87,7 @@ const fetchFinancialNews = async (
       id: article.url,
       title: article.title,
       description: article.description,
+      content: article.content,
       url: article.url,
       publishedAt: article.publishedAt,
       source: article.source?.name || "Unknown",
@@ -99,7 +108,7 @@ const fetchFinancialNews = async (
 
     const hasMore =
       batchNumber < FINANCIAL_NEWS_CONFIG.MAX_BATCHES &&
-      freshItems.length >= FINANCIAL_NEWS_CONFIG.API_BATCH_SIZE;
+      cappedItems.length < FINANCIAL_NEWS_CONFIG.MAX_TOTAL_ITEMS;
 
     newsCache.set(cacheKey, {
       newsItems: cappedItems,
