@@ -10,6 +10,7 @@ import { RelatedArticlesSection } from "../components/common/sector/RelatedArtic
 import { SectorValueBubbles } from "../components/common/sector/SectorValueBubbles";
 import { LoadBoundary, PageError, PageLoading } from "../components/common/LoadBoundary";
 import { ITEMS_PER_PAGE } from "../constants.js";
+import { sectorImages } from "../data/sectorImages";
 
 export const SectorDetail = () => {
   const { id } = useParams();
@@ -34,6 +35,8 @@ export const SectorDetail = () => {
   const sections = detail?.sections;
   const bubbles = detail?.bubbles;
   const bubbleTitle = detail?.bubbleTitle;
+  const imagesForSector = sectorImages[sector?.id] || [];
+
   const header = sector ? (
     <ParallaxHeader image={sector.image} title={sectorTitleEn} />
   ) : null;
@@ -123,39 +126,92 @@ export const SectorDetail = () => {
                     {aboutDescription}
                   </p>
                   {sections && sections.length > 0 ? (
-                    <div className="space-y-6">
-                      {sections.map((sec, idx) => (
-                        <div
-                          key={idx}
-                          id={sec.id || undefined}
-                          className="bg-white p-8 rounded-[1.5rem] border border-slate-100 shadow-sm text-slate-700 text-base leading-relaxed space-y-3"
-                        >
-                          <h4 className="text-xl font-bold text-slate-900">
-                            {sec.title}
-                          </h4>
-                          {sec.stepLinks && (
-                            <ul className="space-y-2 text-indigo-600 font-semibold">
-                              {sec.stepLinks.map((step) => (
-                                <li key={step.id}>
-                                  <a
-                                    href={`#${step.id}`}
-                                    className="hover:text-indigo-800 transition-colors"
-                                  >
-                                    {step.label}
-                                  </a>
-                                </li>
-                              ))}
-                            </ul>
-                          )}
-                          {(Array.isArray(sec.body)
-                            ? sec.body
-                            : (sec.body || "").split(/\n\s*\n/)
-                          ).map((para, pIdx) => (
-                            <p key={pIdx}>{para.trim()}</p>
-                          ))}
-                          {sec.extra && <p className="text-slate-600">{sec.extra}</p>}
-                        </div>
-                      ))}
+                    <div className="space-y-10">
+                      {sections.map((sec, idx) => {
+                        const isBusinessPlan = sector?.id === "business-plan";
+                        const isBusinessPresentations =
+                          sector?.id === "business-presentations";
+                        const isSellSide = sector?.id === "sell-side-advisory";
+                        const isOngoing = sector?.id === "ongoing-financial-advisory";
+                        const skipImage =
+                          (isBusinessPlan && (idx === 0 || idx === 2)) ||
+                          (isBusinessPresentations && idx === 2) ||
+                          (isOngoing && idx > 0) ||
+                          (isSellSide && idx === 0);
+                        const overrideImage = isBusinessPlan
+                          ? idx === 4
+                            ? "/sectorBusinessPlan/realestate.avif"
+                            : idx === 5
+                              ? "/sectorBusinessPlan/create%20new%20business.avif"
+                              : null
+                          : isBusinessPresentations && idx === 3
+                            ? "/sectorBusinessPresentations/board%20presentations.avif"
+                            : isSellSide && idx === 1
+                              ? "/sectorSellSide/company_sale_advisory.avif"
+                            : isSellSide && idx === 2
+                              ? "/sectorSellSide/valuation_exit_starategy.avif"
+                              : isSellSide && idx === 3
+                                ? "/sectorSellSide/financial_&_legal_preparation.avif"
+                                : isSellSide && idx === 4
+                                  ? "/sectorSellSide/identifying_potential_buyers.avif"
+                                  : isSellSide && idx === 5
+                                    ? "/sectorSellSide/assistance_till_negotiation.avif"
+                                    : isSellSide && idx === 6
+                                      ? "/sectorSellSide/investor_presentations_kpi.avif"
+                                    : null;
+                        const imageSrc =
+                          overrideImage ||
+                          (imagesForSector.length > 0
+                            ? imagesForSector[idx % imagesForSector.length]
+                            : null);
+
+                        return (
+                          <div
+                            key={idx}
+                            id={sec.id || undefined}
+                            className="bg-white p-8 rounded-[1.5rem] border border-slate-100 shadow-sm text-slate-700 text-base leading-relaxed"
+                          >
+                            <div className="grid grid-cols-1 lg:grid-cols-[2fr,1fr] gap-6 items-start">
+                              <div className="space-y-3">
+                                <h4 className="text-xl font-bold text-slate-900">
+                                  {sec.title}
+                                </h4>
+                                {sec.stepLinks && (
+                                  <ul className="space-y-2 text-indigo-600 font-semibold">
+                                    {sec.stepLinks.map((step) => (
+                                      <li key={step.id}>
+                                        <a
+                                          href={`#${step.id}`}
+                                          className="hover:text-indigo-800 transition-colors"
+                                        >
+                                          {step.label}
+                                        </a>
+                                      </li>
+                                    ))}
+                                  </ul>
+                                )}
+                                {(Array.isArray(sec.body)
+                                  ? sec.body
+                                  : (sec.body || "").split(/\n\s*\n/)
+                                ).map((para, pIdx) => (
+                                  <p key={pIdx}>{para.trim()}</p>
+                                ))}
+                                {sec.extra && <p className="text-slate-600">{sec.extra}</p>}
+                              </div>
+                              {!skipImage && imageSrc ? (
+                                <div className="rounded-2xl overflow-hidden border border-slate-100 shadow-sm">
+                                  <img
+                                    src={imageSrc}
+                                    alt={`${sectorTitle} illustration ${idx + 1}`}
+                                    className="w-full h-full object-cover"
+                                    loading="lazy"
+                                  />
+                                </div>
+                              ) : null}
+                            </div>
+                          </div>
+                        );
+                      })}
                     </div>
                   ) : longDescription ? (
                     <div className="bg-white p-8 rounded-[1.5rem] border border-slate-100 shadow-sm text-slate-700 text-base leading-relaxed space-y-4">
