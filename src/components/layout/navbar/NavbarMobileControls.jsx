@@ -1,18 +1,7 @@
 import { Menu, X } from "lucide-react";
-import { LanguageToggle } from "./LanguageToggle";
 
-export const NavbarMobileControls = ({
-  language,
-  onLanguageChange,
-  isOpen,
-  onToggle,
-}) => (
+export const NavbarMobileControls = ({ isOpen, onToggle }) => (
   <div className="md:hidden flex items-center gap-4">
-    <LanguageToggle
-      language={language}
-      onChange={onLanguageChange}
-      variant="mobile"
-    />
     <button
       onClick={onToggle}
       className="p-2 text-slate-700"

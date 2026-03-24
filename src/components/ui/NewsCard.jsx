@@ -2,10 +2,10 @@ import { Link, useNavigate } from "react-router-dom";
 import { Card } from "./primitives/Card";
 import { routes } from "../../routes/paths";
 
-export const NewsCard = ({ article, language }) => {
+export const NewsCard = ({ article }) => {
   const navigate = useNavigate();
-  const title = language === 'en' ? article.title.en : article.title.he;
-  const excerpt = language === 'en' ? article.excerpt.en : article.excerpt.he;
+  const title = article.title?.he || article.title?.en || article.title;
+  const excerpt = article.excerpt?.he || article.excerpt?.en || article.excerpt;
   const to = routes.newsDetail(article.id);
 
   const handleNavigate = (e) => {

@@ -1,8 +1,7 @@
 import { NavLink } from "react-router-dom";
 import { routePaths } from "../../../routes/paths";
-import { LanguageToggle } from "./LanguageToggle";
 
-export const NavbarDesktopActions = ({ t, language, onLanguageChange }) => (
+export const NavbarDesktopActions = ({ t }) => (
   <div className="hidden md:flex items-center gap-6">
     <NavLink
       to={routePaths.contact}
@@ -16,10 +15,5 @@ export const NavbarDesktopActions = ({ t, language, onLanguageChange }) => (
     >
       {t.nav.contact}
     </NavLink>
-    <LanguageToggle
-      language={language}
-      onChange={onLanguageChange}
-      variant="desktop"
-    />
   </div>
 );

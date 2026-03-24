@@ -9,7 +9,7 @@ import { NavbarMobileControls } from "./navbar/NavbarMobileControls";
 import { NavbarMobileMenu } from "./navbar/NavbarMobileMenu";
 
 export const Navbar = () => {
-  const { t, language, setLanguage, isRtl } = useLanguage();
+  const { t, isRtl } = useLanguage();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
@@ -57,15 +57,9 @@ export const Navbar = () => {
             navigate={navigate}
           />
 
-          <NavbarDesktopActions
-            t={t}
-            language={language}
-            onLanguageChange={setLanguage}
-          />
+          <NavbarDesktopActions t={t} />
 
           <NavbarMobileControls
-            language={language}
-            onLanguageChange={setLanguage}
             isOpen={mobileMenuOpen}
             onToggle={() => setMobileMenuOpen(!mobileMenuOpen)}
           />

@@ -4,12 +4,7 @@ export const STORAGE_KEYS = {
   THEME: "gd-theme",
 };
 
-export const LANGUAGES = {
-  EN: "en",
-  HE: "he",
-};
-
-export const DEFAULT_LANGUAGE = LANGUAGES.EN;
+export const DEFAULT_LANGUAGE = "he";
 
 export const ITEMS_PER_PAGE = {
   NEWS: 9,

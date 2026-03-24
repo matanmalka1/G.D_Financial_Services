@@ -17,13 +17,13 @@ const DEFAULT_IMAGE =
 
 export const Article = () => {
   const { id } = useParams();
-  const { t, language, isRtl } = useLanguage();
+  const { t, isRtl } = useLanguage();
   const { getArticleById, loading, error, refreshContent } = useContent();
 
   const article = useMemo(() => getArticleById(id), [getArticleById, id]);
-  const title = language === "en" ? article?.title?.en : article?.title?.he;
-  const excerpt = language === "en" ? article?.excerpt?.en : article?.excerpt?.he;
-  const content = language === "en" ? article?.content?.en : article?.content?.he;
+  const title = article?.title?.he || article?.title?.en || article?.title;
+  const excerpt = article?.excerpt?.he || article?.excerpt?.en || article?.excerpt;
+  const content = article?.content?.he || article?.content?.en || article?.content;
 
   const wordCount = useMemo(() => {
     if (!content?.length) return 0;

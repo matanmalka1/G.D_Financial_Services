@@ -14,7 +14,7 @@ import { filterBySearch } from "../utils/helpers/utils";
 const ARTICLES_PER_PAGE = ITEMS_PER_PAGE.NEWS;
 
 export const News = () => {
-  const { t, language, isRtl } = useLanguage();
+  const { t, isRtl } = useLanguage();
   const [search, setSearch] = useState("");
   const { articles, error, refreshContent, loading } = useContent();
   const [currentPage, setCurrentPage] = useState(1);
@@ -129,7 +129,6 @@ export const News = () => {
                 <NewsCard
                   key={article.id}
                   article={article}
-                  language={language}
                 />
               ))
             ) : (

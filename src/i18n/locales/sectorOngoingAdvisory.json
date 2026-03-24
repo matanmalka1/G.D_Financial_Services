@@ -1,168 +1,83 @@
 {
-  "en": {
-    "ongoing-financial-advisory": {
-      "bubbleTitle": "What ongoing advisory provides",
-      "bubbles": [
-        {
-          "icon": "📊",
-          "title": "Rolling forecasts",
-          "description": "Monthly updates to cash, runway, and scenarios so surprises are surfaced early."
-        },
-        {
-          "icon": "🧭",
-          "title": "Decision partner",
-          "description": "Board-ready insights on pricing, hiring, and capex with clear tradeoffs."
-        },
-        {
-          "icon": "🛠️",
-          "title": "Finance infrastructure",
-          "description": "Budgeting models, reporting packs, and controls that scale with the company."
-        },
-        {
-          "icon": "🤝",
-          "title": "Stakeholder confidence",
-          "description": "Consistent communications to investors, lenders, and teams that build trust."
-        }
-      ],
-      "sections": [
-        {
-          "title": "It's time to get control of your business finances",
-          "body": [
-            "Who is this for?",
-            "🔹 Small businesses or freelancers who don't really know their true profit",
-            "🔹 Owners who feel the business is running but there's no order or expense control",
-            "🔹 Businesses that operate but dread “end of month” or drift toward overdraft",
-            "🔹 Anyone who wants to grow but first needs to understand the current position",
-            "🔹 Pros who want simple, personal guidance without complicated reports"
-          ]
-        },
-        {
-          "title": "Basic Plan – Know Where You Stand",
-          "body": [
-            "The first step to financial control.",
-            "For owners who want a simple, clear start, understand the numbers without deep analysis.",
-            "What’s included:",
-            "✔️ Initial financial mapping – all income and expenses in one place",
-            "✔️ Monthly cash-flow plan (forecast + actual)",
-            "✔️ Fixed monthly call (up to 45 min) for review, clarity, and guidance",
-            "✔️ Personalized management file (Google Sheets/Excel)",
-            "✔️ Basic monitoring of movements and unusual expenses"
-          ]
-        },
-        {
-          "title": "Advanced Plan – Measure, Improve, Optimize",
-          "body": [
-            "Full grip on the numbers and better decisions.",
-            "For owners who want not only the picture but performance improvement and smarter execution.",
-            "What’s included:",
-            "✔️ Everything in the Basic Plan",
-            "✔️ Monthly performance vs. forecast analysis",
-            "✔️ Visual charts/reports of revenue, expenses, and monthly profit",
-            "✔️ Initial pricing advice for products/services",
-            "✔️ Identifying profit improvement levers (savings, less/more profitable areas)",
-            "✔️ Practical recommendations to improve day to day finance",
-            "✔️ Support in working with your accountant"
-          ]
-        },
-        {
-          "title": "VIP Plan – Hands-On Partnership",
-          "body": [
-            "You’re not alone, we run the business with you like a partner.",
-            "Top-tier financial guidance with personal availability, bi-weekly control, and ongoing direction tailored to your business.",
-            "What’s included:",
-            "✔️ Everything in the Basic and Advanced plans",
-            "✔️ Bi-weekly follow-up calls (twice a week or every 14 days, your choice)",
-            "✔️ Full availability for ongoing questions via WhatsApp or email",
-            "✔️ Tight tracking of financial target attainment",
-            "✔️ Ongoing support for big business decisions: major spend, investments, pricing changes, hiring, and more",
-            "✔️ Proactive check-ins, we’re the ones who call when needed",
-            "✔️ One in-person meeting each quarter (or Zoom, your preference)"
-          ]
-        }
-      ]
-    }
-  },
-  "he": {
-    "ongoing-financial-advisory": {
-      "bubbleTitle": "מה הליווי השוטף נותן לכם",
-      "bubbles": [
-        {
-          "icon": "📊",
-          "title": "תחזיות מתעדכנות",
-          "description": "עדכוני תזרים, מסלול מזומן ותסריטים מדי חודש כדי לזהות הפתעות מוקדם."
-        },
-        {
-          "icon": "🧭",
-          "title": "שותף להחלטות",
-          "description": "תובנות מוכנות לדירקטוריון על תמחור, גיוסים והשקעות עם הצגת חלופות."
-        },
-        {
-          "icon": "🛠️",
-          "title": "תשתית פיננסית",
-          "description": "מודלי תקציב, חבילות דיווח ובקרות שגדלות יחד עם החברה."
-        },
-        {
-          "icon": "🤝",
-          "title": "אמון בעלי עניין",
-          "description": "תקשורת עקבית למשקיעים, בנקים וצוותים שמחזקת ביטחון."
-        }
-      ],
-      "sections": [
-        {
-          "title": "הגיע הזמן לשלוט בכסף של העסק שלכם",
-          "body": [
-            "למי השירות הזה מתאים?",
-            "🔹 בעלי עסקים קטנים או עצמאיים שלא יודעים כמה הם באמת מרוויחים",
-            "🔹 מי שמרגיש שהעסק זורם, אבל אין סדר או בקרה על ההוצאות",
-            "🔹 עסקים שכבר עובדים – אבל מפחדים מ”סוף החודש” או מתקרבים לאוברדראפט",
-            "🔹 מי שרוצה לצמוח, אבל קודם כל להבין איפה הוא עומד היום",
-            "🔹 בעלי מקצוע שמחפשים ליווי פשוט, אישי ובלי דוחות מסובכים"
-          ]
-        },
-        {
-          "title": "מסלול בסיסי - להבין איפה אתם עומדים",
-          "body": [
-            "השלב הראשון בדרך לשליטה פיננסית.",
-            "מיועד לבעלי עסקים שרוצים התחלה פשוטה וברורה – להבין את המספרים בלי להיכנס לעומק הניתוחים.",
-            "מה כלול במסלול:",
-            "✔️ מיפוי פיננסי ראשוני – ריכוז כל ההכנסות וההוצאות",
-            "✔️ בניית תזרים מזומנים חודשי (צפי קדימה + בפועל)",
-            "✔️ שיחה חודשית קבועה (עד 45 דק׳) לסקירה, הסברים, והכוונה",
-            "✔️ קובץ ניהול מותאם אישית (Google Sheets/Excel)",
-            "✔️ מעקב בסיסי אחרי תנועות והוצאות חריגות"
-          ]
-        },
-        {
-          "title": "מסלול בסיסי - לדעת, להבין ושלוט",
-          "body": [
-            "שליטה מלאה במספרים וקבלת החלטות נכונות לעסק.",
-            "מסלול שמתאים לבעלי עסקים שרוצים לא רק להבין את התמונה – אלא גם לשפר את הביצועים ולהתחיל לעבוד חכם יותר.",
-            "מה כלול במסלול:",
-            "✔️ כל מה שמציע המסלול הבסיסי",
-            "✔️ ניתוח חודשי של ביצועים מול תחזית",
-            "✔️ גרפים ודוחות ויזואליים של הכנסות, הוצאות ורווח חודשי",
-            "✔️ ייעוץ תמחור ראשוני למוצרים/שירותים",
-            "✔️ זיהוי נקודות לשיפור כלכלי בעסק (חסכונות, תחומים רווחיים פחות/יותר)",
-            "✔️ המלצות פרקטיות לשיפור התנהלות פיננסית שוטפת",
-            "✔️ ליווי בהתנהלות מול רואה החשבון"
-          ]
-        },
-        {
-          "title": "מסלול VIP - ליווי צמוד וצמיחה אמיתית",
-          "body": [
-            "אתם לא לבד יש מישהו שמנהל איתכם את העסק כמו שותף.",
-            "ליווי פיננסי ברמה הגבוהה ביותר, עם זמינות אישית, בקרה דו-שבועית והכוונה שוטפת שמותאמת בדיוק לעסק שלכם.",
-            "מה כלול במסלול:",
-            "✔️ כל מה שכלול במסלול הבסיסי והמתקדם",
-            "✔️ שיחות מעקב דו-שבועיות (2 בשבוע או כל 14 יום – לבחירתכם)",
-            "✔️ זמינות מלאה לשאלות והתייעצויות שוטפות בוואטסאפ או מייל",
-            "✔️ בקרה צמודה על עמידה ביעדים פיננסיים",
-            "✔️ סיוע שוטף בקבלת החלטות עסקיות: הוצאות גדולות, השקעות, שינוי תמחור, העסקת עובדים ועוד",
-            "✔️ מעקב יזום – אנחנו אלה שמרימים טלפון כשצריך",
-            "✔️ פגישה פרונטלית אחת לרבעון (או זום – לפי העדפה)"
-          ]
-        }
-      ]
-    }
+  "ongoing-financial-advisory": {
+    "bubbleTitle": "מה הליווי השוטף נותן לכם",
+    "bubbles": [
+      {
+        "icon": "📊",
+        "title": "תחזיות מתעדכנות",
+        "description": "עדכוני תזרים, מסלול מזומן ותסריטים מדי חודש כדי לזהות הפתעות מוקדם."
+      },
+      {
+        "icon": "🧭",
+        "title": "שותף להחלטות",
+        "description": "תובנות מוכנות לדירקטוריון על תמחור, גיוסים והשקעות עם הצגת חלופות."
+      },
+      {
+        "icon": "🛠️",
+        "title": "תשתית פיננסית",
+        "description": "מודלי תקציב, חבילות דיווח ובקרות שגדלות יחד עם החברה."
+      },
+      {
+        "icon": "🤝",
+        "title": "אמון בעלי עניין",
+        "description": "תקשורת עקבית למשקיעים, בנקים וצוותים שמחזקת ביטחון."
+      }
+    ],
+    "sections": [
+      {
+        "title": "הגיע הזמן לשלוט בכסף של העסק שלכם",
+        "body": [
+          "למי השירות הזה מתאים?",
+          "🔹 בעלי עסקים קטנים או עצמאיים שלא יודעים כמה הם באמת מרוויחים",
+          "🔹 מי שמרגיש שהעסק זורם, אבל אין סדר או בקרה על ההוצאות",
+          "🔹 עסקים שכבר עובדים – אבל מפחדים מ\"סוף החודש\" או מתקרבים לאוברדראפט",
+          "🔹 מי שרוצה לצמוח, אבל קודם כל להבין איפה הוא עומד היום",
+          "🔹 בעלי מקצוע שמחפשים ליווי פשוט, אישי ובלי דוחות מסובכים"
+        ]
+      },
+      {
+        "title": "מסלול בסיסי - להבין איפה אתם עומדים",
+        "body": [
+          "השלב הראשון בדרך לשליטה פיננסית.",
+          "מיועד לבעלי עסקים שרוצים התחלה פשוטה וברורה – להבין את המספרים בלי להיכנס לעומק הניתוחים.",
+          "מה כלול במסלול:",
+          "✔️ מיפוי פיננסי ראשוני – ריכוז כל ההכנסות וההוצאות",
+          "✔️ בניית תזרים מזומנים חודשי (צפי קדימה + בפועל)",
+          "✔️ שיחה חודשית קבועה (עד 45 דק׳) לסקירה, הסברים, והכוונה",
+          "✔️ קובץ ניהול מותאם אישית (Google Sheets/Excel)",
+          "✔️ מעקב בסיסי אחרי תנועות והוצאות חריגות"
+        ]
+      },
+      {
+        "title": "מסלול בסיסי - לדעת, להבין ושלוט",
+        "body": [
+          "שליטה מלאה במספרים וקבלת החלטות נכונות לעסק.",
+          "מסלול שמתאים לבעלי עסקים שרוצים לא רק להבין את התמונה – אלא גם לשפר את הביצועים ולהתחיל לעבוד חכם יותר.",
+          "מה כלול במסלול:",
+          "✔️ כל מה שמציע המסלול הבסיסי",
+          "✔️ ניתוח חודשי של ביצועים מול תחזית",
+          "✔️ גרפים ודוחות ויזואליים של הכנסות, הוצאות ורווח חודשי",
+          "✔️ ייעוץ תמחור ראשוני למוצרים/שירותים",
+          "✔️ זיהוי נקודות לשיפור כלכלי בעסק (חסכונות, תחומים רווחיים פחות/יותר)",
+          "✔️ המלצות פרקטיות לשיפור התנהלות פיננסית שוטפת",
+          "✔️ ליווי בהתנהלות מול רואה החשבון"
+        ]
+      },
+      {
+        "title": "מסלול VIP - ליווי צמוד וצמיחה אמיתית",
+        "body": [
+          "אתם לא לבד יש מישהו שמנהל איתכם את העסק כמו שותף.",
+          "ליווי פיננסי ברמה הגבוהה ביותר, עם זמינות אישית, בקרה דו-שבועית והכוונה שוטפת שמותאמת בדיוק לעסק שלכם.",
+          "מה כלול במסלול:",
+          "✔️ כל מה שכלול במסלול הבסיסי והמתקדם",
+          "✔️ שיחות מעקב דו-שבועיות (2 בשבוע או כל 14 יום – לבחירתכם)",
+          "✔️ זמינות מלאה לשאלות והתייעצויות שוטפות בוואטסאפ או מייל",
+          "✔️ בקרה צמודה על עמידה ביעדים פיננסיים",
+          "✔️ סיוע שוטף בקבלת החלטות עסקיות: הוצאות גדולות, השקעות, שינוי תמחור, העסקת עובדים ועוד",
+          "✔️ מעקב יזום – אנחנו אלה שמרימים טלפון כשצריך",
+          "✔️ פגישה פרונטלית אחת לרבעון (או זום – לפי העדפה)"
+        ]
+      }
+    ]
   }
 }

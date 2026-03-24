@@ -1,9 +1,8 @@
 const modules = import.meta.glob('./sector*.json', { eager: true });
 
-let common = { en: {}, he: {} };
-let sectorCommon = { en: { services: {}, benefits: {} }, he: { services: {}, benefits: {} } };
-const sectorDetailsEn = {};
-const sectorDetailsHe = {};
+let common = {};
+let sectorCommon = { services: {}, benefits: {} };
+const sectorDetails = {};
 
 Object.entries(modules).forEach(([path, mod]) => {
   const data = mod.default || mod;
@@ -15,14 +14,13 @@ Object.entries(modules).forEach(([path, mod]) => {
     sectorCommon = data;
     return;
   }
-  // Merge sector-specific entries
-  if (data.en) Object.assign(sectorDetailsEn, data.en);
-  if (data.he) Object.assign(sectorDetailsHe, data.he);
+  // Merge sector-specific entries (now flat, no en/he wrapper)
+  Object.assign(sectorDetails, data);
 });
 
-const mergeCommonLists = (details, lang) => {
-  const servicesById = sectorCommon?.[lang]?.services || {};
-  const benefitsById = sectorCommon?.[lang]?.benefits || {};
+const mergeCommonLists = (details) => {
+  const servicesById = sectorCommon?.services || {};
+  const benefitsById = sectorCommon?.benefits || {};
 
   Object.entries(details).forEach(([id, value]) => {
     if (!value || typeof value !== 'object') return;
@@ -34,12 +32,6 @@ const mergeCommonLists = (details, lang) => {
 };
 
 export const sectorDetailTranslations = {
-  en: {
-    ...common.en,
-    sectorDetails: mergeCommonLists(sectorDetailsEn, 'en'),
-  },
-  he: {
-    ...common.he,
-    sectorDetails: mergeCommonLists(sectorDetailsHe, 'he'),
-  },
+  ...common,
+  sectorDetails: mergeCommonLists(sectorDetails),
 };

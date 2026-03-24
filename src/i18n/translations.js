@@ -9,27 +9,13 @@ import contactTranslations from "./locales/contact.json";
 import modalFormTranslations from "./locales/modalForm.json";
 
 export const translations = {
-  en: {
-    ...globalTranslations.en,
-    home: homeTranslations.en,
-    companyProfile: companyProfileTranslations.en,
-    sectors: sectorsTranslations.en,
-    sectorDetail: sectorDetailTranslations.en,
-    news: newsTranslations.en,
-    financialNews: financialNewsTranslations.en,
-    contact: contactTranslations.en,
-    modalForm: modalFormTranslations.en,
-  },
-  he: {
-    ...globalTranslations.he,
-    home: homeTranslations.he,
-    companyProfile: companyProfileTranslations.he,
-    sectors: sectorsTranslations.he,
-    sectorDetail: sectorDetailTranslations.he,
-    news: newsTranslations.he,
-    // Financial news is English-only now; reuse English copy for Hebrew locale.
-    financialNews: financialNewsTranslations.en,
-    contact: contactTranslations.he,
-    modalForm: modalFormTranslations.he,
-  },
+  ...globalTranslations,
+  home: homeTranslations,
+  companyProfile: companyProfileTranslations,
+  sectors: sectorsTranslations,
+  sectorDetail: sectorDetailTranslations,
+  news: newsTranslations,
+  financialNews: financialNewsTranslations,
+  contact: contactTranslations,
+  modalForm: modalFormTranslations,
 };
