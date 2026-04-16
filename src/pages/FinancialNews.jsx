@@ -1,4 +1,4 @@
-import { useLanguage } from "../hooks/useLanguage";
+import { useSiteContent } from "../hooks/useSiteContent";
 import { useSeo } from "../hooks/useSeo";
 import { useFinancialNews } from "../hooks/useFinancialNews";
 import { Pagination } from "../components/ui/Pagination";
@@ -9,7 +9,7 @@ import { NewsItemCard } from "../components/ui/NewsItemCard";
 import { SectionHeading } from "../components/ui/SectionHeading";
 
 export const FinancialNews = () => {
-  const { t, isRtl } = useLanguage();
+  const { t, isRtl } = useSiteContent();
   useSeo({
     title: t.financialNews?.title || t.nav.financialNews,
     description: "חדשות פיננסיות עדכניות מהשווקים הגלובליים - G.D Financial Services.",

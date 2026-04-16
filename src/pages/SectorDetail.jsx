@@ -1,6 +1,6 @@
 import { useMemo, useState } from "react";
 import { useParams, Link } from "react-router-dom";
-import { useLanguage } from "../hooks/useLanguage";
+import { useSiteContent } from "../hooks/useSiteContent";
 import { useSeo } from "../hooks/useSeo";
 import { useContent } from "../hooks/useContent";
 import { ParallaxHeader } from "../components/common/ParallaxHeader";
@@ -15,7 +15,7 @@ import { sectorImages } from "../data/sectorImages";
 
 export const SectorDetail = () => {
   const { id } = useParams();
-  const { t, isRtl } = useLanguage();
+  const { t, isRtl } = useSiteContent();
   const { getSectorById, getRelatedArticles, error, refreshContent, loading } =
     useContent();
 

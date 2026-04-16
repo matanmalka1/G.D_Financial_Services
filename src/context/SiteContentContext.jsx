@@ -1,24 +1,19 @@
-
 import { createContext, useCallback, useEffect, useMemo, useState } from "react";
-import { translations } from "./translations";
-import { setDocumentMetadata } from "../utils/helpers/dom";
+import { siteContent } from "../content/siteContent";
 import { STORAGE_KEYS } from "../constants.js";
-import {
-  applyFlatOverrides,
-  flattenStringLeaves,
-} from "../utils/contentAdmin";
+import { applyFlatOverrides, flattenStringLeaves } from "../utils/contentAdmin";
+import { setDocumentMetadata } from "../utils/helpers/dom";
 
-const LanguageContext = createContext();
+const SiteContentContext = createContext();
 const ADMIN_PASSWORD = import.meta.env.VITE_ADMIN_PASSWORD;
 
-export const LanguageProvider = ({ children }) => {
+export const SiteContentProvider = ({ children }) => {
   const isRtl = true;
-  const language = "he";
   const [overrides, setOverrides] = useState({});
   const [isAdminAuthenticated, setIsAdminAuthenticated] = useState(false);
 
   useEffect(() => {
-    setDocumentMetadata(isRtl, language);
+    setDocumentMetadata(isRtl, "he");
   }, []);
 
   useEffect(() => {
@@ -26,10 +21,9 @@ export const LanguageProvider = ({ children }) => {
       const savedOverrides = window.localStorage.getItem(
         STORAGE_KEYS.CONTENT_OVERRIDES,
       );
-      const nextOverrides = savedOverrides ? JSON.parse(savedOverrides) : {};
-      setOverrides(nextOverrides);
+      setOverrides(savedOverrides ? JSON.parse(savedOverrides) : {});
     } catch (error) {
-      console.warn("Failed to hydrate translation overrides", error);
+      console.warn("Failed to hydrate content overrides", error);
     }
 
     try {
@@ -49,22 +43,21 @@ export const LanguageProvider = ({ children }) => {
         JSON.stringify(nextOverrides),
       );
     } catch (error) {
-      console.warn("Failed to persist translation overrides", error);
+      console.warn("Failed to persist content overrides", error);
     }
   }, []);
 
-  const updateTranslation = useCallback(
+  const updateContentEntry = useCallback(
     (path, value) => {
-      const nextOverrides = {
+      persistOverrides({
         ...overrides,
         [path]: value,
-      };
-      persistOverrides(nextOverrides);
+      });
     },
     [overrides, persistOverrides],
   );
 
-  const resetTranslation = useCallback(
+  const resetContentEntry = useCallback(
     (path) => {
       const nextOverrides = { ...overrides };
       delete nextOverrides[path];
@@ -73,7 +66,7 @@ export const LanguageProvider = ({ children }) => {
     [overrides, persistOverrides],
   );
 
-  const resetAllTranslations = useCallback(() => {
+  const resetAllContent = useCallback(() => {
     persistOverrides({});
   }, [persistOverrides]);
 
@@ -104,19 +97,11 @@ export const LanguageProvider = ({ children }) => {
     }
   }, []);
 
-  const adminEntries = useMemo(
-    () => flattenStringLeaves(translations),
-    [],
-  );
-
-  const t = useMemo(
-    () => applyFlatOverrides(translations, overrides),
-    [overrides],
-  );
+  const adminEntries = useMemo(() => flattenStringLeaves(siteContent), []);
+  const t = useMemo(() => applyFlatOverrides(siteContent, overrides), [overrides]);
 
   const value = useMemo(
     () => ({
-      language,
       t,
       isRtl,
       adminEntries,
@@ -124,28 +109,29 @@ export const LanguageProvider = ({ children }) => {
       isAdminAuthenticated,
       authenticateAdmin,
       logoutAdmin,
-      updateTranslation,
-      resetTranslation,
-      resetAllTranslations,
+      updateContentEntry,
+      resetContentEntry,
+      resetAllContent,
     }),
     [
       adminEntries,
       authenticateAdmin,
       isAdminAuthenticated,
       isRtl,
-      language,
       logoutAdmin,
       overrides,
-      resetAllTranslations,
-      resetTranslation,
+      resetAllContent,
+      resetContentEntry,
       t,
-      updateTranslation,
+      updateContentEntry,
     ],
   );
 
   return (
-    <LanguageContext.Provider value={value}>{children}</LanguageContext.Provider>
+    <SiteContentContext.Provider value={value}>
+      {children}
+    </SiteContentContext.Provider>
   );
 };
 
-export { LanguageContext };
+export { SiteContentContext };

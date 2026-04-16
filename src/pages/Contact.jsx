@@ -1,6 +1,6 @@
 import { Controller } from "react-hook-form";
 import { toast } from "sonner";
-import { useLanguage } from "../hooks/useLanguage";
+import { useSiteContent } from "../hooks/useSiteContent";
 import { useContactForm } from "../hooks/useContactForm";
 import { ParallaxHeader } from "../components/common/ParallaxHeader";
 import { Select } from "../components/ui/Select";
@@ -10,7 +10,7 @@ import { submitContactForm } from "../services/contactService";
 import { useSeo } from "../hooks/useSeo";
 
 export const Contact = () => {
-  const { t, isRtl } = useLanguage();
+  const { t, isRtl } = useSiteContent();
   useSeo({
     title: t.contact.title,
     description: "צרו קשר עם G.D Financial Services לקבלת ייעוץ פיננסי מקצועי.",

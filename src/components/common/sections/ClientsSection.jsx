@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { useLanguage } from "../../../hooks/useLanguage";
+import { useSiteContent } from "../../../hooks/useSiteContent";
 
 const ICON_BY_KEY = {
   retail: "🛒",
@@ -11,7 +11,7 @@ const ICON_BY_KEY = {
 };
 
 export const ClientsSection = () => {
-  const { t } = useLanguage();
+  const { t } = useSiteContent();
 
   const sectors = useMemo(() => t.home.clients.sectors || [], [t.home.clients.sectors]);
 

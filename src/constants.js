@@ -2,12 +2,9 @@ export const STORAGE_KEYS = {
   CONTENT: "gd-content",
   CONTENT_OVERRIDES: "gd-content-overrides",
   ADMIN_SESSION: "gd-admin-session",
-  LANGUAGE: "gd-language",
   THEME: "gd-theme",
   LEAD_DISMISSED: "gd-lead-dismissed",
 };
-
-export const DEFAULT_LANGUAGE = "he";
 
 export const ITEMS_PER_PAGE = {
   NEWS: 9,

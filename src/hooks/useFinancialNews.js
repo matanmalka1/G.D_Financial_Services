@@ -2,11 +2,11 @@ import { useState, useEffect, useCallback, useRef } from "react";
 import { newsApiService } from "../services/newsApiService";
 import { FINANCIAL_NEWS_CONFIG } from "../constants/financialNews";
 
-const DEFAULT_LANGUAGE = "en";
+const NEWS_API_LANGUAGE = "en";
 const DEFAULT_REGION = "global";
 
 export const useFinancialNews = () => {
-  const language = DEFAULT_LANGUAGE;
+  const language = NEWS_API_LANGUAGE;
   const region = DEFAULT_REGION;
   const [currentPage, setCurrentPage] = useState(1);
   const [newsItems, setNewsItems] = useState([]);

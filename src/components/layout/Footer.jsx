@@ -1,4 +1,4 @@
-import { useLanguage } from "../../hooks/useLanguage";
+import { useSiteContent } from "../../hooks/useSiteContent";
 import { Logo } from "../common/Logo";
 import { Link } from "react-router-dom";
 import { routePaths } from "../../routes/paths";
@@ -101,7 +101,7 @@ const FooterSocial = ({ t }) => (
 );
 
 export const Footer = () => {
-  const { t } = useLanguage();
+  const { t } = useSiteContent();
   return (
     <footer className="bg-slate-50 border-t border-gray-200 py-16">
       <div className="max-w-7xl mx-auto px-4 flex flex-col md:flex-row justify-between gap-12">

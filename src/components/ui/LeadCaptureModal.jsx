@@ -5,7 +5,7 @@ import { PhoneNumberInput } from "./PhoneNumberInput";
 import { Select } from "./Select";
 import { Button } from "./primitives/Button";
 import { Modal } from "./primitives/Modal";
-import { useLanguage } from "../../hooks/useLanguage";
+import { useSiteContent } from "../../hooks/useSiteContent";
 import { useContactForm } from "../../hooks/useContactForm";
 const TextField = ({ label, placeholder, register, name, error }) => (
   <div>
@@ -28,7 +28,7 @@ export const LeadCaptureModal = ({
   isRtl: isRtlProp,
   services,
 }) => {
-  const { t, isRtl: contextIsRtl } = useLanguage();
+  const { t, isRtl: contextIsRtl } = useSiteContent();
   const isRtl = typeof isRtlProp === "boolean" ? isRtlProp : contextIsRtl;
   const copy = t?.modalForm || {};
   const { form, handleSubmit: submitLeadForm } = useContactForm(

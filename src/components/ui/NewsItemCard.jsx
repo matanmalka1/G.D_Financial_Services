@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { Calendar, ExternalLink } from "lucide-react";
-import { useLanguage } from "../../hooks/useLanguage";
+import { useSiteContent } from "../../hooks/useSiteContent";
 
 export const NewsItemCard = ({ item }) => {
-  const { t } = useLanguage();
+  const { t } = useSiteContent();
   const fallbackImage = "/noPhotoFallback.png";
   const [imageSrc, setImageSrc] = useState(item.image || fallbackImage);
 

@@ -1,6 +1,6 @@
 import { useMemo, useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { useLanguage } from "../../hooks/useLanguage";
+import { useSiteContent } from "../../hooks/useSiteContent";
 import { routePaths, routes } from "../../routes/paths";
 import { NavbarBrand } from "./navbar/NavbarBrand";
 import { NavbarDesktopNav } from "./navbar/NavbarDesktopNav";
@@ -9,7 +9,7 @@ import { NavbarMobileControls } from "./navbar/NavbarMobileControls";
 import { NavbarMobileMenu } from "./navbar/NavbarMobileMenu";
 
 export const Navbar = () => {
-  const { t, isRtl } = useLanguage();
+  const { t, isRtl } = useSiteContent();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();

@@ -1,6 +1,6 @@
 import { AlertCircle, RefreshCcw } from "lucide-react";
 import { Button } from "./primitives/Button";
-import { useLanguage } from "../../hooks/useLanguage";
+import { useSiteContent } from "../../hooks/useSiteContent";
 
 export const ErrorState = ({
   title,
@@ -8,7 +8,7 @@ export const ErrorState = ({
   actionLabel,
   onAction,
 }) => {
-  const { t } = useLanguage();
+  const { t } = useSiteContent();
 
   return (
     <div className="w-full bg-white border border-rose-100 text-rose-900 rounded-2xl p-6 md:p-8 shadow-sm flex flex-col items-center gap-3 text-center">

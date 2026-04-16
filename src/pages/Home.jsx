@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 import { useNavigate } from "react-router-dom";
-import { useLanguage } from "../hooks/useLanguage";
+import { useSiteContent } from "../hooks/useSiteContent";
 import { useSeo } from "../hooks/useSeo";
 import { ParallaxHeader } from "../components/common/ParallaxHeader";
 import { routePaths } from "../routes/paths";
@@ -13,7 +13,7 @@ import { analyticsService } from "../services/analyticsService";
 import { ITEMS_PER_PAGE } from "../constants.js";
 
 export const Home = () => {
-  const { t, isRtl } = useLanguage();
+  const { t, isRtl } = useSiteContent();
   const navigate = useNavigate();
   useSeo({
     description: "G.D Financial Services - ייעוץ פיננסי מקצועי לעסקים: תוכניות עסקיות, מצגות למשקיעים, ליווי לצד המכירה וייעוץ פיננסי שוטף.",

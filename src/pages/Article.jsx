@@ -1,7 +1,7 @@
 import { useMemo } from "react";
 import { Link, useParams } from "react-router-dom";
 import { ArrowLeft, ArrowRight } from "lucide-react";
-import { useLanguage } from "../hooks/useLanguage";
+import { useSiteContent } from "../hooks/useSiteContent";
 import { useSeo } from "../hooks/useSeo";
 import { useContent } from "../hooks/useContent";
 import { ParallaxHeader } from "../components/common/ParallaxHeader";
@@ -18,7 +18,7 @@ const DEFAULT_IMAGE =
 
 export const Article = () => {
   const { id } = useParams();
-  const { t, isRtl } = useLanguage();
+  const { t, isRtl } = useSiteContent();
   const { getArticleById, loading, error, refreshContent } = useContent();
 
   const article = useMemo(() => getArticleById(id), [getArticleById, id]);

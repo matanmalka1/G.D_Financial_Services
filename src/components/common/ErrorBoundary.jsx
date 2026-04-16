@@ -1,5 +1,5 @@
 import { Component } from "react";
-import { translations } from "../../i18n/translations";
+import { siteContent } from "../../content/siteContent";
 
 export class ErrorBoundary extends Component {
   constructor(props) {
@@ -26,7 +26,7 @@ export class ErrorBoundary extends Component {
 
   render() {
     if (this.state.hasError) {
-      const errorText = translations.errors;
+      const errorText = siteContent.errors;
 
       return (
         <div className="min-h-screen flex items-center justify-center bg-slate-50 px-4">

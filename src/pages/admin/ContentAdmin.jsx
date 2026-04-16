@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { toast } from "sonner";
 import { Button } from "../../components/ui/primitives/Button";
-import { useLanguage } from "../../hooks/useLanguage";
+import { useSiteContent } from "../../hooks/useSiteContent";
 import { routePaths } from "../../routes/paths";
 
 const ADMIN_PASSWORD = import.meta.env.VITE_ADMIN_PASSWORD;
@@ -337,10 +337,10 @@ export const ContentAdmin = () => {
     isAdminAuthenticated,
     authenticateAdmin,
     logoutAdmin,
-    updateTranslation,
-    resetTranslation,
-    resetAllTranslations,
-  } = useLanguage();
+    updateContentEntry,
+    resetContentEntry,
+    resetAllContent,
+  } = useSiteContent();
   const [query, setQuery] = useState("");
   const [password, setPassword] = useState("");
   const [activeFilter, setActiveFilter] = useState("all");
@@ -392,7 +392,7 @@ export const ContentAdmin = () => {
 
     const timeoutId = window.setTimeout(() => {
       dirtyEntries.forEach((item) => {
-        updateTranslation(item.path, drafts[item.path]);
+        updateContentEntry(item.path, drafts[item.path]);
       });
 
       setSaveStates((previous) => {
@@ -405,7 +405,7 @@ export const ContentAdmin = () => {
     }, AUTOSAVE_DELAY);
 
     return () => window.clearTimeout(timeoutId);
-  }, [adminOverrides, drafts, entriesWithMeta, updateTranslation]);
+  }, [adminOverrides, drafts, entriesWithMeta, updateContentEntry]);
 
   useEffect(() => {
     const savedPaths = Object.entries(saveStates)
@@ -499,14 +499,14 @@ export const ContentAdmin = () => {
       return;
     }
 
-    updateTranslation(path, draftValue);
+    updateContentEntry(path, draftValue);
     setSaveStates((previous) => ({
       ...previous,
       [path]: "saved",
     }));
   };
 
-  const handleResetTranslation = (path) => {
+  const handleResetContent = (path) => {
     setDrafts((previous) => {
       const next = { ...previous };
       delete next[path];
@@ -517,7 +517,7 @@ export const ContentAdmin = () => {
       delete next[path];
       return next;
     });
-    resetTranslation(path);
+    resetContentEntry(path);
     toast.success("השדה חזר לברירת המחדל.");
   };
 
@@ -574,7 +574,7 @@ export const ContentAdmin = () => {
                 onClick={() => {
                   setDrafts({});
                   setSaveStates({});
-                  resetAllTranslations();
+                  resetAllContent();
                   toast.success("כל הכיתובים הוחזרו לברירת המחדל.");
                 }}
               >
@@ -677,7 +677,7 @@ export const ContentAdmin = () => {
                       status={saveStates[item.path]}
                       onChange={handleDraftChange}
                       onFlush={flushDraft}
-                      onReset={handleResetTranslation}
+                      onReset={handleResetContent}
                     />
                   );
                 })}

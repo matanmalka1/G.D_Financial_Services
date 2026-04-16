@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { useLanguage } from "../hooks/useLanguage";
+import { useSiteContent } from "../hooks/useSiteContent";
 import { useSeo } from "../hooks/useSeo";
 import { useContent } from "../hooks/useContent";
 import { ParallaxHeader } from "../components/common/ParallaxHeader";
@@ -10,7 +10,7 @@ import { Card } from "../components/ui/primitives/Card";
 import { LoadBoundary, PageError } from "../components/common/LoadBoundary";
 
 export const CompanyProfile = () => {
-  const { t } = useLanguage();
+  const { t } = useSiteContent();
   useSeo({
     title: t.nav.profile,
     description: "הכירו את G.D Financial Services - הצוות שלנו, הערכים שלנו והניסיון המקצועי בייעוץ פיננסי לעסקים.",

@@ -2,9 +2,9 @@ import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { Toaster } from 'sonner';
 import { App } from './App';
-import { LanguageProvider } from './i18n/LanguageContext';
 import { ContentProvider } from './context/ContentContext';
 import { ErrorBoundary } from './components/common/ErrorBoundary';
+import { SiteContentProvider } from './context/SiteContentContext';
 
 const rootElement = document.getElementById('root');
 if (!rootElement) {
@@ -15,11 +15,11 @@ createRoot(rootElement).render(
   <StrictMode>
     <Toaster richColors position="top-right" closeButton />
     <ErrorBoundary>
-      <LanguageProvider>
+      <SiteContentProvider>
         <ContentProvider>
           <App />
         </ContentProvider>
-      </LanguageProvider>
+      </SiteContentProvider>
     </ErrorBoundary>
   </StrictMode>
 );

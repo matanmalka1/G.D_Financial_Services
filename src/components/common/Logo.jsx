@@ -1,8 +1,8 @@
 import logoSrc from "../../assets/logo.avif";
-import { useLanguage } from "../../hooks/useLanguage";
+import { useSiteContent } from "../../hooks/useSiteContent";
 
 export const Logo = ({ size = 40, className = "" }) => {
-  const { t } = useLanguage();
+  const { t } = useSiteContent();
 
   return (
     <img

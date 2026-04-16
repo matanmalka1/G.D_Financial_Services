@@ -1,13 +1,12 @@
 # G.D Financial Services
 
-A modern, responsive website for G.D Financial Services built with React, Vite, and Tailwind CSS. The site showcases financial advisory services, business consulting solutions, and company information with a professional multilingual interface supporting English and Hebrew.
+A modern, responsive website for G.D Financial Services built with React, Vite, and Tailwind CSS. The site showcases financial advisory services, business consulting solutions, and company information with a polished Hebrew-first interface.
 
 > **Note**: This is a proprietary website for G.D Financial Services. All content and code are protected intellectual property.
 
 ## 🌟 Features
 
 - **🎨 Responsive Design**: Mobile-first approach with Tailwind CSS for beautiful UI across all devices
-- **🌐 Multilingual Support**: Full internationalization (i18n) with English and Hebrew language support
 - **⚡ Modern Components**: Reusable React components with best practices and hooks
 - **🚀 Fast Performance**: Built with Vite for optimized development and production builds
 - **✅ Form Validation**: Robust form handling with React Hook Form and Zod schema validation
@@ -41,8 +40,8 @@ A modern, responsive website for G.D Financial Services built with React, Vite, 
 ### Routing & State
 
 - **Routing**: React Router DOM 7.12.0 - Client-side routing with nested routes
-- **State Management**: React Context API - Global state management for content and language
-- **Custom Hooks**: useContent, useLanguage - Domain-specific custom hooks
+- **State Management**: React Context API - Global state management for content
+- **Custom Hooks**: useContent, useSiteContent - Domain-specific custom hooks
 
 ### Forms & Validation
 
@@ -126,13 +125,13 @@ A modern, responsive website for G.D Financial Services built with React, Vite, 
 │   │
 │   ├── hooks/
 │   │   ├── useContent.js              # Hook for accessing content context
-│   │   └── useLanguage.js             # Hook for i18n and language management
+│   │   └── useSiteContent.js          # Hook for site content access
 │   │
-│   ├── i18n/                          # Internationalization
-│   │   ├── LanguageContext.jsx        # Language context provider
-│   │   ├── translations.js            # Translation utility functions
-│   │   └── locales/                   # Translation files by language
-│   │       ├── global.json            # Shared translations
+│   ├── content/                       # Site content definitions
+│   │   ├── siteContent.js             # Main content map
+│   │   ├── sectorDetailContent.js     # Sector detail content merger
+│   │   └── locales/                   # Content files by page/section
+│   │       ├── global.json            # Shared content
 │   │       ├── home.json              # Home page
 │   │       ├── contact.json           # Contact page
 │   │       ├── news.json              # News page
@@ -142,7 +141,7 @@ A modern, responsive website for G.D Financial Services built with React, Vite, 
 │   │       ├── sectorBusinessPresentations.json
 │   │       ├── sectorDetailCommon.json
 │   │       ├── sectorOngoingAdvisory.json
-│   │       └── ... (more sector translations)
+│   │       └── ... (more sector content)
 │   │
 │   ├── pages/                         # Page components (top-level routes)
 │   │   ├── Home.jsx                   # Landing page
@@ -239,18 +238,11 @@ npm run build
 | **Company Profile** | `/company-profile` | About company and team                    |
 | **Contact**         | `/contact`         | Contact form and company information      |
 
-### i18n (Internationalization)
-
-The application supports multiple languages with JSON locale files:
-
-**Language Support**: English (`en`) and Hebrew (`he`)
-
 ## 🎯 Key Features
 
 ### Responsive Navigation
 
 - ✅ Desktop and mobile-optimized
-- ✅ Language toggle (English/Hebrew)
 - ✅ Sticky header with scroll effects
 - ✅ Mobile hamburger menu
 - ✅ Smooth transitions and animations
@@ -258,7 +250,7 @@ The application supports multiple languages with JSON locale files:
 ### Content Management
 
 - ✅ Context API for global state
-- ✅ Custom hooks for content and language
+- ✅ Custom hooks for content access
 - ✅ Mock data for development
 - ✅ Easy to migrate to API
 - ✅ Caching for performance
@@ -292,7 +284,7 @@ The application supports multiple languages with JSON locale files:
 3. **Code Style**: Follow existing patterns
 4. **Components**: Use functional components with hooks
 5. **Styling**: Use Tailwind CSS utility classes
-6. **i18n**: Always add translations for new strings
+6. **Content**: Keep shared copy centralized in `src/content`
 ## 📄 License
 
 This project is **proprietary software** for G.D Financial Services.

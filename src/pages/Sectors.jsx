@@ -1,5 +1,5 @@
 import { useState, useMemo } from "react";
-import { useLanguage } from "../hooks/useLanguage";
+import { useSiteContent } from "../hooks/useSiteContent";
 import { useContent } from "../hooks/useContent";
 import { useDebounce } from "../hooks/useDebounce";
 import { useSeo } from "../hooks/useSeo";
@@ -11,7 +11,7 @@ import { SearchBar } from "../components/ui/SearchBar";
 import { filterBySearch } from "../utils/helpers/utils";
 
 export const Sectors = () => {
-  const { t, isRtl } = useLanguage();
+  const { t, isRtl } = useSiteContent();
   useSeo({
     title: t.nav.sectors,
     description: "גלו את מגזרי הפעילות של G.D Financial Services: תוכניות עסקיות, מצגות, ייעוץ עסקי, ליווי לצד המכירה וייעוץ פיננסי שוטף.",

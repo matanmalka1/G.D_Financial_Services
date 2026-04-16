@@ -1,5 +1,5 @@
 import { useState, useMemo } from "react";
-import { useLanguage } from "../hooks/useLanguage";
+import { useSiteContent } from "../hooks/useSiteContent";
 import { useContent } from "../hooks/useContent";
 import { useDebounce } from "../hooks/useDebounce";
 import { useSeo } from "../hooks/useSeo";
@@ -16,7 +16,7 @@ import { filterBySearch } from "../utils/helpers/utils";
 const ARTICLES_PER_PAGE = ITEMS_PER_PAGE.NEWS;
 
 export const News = () => {
-  const { t, isRtl } = useLanguage();
+  const { t, isRtl } = useSiteContent();
   useSeo({
     title: t.news.title,
     description: "קראו את המאמרים והחדשות הפיננסיות האחרונות מ-G.D Financial Services.",
