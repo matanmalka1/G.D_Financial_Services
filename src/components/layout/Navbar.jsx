@@ -60,7 +60,6 @@ export const Navbar = () => {
             sectorOptions={sectorOptions}
             onSectorChange={handleSectorChange}
             isRtl={isRtl}
-            navigate={navigate}
           />
 
           <NavbarDesktopActions t={t} />

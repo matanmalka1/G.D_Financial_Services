@@ -4,7 +4,6 @@ import companyProfileTranslations from "./locales/companyProfile.json";
 import sectorsTranslations from "./locales/sectors.json";
 import { sectorDetailContent } from "./sectorDetailContent";
 import newsTranslations from "./locales/news.json";
-import financialNewsTranslations from "./locales/financialNews.json";
 import contactTranslations from "./locales/contact.json";
 import modalFormTranslations from "./locales/modalForm.json";
 
@@ -15,7 +14,6 @@ export const siteContent = {
   sectors: sectorsTranslations,
   sectorDetail: sectorDetailContent,
   news: newsTranslations,
-  financialNews: financialNewsTranslations,
   contact: contactTranslations,
   modalForm: modalFormTranslations,
 };

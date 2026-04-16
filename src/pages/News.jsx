@@ -19,7 +19,7 @@ export const News = () => {
   const { t, isRtl } = useSiteContent();
   useSeo({
     title: t.news.title,
-    description: "קראו את המאמרים והחדשות הפיננסיות האחרונות מ-G.D Financial Services.",
+    description: "קראו את המאמרים האחרונים של G.D Financial Services.",
   });
   const [search, setSearch] = useState("");
   const debouncedSearch = useDebounce(search, 300);
@@ -77,7 +77,7 @@ export const News = () => {
       onRetry={refreshContent}
       errorFallback={
         <PageError
-          title={t.news.errorTitle || "Unable to load news"}
+          title={t.news.errorTitle || "Unable to load articles"}
           message={t.news.errorMessage || error}
           actionLabel={t.news.retry || "Retry"}
           onRetry={refreshContent}

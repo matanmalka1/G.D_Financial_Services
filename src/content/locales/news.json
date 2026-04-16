@@ -1,5 +1,5 @@
 {
-  "title": "חדשות ומאמרים",
+  "title": "מאמרים",
   "searchPlaceholder": "חפש מאמרים...",
   "readMore": "קרא עוד",
   "noResults": "אין מאמרים התואמים את החיפוש שלך.",
@@ -7,7 +7,7 @@
   "clearSearch": "נקה חיפוש",
   "relatedTitle": "מאמרים קשורים",
   "readArticle": "קרא מאמר",
-  "backToNews": "חזרה לחדשות",
+  "backToNews": "חזרה למאמרים",
   "publishedOn": "פורסם בתאריך {date}",
   "readTime": "קריאה של כ-{minutes} דקות",
   "notFoundTitle": "המאמר לא נמצא",

@@ -41,26 +41,15 @@ export const NavbarMobileMenu = ({
         </button>
       ))}
     </div>
-    <div className="flex flex-col space-y-2 py-2 border-y border-gray-50">
-      <button
-        onClick={() => {
-          navigate(routePaths.financialNews);
-          onClose();
-        }}
-        className="block w-full text-left rtl:text-right py-2 text-slate-700 pl-4 rtl:pr-4"
-      >
-        {t.nav.financialNews}
-      </button>
-      <button
-        onClick={() => {
-          navigate(routePaths.news);
-          onClose();
-        }}
-        className="block w-full text-left rtl:text-right py-2 text-slate-700 pl-4 rtl:pr-4"
-      >
-        {t.nav.articles}
-      </button>
-    </div>
+    <button
+      onClick={() => {
+        navigate(routePaths.news);
+        onClose();
+      }}
+      className="block w-full border-y border-gray-50 py-4 pl-4 text-left text-slate-700 rtl:pr-4 rtl:text-right"
+    >
+      {t.nav.articles}
+    </button>
     <NavLink
       to={routePaths.contact}
       onClick={onClose}

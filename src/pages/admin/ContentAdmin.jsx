@@ -17,10 +17,10 @@ const PAGE_CONFIG = [
   },
   {
     key: "news",
-    label: "חדשות ומאמרים",
-    description: "כותרות, כפתורים, הודעות מערכת וטקסטים סביב החדשות באתר.",
+    label: "מאמרים",
+    description: "כותרות, כפתורים, הודעות מערכת וטקסטים סביב עמוד המאמרים באתר.",
     href: routePaths.news,
-    matches: ["news.", "financialNews.", "newsLabels."],
+    matches: ["news."],
   },
   {
     key: "contact",
@@ -75,11 +75,7 @@ const SECTION_LABELS = {
   },
   news: {
     label: "עמוד מאמרים",
-    description: "טקסטים כלליים של עמוד החדשות והמאמרים.",
-  },
-  financialNews: {
-    label: "חדשות פיננסיות",
-    description: "טקסטי ממשק סביב תצוגת החדשות הפיננסיות.",
+    description: "טקסטים כלליים של עמוד המאמרים.",
   },
   contact: {
     label: "טופס יצירת קשר",
@@ -249,8 +245,8 @@ const FIELD_METADATA = {
     maxLength: 80,
   },
   "news.title": {
-    label: "כותרת עמוד חדשות",
-    helpText: "הכותרת שמופיעה בראש עמוד החדשות והמאמרים.",
+    label: "כותרת עמוד מאמרים",
+    helpText: "הכותרת שמופיעה בראש עמוד המאמרים.",
     type: "input",
     maxLength: 80,
   },
@@ -297,8 +293,8 @@ const FIELD_METADATA = {
     maxLength: 24,
   },
   "news.backToNews": {
-    label: "כפתור חזרה לחדשות",
-    helpText: "כפתור חזרה מרמת המאמר לעמוד החדשות.",
+    label: "כפתור חזרה למאמרים",
+    helpText: "כפתור חזרה מרמת המאמר לעמוד המאמרים.",
     type: "input",
     maxLength: 30,
   },

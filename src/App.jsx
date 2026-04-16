@@ -12,7 +12,6 @@ import { Sectors } from "./pages/Sectors";
 import { SectorDetail } from "./pages/SectorDetail";
 import { News } from "./pages/News";
 import { Article } from "./pages/Article";
-import { FinancialNews } from "./pages/FinancialNews";
 import { Contact } from "./pages/Contact";
 import { ContentAdmin } from "./pages/admin/ContentAdmin";
 
@@ -26,7 +25,6 @@ export const App = () => (
         <Route path={routePaths.sectorDetail} element={<SectorDetail />} />
         <Route path={routePaths.news} element={<News />} />
         <Route path={routePaths.newsDetail} element={<Article />} />
-        <Route path={routePaths.financialNews} element={<FinancialNews />} />
         <Route path={routePaths.contact} element={<Contact />} />
         <Route path={routePaths.contentAdmin} element={<ContentAdmin />} />
         <Route path="*" element={<Navigate to={routePaths.home} replace />} />

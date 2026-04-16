@@ -12,7 +12,6 @@ export const NavbarDesktopNav = ({
   sectorOptions,
   onSectorChange,
   isRtl,
-  navigate,
 }) => (
   <div className="hidden md:flex items-center flex-1 justify-center gap-10 rtl:space-x-reverse">
     <NavLink
@@ -36,17 +35,15 @@ export const NavbarDesktopNav = ({
         />
       </div>
     </div>
-    <div className="min-w-[160px]">
-      <Select
-        placeholder={t.nav.news}
-        options={[
-          { value: routePaths.financialNews, label: t.nav.financialNews },
-          { value: routePaths.news, label: t.nav.articles },
-        ]}
-        onValueChange={(path) => navigate(path)}
-        dir={isRtl ? "rtl" : "ltr"}
-        className="border-none bg-transparent"
-      />
-    </div>
+    <NavLink
+      to={routePaths.news}
+      className={({ isActive }) =>
+        `text-sm font-medium transition-colors ${
+          isActive ? "text-slate-900" : "text-slate-700 hover:text-slate-900"
+        }`
+      }
+    >
+      {t.nav.articles}
+    </NavLink>
   </div>
 );

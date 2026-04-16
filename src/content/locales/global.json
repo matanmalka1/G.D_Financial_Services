@@ -10,8 +10,7 @@
     "home": "דף הבית",
     "profile": "פרופיל החברה",
     "sectors": "מגזרי פעילות",
-    "news": "חדשות ומאמרים",
-    "financialNews": "חדשות פיננסיות",
+    "news": "מאמרים",
     "articles": "מאמרים",
     "contact": "צור קשר",
     "businessPlans": "תוכניות עסקיות",
@@ -31,9 +30,5 @@
     "quickLinksTitle": "קישורים מהירים",
     "socialTitle": "רשתות חברתיות",
     "copyright": "כל הזכויות שמורות."
-  },
-  "newsLabels": {
-    "readMore": "קרא עוד",
-    "imageAlt": "תמונת כתבה"
   }
 }
