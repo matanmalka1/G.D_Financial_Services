@@ -6,7 +6,7 @@ import { useSiteContent } from "../hooks/useSiteContent";
 import { useSeo } from "../hooks/useSeo";
 import { useContactForm } from "../hooks/useContactForm";
 import { ParallaxHeader } from "../components/common/ParallaxHeader";
-import { routePaths } from "../routes/paths";
+import { routePaths, routes } from "../routes/paths";
 import { FeatureBubble } from "../components/ui/FeatureBubble";
 import { OwnerSpotlight } from "../components/ui/OwnerSpotlight";
 import { Button } from "../components/ui/primitives/Button";
@@ -20,6 +20,11 @@ import { ITEMS_PER_PAGE } from "../constants.js";
 export const Home = () => {
   const { t, isRtl } = useSiteContent();
   const navigate = useNavigate();
+  const leadFieldIds = {
+    fullName: "home-lead-full-name",
+    phone: "home-lead-phone",
+    email: "home-lead-email",
+  };
   useSeo({
     description: "G.D Financial Services - ייעוץ פיננסי מקצועי לעסקים: תוכניות עסקיות, מצגות למשקיעים, ליווי לצד המכירה וייעוץ פיננסי שוטף.",
   });
@@ -44,20 +49,44 @@ export const Home = () => {
   const bubbles = useMemo(
     () =>
       [
-        { title: t.home.bubbles.businessPlans, icon: "📋" },
-        { title: t.home.bubbles.taxCoordination, icon: "🧾" },
-        { title: t.home.bubbles.businessConsulting, icon: "💼" },
-        { title: t.home.bubbles.ongoingAdvisory, icon: "📈" },
+        {
+          title: t.nav.businessPlans,
+          icon: "📋",
+          path: routes.sectorDetail("business-plan"),
+        },
+        {
+          title: t.nav.businessPresentations,
+          icon: "🧾",
+          path: routes.sectorDetail("business-presentations"),
+        },
+        {
+          title: t.nav.businessConsulting,
+          icon: "💼",
+          path: routes.sectorDetail("business-consulting"),
+        },
+        {
+          title: t.nav.sellSideAdvisory,
+          icon: "🤝",
+          path: routes.sectorDetail("sell-side-advisory"),
+        },
+        {
+          title: t.nav.ongoingAdvisory,
+          icon: "📈",
+          path: routes.sectorDetail("ongoing-financial-advisory"),
+        },
       ].slice(0, ITEMS_PER_PAGE.FEATURED_ARTICLES),
-    [t.home.bubbles],
+    [t.nav],
   );
   const handleContact = () => {
     analyticsService.trackEvent("owner_contact_click", { source: "home" });
     navigate(routePaths.contact);
   };
-  const handleBubbleClick = (title) => {
-    analyticsService.trackEvent("home_bubble_click", { title });
-    navigate(routePaths.contact);
+  const handleBubbleClick = (bubble) => {
+    analyticsService.trackEvent("home_bubble_click", {
+      title: bubble.title,
+      destination: bubble.path,
+    });
+    navigate(bubble.path);
   };
   const {
     register,
@@ -79,13 +108,13 @@ export const Home = () => {
 
       {/* Bubbles Section */}
       <section className="relative -mt-16 md:-mt-24 z-20 max-w-7xl mx-auto px-4">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
           {bubbles.map((bubble, idx) => (
             <FeatureBubble
               key={bubble.title + idx}
               icon={bubble.icon}
               title={bubble.title}
-              onClick={() => handleBubbleClick(bubble.title)}
+              onClick={() => handleBubbleClick(bubble)}
             />
           ))}
         </div>
@@ -113,16 +142,39 @@ export const Home = () => {
           <p>{t.home.about.p1}</p>
           <p>{t.home.about.p2}</p>
           <p>{t.home.about.p3}</p>
-          <ul className="w-full space-y-3 text-slate-700">
+          <ul
+            className={`space-y-3 text-slate-700 ${
+              isRtl ? "flex flex-col items-end text-right w-fit ml-auto" : "w-full"
+            }`}
+          >
             {t.home.about.highlights?.map((item) => (
               <li
                 key={item}
-                className={`flex items-center gap-3 ${isRtl ? "flex-row-reverse justify-end" : "justify-start"}`}
+                className={`inline-flex items-center gap-3 ${
+                  isRtl ? "w-fit text-right" : "justify-start"
+                }`}
               >
-                <span className="text-emerald-600 font-semibold" aria-hidden="true">
-                  ✓
-                </span>
-                <span>{item}</span>
+                {isRtl ? (
+                  <>
+                    <span
+                      className="text-emerald-600 font-semibold"
+                      aria-hidden="true"
+                    >
+                      ✓
+                    </span>
+                    <span>{item}</span>
+                  </>
+                ) : (
+                  <>
+                    <span
+                      className="text-emerald-600 font-semibold"
+                      aria-hidden="true"
+                    >
+                      ✓
+                    </span>
+                    <span>{item}</span>
+                  </>
+                )}
               </li>
             ))}
           </ul>
@@ -171,16 +223,25 @@ export const Home = () => {
                 >
                   {t.home.leadForm.submit}
                 </button>
+                <label className="sr-only" htmlFor={leadFieldIds.fullName}>
+                  {t.contact.fullName}
+                </label>
                 <input
+                  id={leadFieldIds.fullName}
                   {...register("fullName")}
                   className={`h-16 rounded-[1.35rem] border border-white/70 bg-white px-6 text-right text-xl text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-white/70 ${errors.fullName ? "border-red-400" : ""}`}
                   placeholder={t.contact.fullName}
+                  aria-label={t.contact.fullName}
                 />
+                <label className="sr-only" htmlFor={leadFieldIds.phone}>
+                  {t.contact.phone}
+                </label>
                 <Controller
                   name="phone"
                   control={control}
                   render={({ field }) => (
                     <PhoneNumberInput
+                      inputId={leadFieldIds.phone}
                       value={field.value}
                       onChange={field.onChange}
                       error={errors.phone?.message}
@@ -192,10 +253,15 @@ export const Home = () => {
                     />
                   )}
                 />
+                <label className="sr-only" htmlFor={leadFieldIds.email}>
+                  {t.contact.email}
+                </label>
                 <input
+                  id={leadFieldIds.email}
                   {...register("email")}
                   className={`h-16 rounded-[1.35rem] border border-white/70 bg-white px-6 text-right text-xl text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-white/70 ${errors.email ? "border-red-400" : ""}`}
                   placeholder={t.contact.email === "כתובת אימייל" ? "אימייל" : t.contact.email}
+                  aria-label={t.contact.email}
                 />
               </div>
             </form>

@@ -31,9 +31,10 @@ export const SectorDetail = () => {
     return template.replace(/\{sector\}/g, sectorTitle || "");
   }, [t, sectorTitle]);
   const aboutDescription = useMemo(() => {
-    const template = t?.sectorDetail?.aboutDescription || "";
+    const template =
+      detail?.aboutDescription || t?.sectorDetail?.aboutDescription || "";
     return template.replace(/\{sector\}/g, (sectorTitle || "").toLowerCase());
-  }, [t, sectorTitle]);
+  }, [detail?.aboutDescription, t, sectorTitle]);
   const longDescription = detail?.longDescription;
   const sections = detail?.sections;
   const bubbles = detail?.bubbles;
@@ -150,7 +151,7 @@ export const SectorDetail = () => {
                           (isSellSide && idx === 0);
                         const overrideImage = isBusinessPlan
                           ? idx === 4
-                            ? "/sectorBusinessPlan/realestate.avif"
+                            ? "/sectorBusinessPlan/real%20estate.avif"
                             : idx === 5
                               ? "/sectorBusinessPlan/create%20new%20business.avif"
                               : null

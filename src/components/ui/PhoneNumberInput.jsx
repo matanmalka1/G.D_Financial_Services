@@ -16,6 +16,7 @@ export const PhoneNumberInput = forwardRef(
       className = "",
       inputClassName = "",
       localInputClassName = "",
+      inputId,
       isRtl = false,
     },
     ref,
@@ -248,6 +249,7 @@ export const PhoneNumberInput = forwardRef(
             />
             <PhoneLocalInput
               ref={ref}
+              id={inputId}
               value={displayLocal}
               onChange={handleLocalChange}
               placeholder={computedPlaceholder}

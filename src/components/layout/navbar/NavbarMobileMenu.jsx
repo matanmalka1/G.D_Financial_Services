@@ -72,5 +72,11 @@ export const NavbarMobileMenu = ({
     >
       {t.nav.contact}
     </NavLink>
+    <a
+      href="tel:0542121928"
+      className="text-center py-2 font-semibold text-slate-700"
+    >
+      054-2121928
+    </a>
   </div>
 );

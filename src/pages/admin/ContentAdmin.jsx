@@ -65,6 +65,10 @@ const SECTION_LABELS = {
     label: "על הבעלים",
     description: "הצגת האדם שמוביל את השירות והמסר האישי שלו.",
   },
+  "home.leadForm": {
+    label: "טופס לידים",
+    description: "כותרת, תיאור וכפתור של טופס ההשארת פרטים במסך הבית.",
+  },
   "home.clients": {
     label: "לקוחות",
     description: "כותרות וטקסטים באזור הלקוחות והאמון.",
@@ -134,13 +138,31 @@ const FIELD_METADATA = {
     label: "טקסט על הבעלים",
     helpText: "פסקת ההיכרות שמספרת מי עומד מאחורי העסק.",
     type: "textarea",
-    maxLength: 320,
+    maxLength: 900,
   },
   "home.owner.contact": {
     label: "טקסט כפתור יצירת קשר",
     helpText: "הכיתוב על הכפתור שמניע לפנייה.",
     type: "input",
     maxLength: 35,
+  },
+  "home.leadForm.title": {
+    label: "כותרת טופס לידים",
+    helpText: "הכותרת הגדולה של אזור ההשארת פרטים במסך הבית.",
+    type: "input",
+    maxLength: 40,
+  },
+  "home.leadForm.description": {
+    label: "תיאור טופס לידים",
+    helpText: "משפט קצר שמופיע ליד שדות הטופס במסך הבית.",
+    type: "textarea",
+    maxLength: 140,
+  },
+  "home.leadForm.submit": {
+    label: "כפתור שליחת ליד",
+    helpText: "הכיתוב על כפתור השליחה בטופס הקצר במסך הבית.",
+    type: "input",
+    maxLength: 20,
   },
   "home.clients.title": {
     label: "כותרת אזור לקוחות",

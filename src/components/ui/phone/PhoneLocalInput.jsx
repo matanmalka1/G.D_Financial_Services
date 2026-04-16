@@ -1,8 +1,9 @@
 import { forwardRef } from "react";
 
 export const PhoneLocalInput = forwardRef(
-  ({ value, onChange, placeholder, isRtl, className = "" }, ref) => (
+  ({ id, value, onChange, placeholder, isRtl, className = "" }, ref) => (
     <input
+      id={id}
       ref={ref}
       value={value}
       onChange={(e) => onChange(e.target.value.replace(/\D/g, ""))}

@@ -9,7 +9,7 @@ export const STORAGE_KEYS = {
 export const ITEMS_PER_PAGE = {
   NEWS: 9,
   RELATED_ARTICLES: 3,
-  FEATURED_ARTICLES: 4,
+  FEATURED_ARTICLES: 5,
 };
 
 export const sectorKeywords = {

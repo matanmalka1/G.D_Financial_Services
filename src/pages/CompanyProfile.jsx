@@ -10,7 +10,7 @@ import { Card } from "../components/ui/primitives/Card";
 import { LoadBoundary, PageError } from "../components/common/LoadBoundary";
 
 export const CompanyProfile = () => {
-  const { t } = useSiteContent();
+  const { t, isRtl } = useSiteContent();
   useSeo({
     title: t.nav.profile,
     description: "הכירו את G.D Financial Services - הצוות שלנו, הערכים שלנו והניסיון המקצועי בייעוץ פיננסי לעסקים.",
@@ -46,77 +46,84 @@ export const CompanyProfile = () => {
         />
       }
     >
-      <main>
-      <ParallaxHeader
-        image="https://images.unsplash.com/photo-1554469384-e58fac16e23a?auto=format&fit=crop&q=80&w=2000"
-        title={t.nav.profile}
-        align="center"
-      />
+      <main dir={isRtl ? "rtl" : "ltr"}>
+        <ParallaxHeader
+          image="https://images.unsplash.com/photo-1554469384-e58fac16e23a?auto=format&fit=crop&q=80&w=2000"
+          title={t.nav.profile}
+        />
 
-      <section className="py-24 max-w-4xl mx-auto px-4">
-        <SectionHeading title={t.companyProfile.missionTitle} />
-        <p className="text-lg text-slate-600 leading-loose mb-12 text-center italic">
-          "{t.companyProfile.missionStatement}"
-        </p>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16">
-          {values.map((v, i) => (
-            <Card key={i} className="p-8 bg-slate-50 text-center">
-              <h3 className="text-xl font-bold mb-4 text-slate-900">
-                {v.title}
-              </h3>
-              <p className="text-sm text-slate-500 leading-relaxed">{v.desc}</p>
-            </Card>
-          ))}
-        </div>
-        {t.companyProfile.aboutText && (
-          <div className="max-w-5xl mx-auto mt-16 grid grid-cols-1 md:grid-cols-[0.9fr_1.1fr] gap-10 items-center">
-            <div className="w-full flex justify-center md:justify-start order-2 md:order-1">
+        <section className="py-24 max-w-4xl mx-auto px-4">
+          <div className="text-center">
+            <SectionHeading title={t.companyProfile.missionTitle} />
+          </div>
+          <p className="text-lg text-slate-600 leading-loose mb-12 text-center italic">
+            "{t.companyProfile.missionStatement}"
+          </p>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16">
+            {values.map((v, i) => (
+              <Card key={i} className="p-8 bg-slate-50 text-center">
+                <h3 className="text-xl font-bold mb-4 text-slate-900">
+                  {v.title}
+                </h3>
+                <p className="text-sm text-slate-500 leading-relaxed">{v.desc}</p>
+              </Card>
+            ))}
+          </div>
+          {t.companyProfile.aboutText && (
+            <div className="max-w-5xl mx-auto mt-16 grid grid-cols-1 md:grid-cols-[1.1fr_0.9fr] gap-10 items-center">
+              <div
+                className={`space-y-3 text-center ${isRtl ? "md:text-right" : "md:text-left"} order-1`}
+              >
+                {t.companyProfile.aboutSubtitle && (
+                  <h3 className="text-xl font-semibold text-slate-900">
+                    {t.companyProfile.aboutSubtitle}
+                  </h3>
+                )}
+                <p className="text-base text-slate-600 leading-relaxed">
+                  {t.companyProfile.aboutText}
+                </p>
+                <div className="pt-4">
+                  <Link to={routePaths.contact} className="inline-block">
+                    <Button size="lg" className="rounded-full">
+                      {t.nav.contact}
+                    </Button>
+                  </Link>
+                </div>
+              </div>
+              <div
+                className={`w-full flex justify-center ${isRtl ? "md:justify-start" : "md:justify-end"} order-2`}
+              >
+                <img
+                  src="https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?auto=format&fit=crop&w=900&q=80"
+                  alt="G.D Finance team collaboration"
+                  className="w-full max-w-md rounded-3xl shadow-lg border border-slate-100 object-cover"
+                  loading="lazy"
+                />
+              </div>
+            </div>
+          )}
+        </section>
+
+        <section className="py-24 bg-white">
+          <div
+            className={`max-w-4xl mx-auto px-4 flex flex-col ${isRtl ? "md:flex-row" : "md:flex-row-reverse"} items-center gap-12`}
+          >
+            <div className={`flex-1 space-y-6 text-slate-600 ${isRtl ? "text-right" : "text-left"}`}>
+              <SectionHeading title={t.companyProfile.storyTitle} />
+              <p>{t.companyProfile.storyP1}</p>
+              <p>{t.companyProfile.storyP2}</p>
+            </div>
+            <div className="w-full md:w-1/2">
               <img
-                src="https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?auto=format&fit=crop&w=900&q=80"
-                alt="G.D Finance team collaboration"
-                className="w-full max-w-md rounded-3xl shadow-lg border border-slate-100 object-cover"
+                src="https://picsum.photos/seed/company/600/400"
+                className="rounded-2xl shadow-lg"
+                alt="Company office"
                 loading="lazy"
               />
             </div>
-            <div className="space-y-3 text-center md:text-left order-1 md:order-2">
-              {t.companyProfile.aboutSubtitle && (
-                <h3 className="text-xl font-semibold text-slate-900">
-                  {t.companyProfile.aboutSubtitle}
-                </h3>
-              )}
-              <p className="text-base text-slate-600 leading-relaxed">
-                {t.companyProfile.aboutText}
-              </p>
-              <div className="pt-4">
-                <Link to={routePaths.contact} className="inline-block">
-                  <Button size="lg" className="rounded-full">
-                    {t.nav.contact}
-                  </Button>
-                </Link>
-              </div>
-            </div>
           </div>
-        )}
-      </section>
-
-      <section className="py-24 bg-white">
-        <div className="max-w-4xl mx-auto px-4 flex flex-col md:flex-row items-center gap-12">
-          <div className="flex-1 space-y-6 text-slate-600">
-            <SectionHeading title={t.companyProfile.storyTitle} />
-            <p>{t.companyProfile.storyP1}</p>
-            <p>{t.companyProfile.storyP2}</p>
-          </div>
-          <div className="w-full md:w-1/2">
-            <img
-              src="https://picsum.photos/seed/company/600/400"
-              className="rounded-2xl shadow-lg"
-              alt="Company office"
-              loading="lazy"
-            />
-          </div>
-        </div>
-      </section>
-    </main>
+        </section>
+      </main>
     </LoadBoundary>
   );
 };
