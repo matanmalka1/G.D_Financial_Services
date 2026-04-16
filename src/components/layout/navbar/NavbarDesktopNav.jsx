@@ -2,11 +2,6 @@ import { NavLink } from "react-router-dom";
 import { Select } from "../../ui/Select";
 import { routePaths } from "../../../routes/paths";
 
-
-
-
-
-
 export const NavbarDesktopNav = ({
   t,
   sectorOptions,
@@ -43,7 +38,7 @@ export const NavbarDesktopNav = ({
         }`
       }
     >
-      {t.nav.articles}
+      {t.nav.news}
     </NavLink>
   </div>
 );

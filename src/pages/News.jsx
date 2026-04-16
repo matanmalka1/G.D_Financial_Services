@@ -1,4 +1,4 @@
-import { useState, useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useSiteContent } from "../hooks/useSiteContent";
 import { useContent } from "../hooks/useContent";
 import { useDebounce } from "../hooks/useDebounce";
@@ -12,6 +12,7 @@ import { EmptyState } from "../components/ui/EmptyState";
 import { LoadBoundary, PageError, PageLoading } from "../components/common/LoadBoundary";
 import { ITEMS_PER_PAGE } from "../constants.js";
 import { filterBySearch } from "../utils/helpers/utils";
+import { getArticleSearchValues } from "../services/contentService";
 
 const ARTICLES_PER_PAGE = ITEMS_PER_PAGE.NEWS;
 
@@ -34,15 +35,7 @@ export const News = () => {
   );
 
   const filtered = useMemo(
-    () =>
-      filterBySearch(articles, debouncedSearch, (art) => [
-        art.title.en,
-        art.title.he,
-        art.excerpt.en,
-        art.excerpt.he,
-        art.content?.en?.join(" "),
-        art.content?.he?.join(" "),
-      ]),
+    () => filterBySearch(articles, debouncedSearch, getArticleSearchValues),
     [debouncedSearch, articles],
   );
 
@@ -51,19 +44,32 @@ export const News = () => {
     setCurrentPage(1);
   };
 
-  const safeCurrentPage = useMemo(() => {
-    const total = Math.ceil(filtered.length / ARTICLES_PER_PAGE) || 1;
-    return Math.min(currentPage, total);
-  }, [currentPage, filtered.length]);
-
   const totalPages = Math.ceil(filtered.length / ARTICLES_PER_PAGE) || 1;
+  const safeCurrentPage = Math.min(currentPage, totalPages);
+
+  useEffect(() => {
+    if (currentPage !== safeCurrentPage) {
+      setCurrentPage(safeCurrentPage);
+    }
+  }, [currentPage, safeCurrentPage]);
 
   const paginatedArticles = useMemo(() => {
     const start = (safeCurrentPage - 1) * ARTICLES_PER_PAGE;
     return filtered.slice(start, start + ARTICLES_PER_PAGE);
   }, [filtered, safeCurrentPage]);
 
-  const handleClearSearch = () => setSearch("");
+  const resultsSummary = useMemo(
+    () =>
+      debouncedSearch
+        ? t.news.showingResults.replace("{count}", filtered.length.toString())
+        : `${articles.length} ${t.news.title}`,
+    [articles.length, debouncedSearch, filtered.length, t.news.showingResults, t.news.title],
+  );
+
+  const handleClearSearch = () => {
+    setSearch("");
+    setCurrentPage(1);
+  };
 
   const goToPage = (page) => {
     setCurrentPage(page);
@@ -102,22 +108,8 @@ export const News = () => {
 
           <SectionHeading
             title={t.news.title}
-            subtitle={
-              search
-                ? t.news.showingResults.replace(
-                    "{count}",
-                    filtered.length.toString(),
-                  )
-                : `${articles.length} ${t.news.title}`
-            }
-            liveMessage={
-              search
-                ? t.news.showingResults.replace(
-                    "{count}",
-                    filtered.length.toString(),
-                  )
-                : `${articles.length} ${t.news.title}`
-            }
+            subtitle={resultsSummary}
+            liveMessage={resultsSummary}
             action={
               search ? (
                 <button
@@ -148,7 +140,7 @@ export const News = () => {
           </div>
 
           <Pagination
-            currentPage={currentPage}
+            currentPage={safeCurrentPage}
             totalPages={totalPages}
             onChange={goToPage}
             isRtl={isRtl}

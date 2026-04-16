@@ -2,6 +2,8 @@ import { Link } from "react-router-dom";
 import { routePaths, routes } from "../../../routes/paths";
 import { ArrowRight } from "lucide-react";
 
+const getLocalizedValue = (value) => value?.he || value?.en || value;
+
 export const RelatedArticlesSection = ({ articles = [], t, isRtl }) => {
   if (!articles.length) return null;
 
@@ -29,31 +31,36 @@ export const RelatedArticlesSection = ({ articles = [], t, isRtl }) => {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-        {articles.map((article) => (
-          <Link
-            to={routes.newsDetail(article.id)}
-            key={article.id}
-            className="group bg-white p-8 rounded-[2rem] border border-slate-100 shadow-sm hover:shadow-2xl hover:-translate-y-1 transition-all duration-500 flex flex-col"
-          >
-            <div className="flex items-center gap-3 mb-6">
-              <span className="px-3 py-1 bg-slate-100 text-[10px] font-bold text-slate-500 rounded-full uppercase tracking-widest">
-                {article.date}
-              </span>
-            </div>
-            <h4 className="text-xl font-bold text-slate-900 mb-4 group-hover:text-slate-700 transition-colors line-clamp-2 leading-tight">
-              {article.title.en}
-            </h4>
-            <p className="text-slate-500 text-sm leading-relaxed mb-8 line-clamp-3">
-              {article.excerpt.en}
-            </p>
-            <div className="mt-auto flex items-center gap-2 text-xs font-bold text-slate-900">
-              <span className="border-b-2 border-slate-900 pb-0.5">
-                {t.news.readArticle}
-              </span>
-              <ArrowRight className={`w-4 h-4 ${isRtl ? "rotate-180" : ""}`} strokeWidth={2} />
-            </div>
-          </Link>
-        ))}
+        {articles.map((article) => {
+          const title = getLocalizedValue(article.title);
+          const excerpt = getLocalizedValue(article.excerpt);
+
+          return (
+            <Link
+              to={routes.newsDetail(article.id)}
+              key={article.id}
+              className="group bg-white p-8 rounded-[2rem] border border-slate-100 shadow-sm hover:shadow-2xl hover:-translate-y-1 transition-all duration-500 flex flex-col"
+            >
+              <div className="flex items-center gap-3 mb-6">
+                <span className="px-3 py-1 bg-slate-100 text-[10px] font-bold text-slate-500 rounded-full uppercase tracking-widest">
+                  {article.date}
+                </span>
+              </div>
+              <h4 className="text-xl font-bold text-slate-900 mb-4 group-hover:text-slate-700 transition-colors line-clamp-2 leading-tight">
+                {title}
+              </h4>
+              <p className="text-slate-500 text-sm leading-relaxed mb-8 line-clamp-3">
+                {excerpt}
+              </p>
+              <div className="mt-auto flex items-center gap-2 text-xs font-bold text-slate-900">
+                <span className="border-b-2 border-slate-900 pb-0.5">
+                  {t.news.readArticle}
+                </span>
+                <ArrowRight className={`w-4 h-4 ${isRtl ? "rotate-180" : ""}`} strokeWidth={2} />
+              </div>
+            </Link>
+          );
+        })}
       </div>
     </div>
   );

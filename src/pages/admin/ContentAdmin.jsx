@@ -256,12 +256,6 @@ const FIELD_METADATA = {
     type: "input",
     maxLength: 50,
   },
-  "news.readMore": {
-    label: "כפתור קרא עוד",
-    helpText: "הטקסט שמופיע על כפתור המעבר למאמר.",
-    type: "input",
-    maxLength: 24,
-  },
   "news.noResults": {
     label: "הודעת אין תוצאות",
     helpText: "מופיעה אם לא נמצאו תכנים מתאימים.",

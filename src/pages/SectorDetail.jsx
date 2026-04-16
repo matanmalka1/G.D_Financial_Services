@@ -25,7 +25,6 @@ export const SectorDetail = () => {
   const detail = sector ? t.sectorDetail.sectorDetails[sector.id] : null;
 
   const sectorTitle = sector ? t.nav[sector.titleKey] : "";
-  const sectorTitleEn = sector ? t.nav[sector.titleKey] : "";
   const mainDescription = useMemo(() => {
     const template = t?.sectorDetail?.mainDescription || "";
     return template.replace(/\{sector\}/g, sectorTitle || "");
@@ -48,7 +47,7 @@ export const SectorDetail = () => {
   });
 
   const header = sector ? (
-    <ParallaxHeader image={sector.image} title={sectorTitleEn} />
+    <ParallaxHeader image={sector.image} title={sectorTitle} />
   ) : null;
   const relatedArticles = useMemo(() => {
     if (!id) return [];

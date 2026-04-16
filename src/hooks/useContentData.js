@@ -1,5 +1,5 @@
-import { useCallback, useEffect, useMemo, useState } from "react";
-import { contentService } from "../services/contentService";
+import { useCallback, useEffect, useState } from "react";
+import { contentService, getRelatedArticlesForSector } from "../services/contentService";
 import { STORAGE_KEYS } from "../constants.js";
 import { toast } from "sonner";
 
@@ -103,13 +103,6 @@ export const useContentData = () => {
     await loadContent({ hydrateCache: false });
   }, [loadContent]);
 
-  const featuredArticles = useMemo(
-    () => state.articles.slice(0, 4),
-    [state.articles],
-  );
-
-  const searchArticles = contentService.filterArticles;
-
   const getSectorById = useCallback(
     (id) => state.sectors.find((sector) => sector.id === id) || null,
     [state.sectors],
@@ -121,14 +114,12 @@ export const useContentData = () => {
   );
 
   const getRelatedArticles = useCallback(
-    (sectorId) => contentService.getRelatedArticles(sectorId),
-    [],
+    (sectorId) => getRelatedArticlesForSector(state.articles, sectorId),
+    [state.articles],
   );
 
   return {
     ...state,
-    featuredArticles,
-    searchArticles,
     getSectorById,
     getArticleById,
     getRelatedArticles,

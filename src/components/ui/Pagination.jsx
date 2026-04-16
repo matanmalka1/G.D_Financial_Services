@@ -3,6 +3,9 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 export const Pagination = ({ currentPage, totalPages, onChange, isRtl = false }) => {
   if (totalPages <= 1) return null;
 
+  const PreviousIcon = isRtl ? ChevronRight : ChevronLeft;
+  const NextIcon = isRtl ? ChevronLeft : ChevronRight;
+
   const goTo = (page) => {
     if (page < 1 || page > totalPages) return;
     onChange?.(page);
@@ -14,9 +17,9 @@ export const Pagination = ({ currentPage, totalPages, onChange, isRtl = false })
         onClick={() => goTo(currentPage - 1)}
         disabled={currentPage === 1}
         className={`p-3 rounded-xl border border-slate-200 transition-all ${currentPage === 1 ? 'opacity-30 cursor-not-allowed' : 'hover:bg-slate-900 hover:text-white'}`}
-        aria-label="Previous Page"
+        aria-label={isRtl ? "העמוד הקודם" : "Previous Page"}
       >
-        <ChevronLeft className="w-5 h-5" strokeWidth={2} />
+        <PreviousIcon className="w-5 h-5" strokeWidth={2} />
       </button>
 
       <div className="flex items-center gap-2">
@@ -35,9 +38,9 @@ export const Pagination = ({ currentPage, totalPages, onChange, isRtl = false })
         onClick={() => goTo(currentPage + 1)}
         disabled={currentPage === totalPages}
         className={`p-3 rounded-xl border border-slate-200 transition-all ${currentPage === totalPages ? 'opacity-30 cursor-not-allowed' : 'hover:bg-slate-900 hover:text-white'}`}
-        aria-label="Next Page"
+        aria-label={isRtl ? "העמוד הבא" : "Next Page"}
       >
-        <ChevronRight className="w-5 h-5" strokeWidth={2} />
+        <NextIcon className="w-5 h-5" strokeWidth={2} />
       </button>
     </div>
   );

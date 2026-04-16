@@ -48,7 +48,7 @@ export const NavbarMobileMenu = ({
       }}
       className="block w-full border-y border-gray-50 py-4 pl-4 text-left text-slate-700 rtl:pr-4 rtl:text-right"
     >
-      {t.nav.articles}
+      {t.nav.news}
     </button>
     <NavLink
       to={routePaths.contact}
