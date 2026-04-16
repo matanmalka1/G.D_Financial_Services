@@ -2,12 +2,7 @@ import { FINANCIAL_NEWS_CONFIG } from "../constants/financialNews";
 
 const newsCache = new Map();
 const CACHE_TTL_MS = FINANCIAL_NEWS_CONFIG.CACHE_TTL_MS;
-
-const getCacheKey = () => "financial-news";
-
-const clearCache = () => {
-  newsCache.clear();
-};
+const CACHE_KEY = "financial-news";
 
 const normalizeForDedup = (article) => {
   const titleNorm = (article.title || "").toLowerCase().trim();
@@ -36,7 +31,7 @@ const fetchFinancialNews = async (
   }
 
   if (batchNumber > FINANCIAL_NEWS_CONFIG.MAX_BATCHES) {
-    const cached = newsCache.get(getCacheKey());
+    const cached = newsCache.get(CACHE_KEY);
     return {
       newsItems: cached?.newsItems || [],
       hasMore: false,
@@ -44,8 +39,7 @@ const fetchFinancialNews = async (
     };
   }
 
-  const cacheKey = getCacheKey();
-  const cached = newsCache.get(cacheKey);
+  const cached = newsCache.get(CACHE_KEY);
 
   const isFresh =
     cached && cached.timestamp && Date.now() - cached.timestamp < CACHE_TTL_MS;
@@ -110,7 +104,7 @@ const fetchFinancialNews = async (
       batchNumber < FINANCIAL_NEWS_CONFIG.MAX_BATCHES &&
       cappedItems.length < FINANCIAL_NEWS_CONFIG.MAX_TOTAL_ITEMS;
 
-    newsCache.set(cacheKey, {
+    newsCache.set(CACHE_KEY, {
       newsItems: cappedItems,
       hasMore,
       lastBatch: batchNumber,
@@ -149,6 +143,4 @@ const fetchFinancialNews = async (
 
 export const newsApiService = {
   fetchFinancialNews,
-  clearCache,
-  getCacheKey,
 };

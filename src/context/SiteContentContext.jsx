@@ -6,14 +6,15 @@ import { setDocumentMetadata } from "../utils/helpers/dom";
 
 const SiteContentContext = createContext();
 const ADMIN_PASSWORD = import.meta.env.VITE_ADMIN_PASSWORD;
+const SITE_LANGUAGE = "he";
+const IS_RTL = true;
 
 export const SiteContentProvider = ({ children }) => {
-  const isRtl = true;
   const [overrides, setOverrides] = useState({});
   const [isAdminAuthenticated, setIsAdminAuthenticated] = useState(false);
 
   useEffect(() => {
-    setDocumentMetadata(isRtl, "he");
+    setDocumentMetadata(IS_RTL, SITE_LANGUAGE);
   }, []);
 
   useEffect(() => {
@@ -34,36 +35,43 @@ export const SiteContentProvider = ({ children }) => {
     }
   }, []);
 
-  const persistOverrides = useCallback((nextOverrides) => {
-    setOverrides(nextOverrides);
+  const persistOverrides = useCallback((updater) => {
+    setOverrides((currentOverrides) => {
+      const nextOverrides =
+        typeof updater === "function" ? updater(currentOverrides) : updater;
 
-    try {
-      window.localStorage.setItem(
-        STORAGE_KEYS.CONTENT_OVERRIDES,
-        JSON.stringify(nextOverrides),
-      );
-    } catch (error) {
-      console.warn("Failed to persist content overrides", error);
-    }
+      try {
+        window.localStorage.setItem(
+          STORAGE_KEYS.CONTENT_OVERRIDES,
+          JSON.stringify(nextOverrides),
+        );
+      } catch (error) {
+        console.warn("Failed to persist content overrides", error);
+      }
+
+      return nextOverrides;
+    });
   }, []);
 
   const updateContentEntry = useCallback(
     (path, value) => {
-      persistOverrides({
-        ...overrides,
+      persistOverrides((currentOverrides) => ({
+        ...currentOverrides,
         [path]: value,
-      });
+      }));
     },
-    [overrides, persistOverrides],
+    [persistOverrides],
   );
 
   const resetContentEntry = useCallback(
     (path) => {
-      const nextOverrides = { ...overrides };
-      delete nextOverrides[path];
-      persistOverrides(nextOverrides);
+      persistOverrides((currentOverrides) => {
+        const nextOverrides = { ...currentOverrides };
+        delete nextOverrides[path];
+        return nextOverrides;
+      });
     },
-    [overrides, persistOverrides],
+    [persistOverrides],
   );
 
   const resetAllContent = useCallback(() => {
@@ -103,7 +111,7 @@ export const SiteContentProvider = ({ children }) => {
   const value = useMemo(
     () => ({
       t,
-      isRtl,
+      isRtl: IS_RTL,
       adminEntries,
       adminOverrides: overrides,
       isAdminAuthenticated,
@@ -117,7 +125,6 @@ export const SiteContentProvider = ({ children }) => {
       adminEntries,
       authenticateAdmin,
       isAdminAuthenticated,
-      isRtl,
       logoutAdmin,
       overrides,
       resetAllContent,

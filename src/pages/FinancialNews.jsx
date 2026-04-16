@@ -9,7 +9,7 @@ import { NewsItemCard } from "../components/ui/NewsItemCard";
 import { SectionHeading } from "../components/ui/SectionHeading";
 
 export const FinancialNews = () => {
-  const { t, isRtl } = useSiteContent();
+  const { t } = useSiteContent();
   useSeo({
     title: t.financialNews?.title || t.nav.financialNews,
     description: "חדשות פיננסיות עדכניות מהשווקים הגלובליים - G.D Financial Services.",
