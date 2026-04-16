@@ -1,27 +1,31 @@
 import { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 import { Navbar } from "./Navbar";
 import { Footer } from "./Footer";
 import { ScrollToTop } from "../common/ScrollToTop";
 import { LeadCaptureModal } from "../ui/LeadCaptureModal";
-import { STORAGE_KEYS } from "../../constants.js";
 import { submitContactForm } from "../../services/contactService.js";
+import { routePaths } from "../../routes/paths.js";
 
 export const Layout = ({ children }) => {
+  const { pathname } = useLocation();
   const [leadModalOpen, setLeadModalOpen] = useState(false);
 
   useEffect(() => {
-    if (localStorage.getItem(STORAGE_KEYS.LEAD_DISMISSED)) return;
+    if (pathname === routePaths.contentAdmin) {
+      setLeadModalOpen(false);
+      return;
+    }
+
     const timer = setTimeout(() => setLeadModalOpen(true), 10000);
     return () => clearTimeout(timer);
-  }, []);
+  }, [pathname]);
 
   const handleLeadClose = () => {
-    localStorage.setItem(STORAGE_KEYS.LEAD_DISMISSED, "1");
     setLeadModalOpen(false);
   };
 
   const handleLeadSubmit = async (data) => {
-    localStorage.setItem(STORAGE_KEYS.LEAD_DISMISSED, "1");
     try {
       await submitContactForm(data, "Lead Capture Modal - G.D Financial Services");
     } catch (error) {

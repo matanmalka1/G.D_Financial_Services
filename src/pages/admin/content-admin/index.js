@@ -1,0 +1,1 @@
+export { ContentAdmin } from "./ContentAdminPage";

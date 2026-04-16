@@ -105,6 +105,9 @@ export const Contact = () => {
                       onChange={field.onChange}
                       error={errors.phone?.message}
                       isRtl={isRtl}
+                      className="space-y-0"
+                      inputClassName={`rounded-lg shadow-none hover:shadow-none ${errors.phone ? "border-red-500" : "border-slate-200"} focus-within:ring-2 focus-within:ring-slate-900 transition-all`}
+                      localInputClassName="px-4 py-3"
                     />
                   )}
                 />
