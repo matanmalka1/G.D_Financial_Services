@@ -1,6 +1,8 @@
 import { useState, useMemo } from "react";
 import { useLanguage } from "../hooks/useLanguage";
 import { useContent } from "../hooks/useContent";
+import { useDebounce } from "../hooks/useDebounce";
+import { useSeo } from "../hooks/useSeo";
 import { ParallaxHeader } from "../components/common/ParallaxHeader";
 import { SectionHeading } from "../components/ui/SectionHeading";
 import { NewsCard } from "../components/ui/NewsCard";
@@ -15,7 +17,12 @@ const ARTICLES_PER_PAGE = ITEMS_PER_PAGE.NEWS;
 
 export const News = () => {
   const { t, isRtl } = useLanguage();
+  useSeo({
+    title: t.news.title,
+    description: "קראו את המאמרים והחדשות הפיננסיות האחרונות מ-G.D Financial Services.",
+  });
   const [search, setSearch] = useState("");
+  const debouncedSearch = useDebounce(search, 300);
   const { articles, error, refreshContent, loading } = useContent();
   const [currentPage, setCurrentPage] = useState(1);
 
@@ -28,7 +35,7 @@ export const News = () => {
 
   const filtered = useMemo(
     () =>
-      filterBySearch(articles, search, (art) => [
+      filterBySearch(articles, debouncedSearch, (art) => [
         art.title.en,
         art.title.he,
         art.excerpt.en,
@@ -36,7 +43,7 @@ export const News = () => {
         art.content?.en?.join(" "),
         art.content?.he?.join(" "),
       ]),
-    [search, articles],
+    [debouncedSearch, articles],
   );
 
   const handleSearchChange = (value) => {

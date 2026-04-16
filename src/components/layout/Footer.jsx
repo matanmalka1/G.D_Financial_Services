@@ -8,17 +8,16 @@ import {
   LinkedInLogo,
 } from "../common/SocialLogos";
 
-const FooterBrand = () => (
+const FooterBrand = ({ t }) => (
   <div className="max-w-xs">
     <div className="flex items-center gap-3 mb-4">
       <Logo size={48} />
       <h2 className="brand text-xl font-bold text-slate-900">
-        G.D Financial Services
+        {t.footer.brandTitle}
       </h2>
     </div>
     <p className="text-sm text-slate-500 leading-relaxed">
-      Professional financial advisory for startups and entrepreneurs.
-      Integrity, Reliability, and Professionalism.
+      {t.footer.brandDescription}
     </p>
   </div>
 );
@@ -37,7 +36,7 @@ const FooterContact = ({ t }) => (
 const FooterLinks = ({ t }) => (
   <div>
     <h3 className="text-sm font-bold text-slate-900 uppercase tracking-widest mb-4">
-      Quick Links
+      {t.footer.quickLinksTitle}
     </h3>
     <ul className="text-sm text-slate-600 space-y-2">
       <li>
@@ -64,10 +63,10 @@ const FooterLinks = ({ t }) => (
   </div>
 );
 
-const FooterSocial = () => (
+const FooterSocial = ({ t }) => (
   <div>
     <h3 className="text-sm font-bold text-slate-900 uppercase tracking-widest mb-4">
-      Social Networks
+      {t.footer.socialTitle}
     </h3>
     <div className="flex items-center gap-4 text-slate-600">
       <a
@@ -106,17 +105,20 @@ export const Footer = () => {
   return (
     <footer className="bg-slate-50 border-t border-gray-200 py-16">
       <div className="max-w-7xl mx-auto px-4 flex flex-col md:flex-row justify-between gap-12">
-        <FooterBrand />
+        <FooterBrand t={t} />
 
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-12">
           <FooterContact t={t} />
           <FooterLinks t={t} />
-          <FooterSocial />
+          <FooterSocial t={t} />
         </div>
       </div>
       <div className="max-w-7xl mx-auto px-4 mt-16 pt-8 border-t border-gray-200 text-center text-xs text-slate-400">
-        &copy; {new Date().getFullYear()} G.D Financial Services. All rights
-        reserved.
+        &copy; {new Date().getFullYear()} {t.footer.brandTitle}.{" "}
+        {t.footer.copyright}
+        <Link className="ms-3 underline underline-offset-4" to={routePaths.contentAdmin}>
+          Admin
+        </Link>
       </div>
     </footer>
   );

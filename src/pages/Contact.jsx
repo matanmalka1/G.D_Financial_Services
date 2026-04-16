@@ -6,17 +6,22 @@ import { ParallaxHeader } from "../components/common/ParallaxHeader";
 import { Select } from "../components/ui/Select";
 import { Button } from "../components/ui/primitives/Button";
 import { PhoneNumberInput } from "../components/ui/PhoneNumberInput";
+import { submitContactForm } from "../services/contactService";
+import { useSeo } from "../hooks/useSeo";
 
 export const Contact = () => {
   const { t, isRtl } = useLanguage();
+  useSeo({
+    title: t.contact.title,
+    description: "צרו קשר עם G.D Financial Services לקבלת ייעוץ פיננסי מקצועי.",
+  });
 
   const { form, handleSubmit: submitContact } = useContactForm(
     t,
     async (data) => {
-      const loadingToast = toast.loading("Sending...");
+      const loadingToast = toast.loading(t.contact.sending);
       try {
-        await new Promise((resolve) => setTimeout(resolve, 1500));
-        console.log("Form Data:", data);
+        await submitContactForm(data, "Contact Form - G.D Financial Services");
         toast.success(t.contact.success, { id: loadingToast });
       } catch (error) {
         toast.error(t.contact.error, { id: loadingToast });
@@ -63,7 +68,7 @@ export const Contact = () => {
                 <input
                   {...register("fullName")}
                   className={`w-full px-4 py-3 rounded-lg border ${errors.fullName ? "border-red-500" : "border-slate-200"} focus:outline-none focus:ring-2 focus:ring-slate-900 transition-all`}
-                  placeholder="John Doe"
+                  placeholder={t.contact.fullNamePlaceholder}
                 />
                 {errors.fullName && (
                   <p className="text-red-500 text-xs mt-1">
@@ -78,7 +83,7 @@ export const Contact = () => {
                 <input
                   {...register("email")}
                   className={`w-full px-4 py-3 rounded-lg border ${errors.email ? "border-red-500" : "border-slate-200"} focus:outline-none focus:ring-2 focus:ring-slate-900 transition-all`}
-                  placeholder="john@example.com"
+                  placeholder={t.contact.emailPlaceholder}
                 />
                 {errors.email && (
                   <p className="text-red-500 text-xs mt-1">
@@ -138,7 +143,7 @@ export const Contact = () => {
                 {...register("message")}
                 rows={5}
                 className={`w-full px-4 py-3 rounded-lg border ${errors.message ? "border-red-500" : "border-slate-200"} focus:outline-none focus:ring-2 focus:ring-slate-900 transition-all`}
-                placeholder="How can we help you?"
+                placeholder={t.contact.messagePlaceholder}
               />
               {errors.message && (
                 <p className="text-red-500 text-xs mt-1">

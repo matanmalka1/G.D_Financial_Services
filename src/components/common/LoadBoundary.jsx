@@ -3,9 +3,9 @@ import { LoadingGrid } from "../ui/LoadingGrid";
 
 // Simple building blocks for loading/error pages so callers can compose their own layouts.
 export const PageError = ({
-  title = "Something went wrong",
-  message = "Unable to load content",
-  actionLabel = "Retry",
+  title,
+  message,
+  actionLabel,
   onRetry,
 }) => (
   <main className="min-h-screen bg-slate-50/30 flex items-center justify-center px-4">

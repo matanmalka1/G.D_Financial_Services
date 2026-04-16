@@ -2,6 +2,7 @@ import { useMemo } from "react";
 import { Link, useParams } from "react-router-dom";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { useLanguage } from "../hooks/useLanguage";
+import { useSeo } from "../hooks/useSeo";
 import { useContent } from "../hooks/useContent";
 import { ParallaxHeader } from "../components/common/ParallaxHeader";
 import { SectionHeading } from "../components/ui/SectionHeading";
@@ -24,6 +25,12 @@ export const Article = () => {
   const title = article?.title?.he || article?.title?.en || article?.title;
   const excerpt = article?.excerpt?.he || article?.excerpt?.en || article?.excerpt;
   const content = article?.content?.he || article?.content?.en || article?.content;
+
+  useSeo({
+    title: title || t.news.title,
+    description: excerpt || undefined,
+    ogImage: article?.image || DEFAULT_IMAGE,
+  });
 
   const wordCount = useMemo(() => {
     if (!content?.length) return 0;

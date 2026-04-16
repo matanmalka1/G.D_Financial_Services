@@ -14,6 +14,7 @@ import { News } from "./pages/News";
 import { Article } from "./pages/Article";
 import { FinancialNews } from "./pages/FinancialNews";
 import { Contact } from "./pages/Contact";
+import { ContentAdmin } from "./pages/admin/ContentAdmin";
 
 export const App = () => (
   <Router>
@@ -27,6 +28,7 @@ export const App = () => (
         <Route path={routePaths.newsDetail} element={<Article />} />
         <Route path={routePaths.financialNews} element={<FinancialNews />} />
         <Route path={routePaths.contact} element={<Contact />} />
+        <Route path={routePaths.contentAdmin} element={<ContentAdmin />} />
         <Route path="*" element={<Navigate to={routePaths.home} replace />} />
       </Routes>
     </Layout>

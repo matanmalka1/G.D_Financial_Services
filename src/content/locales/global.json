@@ -1,0 +1,39 @@
+{
+  "errors": {
+    "contentLoadFailed": "לא הצלחנו לטעון את התוכן. אנא נסה שוב.",
+    "genericTitle": "משהו השתבש",
+    "genericMessage": "אירעה שגיאה לא צפויה. נסה שוב. אם הבעיה נמשכת, צור קשר.",
+    "retry": "נסה שוב",
+    "reload": "טען מחדש"
+  },
+  "nav": {
+    "home": "דף הבית",
+    "profile": "פרופיל החברה",
+    "sectors": "מגזרי פעילות",
+    "news": "חדשות ומאמרים",
+    "financialNews": "חדשות פיננסיות",
+    "articles": "מאמרים",
+    "contact": "צור קשר",
+    "businessPlans": "תוכניות עסקיות",
+    "businessPresentations": "מצגות עסקיות",
+    "sellSideAdvisory": "ליווי לצד המכירה",
+    "businessConsulting": "ליווי עסקי",
+    "ongoingAdvisory": "ליווי פיננסי שוטף"
+  },
+  "footer": {
+    "brandTitle": "G.D Financial Services",
+    "brandDescription": "ייעוץ פיננסי מקצועי לסטארטאפים, יזמים וחברות בצמיחה.",
+    "brandAlt": "לוגו G.D Financial Services",
+    "addressTitle": "כתובת",
+    "address": "תובל 40, מגדל ספיר, מתחם הבורסה רמת גן",
+    "email": "G.D.FinancialServices1@gmail.com",
+    "phone": "055-9691334",
+    "quickLinksTitle": "קישורים מהירים",
+    "socialTitle": "רשתות חברתיות",
+    "copyright": "כל הזכויות שמורות."
+  },
+  "newsLabels": {
+    "readMore": "קרא עוד",
+    "imageAlt": "תמונת כתבה"
+  }
+}

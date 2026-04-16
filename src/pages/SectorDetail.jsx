@@ -1,6 +1,7 @@
 import { useMemo, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { useLanguage } from "../hooks/useLanguage";
+import { useSeo } from "../hooks/useSeo";
 import { useContent } from "../hooks/useContent";
 import { ParallaxHeader } from "../components/common/ParallaxHeader";
 import { routePaths } from "../routes/paths";
@@ -38,6 +39,12 @@ export const SectorDetail = () => {
   const bubbles = detail?.bubbles;
   const bubbleTitle = detail?.bubbleTitle;
   const imagesForSector = sectorImages[sector?.id] || [];
+
+  useSeo({
+    title: sectorTitle || t.nav.sectors,
+    description: mainDescription || undefined,
+    ogImage: sector?.image,
+  });
 
   const header = sector ? (
     <ParallaxHeader image={sector.image} title={sectorTitleEn} />

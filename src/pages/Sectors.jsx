@@ -1,6 +1,8 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { useLanguage } from "../hooks/useLanguage";
 import { useContent } from "../hooks/useContent";
+import { useDebounce } from "../hooks/useDebounce";
+import { useSeo } from "../hooks/useSeo";
 import { ParallaxHeader } from "../components/common/ParallaxHeader";
 import { LoadBoundary, PageError, PageLoading } from "../components/common/LoadBoundary";
 import { SectorTile } from "../components/ui/SectorTile";
@@ -10,11 +12,17 @@ import { filterBySearch } from "../utils/helpers/utils";
 
 export const Sectors = () => {
   const { t, isRtl } = useLanguage();
+  useSeo({
+    title: t.nav.sectors,
+    description: "גלו את מגזרי הפעילות של G.D Financial Services: תוכניות עסקיות, מצגות, ייעוץ עסקי, ליווי לצד המכירה וייעוץ פיננסי שוטף.",
+  });
   const [search, setSearch] = useState("");
+  const debouncedSearch = useDebounce(search, 300);
   const { sectors, error, refreshContent, loading } = useContent();
-  const filteredSectors = filterBySearch(sectors, search, (sector) => [
-    t.nav[sector.titleKey] || "",
-  ]);
+  const filteredSectors = useMemo(
+    () => filterBySearch(sectors, debouncedSearch, (sector) => [t.nav[sector.titleKey] || ""]),
+    [sectors, debouncedSearch, t.nav],
+  );
 
   const header = (
     <ParallaxHeader

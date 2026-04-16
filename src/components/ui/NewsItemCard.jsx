@@ -1,7 +1,9 @@
 import { useState } from "react";
 import { Calendar, ExternalLink } from "lucide-react";
+import { useLanguage } from "../../hooks/useLanguage";
 
 export const NewsItemCard = ({ item }) => {
+  const { t } = useLanguage();
   const fallbackImage = "/noPhotoFallback.png";
   const [imageSrc, setImageSrc] = useState(item.image || fallbackImage);
 
@@ -27,7 +29,7 @@ export const NewsItemCard = ({ item }) => {
       <div className="aspect-video w-full overflow-hidden bg-slate-100">
         <img
           src={imageSrc}
-          alt={item.title || "News article image"}
+          alt={item.title || t.newsLabels.imageAlt}
           onError={() => setImageSrc(fallbackImage)}
           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
         />
@@ -55,7 +57,7 @@ export const NewsItemCard = ({ item }) => {
         </p>
 
         <div className="flex items-center gap-2 text-indigo-600 text-sm font-medium">
-          <span>Read more</span>
+          <span>{t.newsLabels.readMore}</span>
           <ExternalLink className="w-4 h-4" />
         </div>
       </div>

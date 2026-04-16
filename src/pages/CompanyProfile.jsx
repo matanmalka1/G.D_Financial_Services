@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { useLanguage } from "../hooks/useLanguage";
+import { useSeo } from "../hooks/useSeo";
 import { useContent } from "../hooks/useContent";
 import { ParallaxHeader } from "../components/common/ParallaxHeader";
 import { routePaths } from "../routes/paths";
@@ -10,6 +11,10 @@ import { LoadBoundary, PageError } from "../components/common/LoadBoundary";
 
 export const CompanyProfile = () => {
   const { t } = useLanguage();
+  useSeo({
+    title: t.nav.profile,
+    description: "הכירו את G.D Financial Services - הצוות שלנו, הערכים שלנו והניסיון המקצועי בייעוץ פיננסי לעסקים.",
+  });
   const { error, refreshContent } = useContent();
 
   const values = [

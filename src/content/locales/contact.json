@@ -6,9 +6,13 @@
   "service": "שירות מבוקש",
   "message": "הודעה",
   "submit": "שלח הודעה",
+  "sending": "שולח הודעה...",
   "success": "הודעתך נשלחה בהצלחה!",
   "error": "נא לתקן את השגיאות בטופס.",
   "selectPlaceholder": "בחר שירות...",
+  "fullNamePlaceholder": "ישראל ישראלי",
+  "emailPlaceholder": "name@example.com",
+  "messagePlaceholder": "איך אפשר לעזור לך?",
   "validation": {
     "nameMin": "השם חייב להכיל לפחות 2 תווים",
     "emailInvalid": "אנא הזן כתובת אימייל תקינה",

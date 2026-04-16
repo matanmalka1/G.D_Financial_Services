@@ -1,4 +1,5 @@
 import { useLanguage } from "../hooks/useLanguage";
+import { useSeo } from "../hooks/useSeo";
 import { useFinancialNews } from "../hooks/useFinancialNews";
 import { Pagination } from "../components/ui/Pagination";
 import { LoadingGrid } from "../components/ui/LoadingGrid";
@@ -9,6 +10,10 @@ import { SectionHeading } from "../components/ui/SectionHeading";
 
 export const FinancialNews = () => {
   const { t, isRtl } = useLanguage();
+  useSeo({
+    title: t.financialNews?.title || t.nav.financialNews,
+    description: "חדשות פיננסיות עדכניות מהשווקים הגלובליים - G.D Financial Services.",
+  });
   const {
     currentPage,
     newsItems,
