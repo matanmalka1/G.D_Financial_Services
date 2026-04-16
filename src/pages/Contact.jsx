@@ -50,7 +50,7 @@ export const Contact = () => {
   return (
     <main>
       <ParallaxHeader
-        image="https://images.unsplash.com/photo-1521791136064-7986c295944c?auto=format&fit=crop&q=80&w=2000"
+        image="https://images.unsplash.com/photo-1556740749-887f6717d7e4?auto=format&fit=crop&q=80&w=2000"
         title={t.contact.title}
       />
 

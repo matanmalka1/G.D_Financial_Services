@@ -14,6 +14,8 @@ export const PhoneNumberInput = forwardRef(
       label,
       placeholder,
       className = "",
+      inputClassName = "",
+      localInputClassName = "",
       isRtl = false,
     },
     ref,
@@ -125,11 +127,26 @@ export const PhoneNumberInput = forwardRef(
     const [buttonRect, setButtonRect] = useState(null);
     const buttonRef = useRef(null);
     const optionsRef = useRef(null);
+    const updateButtonRect = useCallback(() => {
+      if (!buttonRef.current) return;
+      setButtonRect(buttonRef.current.getBoundingClientRect());
+    }, []);
 
     useEffect(() => {
-      if (!open || !buttonRef.current) return;
-      setButtonRect(buttonRef.current.getBoundingClientRect());
-    }, [open, selected]);
+      if (!open) return;
+      updateButtonRect();
+    }, [open, selected, updateButtonRect]);
+
+    useEffect(() => {
+      if (!open) return;
+      const handlePositionUpdate = () => updateButtonRect();
+      window.addEventListener("scroll", handlePositionUpdate, true);
+      window.addEventListener("resize", handlePositionUpdate);
+      return () => {
+        window.removeEventListener("scroll", handlePositionUpdate, true);
+        window.removeEventListener("resize", handlePositionUpdate);
+      };
+    }, [open, updateButtonRect]);
 
     return (
       <div className={`space-y-2 ${className}`} ref={containerRef}>
@@ -140,7 +157,7 @@ export const PhoneNumberInput = forwardRef(
         ) : null}
 
         <div
-          className={`relative flex ${isRtl ? "flex-row-reverse" : "flex-row"} rounded-xl border border-slate-200 bg-white shadow-sm hover:shadow-md transition focus-within:ring-2 focus-within:ring-slate-900/80 focus-within:border-slate-900/40`}
+          className={`relative flex ${isRtl ? "flex-row-reverse" : "flex-row"} rounded-xl border border-slate-200 bg-white shadow-sm hover:shadow-md transition focus-within:ring-2 focus-within:ring-slate-900/80 focus-within:border-slate-900/40 ${inputClassName}`}
         >
           <Listbox
             value={selected}
@@ -169,14 +186,14 @@ export const PhoneNumberInput = forwardRef(
                   <Listbox.Options
                     ref={optionsRef}
                     static
-                    className="absolute z-[80] mt-2 w-80 bg-white border border-slate-200 rounded-2xl shadow-2xl overflow-hidden"
+                    className="absolute z-[80] mt-2 overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-2xl"
                     style={{
                       position: "fixed",
                       top: buttonRect.bottom + 8,
                       left: isRtl
-                        ? buttonRect.right - 320
+                        ? buttonRect.right - Math.max(buttonRect.width, 280)
                         : buttonRect.left,
-                      width: 320,
+                      width: Math.max(buttonRect.width, 280),
                     }}
                   >
                     <div className="sticky top-0 flex items-center gap-2 px-3 py-2 border-b border-slate-100 bg-slate-50">
@@ -235,6 +252,7 @@ export const PhoneNumberInput = forwardRef(
               onChange={handleLocalChange}
               placeholder={computedPlaceholder}
               isRtl={isRtl}
+              className={localInputClassName}
             />
           </div>
         </div>

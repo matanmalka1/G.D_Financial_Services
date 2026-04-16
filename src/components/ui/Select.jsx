@@ -36,16 +36,18 @@ export const Select = ({
 
       <SelectPrimitive.Portal>
         <SelectPrimitive.Content
-          className="z-50 overflow-hidden bg-white border border-gray-200 rounded-md shadow-lg min-w-[200px]"
+          className="z-50 overflow-hidden rounded-xl border border-gray-200 bg-white shadow-lg min-w-[var(--radix-select-trigger-width)] w-[var(--radix-select-trigger-width)] max-h-[320px]"
           position="popper"
           sideOffset={5}
+          align={dir === "rtl" ? "end" : "start"}
+          collisionPadding={12}
         >
           <SelectPrimitive.Viewport className="p-1">
             {options.map((opt) => (
               <SelectPrimitive.Item
                 key={opt.value}
                 value={opt.value}
-                className="relative flex items-center px-8 py-2 text-sm text-gray-700 rounded-sm cursor-default select-none hover:bg-slate-100 focus:bg-slate-100 outline-none"
+                className="relative flex items-center rounded-lg px-8 py-3 text-sm text-gray-700 cursor-default select-none hover:bg-slate-100 focus:bg-slate-100 outline-none"
               >
                 <SelectPrimitive.ItemText>{opt.label}</SelectPrimitive.ItemText>
                 <SelectPrimitive.ItemIndicator className="absolute left-2 flex items-center justify-center">

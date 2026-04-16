@@ -7,18 +7,24 @@ import { buildContactSchema } from "../validation/contactSchema";
  * Use `includeMessage: false` for shorter lead forms that omit the message field.
  */
 export const useContactForm = (t, onSuccess, options = {}) => {
-  const { includeMessage = true } = options;
+  const { includeMessage = true, includeService = true } = options;
 
   const schema = buildContactSchema(t);
-  const activeSchema = includeMessage
-    ? schema
-    : schema.omit({ message: true });
+  const fieldsToOmit = {};
+  if (!includeMessage) {
+    fieldsToOmit.message = true;
+  }
+  if (!includeService) {
+    fieldsToOmit.service = true;
+  }
+  const activeSchema =
+    Object.keys(fieldsToOmit).length > 0 ? schema.omit(fieldsToOmit) : schema;
 
   const defaultValues = {
     fullName: "",
     email: "",
     phone: "",
-    service: "",
+    ...(includeService ? { service: "" } : {}),
     ...(includeMessage ? { message: "" } : {}),
   };
 
