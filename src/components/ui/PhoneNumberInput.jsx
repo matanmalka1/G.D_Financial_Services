@@ -16,6 +16,7 @@ export const PhoneNumberInput = forwardRef(
       className = "",
       inputClassName = "",
       localInputClassName = "",
+      prefixClassName = "",
       inputId,
       isRtl = false,
     },
@@ -73,7 +74,7 @@ export const PhoneNumberInput = forwardRef(
           className={`relative flex ${isRtl ? "flex-row-reverse" : "flex-row"} rounded-xl border border-slate-200 bg-white shadow-sm hover:shadow-md transition focus-within:ring-2 focus-within:ring-slate-900/80 focus-within:border-slate-900/40 ${inputClassName}`}
         >
           <div
-            className={`flex items-center h-12 px-4 text-sm font-medium text-slate-500 ${isRtl ? "border-l border-slate-200 rounded-r-xl" : "border-r border-slate-200 rounded-l-xl"} bg-white`}
+            className={`flex items-center h-12 px-4 text-sm font-medium text-slate-500 ${isRtl ? "border-l border-slate-200 rounded-r-xl" : "border-r border-slate-200 rounded-l-xl"} bg-white ${prefixClassName}`}
           >
             <span>{defaultCountry.dialCode}</span>
           </div>

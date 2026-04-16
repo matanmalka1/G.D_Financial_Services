@@ -201,70 +201,106 @@ export const Home = () => {
       />
 
       <section className="py-16 px-4">
-        <div className="max-w-[1680px] mx-auto rounded-[2.75rem] overflow-hidden bg-white shadow-[0_24px_70px_rgba(15,49,82,0.12)] border border-slate-200/80">
-          <div className="grid grid-cols-1 lg:grid-cols-[480px_minmax(0,1fr)] items-stretch">
-            <div className="bg-white px-8 py-12 text-right flex flex-col justify-center md:px-12 lg:px-16">
-              <h2 className="text-4xl md:text-6xl font-bold text-slate-950 leading-[0.95]">
-                {t.home.leadForm.title}
-              </h2>
-              <p className="mt-6 text-xl md:text-[2rem] text-slate-500 leading-relaxed">
-                {t.home.leadForm.description}
-              </p>
-            </div>
-
+        <div className="max-w-[1380px] mx-auto rounded-[2.75rem] overflow-hidden border border-slate-200/80 bg-white shadow-[0_24px_70px_rgba(15,49,82,0.12)]">
+          <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1.15fr)_460px] items-stretch">
             <form
               onSubmit={form.handleSubmit(submitLead, onLeadError)}
-              className="bg-[#163b63] px-6 py-10 md:px-10 lg:px-12"
+              className="relative overflow-hidden bg-[#163b63] px-6 py-8 md:px-10 md:py-10 lg:px-12 lg:py-12"
             >
-              <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-5 items-start">
-                <button
-                  type="submit"
-                  className="h-16 rounded-[1.35rem] bg-slate-100 px-8 text-2xl font-semibold text-[#163b63] hover:bg-white transition-colors order-4 xl:order-1"
-                >
-                  {t.home.leadForm.submit}
-                </button>
-                <label className="sr-only" htmlFor={leadFieldIds.fullName}>
-                  {t.contact.fullName}
-                </label>
-                <input
-                  id={leadFieldIds.fullName}
-                  {...register("fullName")}
-                  className={`h-16 rounded-[1.35rem] border border-white/70 bg-white px-6 text-right text-xl text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-white/70 ${errors.fullName ? "border-red-400" : ""}`}
-                  placeholder={t.contact.fullName}
-                  aria-label={t.contact.fullName}
-                />
-                <label className="sr-only" htmlFor={leadFieldIds.phone}>
-                  {t.contact.phone}
-                </label>
-                <Controller
-                  name="phone"
-                  control={control}
-                  render={({ field }) => (
-                    <PhoneNumberInput
-                      inputId={leadFieldIds.phone}
-                      value={field.value}
-                      onChange={field.onChange}
-                      error={errors.phone?.message}
-                      isRtl={isRtl}
-                      placeholder={t.contact.phone}
-                      className="space-y-0"
-                      inputClassName="h-16 rounded-[1.35rem] border-white/70 bg-white shadow-none hover:shadow-none focus-within:ring-2 focus-within:ring-white/70"
-                      localInputClassName="h-16 pr-10 pl-4 text-right text-xl placeholder:text-slate-400"
+              <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(255,255,255,0.18),transparent_35%),radial-gradient(circle_at_bottom_right,rgba(255,255,255,0.12),transparent_30%)]" />
+              <div className="relative">
+                <div className="mb-8 text-right text-white">
+                  <div className="mb-4 mr-auto h-px w-20 bg-white/25" />
+                  <p className="max-w-2xl text-base leading-7 text-white/80 md:text-lg">
+                    {t.home.leadForm.description}
+                  </p>
+                </div>
+
+                <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+                  <div className="space-y-2">
+                    <label
+                      className="block text-sm font-semibold text-white/85"
+                      htmlFor={leadFieldIds.fullName}
+                    >
+                      {t.contact.fullName}
+                    </label>
+                    <input
+                      id={leadFieldIds.fullName}
+                      {...register("fullName")}
+                      className={`h-14 w-full rounded-2xl border bg-white/96 px-5 text-right text-lg text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-white/60 ${errors.fullName ? "border-rose-300" : "border-white/70"}`}
+                      placeholder={t.contact.fullName}
+                      aria-label={t.contact.fullName}
                     />
-                  )}
-                />
-                <label className="sr-only" htmlFor={leadFieldIds.email}>
-                  {t.contact.email}
-                </label>
-                <input
-                  id={leadFieldIds.email}
-                  {...register("email")}
-                  className={`h-16 rounded-[1.35rem] border border-white/70 bg-white px-6 text-right text-xl text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-white/70 ${errors.email ? "border-red-400" : ""}`}
-                  placeholder={t.contact.email === "כתובת אימייל" ? "אימייל" : t.contact.email}
-                  aria-label={t.contact.email}
-                />
+                  </div>
+
+                  <div className="space-y-2">
+                    <label
+                      className="block text-sm font-semibold text-white/85"
+                      htmlFor={leadFieldIds.phone}
+                    >
+                      {t.contact.phone}
+                    </label>
+                    <Controller
+                      name="phone"
+                      control={control}
+                      render={({ field }) => (
+                        <PhoneNumberInput
+                          inputId={leadFieldIds.phone}
+                          value={field.value}
+                          onChange={field.onChange}
+                          error={errors.phone?.message}
+                          isRtl={isRtl}
+                          placeholder={t.contact.phone}
+                          className="space-y-1"
+                          inputClassName={`h-14 rounded-2xl border bg-white/96 shadow-none hover:shadow-none focus-within:ring-2 focus-within:ring-white/60 ${errors.phone ? "border-rose-300" : "border-white/70"}`}
+                          prefixClassName="h-14 rounded-r-2xl rounded-l-none border-white/70 bg-white/96 text-slate-500"
+                          localInputClassName="h-14 pr-10 pl-4 text-right text-lg text-slate-900 placeholder:text-slate-400"
+                        />
+                      )}
+                    />
+                  </div>
+
+                  <div className="space-y-2">
+                    <label
+                      className="block text-sm font-semibold text-white/85"
+                      htmlFor={leadFieldIds.email}
+                    >
+                      {t.contact.email}
+                    </label>
+                    <input
+                      id={leadFieldIds.email}
+                      {...register("email")}
+                      className={`h-14 w-full rounded-2xl border bg-white/96 px-5 text-right text-lg text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-white/60 ${errors.email ? "border-rose-300" : "border-white/70"}`}
+                      placeholder={
+                        t.contact.email === "כתובת אימייל" ? "אימייל" : t.contact.email
+                      }
+                      aria-label={t.contact.email}
+                    />
+                  </div>
+
+                  <div className="flex items-end">
+                    <button
+                      type="submit"
+                      className="h-14 w-full rounded-2xl bg-slate-950 px-8 text-lg font-semibold text-white transition-all hover:bg-slate-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white/80"
+                    >
+                      {t.home.leadForm.submit}
+                    </button>
+                  </div>
+                </div>
               </div>
             </form>
+
+            <div className="bg-white px-8 py-10 text-right md:px-12 lg:px-14 lg:py-12">
+              <div className="flex h-full flex-col justify-center">
+                <h2 className="text-4xl font-bold text-slate-950 leading-[0.95] md:text-5xl xl:text-6xl">
+                  {t.home.leadForm.title}
+                </h2>
+                <p className="mt-6 max-w-md text-xl leading-relaxed text-slate-500 md:text-[1.85rem]">
+                  {t.home.leadForm.description}
+                </p>
+                <div className="mt-8 h-1 w-20 rounded-full bg-gradient-to-l from-[#163b63] to-slate-200" />
+              </div>
+            </div>
           </div>
         </div>
       </section>
