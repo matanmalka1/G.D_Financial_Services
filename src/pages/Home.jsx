@@ -144,37 +144,23 @@ export const Home = () => {
           <p>{t.home.about.p3}</p>
           <ul
             className={`space-y-3 text-slate-700 ${
-              isRtl ? "flex flex-col items-end text-right w-fit ml-auto" : "w-full"
+              isRtl ? "flex flex-col items-end" : "w-full"
             }`}
           >
             {t.home.about.highlights?.map((item) => (
               <li
                 key={item}
-                className={`inline-flex items-center gap-3 ${
-                  isRtl ? "w-fit text-right" : "justify-start"
+                className={`flex items-center gap-3 ${
+                  isRtl ? "flex-row text-right" : "flex-row justify-start"
                 }`}
               >
-                {isRtl ? (
-                  <>
-                    <span
-                      className="text-emerald-600 font-semibold"
-                      aria-hidden="true"
-                    >
-                      ✓
-                    </span>
-                    <span>{item}</span>
-                  </>
-                ) : (
-                  <>
-                    <span
-                      className="text-emerald-600 font-semibold"
-                      aria-hidden="true"
-                    >
-                      ✓
-                    </span>
-                    <span>{item}</span>
-                  </>
-                )}
+                <span
+                  className="text-emerald-600 font-semibold"
+                  aria-hidden="true"
+                >
+                  ✓
+                </span>
+                <span>{item}</span>
               </li>
             ))}
           </ul>
@@ -211,7 +197,7 @@ export const Home = () => {
               <div className="relative">
                 <div className="mb-5 text-right text-white">
                   <div className="mb-3 mr-auto h-px w-16 bg-white/25" />
-                  <p className="max-w-2xl text-sm leading-6 text-white/80 md:text-base">
+                  <p className="max-w-2xl text-base leading-7 text-white/80 md:text-lg">
                     {t.home.leadForm.description}
                   </p>
                 </div>
@@ -253,8 +239,8 @@ export const Home = () => {
                           placeholder={t.contact.phone}
                           className="space-y-1"
                           inputClassName={`h-12 rounded-xl border bg-white/96 shadow-none hover:shadow-none focus-within:ring-2 focus-within:ring-white/60 ${errors.phone ? "border-rose-300" : "border-white/70"}`}
-                          prefixClassName="h-12 rounded-r-xl rounded-l-none border-white/70 bg-white/96 text-slate-500"
-                          localInputClassName="h-12 pr-10 pl-4 text-right text-base text-slate-900 placeholder:text-slate-400"
+                          prefixClassName="h-12 rounded-none border-white/60 bg-transparent text-slate-500"
+                          localInputClassName="h-12 rounded-none bg-transparent pr-10 pl-4 text-right text-base text-slate-900 placeholder:text-slate-400"
                         />
                       )}
                     />
@@ -295,7 +281,7 @@ export const Home = () => {
                 <h2 className="text-3xl font-bold text-slate-950 leading-[0.95] md:text-4xl xl:text-5xl">
                   {t.home.leadForm.title}
                 </h2>
-                <p className="mt-4 max-w-sm text-lg leading-relaxed text-slate-500 md:text-2xl">
+                <p className="mt-4 max-w-sm text-xl leading-relaxed text-slate-500 md:text-[1.65rem]">
                   {t.home.leadForm.description}
                 </p>
                 <div className="mt-6 h-1 w-16 rounded-full bg-gradient-to-l from-[#163b63] to-slate-200" />
