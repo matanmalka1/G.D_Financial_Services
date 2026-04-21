@@ -200,24 +200,24 @@ export const Home = () => {
         onContact={handleContact}
       />
 
-      <section className="py-16 px-4">
-        <div className="max-w-[1380px] mx-auto rounded-[2.75rem] overflow-hidden border border-slate-200/80 bg-white shadow-[0_24px_70px_rgba(15,49,82,0.12)]">
-          <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1.15fr)_460px] items-stretch">
+      <section className="py-10 px-4">
+        <div className="max-w-5xl mx-auto rounded-[2rem] overflow-hidden border border-slate-200/80 bg-white shadow-[0_18px_48px_rgba(15,49,82,0.1)]">
+          <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1.15fr)_360px] items-stretch">
             <form
               onSubmit={form.handleSubmit(submitLead, onLeadError)}
-              className="relative overflow-hidden bg-[#163b63] px-6 py-8 md:px-10 md:py-10 lg:px-12 lg:py-12"
+              className="relative overflow-hidden bg-[#163b63] px-5 py-6 md:px-8 md:py-8 lg:px-10 lg:py-9"
             >
               <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(255,255,255,0.18),transparent_35%),radial-gradient(circle_at_bottom_right,rgba(255,255,255,0.12),transparent_30%)]" />
               <div className="relative">
-                <div className="mb-8 text-right text-white">
-                  <div className="mb-4 mr-auto h-px w-20 bg-white/25" />
-                  <p className="max-w-2xl text-base leading-7 text-white/80 md:text-lg">
+                <div className="mb-5 text-right text-white">
+                  <div className="mb-3 mr-auto h-px w-16 bg-white/25" />
+                  <p className="max-w-2xl text-sm leading-6 text-white/80 md:text-base">
                     {t.home.leadForm.description}
                   </p>
                 </div>
 
-                <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-                  <div className="space-y-2">
+                <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
+                  <div className="space-y-1.5">
                     <label
                       className="block text-sm font-semibold text-white/85"
                       htmlFor={leadFieldIds.fullName}
@@ -227,13 +227,13 @@ export const Home = () => {
                     <input
                       id={leadFieldIds.fullName}
                       {...register("fullName")}
-                      className={`h-14 w-full rounded-2xl border bg-white/96 px-5 text-right text-lg text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-white/60 ${errors.fullName ? "border-rose-300" : "border-white/70"}`}
+                      className={`h-12 w-full rounded-xl border bg-white/96 px-4 text-right text-base text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-white/60 ${errors.fullName ? "border-rose-300" : "border-white/70"}`}
                       placeholder={t.contact.fullName}
                       aria-label={t.contact.fullName}
                     />
                   </div>
 
-                  <div className="space-y-2">
+                  <div className="space-y-1.5">
                     <label
                       className="block text-sm font-semibold text-white/85"
                       htmlFor={leadFieldIds.phone}
@@ -252,15 +252,15 @@ export const Home = () => {
                           isRtl={isRtl}
                           placeholder={t.contact.phone}
                           className="space-y-1"
-                          inputClassName={`h-14 rounded-2xl border bg-white/96 shadow-none hover:shadow-none focus-within:ring-2 focus-within:ring-white/60 ${errors.phone ? "border-rose-300" : "border-white/70"}`}
-                          prefixClassName="h-14 rounded-r-2xl rounded-l-none border-white/70 bg-white/96 text-slate-500"
-                          localInputClassName="h-14 pr-10 pl-4 text-right text-lg text-slate-900 placeholder:text-slate-400"
+                          inputClassName={`h-12 rounded-xl border bg-white/96 shadow-none hover:shadow-none focus-within:ring-2 focus-within:ring-white/60 ${errors.phone ? "border-rose-300" : "border-white/70"}`}
+                          prefixClassName="h-12 rounded-r-xl rounded-l-none border-white/70 bg-white/96 text-slate-500"
+                          localInputClassName="h-12 pr-10 pl-4 text-right text-base text-slate-900 placeholder:text-slate-400"
                         />
                       )}
                     />
                   </div>
 
-                  <div className="space-y-2">
+                  <div className="space-y-1.5">
                     <label
                       className="block text-sm font-semibold text-white/85"
                       htmlFor={leadFieldIds.email}
@@ -270,7 +270,7 @@ export const Home = () => {
                     <input
                       id={leadFieldIds.email}
                       {...register("email")}
-                      className={`h-14 w-full rounded-2xl border bg-white/96 px-5 text-right text-lg text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-white/60 ${errors.email ? "border-rose-300" : "border-white/70"}`}
+                      className={`h-12 w-full rounded-xl border bg-white/96 px-4 text-right text-base text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-white/60 ${errors.email ? "border-rose-300" : "border-white/70"}`}
                       placeholder={
                         t.contact.email === "כתובת אימייל" ? "אימייל" : t.contact.email
                       }
@@ -281,7 +281,7 @@ export const Home = () => {
                   <div className="flex items-end">
                     <button
                       type="submit"
-                      className="h-14 w-full rounded-2xl bg-slate-950 px-8 text-lg font-semibold text-white transition-all hover:bg-slate-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white/80"
+                      className="h-12 w-full rounded-xl bg-slate-950 px-6 text-base font-semibold text-white transition-all hover:bg-slate-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white/80"
                     >
                       {t.home.leadForm.submit}
                     </button>
@@ -290,15 +290,15 @@ export const Home = () => {
               </div>
             </form>
 
-            <div className="bg-white px-8 py-10 text-right md:px-12 lg:px-14 lg:py-12">
+            <div className="bg-white px-6 py-8 text-right md:px-9 lg:px-10 lg:py-9">
               <div className="flex h-full flex-col justify-center">
-                <h2 className="text-4xl font-bold text-slate-950 leading-[0.95] md:text-5xl xl:text-6xl">
+                <h2 className="text-3xl font-bold text-slate-950 leading-[0.95] md:text-4xl xl:text-5xl">
                   {t.home.leadForm.title}
                 </h2>
-                <p className="mt-6 max-w-md text-xl leading-relaxed text-slate-500 md:text-[1.85rem]">
+                <p className="mt-4 max-w-sm text-lg leading-relaxed text-slate-500 md:text-2xl">
                   {t.home.leadForm.description}
                 </p>
-                <div className="mt-8 h-1 w-20 rounded-full bg-gradient-to-l from-[#163b63] to-slate-200" />
+                <div className="mt-6 h-1 w-16 rounded-full bg-gradient-to-l from-[#163b63] to-slate-200" />
               </div>
             </div>
           </div>
