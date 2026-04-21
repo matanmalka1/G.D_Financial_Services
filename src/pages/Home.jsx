@@ -239,8 +239,8 @@ export const Home = () => {
                           placeholder={t.contact.phone}
                           className="space-y-1"
                           inputClassName={`h-12 rounded-xl border bg-white/96 shadow-none hover:shadow-none focus-within:ring-2 focus-within:ring-white/60 ${errors.phone ? "border-rose-300" : "border-white/70"}`}
-                          prefixClassName="h-12 rounded-none border-white/60 bg-transparent text-slate-500"
-                          localInputClassName="h-12 rounded-none bg-transparent pr-10 pl-4 text-right text-base text-slate-900 placeholder:text-slate-400"
+                          prefixClassName="border-white/60 bg-slate-50/90 text-slate-700 group-focus-within:bg-white"
+                          localInputClassName="h-12 bg-transparent text-right text-base text-slate-900 placeholder:text-slate-400"
                         />
                       )}
                     />

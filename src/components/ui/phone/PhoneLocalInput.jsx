@@ -7,9 +7,10 @@ export const PhoneLocalInput = forwardRef(
       ref={ref}
       value={value}
       onChange={(e) => onChange(e.target.value.replace(/\D/g, ""))}
-      className={`w-full h-12 ${isRtl ? "pr-9 pl-3" : "pl-9 pr-3"} border-0 rounded-xl bg-transparent focus:outline-none text-slate-900 placeholder:text-slate-400 ${className}`}
+      className={`h-12 w-full border-0 bg-transparent px-4 text-base text-slate-900 placeholder:text-slate-400 focus:outline-none ${isRtl ? "text-right" : "text-left"} ${className}`}
       placeholder={placeholder}
       inputMode="tel"
+      dir="ltr"
     />
   ),
 );

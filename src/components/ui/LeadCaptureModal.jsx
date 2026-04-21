@@ -106,7 +106,6 @@ export const LeadCaptureModal = ({
                 isRtl={isRtl}
                 className="space-y-0"
                 inputClassName={`h-12 rounded-xl shadow-inner shadow-slate-900/5 ${errors.phone ? "border-red-400" : "border-slate-200"} focus-within:ring-2 focus-within:ring-slate-900/70`}
-                localInputClassName="px-4"
               />
             )}
           />

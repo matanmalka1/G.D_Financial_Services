@@ -1,5 +1,4 @@
 import { forwardRef, useMemo, useCallback } from "react";
-import { Phone } from "lucide-react";
 import { AsYouType, getExampleNumber } from "libphonenumber-js";
 import metadata from "libphonenumber-js/metadata.min.json";
 import { PhoneLocalInput } from "./phone/PhoneLocalInput";
@@ -71,18 +70,21 @@ export const PhoneNumberInput = forwardRef(
         ) : null}
 
         <div
-          className={`relative flex ${isRtl ? "flex-row-reverse" : "flex-row"} rounded-xl border border-slate-200 bg-white shadow-sm hover:shadow-md transition focus-within:ring-2 focus-within:ring-slate-900/80 focus-within:border-slate-900/40 ${inputClassName}`}
+          className={`group relative flex min-h-12 overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm transition focus-within:border-slate-900/40 focus-within:ring-2 focus-within:ring-slate-900/80 ${isRtl ? "flex-row-reverse" : "flex-row"} ${inputClassName}`}
         >
           <div
-            className={`flex items-center h-12 px-4 text-sm font-medium text-slate-500 ${isRtl ? "border-l border-slate-200 rounded-r-xl" : "border-r border-slate-200 rounded-l-xl"} bg-white ${prefixClassName}`}
+            className={`flex min-w-[5.75rem] shrink-0 items-center justify-center gap-2 border-slate-200 bg-slate-50 px-3 text-sm font-semibold text-slate-700 transition-colors group-focus-within:bg-slate-100 ${isRtl ? "border-l" : "border-r"} ${prefixClassName}`}
+            dir="ltr"
+            style={{ unicodeBidi: "isolate" }}
+            aria-hidden="true"
           >
-            <span>{defaultCountry.dialCode}</span>
+            <span className="text-base leading-none">{defaultCountry.flag}</span>
+            <span className="tabular-nums tracking-normal">
+              {defaultCountry.dialCode}
+            </span>
           </div>
 
           <div className="flex-1 relative">
-            <Phone
-              className={`w-4 h-4 text-slate-400 absolute ${isRtl ? "right-3" : "left-3"} top-3.5`}
-            />
             <PhoneLocalInput
               ref={ref}
               id={inputId}
