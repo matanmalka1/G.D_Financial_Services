@@ -18,24 +18,24 @@ export const NewsCard = ({ article }) => {
   return (
     <Link
       to={to}
-      className="block group focus:outline-none focus:ring-2 focus:ring-indigo-500 rounded-[2rem]"
+      className="block h-full group focus:outline-none focus:ring-2 focus:ring-indigo-500 rounded-[1.5rem]"
       aria-label={title}
       onClick={handleNavigate}
     >
       <Card
         as="article"
         variant="flat"
-        className="p-8 shadow-sm transition-all flex flex-col gap-6 cursor-pointer group-hover:shadow-lg"
+        className="h-full rounded-[1.5rem] p-6 sm:p-7 shadow-sm transition-all flex flex-col gap-5 cursor-pointer group-hover:-translate-y-1 group-hover:shadow-lg"
       >
-        <div className="flex items-center gap-3">
-          <span className="text-xs font-bold uppercase tracking-[0.2em] text-slate-400">
+        <div className="flex items-center gap-3 border-b border-slate-100 pb-4">
+          <span className="text-[11px] font-bold uppercase tracking-[0.18em] text-slate-400">
             {article.date}
           </span>
         </div>
-        <h3 className="text-xl font-bold text-slate-900 group-hover:text-slate-700 transition-colors">
+        <h3 className="text-xl font-bold leading-snug text-slate-900 group-hover:text-slate-700 transition-colors line-clamp-2">
           {title}
         </h3>
-        <p className="text-sm text-slate-500 leading-relaxed line-clamp-3">{excerpt}</p>
+        <p className="text-sm text-slate-500 leading-7 line-clamp-3">{excerpt}</p>
       </Card>
     </Link>
   );
