@@ -19,17 +19,14 @@ export const NavbarDesktopNav = ({
     >
       {t.nav.profile}
     </NavLink>
-    <div className="flex items-center gap-2">
-      <div className="min-w-[40px]">
-        <Select
-          placeholder={t.nav.sectors}
-          options={sectorOptions}
-          onValueChange={onSectorChange}
-          dir={isRtl ? "rtl" : "ltr"}
-          className="w-10 !p-1 border-none bg-transparent"
-        />
-      </div>
-    </div>
+    <Select
+      placeholder={t.nav.sectors}
+      options={sectorOptions}
+      onValueChange={onSectorChange}
+      dir={isRtl ? "rtl" : "ltr"}
+      variant="ghost"
+      className="w-auto min-w-32"
+    />
     <NavLink
       to={routePaths.news}
       className={({ isActive }) =>
