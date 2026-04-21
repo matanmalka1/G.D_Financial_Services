@@ -133,7 +133,7 @@ export const Home = () => {
           <div className="w-20 h-1 bg-slate-900 mx-auto rounded-full" />
         </div>
         <div
-          className={`space-y-6 text-lg text-slate-600 leading-relaxed ${
+          className={`space-y-4 text-lg text-slate-600 leading-7 ${
             isRtl ? "text-right" : "text-left"
           }`}
           dir={isRtl ? "rtl" : "ltr"}
@@ -178,7 +178,7 @@ export const Home = () => {
               </li>
             ))}
           </ul>
-          <p className="font-semibold text-slate-800 text-right">
+          <p className="font-semibold text-slate-800 text-right leading-7">
             {t.home.about.summary}
           </p>
         </div>
