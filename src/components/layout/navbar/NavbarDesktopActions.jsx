@@ -15,5 +15,11 @@ export const NavbarDesktopActions = ({ t }) => (
     >
       {t.nav.contact}
     </NavLink>
+    <a
+      href="tel:0542121928"
+      className="text-sm lg:text-base font-semibold text-slate-700 hover:text-slate-900 transition-colors"
+    >
+      054-2121928
+    </a>
   </div>
 );

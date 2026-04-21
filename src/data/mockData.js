@@ -1,4 +1,7 @@
+import { addedArticles } from "./addedArticles.js";
+
 export const mockArticles = [
+  ...addedArticles,
   {
     id: '1',
     title: {

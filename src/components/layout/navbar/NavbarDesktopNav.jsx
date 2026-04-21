@@ -8,11 +8,11 @@ export const NavbarDesktopNav = ({
   onSectorChange,
   isRtl,
 }) => (
-  <div className="hidden md:flex items-center flex-1 justify-center gap-10 rtl:space-x-reverse">
+  <div className="hidden md:flex items-center gap-8 lg:gap-10">
     <NavLink
       to={routePaths.companyProfile}
       className={({ isActive }) =>
-        `text-sm font-medium transition-colors ${
+        `whitespace-nowrap text-sm font-medium transition-colors ${
           isActive ? "text-slate-900" : "text-slate-700 hover:text-slate-900"
         }`
       }
@@ -30,7 +30,7 @@ export const NavbarDesktopNav = ({
     <NavLink
       to={routePaths.news}
       className={({ isActive }) =>
-        `text-sm font-medium transition-colors ${
+        `whitespace-nowrap text-sm font-medium transition-colors ${
           isActive ? "text-slate-900" : "text-slate-700 hover:text-slate-900"
         }`
       }

@@ -46,13 +46,7 @@ export const Navbar = () => {
   return (
     <nav className="sticky top-0 z-50 bg-white/90 backdrop-blur-md shadow-sm border-b border-gray-100">
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <a
-          href="tel:0542121928"
-          className="hidden md:block absolute left-4 sm:left-6 lg:left-8 top-1/2 -translate-y-1/2 text-sm lg:text-base font-semibold text-slate-700 hover:text-slate-900 transition-colors"
-        >
-          054-2121928
-        </a>
-        <div className="flex justify-between items-center h-20 gap-6 md:pl-36">
+        <div className="flex justify-between items-center h-20 gap-6">
           <NavbarBrand to={routePaths.home} />
 
           <NavbarDesktopNav
