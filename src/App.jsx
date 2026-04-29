@@ -11,7 +11,7 @@ import { SectorDetail } from "./pages/SectorDetail";
 import { News } from "./pages/News";
 import { Article } from "./pages/Article";
 import { Contact } from "./pages/Contact";
-import { ContentAdmin } from "./pages/admin/ContentAdmin";
+import { ContentAdmin } from "./pages/admin/content-admin";
 
 export const App = () => (
   <Router>

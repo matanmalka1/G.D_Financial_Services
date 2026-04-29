@@ -1,9 +1,7 @@
 import { MessageCircle, Phone, Presentation } from "lucide-react";
-import { RelatedArticlesSection } from "./RelatedArticlesSection";
-import { SectorHeroActions } from "./SectorHeroActions";
-
-const phoneNumber = "0542121928";
-const whatsappNumber = "972542121928";
+import { RelatedArticlesSection } from "../../components/common/sector/RelatedArticlesSection";
+import { SectorHeroActions } from "../../components/common/sector/SectorHeroActions";
+import { CONTACT } from "../../constants.js";
 
 const heroStats = [
   ["360°", "ניהול פיננסי מלא"],
@@ -173,7 +171,7 @@ const CtaButtons = ({ dark = false }) => (
       הכירו את השירותים
     </a>
     <a
-      href={dark ? `tel:${phoneNumber}` : `https://wa.me/${whatsappNumber}`}
+      href={dark ? `tel:${CONTACT.PHONE}` : `https://wa.me/${CONTACT.WHATSAPP}`}
       target={dark ? undefined : "_blank"}
       rel={dark ? undefined : "noreferrer"}
       className={`inline-flex items-center justify-center gap-2 rounded-lg px-5 py-3 text-sm font-bold transition hover:-translate-y-0.5 ${

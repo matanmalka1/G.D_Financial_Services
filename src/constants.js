@@ -1,3 +1,8 @@
+export const CONTACT = {
+  PHONE: "0542121928",
+  WHATSAPP: "972542121928",
+};
+
 export const STORAGE_KEYS = {
   CONTENT: "gd-content",
   CONTENT_OVERRIDES: "gd-content-overrides",

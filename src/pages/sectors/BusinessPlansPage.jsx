@@ -17,11 +17,9 @@ import {
   Target,
   TrendingUp,
 } from "lucide-react";
-import { routes } from "../../../routes/paths";
-import { SectorHeroActions } from "./SectorHeroActions";
-
-const phoneNumber = "0542121928";
-const whatsappNumber = "972542121928";
+import { routes } from "../../routes/paths";
+import { SectorHeroActions } from "../../components/common/sector/SectorHeroActions";
+import { CONTACT } from "../../constants.js";
 
 const challenges = [
   {
@@ -193,7 +191,7 @@ const SectionHeader = ({ label, title, text, light = false }) => (
 const CtaButtons = ({ dark = false }) => (
   <div className="flex flex-col gap-3 sm:flex-row">
     <a
-      href={`tel:${phoneNumber}`}
+      href={`tel:${CONTACT.PHONE}`}
       className={`inline-flex items-center justify-center gap-2 rounded-lg px-7 py-4 text-base font-bold transition hover:-translate-y-0.5 ${
         dark
           ? "bg-slate-900 text-white shadow-xl shadow-slate-900/20"
@@ -204,7 +202,7 @@ const CtaButtons = ({ dark = false }) => (
       קבע שיחת ייעוץ
     </a>
     <a
-      href={`https://wa.me/${whatsappNumber}`}
+      href={`https://wa.me/${CONTACT.WHATSAPP}`}
       target="_blank"
       rel="noreferrer"
       className={`inline-flex items-center justify-center gap-2 rounded-lg px-7 py-4 text-base font-bold transition hover:-translate-y-0.5 ${

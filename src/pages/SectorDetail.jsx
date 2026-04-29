@@ -4,10 +4,10 @@ import { useSiteContent } from "../hooks/useSiteContent";
 import { useSeo } from "../hooks/useSeo";
 import { useContent } from "../hooks/useContent";
 import { routes } from "../routes/paths";
-import { BusinessPlansPage } from "../components/common/sector/BusinessPlansPage";
-import { BusinessPresentationsPage } from "../components/common/sector/BusinessPresentationsPage";
-import { BusinessConsultingPage } from "../components/common/sector/BusinessConsultingPage";
-import { SellSideAdvisoryPage } from "../components/common/sector/SellSideAdvisoryPage";
+import { BusinessPlansPage } from "./sectors/BusinessPlansPage";
+import { BusinessPresentationsPage } from "./sectors/BusinessPresentationsPage";
+import { BusinessConsultingPage } from "./sectors/BusinessConsultingPage";
+import { SellSideAdvisoryPage } from "./sectors/SellSideAdvisoryPage";
 import { LoadBoundary, PageError, PageLoading } from "../components/common/LoadBoundary";
 import { ITEMS_PER_PAGE } from "../constants.js";
 
