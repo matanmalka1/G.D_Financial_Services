@@ -3,7 +3,7 @@ import { Phone } from "lucide-react";
 import { routePaths } from "../../../routes/paths";
 
 export const NavbarDesktopActions = ({ t }) => (
-  <div className="hidden md:flex items-center gap-6">
+  <div className="hidden shrink-0 items-center gap-5 md:flex lg:gap-6">
     <NavLink
       to={routePaths.contact}
       className={({ isActive }) =>

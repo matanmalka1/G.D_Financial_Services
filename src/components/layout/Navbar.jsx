@@ -9,7 +9,7 @@ import { NavbarMobileControls } from "./navbar/NavbarMobileControls";
 import { NavbarMobileMenu } from "./navbar/NavbarMobileMenu";
 
 export const Navbar = () => {
-  const { t, isRtl } = useSiteContent();
+  const { t } = useSiteContent();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
@@ -44,15 +44,13 @@ export const Navbar = () => {
 
   return (
     <nav className="sticky top-0 z-50 bg-white/90 backdrop-blur-md shadow-sm border-b border-gray-100">
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-20 gap-6">
+      <div className="relative w-full px-4 sm:px-6 lg:px-10 xl:px-14">
+        <div className="flex h-20 items-center gap-6">
           <NavbarBrand to={routePaths.home} />
 
           <NavbarDesktopNav
             t={t}
             sectorOptions={sectorOptions}
-            onSectorChange={handleSectorChange}
-            isRtl={isRtl}
           />
 
           <NavbarDesktopActions t={t} />

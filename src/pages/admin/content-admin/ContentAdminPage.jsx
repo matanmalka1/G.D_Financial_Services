@@ -75,6 +75,10 @@ export const ContentAdmin = () => {
   const filteredEntries = useMemo(
     () =>
       entriesWithMeta.filter((item) => {
+        if (activePage === "all" && item.pageKey === "inactive") {
+          return false;
+        }
+
         if (activePage !== "all" && item.pageKey !== activePage) {
           return false;
         }
@@ -139,13 +143,16 @@ export const ContentAdmin = () => {
         ...option,
         count:
           option.key === "all"
-            ? entriesWithMeta.length
+            ? entriesWithMeta.filter((item) => item.pageKey !== "inactive").length
             : entriesWithMeta.filter((item) => item.pageKey === option.key).length,
       })),
     [entriesWithMeta],
   );
 
-  const customizedCount = Object.keys(adminOverrides).length;
+  const visibleOverridePaths = new Set(entriesWithMeta.map((item) => item.path));
+  const customizedCount = Object.keys(adminOverrides).filter((path) =>
+    visibleOverridePaths.has(path),
+  ).length;
   const visibleCount = filteredEntries.length;
   const requiresPassword = Boolean(ADMIN_PASSWORD);
 
@@ -238,10 +245,10 @@ export const ContentAdmin = () => {
               <p className="text-sm font-semibold uppercase tracking-[0.3em] text-slate-300">
                 Admin Panel
               </p>
-              <h1 className="mt-3 text-3xl font-bold md:text-4xl">ניהול אתר ברור ופשוט</h1>
+              <h1 className="mt-3 text-3xl font-bold md:text-4xl">ניהול תוכן האתר הנוכחי</h1>
               <p className="mt-3 max-w-2xl text-sm leading-6 text-slate-300">
-                בוחרים אזור באתר, משנים טקסט בשפה פשוטה, רואים איך זה ייראה,
-                ושומרים רק כשמוכנים.
+                בוחרים אזור פעיל באתר, משנים טקסט, רואים איך זה ייראה ושומרים
+                רק כשמוכנים. תוכן ישן שלא מחובר למסכים הנוכחיים מרוכז בנפרד.
               </p>
             </div>
 
@@ -314,7 +321,7 @@ export const ContentAdmin = () => {
               <div>
                 <h2 className="text-xl font-semibold text-slate-900">איתור מהיר של מה שרוצים לשנות</h2>
                 <p className="mt-1 text-sm text-slate-500">
-                  אפשר לחפש לפי אזור, לבחור סוג תוכן, או להציג רק שדות שכבר שינית.
+                  אפשר לחפש לפי אזור, לבחור סוג תוכן, להציג רק שדות ששונו או לעבור לתוכן לא פעיל.
                 </p>
               </div>
 

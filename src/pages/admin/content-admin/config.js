@@ -5,8 +5,8 @@ export const ADMIN_PASSWORD = import.meta.env.VITE_ADMIN_PASSWORD;
 export const PAGE_OPTIONS = [
   {
     key: "all",
-    label: "כל האתר",
-    description: "כל הטקסטים שניתנים לעריכה במקום אחד.",
+    label: "כל התוכן הפעיל",
+    description: "כל הטקסטים שמחוברים כרגע למסכים הפעילים באתר.",
   },
   {
     key: "home",
@@ -14,14 +14,9 @@ export const PAGE_OPTIONS = [
     description: "כותרות, אזור אודות, בעל העסק, לקוחות ושאלות נפוצות.",
   },
   {
-    key: "companyProfile",
-    label: "אודות החברה",
-    description: "המשימה, הסיפור, הערכים והמסרים של העסק.",
-  },
-  {
     key: "services",
-    label: "שירותים ומגזרים",
-    description: "עמוד השירותים ודפי השירות המפורטים.",
+    label: "שירותים",
+    description: "עמוד השירותים ודפי השירות: תוכנית עסקית, מצגות, ייעוץ ומכירה.",
   },
   {
     key: "news",
@@ -37,6 +32,11 @@ export const PAGE_OPTIONS = [
     key: "global",
     label: "תפריט, פוטר וכללי",
     description: "ניווט, פוטר וטקסטים שחוזרים בכמה מקומות באתר.",
+  },
+  {
+    key: "inactive",
+    label: "תוכן לא פעיל",
+    description: "טקסטים קיימים בקבצי התוכן שלא מוצגים כרגע באתר.",
   },
 ];
 
@@ -54,12 +54,8 @@ export const PAGE_META = {
     label: "דף הבית",
     href: routePaths.home,
   },
-  companyProfile: {
-    label: "אודות החברה",
-    href: routePaths.companyProfile,
-  },
   services: {
-    label: "שירותים ומגזרים",
+    label: "שירותים",
     href: routePaths.sectors,
   },
   news: {
@@ -74,6 +70,10 @@ export const PAGE_META = {
     label: "תפריט, פוטר וכללי",
     href: routePaths.home,
   },
+  inactive: {
+    label: "תוכן לא פעיל",
+    href: routePaths.home,
+  },
 };
 
 export const SECTION_LABELS = {
@@ -82,8 +82,8 @@ export const SECTION_LABELS = {
     description: "הכותרת והמשפט שהמבקר רואה מיד כשהוא נכנס לאתר.",
   },
   "home.bubbles": {
-    label: "שירותים קצרים בדף הבית",
-    description: "הכיתובים הקצרים שמציגים תחומי פעילות מרכזיים.",
+    label: "שירותים קצרים ישנים",
+    description: "תוכן ישן שאינו מחובר כרגע לדף הבית החדש.",
   },
   "home.about": {
     label: "אזור אודות בדף הבית",
@@ -111,7 +111,7 @@ export const SECTION_LABELS = {
   },
   sectors: {
     label: "עמוד השירותים",
-    description: "הכותרות והמסרים הכלליים של עמוד השירותים.",
+    description: "כותרות, חיפוש וכפתורים בעמוד השירותים.",
   },
   news: {
     label: "עמוד מאמרים",
@@ -136,6 +136,10 @@ export const SECTION_LABELS = {
   global: {
     label: "טקסטים כלליים",
     description: "כיתובים שחוזרים בכמה חלקים באתר.",
+  },
+  inactive: {
+    label: "תוכן לא פעיל באתר הנוכחי",
+    description: "השדה נשמר בקבצי התוכן, אבל אינו מוצג כרגע במסכים הפעילים.",
   },
 };
 
@@ -179,6 +183,13 @@ export const SEGMENT_LABELS = {
   storyTitle: "כותרת הסיפור",
   storyP1: "פסקה ראשונה בסיפור",
   storyP2: "פסקה שנייה בסיפור",
+  p1: "פסקה ראשונה",
+  p2: "פסקה שנייה",
+  p3: "פסקה שלישית",
+  bio: "ביוגרפיה",
+  summary: "סיכום",
+  selectPlaceholder: "טקסט עזר בבחירת שירות",
+  showingResults: "נוסח תוצאות חיפוש",
   bubbleTitle: "כותרת הבועות",
   aboutDescription: "תיאור על השירות",
   ourServices: "כותרת השירותים שלנו",
@@ -193,10 +204,10 @@ export const SEGMENT_LABELS = {
 };
 
 export const SECTOR_LABELS = {
-  "business-plan": "תוכנית עסקית",
-  "business-presentations": "מצגות עסקיות",
+  "business-plan": "תוכנית עסקית לבנק",
+  "business-presentations": "שירות מחלקה כלכלית במיקור חוץ",
   "business-consulting": "ייעוץ עסקי",
-  "sell-side-advisory": "ליווי מכירה ועסקאות",
+  "sell-side-advisory": "ליווי חברות למכירה",
 };
 
 export const HUMAN_LABELS = {

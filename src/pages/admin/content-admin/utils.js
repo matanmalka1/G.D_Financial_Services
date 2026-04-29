@@ -16,7 +16,31 @@ const prettifySlug = (value) =>
 export const getSectorLabel = (sectorId) =>
   SECTOR_LABELS[sectorId] ?? prettifySlug(sectorId);
 
+const inactiveContentPrefixes = [
+  "companyProfile.",
+  "home.bubbles.",
+  "sectorDetail.sectorDetails.",
+];
+
+const inactiveContentPaths = new Set([
+  "home.about.moreInfo",
+  "sectorDetail.mainDescription",
+  "sectorDetail.aboutDescription",
+  "sectorDetail.expertAnalysis",
+  "sectorDetail.customizedStrategy",
+  "sectorDetail.executiveSupport",
+  "sectors.aboutSector",
+  "sectors.ourServices",
+  "sectors.clientBenefits",
+  "sectors.businessPlansDesc",
+]);
+
+export const isInactiveContentPath = (path) =>
+  inactiveContentPaths.has(path) ||
+  inactiveContentPrefixes.some((prefix) => path.startsWith(prefix));
+
 export const getPageKey = (path) => {
+  if (isInactiveContentPath(path)) return "inactive";
   if (path.startsWith("home.")) return "home";
   if (path.startsWith("companyProfile.")) return "companyProfile";
   if (path.startsWith("sectors.") || path.startsWith("sectorDetail.")) return "services";
@@ -34,6 +58,7 @@ export const getPageKey = (path) => {
 };
 
 export const getItemHref = (path) => {
+  if (isInactiveContentPath(path)) return routePaths.home;
   if (path.startsWith("companyProfile.")) return routePaths.companyProfile;
   if (path.startsWith("sectors.")) return routePaths.sectors;
   if (path.startsWith("sectorDetail.sectorDetails.")) {
@@ -50,6 +75,13 @@ export const getItemHref = (path) => {
 
 export const getSectionMeta = (path) => {
   const parts = path.split(".");
+
+  if (isInactiveContentPath(path)) {
+    return {
+      key: `inactive-${parts[0]}-${parts[1] ?? "general"}`,
+      ...SECTION_LABELS.inactive,
+    };
+  }
 
   if (path.startsWith("companyProfile.")) {
     return {

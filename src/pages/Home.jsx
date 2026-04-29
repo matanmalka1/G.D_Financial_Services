@@ -101,7 +101,7 @@ export const Home = () => {
         <div className="relative mx-auto max-w-7xl">
           <div className="mx-auto max-w-3xl text-center">
             <div className="mb-6 font-serif text-5xl font-black leading-none text-white md:text-7xl">
-              G.D Finance
+              {t.home.hero.title}
             </div>
             <p
               className="mx-auto mb-8 max-w-2xl text-lg leading-9 text-white/70"
@@ -278,14 +278,10 @@ export const Home = () => {
       <section className="mx-auto grid max-w-7xl gap-12 px-4 py-24 lg:grid-cols-[0.85fr,1.15fr] lg:items-start">
         <div className="text-center lg:sticky lg:top-28 lg:order-2 lg:text-right">
           <h2 className="font-serif text-4xl font-black leading-tight text-slate-900 md:text-6xl">
-            שאלות נפוצות
+            {t.home.faq.title}
           </h2>
           <p className="mx-auto mt-5 max-w-xl text-lg leading-8 text-slate-600 lg:mx-0">
-            יש לכם שאלות? מצוין אתם לא לבד. ריכזנו כאן את השאלות הכי נפוצות
-            שאנחנו שומעים מלקוחות חדשים, כדי לעזור לכם להבין טוב יותר איך
-            הדברים עובדים, מה נדרש מכם, ואיך אנחנו יכולים לחסוך לכם זמן, כסף
-            ודאגות. ואם לא מצאתם תשובה כאן תמיד אפשר לפנות אלינו ונשמח
-            לעזור.
+            {t.home.faq.description}
           </p>
         </div>
         <div className="lg:order-1">
