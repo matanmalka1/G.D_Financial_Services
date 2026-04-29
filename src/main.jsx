@@ -5,6 +5,7 @@ import { App } from "./App";
 import { ContentProvider } from "./context/ContentContext";
 import { ErrorBoundary } from "./components/common/ErrorBoundary";
 import { SiteContentProvider } from "./context/SiteContentContext";
+import "./index.css";
 
 const rootElement = document.getElementById("root");
 if (!rootElement) {
