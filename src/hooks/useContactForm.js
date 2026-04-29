@@ -35,8 +35,12 @@ export const useContactForm = (t, onSuccess, options = {}) => {
   });
 
   const handleSubmit = async (data) => {
-    await onSuccess?.(data);
-    form.reset();
+    try {
+      await onSuccess?.(data);
+      form.reset();
+    } catch {
+      // The caller owns user-facing error messaging. Keep entered values intact.
+    }
   };
 
   return { form, handleSubmit };

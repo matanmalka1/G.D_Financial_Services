@@ -51,35 +51,14 @@ export const SectorDetail = () => {
   const page = (() => {
     if (!sector) return <NotFound t={t} />;
 
+    const pageProps = { relatedArticles, t, isRtl };
+
     switch (sector.id) {
-      case "business-plan":
-        return <BusinessPlansPage />;
-      case "business-presentations":
-        return (
-          <BusinessPresentationsPage
-            relatedArticles={relatedArticles}
-            t={t}
-            isRtl={isRtl}
-          />
-        );
-      case "business-consulting":
-        return (
-          <BusinessConsultingPage
-            relatedArticles={relatedArticles}
-            t={t}
-            isRtl={isRtl}
-          />
-        );
-      case "sell-side-advisory":
-        return (
-          <SellSideAdvisoryPage
-            relatedArticles={relatedArticles}
-            t={t}
-            isRtl={isRtl}
-          />
-        );
-      default:
-        return <NotFound t={t} />;
+      case "business-plan":        return <BusinessPlansPage {...pageProps} />;
+      case "business-presentations": return <BusinessPresentationsPage {...pageProps} />;
+      case "business-consulting":  return <BusinessConsultingPage {...pageProps} />;
+      case "sell-side-advisory":   return <SellSideAdvisoryPage {...pageProps} />;
+      default:                     return <NotFound t={t} />;
     }
   })();
 

@@ -1,7 +1,11 @@
-import { MessageCircle, Phone, Presentation } from "lucide-react";
+import { Presentation } from "lucide-react";
 import { RelatedArticlesSection } from "../../components/common/sector/RelatedArticlesSection";
 import { SectorHeroActions } from "../../components/common/sector/SectorHeroActions";
-import { CONTACT } from "../../constants.js";
+import {
+  HeroBackground,
+  HeroStatGrid,
+  SectionHeader,
+} from "../../components/common/sector/SectorPagePrimitives";
 
 const heroStats = [
   ["360°", "ניהול פיננסי מלא"],
@@ -64,7 +68,7 @@ const services = [
     icon: "🖥️",
     title: "דוחות ודשבורדים",
     items: [
-      "דשבורד מנכ\"ל עם מדדי מפתח",
+      'דשבורד מנכ"ל עם מדדי מפתח',
       "דוחות ניהוליים חודשיים",
       "ניתוח נתונים מעמיק לפי צורך",
     ],
@@ -125,72 +129,9 @@ const processSteps = [
   },
 ];
 
-const SectionLabel = ({ children, light = false }) => (
-  <span
-    className={`mb-3 inline-block text-xs font-bold uppercase tracking-[0.18em] ${
-      light ? "text-white" : "text-slate-900"
-    }`}
-  >
-    {children}
-  </span>
-);
-
-const SectionHeader = ({ label, title, text, light = false }) => (
-  <div className="mb-8 max-w-2xl">
-    <SectionLabel light={light}>{label}</SectionLabel>
-    <h2
-      className={`font-serif text-2xl font-black leading-tight md:text-4xl ${
-        light ? "text-white" : "text-slate-900"
-      }`}
-    >
-      {title}
-    </h2>
-    {text ? (
-      <p
-        className={`mt-3 text-base leading-7 ${
-          light ? "text-white/65" : "text-slate-600"
-        }`}
-      >
-        {text}
-      </p>
-    ) : null}
-  </div>
-);
-
-const CtaButtons = ({ dark = false }) => (
-  <div className="flex flex-col gap-2 sm:flex-row">
-    <a
-      href="#services"
-      className={`inline-flex items-center justify-center gap-2 rounded-lg px-5 py-3 text-sm font-bold transition hover:-translate-y-0.5 ${
-        dark
-          ? "bg-slate-900 text-white shadow-lg shadow-slate-900/20"
-          : "bg-white text-slate-900 shadow-lg shadow-white/20 hover:bg-slate-100"
-      }`}
-    >
-      <Presentation className="h-4 w-4" />
-      הכירו את השירותים
-    </a>
-    <a
-      href={dark ? `tel:${CONTACT.PHONE}` : `https://wa.me/${CONTACT.WHATSAPP}`}
-      target={dark ? undefined : "_blank"}
-      rel={dark ? undefined : "noreferrer"}
-      className={`inline-flex items-center justify-center gap-2 rounded-lg px-5 py-3 text-sm font-bold transition hover:-translate-y-0.5 ${
-        dark
-          ? "border border-slate-900/20 bg-white/25 text-slate-900 hover:bg-white/40"
-          : "border border-white/20 bg-white/5 text-white hover:bg-white/10"
-        }`}
-    >
-      {dark ? <Phone className="h-4 w-4" /> : <MessageCircle className="h-4 w-4" />}
-      {dark ? "קבע שיחת ייעוץ" : "שלח הודעה בוואטסאפ"}
-    </a>
-  </div>
-);
-
 const Hero = () => (
   <section className="relative flex min-h-[72vh] items-center overflow-hidden bg-slate-900 px-4 py-24 text-white sm:px-6 lg:px-8 lg:py-32">
-    <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.06)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.06)_1px,transparent_1px)] bg-[size:60px_60px]" />
-    <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_80%_30%,rgba(255,255,255,0.14),transparent_55%),radial-gradient(ellipse_at_15%_80%,rgba(255,255,255,0.08),transparent_45%)]" />
-
+    <HeroBackground />
     <div className="relative mx-auto w-full max-w-7xl">
       <div className="mx-auto flex max-w-3xl flex-col items-center text-center">
         <div className="mb-8 inline-flex items-center justify-center gap-2 rounded-full border border-white/30 bg-white/10 px-5 py-2 text-sm font-semibold text-white">
@@ -202,22 +143,12 @@ const Hero = () => (
           <span className="block">במיקור חוץ</span>
         </h1>
         <p className="mt-7 max-w-2xl text-lg leading-9 text-white/70">
-          ניהול פיננסי אסטרטגי ומלא לעסק שלך  רווחיות, שליטה ותכנון
-          קדימה  ללא הצורך לגייס CFO פנימי.
+          ניהול פיננסי אסטרטגי ומלא לעסק שלך — רווחיות, שליטה ותכנון קדימה —
+          ללא הצורך לגייס CFO פנימי.
         </p>
         <SectorHeroActions className="mt-10" />
       </div>
-
-      <div className="mx-auto mt-16 grid max-w-4xl gap-px overflow-hidden rounded-2xl border border-slate-200 bg-slate-200 shadow-xl shadow-slate-950/10 sm:grid-cols-3">
-        {heroStats.map(([value, label]) => (
-          <div key={label} className="bg-white p-7 text-center">
-            <strong className="block font-serif text-3xl font-black text-slate-900">
-              {value}
-            </strong>
-            <span className="mt-2 block text-sm text-slate-500">{label}</span>
-          </div>
-        ))}
-      </div>
+      <HeroStatGrid stats={heroStats} cols={3} />
     </div>
   </section>
 );
@@ -229,6 +160,7 @@ const ServicesSection = () => (
   >
     <div className="mx-auto max-w-7xl">
       <SectionHeader
+        compact
         label="תחומי שירות"
         title="מה אנחנו עושים בשבילך"
         text="כל שירות מתורגם לאחת שאלה אחת: איך העסק שלך מרוויח יותר, בשליטה מלאה."
@@ -269,6 +201,7 @@ const ProcessSection = () => (
   <section className="bg-stone-50 px-4 py-12 sm:px-6 lg:px-8 lg:py-16">
     <div className="mx-auto max-w-7xl">
       <SectionHeader
+        compact
         label="איך עובדים איתנו"
         title="התהליך שלנו"
         text="חמישה שלבים מהבנת המצב הקיים ועד ניהול שוטף מבוסס נתונים."
@@ -293,11 +226,7 @@ const ProcessSection = () => (
   </section>
 );
 
-export const BusinessPresentationsPage = ({
-  relatedArticles = [],
-  t,
-  isRtl,
-}) => (
+export const BusinessPresentationsPage = ({ relatedArticles = [], t, isRtl }) => (
   <main className="bg-white" dir="rtl">
     <Hero />
     <ServicesSection />

@@ -1,14 +1,17 @@
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
+import { toast } from "sonner";
 import { Navbar } from "./Navbar";
 import { Footer } from "./Footer";
 import { ScrollToTop } from "../common/ScrollToTop";
 import { LeadCaptureModal } from "../ui/LeadCaptureModal";
 import { submitContactForm } from "../../services/contactService.js";
 import { routePaths } from "../../routes/paths.js";
+import { useSiteContent } from "../../hooks/useSiteContent.js";
 
 export const Layout = ({ children }) => {
   const { pathname } = useLocation();
+  const { t } = useSiteContent();
   const [leadModalOpen, setLeadModalOpen] = useState(false);
 
   useEffect(() => {
@@ -28,10 +31,13 @@ export const Layout = ({ children }) => {
   const handleLeadSubmit = async (data) => {
     try {
       await submitContactForm(data, "Lead Capture Modal - G.D Financial Services");
+      toast.success(t.modalForm.success);
+      setLeadModalOpen(false);
     } catch (error) {
       console.warn("Lead form submission failed:", error);
+      toast.error(t.modalForm.submitError);
+      throw error;
     }
-    setLeadModalOpen(false);
   };
 
   return (

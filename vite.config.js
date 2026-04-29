@@ -13,6 +13,18 @@ export default defineConfig(({ mode }) => {
       optimizeDeps: {
         include: ['sonner'],
       },
+      build: {
+        rollupOptions: {
+          output: {
+            manualChunks: {
+              react: ['react', 'react-dom', 'react-router-dom'],
+              forms: ['react-hook-form', '@hookform/resolvers', 'zod'],
+              ui: ['@headlessui/react', '@radix-ui/react-select', 'lucide-react', 'sonner'],
+              phone: ['libphonenumber-js'],
+            },
+          },
+        },
+      },
       define: {},
       resolve: {
         alias: {

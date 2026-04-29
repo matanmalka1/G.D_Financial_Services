@@ -21,6 +21,7 @@
   "sending": "שולח הודעה...",
   "success": "הודעתך נשלחה בהצלחה!",
   "error": "נא לתקן את השגיאות בטופס.",
+  "submitError": "לא הצלחנו לשלוח את ההודעה. נסו שוב בעוד רגע.",
   "selectPlaceholder": "בחר שירות...",
   "fullNamePlaceholder": "ישראל ישראלי",
   "emailPlaceholder": "name@example.com",

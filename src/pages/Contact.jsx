@@ -31,7 +31,7 @@ export const Contact = () => {
         await submitContactForm(data, "Contact Form - G.D Financial Services");
         toast.success(t.contact.success, { id: loadingToast });
       } catch (error) {
-        toast.error(t.contact.error, { id: loadingToast });
+        toast.error(t.contact.submitError, { id: loadingToast });
         throw error;
       }
     },

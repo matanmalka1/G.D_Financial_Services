@@ -1,6 +1,4 @@
-import { Link } from "react-router-dom";
 import {
-  ArrowLeft,
   Banknote,
   BarChart3,
   BriefcaseBusiness,
@@ -9,17 +7,28 @@ import {
   ClipboardList,
   Landmark,
   LineChart,
-  MessageCircle,
-  Phone,
   PieChart,
   Scale,
   ShieldCheck,
   Target,
   TrendingUp,
 } from "lucide-react";
-import { routes } from "../../routes/paths";
+import { RelatedArticlesSection } from "../../components/common/sector/RelatedArticlesSection";
 import { SectorHeroActions } from "../../components/common/sector/SectorHeroActions";
-import { CONTACT } from "../../constants.js";
+import {
+  ContactCtaSection,
+  HeroBackground,
+  HeroStatGrid,
+  SectionHeader,
+  SectionLabel,
+} from "../../components/common/sector/SectorPagePrimitives";
+
+const heroStats = [
+  ["בנק", "מסמך שמדבר בשפה של הבנק"],
+  ["100%", "התאמה למטרות העסק"],
+  ["מהיר", "ביצוע בזמן קצר"],
+  ["מדויק", "מיקוד בתוצאה: החלטה נכונה"],
+];
 
 const challenges = [
   {
@@ -156,72 +165,9 @@ const reasons = [
   },
 ];
 
-const SectionLabel = ({ children, light = false }) => (
-  <span
-    className={`mb-4 inline-block text-xs font-bold uppercase tracking-[0.18em] ${
-      light ? "text-white" : "text-slate-900"
-    }`}
-  >
-    {children}
-  </span>
-);
-
-const SectionHeader = ({ label, title, text, light = false }) => (
-  <div className="mb-12 max-w-3xl">
-    <SectionLabel light={light}>{label}</SectionLabel>
-    <h2
-      className={`font-serif text-3xl font-black leading-tight md:text-5xl ${
-        light ? "text-white" : "text-slate-900"
-      }`}
-    >
-      {title}
-    </h2>
-    {text ? (
-      <p
-        className={`mt-5 text-lg leading-8 ${
-          light ? "text-white/65" : "text-slate-600"
-        }`}
-      >
-        {text}
-      </p>
-    ) : null}
-  </div>
-);
-
-const CtaButtons = ({ dark = false }) => (
-  <div className="flex flex-col gap-3 sm:flex-row">
-    <a
-      href={`tel:${CONTACT.PHONE}`}
-      className={`inline-flex items-center justify-center gap-2 rounded-lg px-7 py-4 text-base font-bold transition hover:-translate-y-0.5 ${
-        dark
-          ? "bg-slate-900 text-white shadow-xl shadow-slate-900/20"
-          : "bg-white text-slate-900 shadow-xl shadow-white/20 hover:bg-slate-100"
-      }`}
-    >
-      <Phone className="h-5 w-5" />
-      קבע שיחת ייעוץ
-    </a>
-    <a
-      href={`https://wa.me/${CONTACT.WHATSAPP}`}
-      target="_blank"
-      rel="noreferrer"
-      className={`inline-flex items-center justify-center gap-2 rounded-lg px-7 py-4 text-base font-bold transition hover:-translate-y-0.5 ${
-        dark
-          ? "border border-slate-900/20 bg-white/25 text-slate-900 hover:bg-white/40"
-          : "border border-white/20 bg-white/5 text-white hover:bg-white/10"
-      }`}
-    >
-      <MessageCircle className="h-5 w-5" />
-      שלח הודעה בוואטסאפ
-    </a>
-  </div>
-);
-
-const BusinessPlansHero = () => (
+const Hero = () => (
   <section className="relative overflow-hidden bg-slate-900 px-4 py-24 text-white sm:px-6 lg:px-8 lg:py-32">
-    <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.06)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.06)_1px,transparent_1px)] bg-[size:60px_60px]" />
-    <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_80%_30%,rgba(255,255,255,0.14),transparent_55%),radial-gradient(ellipse_at_15%_80%,rgba(255,255,255,0.08),transparent_45%)]" />
-
+    <HeroBackground />
     <div className="relative mx-auto max-w-7xl">
       <div className="mx-auto max-w-3xl text-center">
         <div className="mb-8 inline-flex items-center justify-center gap-2 rounded-full border border-white/30 bg-white/10 px-5 py-2 text-sm font-semibold text-white">
@@ -239,22 +185,7 @@ const BusinessPlansHero = () => (
         </p>
         <SectorHeroActions className="mt-10" />
       </div>
-
-      <div className="mx-auto mt-16 grid max-w-6xl gap-px overflow-hidden rounded-2xl border border-slate-200 bg-slate-200 shadow-xl shadow-slate-950/10 sm:grid-cols-2 lg:grid-cols-4">
-        {[
-          ["בנק", "מסמך שמדבר בשפה של הבנק"],
-          ["100%", "התאמה למטרות העסק"],
-          ["מהיר", "ביצוע בזמן קצר"],
-          ["מדויק", "מיקוד בתוצאה: החלטה נכונה"],
-        ].map(([value, label]) => (
-          <div key={label} className="bg-white p-7 text-center">
-            <strong className="block font-serif text-3xl font-black text-slate-900">
-              {value}
-            </strong>
-            <span className="mt-2 block text-sm text-slate-500">{label}</span>
-          </div>
-        ))}
-      </div>
+      <HeroStatGrid stats={heroStats} cols={4} />
     </div>
   </section>
 );
@@ -267,7 +198,6 @@ const ChallengeSection = () => (
         title="הבנק מבקש תוכנית עסקית ולא ברור מאיפה מתחילים?"
         text="בעלי עסקים רבים צריכים תוכנית עסקית לבנק, למשקיעים, להקמת פעילות חדשה או לקבלת החלטות פנימיות, ולא יודעים מה לכלול ואיך לבנות את המספרים."
       />
-
       <div className="grid gap-4">
         {challenges.map(({ icon: Icon, title, text }) => (
           <article
@@ -297,7 +227,6 @@ const ProofSection = () => (
         title="5 הדברים שכל תוכנית עסקית חייבת להוכיח"
         text="תוכנית טובה לא מסתפקת בסיפור. היא מציגה נתונים שמסבירים למה העסק יכול לעבוד."
       />
-
       <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-5">
         {proofPoints.map(({ icon: Icon, title, text }) => (
           <article
@@ -323,7 +252,6 @@ const SolutionSection = () => (
           title="אנחנו בונים תוכנית עסקית שאפשר לעבוד איתה"
           text="לא מסמך גנרי. תוכנית מותאמת לעסק שלך, שמדברת בשפה פיננסית ברורה ומתורגמת לפעולות."
         />
-
         <div className="space-y-6">
           {solutionPoints.map((point, idx) => (
             <article key={point.title} className="flex gap-5">
@@ -367,7 +295,6 @@ const ServicesSection = () => (
         title="מה כולל השירות"
         text="כל שלב בנוי כדי להפוך רעיון, צורך או יעד עסקי לתוכנית ברורה ומגובה במספרים."
       />
-
       <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
         {services.map((service, idx) => (
           <article
@@ -406,7 +333,6 @@ const WhyUsSection = () => (
         title="מה מייחד אותנו"
         text="לא כל מי שכותב תוכניות עסקיות יודע לחבר בין אסטרטגיה, פיננסים וקבלת החלטות."
       />
-
       <div className="grid gap-6 md:grid-cols-2">
         {reasons.map(({ icon: Icon, title, text }) => (
           <article
@@ -423,38 +349,22 @@ const WhyUsSection = () => (
   </section>
 );
 
-const FinalCtaSection = () => (
-  <section className="bg-white px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
-    <div className="mx-auto max-w-3xl text-center">
-      <h2 className="font-serif text-4xl font-black leading-tight text-slate-900 md:text-5xl">
-        צריך תוכנית עסקית מקצועית?
-      </h2>
-      <p className="mx-auto mt-5 max-w-2xl text-lg leading-8 text-slate-900/75">
-        שיחת ייעוץ ראשונית ללא עלות. נבין את המטרה שלך ונסביר כיצד נוכל לבנות
-        עבורך תוכנית מדויקת.
-      </p>
-      <div className="mt-10 flex justify-center">
-        <CtaButtons dark />
-      </div>
-      <Link
-        to={routes.contact()}
-        className="mt-8 inline-flex items-center gap-2 font-bold text-slate-900 underline underline-offset-8"
-      >
-        מעבר לעמוד יצירת קשר
-        <ArrowLeft className="h-4 w-4" />
-      </Link>
-    </div>
-  </section>
-);
-
-export const BusinessPlansPage = () => (
+export const BusinessPlansPage = ({ relatedArticles = [], t, isRtl }) => (
   <main className="bg-white" dir="rtl">
-    <BusinessPlansHero />
+    <Hero />
     <ChallengeSection />
     <ProofSection />
     <SolutionSection />
     <ServicesSection />
     <WhyUsSection />
-    <FinalCtaSection />
+    <ContactCtaSection
+      title="צריך תוכנית עסקית מקצועית?"
+      text="שיחת ייעוץ ראשונית ללא עלות. נבין את המטרה שלך ונסביר כיצד נוכל לבנות עבורך תוכנית מדויקת."
+    />
+    {relatedArticles.length ? (
+      <section className="mx-auto max-w-7xl px-4 py-12">
+        <RelatedArticlesSection articles={relatedArticles} t={t} isRtl={isRtl} />
+      </section>
+    ) : null}
   </main>
 );
