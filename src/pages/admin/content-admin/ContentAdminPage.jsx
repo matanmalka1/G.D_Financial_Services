@@ -75,10 +75,6 @@ export const ContentAdmin = () => {
   const filteredEntries = useMemo(
     () =>
       entriesWithMeta.filter((item) => {
-        if (activePage === "all" && item.pageKey === "inactive") {
-          return false;
-        }
-
         if (activePage !== "all" && item.pageKey !== activePage) {
           return false;
         }
@@ -143,7 +139,7 @@ export const ContentAdmin = () => {
         ...option,
         count:
           option.key === "all"
-            ? entriesWithMeta.filter((item) => item.pageKey !== "inactive").length
+            ? entriesWithMeta.length
             : entriesWithMeta.filter((item) => item.pageKey === option.key).length,
       })),
     [entriesWithMeta],

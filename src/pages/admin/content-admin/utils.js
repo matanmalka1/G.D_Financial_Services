@@ -1,45 +1,11 @@
 import { routePaths, routes } from "../../../routes/paths";
 import {
-  HUMAN_LABELS,
   PAGE_META,
   SECTION_LABELS,
-  SECTOR_LABELS,
   SEGMENT_LABELS,
 } from "./config";
 
-const prettifySlug = (value) =>
-  value
-    .split("-")
-    .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
-    .join(" ");
-
-export const getSectorLabel = (sectorId) =>
-  SECTOR_LABELS[sectorId] ?? prettifySlug(sectorId);
-
-const inactiveContentPrefixes = [
-  "home.bubbles.",
-  "sectorDetail.sectorDetails.",
-];
-
-const inactiveContentPaths = new Set([
-  "home.about.moreInfo",
-  "sectorDetail.mainDescription",
-  "sectorDetail.aboutDescription",
-  "sectorDetail.expertAnalysis",
-  "sectorDetail.customizedStrategy",
-  "sectorDetail.executiveSupport",
-  "sectors.aboutSector",
-  "sectors.ourServices",
-  "sectors.clientBenefits",
-  "sectors.businessPlansDesc",
-]);
-
-export const isInactiveContentPath = (path) =>
-  inactiveContentPaths.has(path) ||
-  inactiveContentPrefixes.some((prefix) => path.startsWith(prefix));
-
 export const getPageKey = (path) => {
-  if (isInactiveContentPath(path)) return "inactive";
   if (path.startsWith("home.")) return "home";
   if (path.startsWith("sectors.") || path.startsWith("sectorDetail.")) return "services";
   if (path.startsWith("news.")) return "news";
@@ -56,13 +22,13 @@ export const getPageKey = (path) => {
 };
 
 export const getItemHref = (path) => {
-  if (isInactiveContentPath(path)) return routePaths.home;
-  if (path.startsWith("sectors.")) return routePaths.sectors;
   if (path.startsWith("sectorDetail.sectorDetails.")) {
     const sectorId = path.split(".")[2];
     return routes.sectorDetail(sectorId);
   }
-  if (path.startsWith("sectorDetail.")) return routePaths.sectors;
+  if (path.startsWith("sectors.") || path.startsWith("sectorDetail.")) {
+    return routes.sectorDetail("business-plan");
+  }
   if (path.startsWith("news.")) return routePaths.news;
   if (path.startsWith("contact.") || path.startsWith("modalForm.")) {
     return routePaths.contact;
@@ -73,61 +39,10 @@ export const getItemHref = (path) => {
 export const getSectionMeta = (path) => {
   const parts = path.split(".");
 
-  if (isInactiveContentPath(path)) {
-    return {
-      key: `inactive-${parts[0]}-${parts[1] ?? "general"}`,
-      ...SECTION_LABELS.inactive,
-    };
-  }
-
   if (path.startsWith("sectors.")) {
     return {
       key: "sectors",
       ...SECTION_LABELS.sectors,
-    };
-  }
-
-  if (path.startsWith("sectorDetail.sectorDetails.")) {
-    const sectorId = parts[2];
-    const sectorLabel = getSectorLabel(sectorId);
-    const subSection = parts[3];
-
-    if (subSection === "bubbles") {
-      return {
-        key: `sector-${sectorId}-bubbles`,
-        label: `${sectorLabel} - בועות ערך`,
-        description: "הכותרות והתיאורים הקצרים שמציגים את הערך של השירות.",
-      };
-    }
-
-    if (subSection === "sections") {
-      return {
-        key: `sector-${sectorId}-sections`,
-        label: `${sectorLabel} - תוכן מפורט`,
-        description: "המקטעים הארוכים שמסבירים את השירות לעומק.",
-      };
-    }
-
-    if (subSection === "services") {
-      return {
-        key: `sector-${sectorId}-services`,
-        label: `${sectorLabel} - רשימת שירותים`,
-        description: "רשימת השירותים שמוצגת ללקוח בעמוד השירות.",
-      };
-    }
-
-    if (subSection === "benefits") {
-      return {
-        key: `sector-${sectorId}-benefits`,
-        label: `${sectorLabel} - יתרונות ללקוח`,
-        description: "הרשימה שמציגה מה הלקוח מרוויח מהשירות.",
-      };
-    }
-
-    return {
-      key: `sector-${sectorId}-general`,
-      label: `${sectorLabel} - כללי`,
-      description: "טקסטים כלליים של עמוד השירות.",
     };
   }
 
@@ -159,7 +74,7 @@ export const inferInputType = (path, value) => {
 export const inferMaxLength = (path, value) => {
   if (path.endsWith(".icon")) return 4;
   if (path.toLowerCase().includes("placeholder")) return 45;
-  if (/title|label|submit|contact|moreInfo|view|back|clear/i.test(path)) return 80;
+  if (/title|label|submit|contact|view|back|clear/i.test(path)) return 80;
   if (typeof value === "string" && value.length <= 80) return 90;
   return 400;
 };
@@ -265,11 +180,11 @@ export const getFieldLabel = (path) => {
   }
 
   const last = parts.at(-1);
-  return HUMAN_LABELS[last] ?? SEGMENT_LABELS[last] ?? "טקסט";
+  return SEGMENT_LABELS[last] ?? "טקסט";
 };
 
 export const getFocusArea = (path, value) => {
-  if (/submit|contact|view|back|clear|read|moreInfo/i.test(path)) {
+  if (/submit|contact|view|back|clear|read/i.test(path)) {
     return "buttons";
   }
 

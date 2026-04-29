@@ -1,4 +1,4 @@
-import { routePaths } from "../../../routes/paths";
+import { routePaths, routes } from "../../../routes/paths";
 
 export const ADMIN_PASSWORD = import.meta.env.VITE_ADMIN_PASSWORD;
 
@@ -33,11 +33,6 @@ export const PAGE_OPTIONS = [
     label: "תפריט, פוטר וכללי",
     description: "ניווט, פוטר וטקסטים שחוזרים בכמה מקומות באתר.",
   },
-  {
-    key: "inactive",
-    label: "תוכן לא פעיל",
-    description: "טקסטים קיימים בקבצי התוכן שלא מוצגים כרגע באתר.",
-  },
 ];
 
 export const QUICK_FILTERS = [
@@ -56,7 +51,7 @@ export const PAGE_META = {
   },
   services: {
     label: "שירותים",
-    href: routePaths.sectors,
+    href: routes.sectorDetail("business-plan"),
   },
   news: {
     label: "מאמרים",
@@ -70,20 +65,12 @@ export const PAGE_META = {
     label: "תפריט, פוטר וכללי",
     href: routePaths.home,
   },
-  inactive: {
-    label: "תוכן לא פעיל",
-    href: routePaths.home,
-  },
 };
 
 export const SECTION_LABELS = {
   "home.hero": {
     label: "המסך הראשון בדף הבית",
     description: "הכותרת והמשפט שהמבקר רואה מיד כשהוא נכנס לאתר.",
-  },
-  "home.bubbles": {
-    label: "שירותים קצרים ישנים",
-    description: "תוכן ישן שאינו מחובר כרגע לדף הבית החדש.",
   },
   "home.about": {
     label: "אזור אודות בדף הבית",
@@ -133,10 +120,6 @@ export const SECTION_LABELS = {
     label: "טקסטים כלליים",
     description: "כיתובים שחוזרים בכמה חלקים באתר.",
   },
-  inactive: {
-    label: "תוכן לא פעיל באתר הנוכחי",
-    description: "השדה נשמר בקבצי התוכן, אבל אינו מוצג כרגע במסכים הפעילים.",
-  },
 };
 
 export const SEGMENT_LABELS = {
@@ -147,7 +130,6 @@ export const SEGMENT_LABELS = {
   label: "שם שמוצג באתר",
   submit: "כפתור שליחה",
   contact: "כפתור יצירת קשר",
-  moreInfo: "כפתור מידע נוסף",
   searchPlaceholder: "טקסט עזר בשדה חיפוש",
   placeholder: "טקסט עזר",
   fullName: "תווית שם מלא",
@@ -187,9 +169,6 @@ export const SEGMENT_LABELS = {
   selectPlaceholder: "טקסט עזר בבחירת שירות",
   showingResults: "נוסח תוצאות חיפוש",
   bubbleTitle: "כותרת הבועות",
-  aboutDescription: "תיאור על השירות",
-  ourServices: "כותרת השירותים שלנו",
-  clientBenefits: "כותרת יתרונות ללקוחות",
   icon: "אייקון",
   brandTitle: "שם העסק בפוטר",
   brandDescription: "תיאור קצר בפוטר",
@@ -197,23 +176,4 @@ export const SEGMENT_LABELS = {
   quickLinksTitle: "כותרת קישורים מהירים",
   socialTitle: "כותרת רשתות חברתיות",
   copyright: "זכויות יוצרים",
-};
-
-export const SECTOR_LABELS = {
-  "business-plan": "תוכנית עסקית לבנק",
-  "business-presentations": "שירות מחלקה כלכלית במיקור חוץ",
-  "business-consulting": "ייעוץ עסקי",
-  "sell-side-advisory": "ליווי חברות למכירה",
-};
-
-export const HUMAN_LABELS = {
-  integrity: "ערך ליבה: יושרה",
-  integrityDesc: "תיאור הערך יושרה",
-  reliability: "ערך ליבה: אמינות",
-  reliabilityDesc: "תיאור הערך אמינות",
-  professionalism: "ערך ליבה: מקצועיות",
-  professionalismDesc: "תיאור הערך מקצועיות",
-  expertAnalysis: "יתרון: ניתוח מומחה",
-  customizedStrategy: "יתרון: אסטרטגיה מותאמת",
-  executiveSupport: "תמיכה ניהולית",
 };

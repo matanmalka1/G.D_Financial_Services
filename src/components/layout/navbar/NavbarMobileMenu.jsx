@@ -12,15 +12,6 @@ export const NavbarMobileMenu = ({
     id="mobile-nav"
     className="md:hidden bg-white border-t border-gray-100 py-4 px-4 flex flex-col space-y-4"
   >
-    <NavLink
-      to={routePaths.sectors}
-      onClick={onClose}
-      className={({ isActive }) =>
-        `font-medium ${isActive ? "text-slate-900" : "text-slate-700"}`
-      }
-    >
-      {t.nav.sectors}
-    </NavLink>
     <div className="py-2 border-y border-gray-50">
       {sectorOptions.map((opt) => (
         <button

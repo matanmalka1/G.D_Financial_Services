@@ -1,6 +1,5 @@
 export const routePaths = {
   home: "/",
-  sectors: "/sectors",
   sectorDetail: "/sectors/:id",
   news: "/news",
   newsDetail: "/news/:id",
@@ -11,7 +10,6 @@ export const routePaths = {
 // Helper builders to avoid manual string concatenation in components.
 export const routes = {
   home: () => routePaths.home,
-  sectors: () => routePaths.sectors,
   sectorDetail: (id) => `/sectors/${id}`,
   news: () => routePaths.news,
   newsDetail: (id) => `/news/${id}`,

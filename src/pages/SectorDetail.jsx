@@ -1,22 +1,33 @@
-import { useMemo, useState } from "react";
+import { useMemo } from "react";
 import { useParams, Link } from "react-router-dom";
 import { useSiteContent } from "../hooks/useSiteContent";
 import { useSeo } from "../hooks/useSeo";
 import { useContent } from "../hooks/useContent";
-import { ParallaxHeader } from "../components/common/ParallaxHeader";
-import { routePaths } from "../routes/paths";
-import { SectorServices } from "../components/common/sector/SectorServices";
-import { SectorBenefitsCard } from "../components/common/sector/SectorBenefitsCard";
-import { RelatedArticlesSection } from "../components/common/sector/RelatedArticlesSection";
-import { SectorValueBubbles } from "../components/common/sector/SectorValueBubbles";
+import { routes } from "../routes/paths";
 import { BusinessPlansPage } from "../components/common/sector/BusinessPlansPage";
 import { BusinessPresentationsPage } from "../components/common/sector/BusinessPresentationsPage";
 import { BusinessConsultingPage } from "../components/common/sector/BusinessConsultingPage";
 import { SellSideAdvisoryPage } from "../components/common/sector/SellSideAdvisoryPage";
-import { SectorHeroActions } from "../components/common/sector/SectorHeroActions";
 import { LoadBoundary, PageError, PageLoading } from "../components/common/LoadBoundary";
 import { ITEMS_PER_PAGE } from "../constants.js";
-import { sectorImages } from "../data/sectorImages";
+
+const NotFound = ({ t }) => (
+  <main className="min-h-screen bg-slate-50/30 px-4 py-24">
+    <div className="mx-auto flex min-h-[40vh] max-w-7xl items-center justify-center">
+      <div className="text-center">
+        <h2 className="mb-4 text-2xl font-bold text-slate-900">
+          {t.sectorDetail.notFound}
+        </h2>
+        <Link
+          to={routes.sectorDetail("business-plan")}
+          className="text-slate-600 underline hover:text-slate-900"
+        >
+          {t.sectorDetail.backToSectors}
+        </Link>
+      </div>
+    </div>
+  </main>
+);
 
 export const SectorDetail = () => {
   const { id } = useParams();
@@ -24,42 +35,53 @@ export const SectorDetail = () => {
   const { getSectorById, getRelatedArticles, error, refreshContent, loading } =
     useContent();
 
-  const [loadedImages, setLoadedImages] = useState({});
-
   const sector = getSectorById(id);
-  const detail = sector ? t.sectorDetail.sectorDetails[sector.id] : null;
-
   const sectorTitle = sector ? t.nav[sector.titleKey] : "";
-  const mainDescription = useMemo(() => {
-    const template = t?.sectorDetail?.mainDescription || "";
-    return template.replace(/\{sector\}/g, sectorTitle || "");
-  }, [t, sectorTitle]);
-  const aboutDescription = useMemo(() => {
-    const template =
-      detail?.aboutDescription || t?.sectorDetail?.aboutDescription || "";
-    return template.replace(/\{sector\}/g, (sectorTitle || "").toLowerCase());
-  }, [detail?.aboutDescription, t, sectorTitle]);
-  const longDescription = detail?.longDescription;
-  const sections = detail?.sections;
-  const bubbles = detail?.bubbles;
-  const bubbleTitle = detail?.bubbleTitle;
-  const imagesForSector = sectorImages[sector?.id] || [];
 
   useSeo({
     title: sectorTitle || t.nav.sectors,
-    description: mainDescription || undefined,
     ogImage: sector?.image,
   });
 
-  const header = sector ? (
-    <ParallaxHeader image={sector.image} title={sectorTitle}>
-      <SectorHeroActions />
-    </ParallaxHeader>
-  ) : null;
   const relatedArticles = useMemo(() => {
     if (!id) return [];
     return getRelatedArticles(id).slice(0, ITEMS_PER_PAGE.RELATED_ARTICLES);
   }, [id, getRelatedArticles]);
+
+  const page = (() => {
+    if (!sector) return <NotFound t={t} />;
+
+    switch (sector.id) {
+      case "business-plan":
+        return <BusinessPlansPage />;
+      case "business-presentations":
+        return (
+          <BusinessPresentationsPage
+            relatedArticles={relatedArticles}
+            t={t}
+            isRtl={isRtl}
+          />
+        );
+      case "business-consulting":
+        return (
+          <BusinessConsultingPage
+            relatedArticles={relatedArticles}
+            t={t}
+            isRtl={isRtl}
+          />
+        );
+      case "sell-side-advisory":
+        return (
+          <SellSideAdvisoryPage
+            relatedArticles={relatedArticles}
+            t={t}
+            isRtl={isRtl}
+          />
+        );
+      default:
+        return <NotFound t={t} />;
+    }
+  })();
 
   return (
     <LoadBoundary
@@ -74,226 +96,9 @@ export const SectorDetail = () => {
           onRetry={refreshContent}
         />
       }
-      loadingFallback={<PageLoading header={header} count={3} />}
+      loadingFallback={<PageLoading count={3} />}
     >
-      {sector?.id === "business-plan" && detail ? (
-        <BusinessPlansPage />
-      ) : sector?.id === "business-presentations" && detail ? (
-        <BusinessPresentationsPage
-          sectorTitle={sectorTitle}
-          mainDescription={mainDescription}
-          detail={detail}
-          relatedArticles={relatedArticles}
-          t={t}
-          isRtl={isRtl}
-        />
-      ) : sector?.id === "business-consulting" && detail ? (
-        <BusinessConsultingPage
-          relatedArticles={relatedArticles}
-          t={t}
-          isRtl={isRtl}
-        />
-      ) : sector?.id === "sell-side-advisory" && detail ? (
-        <SellSideAdvisoryPage
-          relatedArticles={relatedArticles}
-          t={t}
-          isRtl={isRtl}
-        />
-      ) : (
-      <main className="bg-slate-50/30 min-h-screen pb-20">
-        {header}
-
-        <section className="py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {!sector || !detail ? (
-            <div className="min-h-[40vh] flex items-center justify-center">
-              <div className="text-center">
-                <h2 className="text-2xl font-bold text-slate-900 mb-4">
-                  {t.sectorDetail.notFound}
-                </h2>
-                <Link
-                  to={routePaths.sectors}
-                  className="text-slate-600 hover:text-slate-900 underline"
-                >
-                  {t.sectorDetail.backToSectors}
-                </Link>
-              </div>
-            </div>
-          ) : (
-            <>
-              {bubbles?.length ? (
-                <div className="mb-20">
-                  <SectorValueBubbles
-                    title={bubbleTitle || sectorTitle}
-                    bubbles={bubbles}
-                  />
-                </div>
-              ) : null}
-
-              <div className="bg-white p-8 md:p-16 rounded-[2.5rem] shadow-xl shadow-slate-200/50 border border-slate-100 mb-20 relative overflow-hidden">
-                <div className="absolute top-0 left-0 w-2 h-full bg-slate-900" />
-                <h2 className="text-3xl md:text-4xl font-bold mb-8 text-slate-900">
-                  {sectorTitle}
-                </h2>
-                <p className="text-xl text-slate-600 leading-relaxed mb-12 max-w-5xl">
-                  {mainDescription}
-                </p>
-
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                  {[
-                    { label: t.sectorDetail.expertAnalysis, icon: "📊" },
-                    { label: t.sectorDetail.customizedStrategy, icon: "🎯" },
-                    { label: t.sectorDetail.executiveSupport, icon: "🤝" },
-                  ].map((item, i) => (
-                    <div
-                      key={i}
-                      className="flex items-center gap-5 p-6 rounded-2xl bg-slate-50 border border-slate-100 group hover:bg-white hover:shadow-md transition-all duration-300"
-                    >
-                      <span className="text-2xl group-hover:scale-110 transition-transform">
-                        {item.icon}
-                      </span>
-                      <span className="font-bold text-slate-800">{item.label}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 mb-24">
-                <div className="lg:col-span-2 space-y-8">
-                  <h3 className="text-3xl font-bold text-slate-900 border-b-2 border-slate-900 inline-block pb-2">
-                    {t.sectors.aboutSector.replace("{name}", sectorTitle)}
-                  </h3>
-                  <p className="text-lg text-slate-600 leading-relaxed">
-                    {aboutDescription}
-                  </p>
-                  {sections && sections.length > 0 ? (
-                    <div className="space-y-10">
-                      {sections.map((sec, idx) => {
-                        const isBusinessPlan = sector?.id === "business-plan";
-                        const isBusinessPresentations =
-                          sector?.id === "business-presentations";
-                        const isSellSide = sector?.id === "sell-side-advisory";
-                        const imgKey = `${sector?.id || "sector"}-${idx}`;
-                        const skipImage =
-                          (isBusinessPlan && (idx === 0 || idx === 2)) ||
-                          (isBusinessPresentations && idx === 2) ||
-                          (isSellSide && idx === 0);
-                        const overrideImage = isBusinessPlan
-                          ? idx === 4
-                            ? "/sectorBusinessPlan/real%20estate.avif"
-                            : idx === 5
-                              ? "/sectorBusinessPlan/create%20new%20business.avif"
-                              : null
-                          : isBusinessPresentations && idx === 3
-                            ? "/sectorBusinessPresentations/board%20presentations.avif"
-                            : isSellSide && idx === 1
-                              ? "/sectorSellSide/company_sale_advisory.avif"
-                            : isSellSide && idx === 2
-                              ? "/sectorSellSide/valuation_exit_starategy.avif"
-                              : isSellSide && idx === 3
-                            ? "/sectorSellSide/financial_&_legal_preparation.avif"
-                            : isSellSide && idx === 4
-                              ? "/sectorSellSide/identifying_potential_buyers.avif"
-                              : isSellSide && idx === 5
-                                ? "/sectorSellSide/assistance_till_negotiation.avif"
-                              : isSellSide && idx === 6
-                                ? "/sectorSellSide/investor_presentations_kpi.avif"
-                                : null;
-                        const imageSrc =
-                          overrideImage ||
-                          (imagesForSector.length > 0
-                            ? imagesForSector[idx % imagesForSector.length]
-                            : null);
-                        const isLoaded = loadedImages[imgKey];
-
-                        return (
-                          <div
-                            key={idx}
-                            id={sec.id || undefined}
-                            className="bg-white p-8 rounded-[1.5rem] border border-slate-100 shadow-sm text-slate-700 text-base leading-relaxed"
-                          >
-                            <div className="grid grid-cols-1 lg:grid-cols-[3fr,1fr] gap-10 items-start">
-                              <div className="space-y-3">
-                                <h4 className="text-xl font-bold text-slate-900">
-                                  {sec.title}
-                                </h4>
-                                {sec.stepLinks && (
-                                  <ul className="space-y-2 text-indigo-600 font-semibold">
-                                    {sec.stepLinks.map((step) => (
-                                      <li key={step.id}>
-                                        <a
-                                          href={`#${step.id}`}
-                                          className="hover:text-indigo-800 transition-colors"
-                                        >
-                                          {step.label}
-                                        </a>
-                                      </li>
-                                    ))}
-                                  </ul>
-                                )}
-                                {(Array.isArray(sec.body)
-                                  ? sec.body
-                                  : (sec.body || "").split(/\n\s*\n/)
-                                ).map((para, pIdx) => (
-                                  <p key={pIdx}>{para.trim()}</p>
-                                ))}
-                                {sec.extra && <p className="text-slate-600">{sec.extra}</p>}
-                              </div>
-                              {!skipImage && imageSrc ? (
-                                <div className="rounded-2xl overflow-hidden border border-slate-100 shadow-sm group transition duration-500 ease-out hover:-translate-y-1 hover:shadow-md">
-                                  <img
-                                    src={imageSrc}
-                                    alt={`${sectorTitle} illustration ${idx + 1}`}
-                                    className={`w-full h-full object-cover transition duration-700 ease-out ${
-                                      isLoaded ? "opacity-100 scale-100" : "opacity-0 scale-105"
-                                    } group-hover:scale-105`}
-                                    loading="lazy"
-                                    onLoad={() =>
-                                      setLoadedImages((prev) => ({ ...prev, [imgKey]: true }))
-                                    }
-                                  />
-                                </div>
-                              ) : null}
-                            </div>
-                          </div>
-                        );
-                      })}
-                    </div>
-                  ) : longDescription ? (
-                    <div className="bg-white p-8 rounded-[1.5rem] border border-slate-100 shadow-sm text-slate-700 text-base leading-relaxed space-y-4">
-                      {(Array.isArray(longDescription)
-                        ? longDescription
-                        : (longDescription || "").split(/\n\s*\n/)
-                      ).map((para, idx) => (
-                        <p key={idx}>{para.trim()}</p>
-                      ))}
-                    </div>
-                  ) : null}
-                </div>
-
-                <div className="lg:col-span-1 space-y-8">
-                  <SectorServices
-                    title={t.sectors.ourServices}
-                    services={detail?.services}
-                  />
-                  <SectorBenefitsCard
-                    title={t.sectors.clientBenefits}
-                    benefits={detail?.benefits}
-                    ctaLabel={t.nav.contact}
-                    ctaTo={routePaths.contact}
-                  />
-                </div>
-              </div>
-
-              <RelatedArticlesSection
-                articles={relatedArticles}
-                t={t}
-                isRtl={isRtl}
-              />
-            </>
-          )}
-        </section>
-      </main>
-      )}
+      {page}
     </LoadBoundary>
   );
 };

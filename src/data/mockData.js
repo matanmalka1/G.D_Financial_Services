@@ -259,28 +259,24 @@ export const sectors = [
     id: 'business-presentations',
     path: '/sectors/business-presentations',
     titleKey: 'businessPresentations',
-    image: 'https://picsum.photos/seed/presentation/1200/600',
-    descriptionKey: 'businessPresentationsDesc'
+    image: 'https://picsum.photos/seed/presentation/1200/600'
   },
   {
     id: 'sell-side-advisory',
     path: '/sectors/sell-side-advisory',
     titleKey: 'sellSideAdvisory',
-    image: 'https://picsum.photos/seed/sellside/1200/600',
-    descriptionKey: 'sellSideAdvisoryDesc'
+    image: 'https://picsum.photos/seed/sellside/1200/600'
   },
   {
     id: 'business-consulting',
     path: '/sectors/business-consulting',
     titleKey: 'businessConsulting',
-    image: 'https://picsum.photos/seed/consulting/1200/600',
-    descriptionKey: 'businessConsultingDesc'
+    image: 'https://picsum.photos/seed/consulting/1200/600'
   },
   {
     id: 'business-plan',
     path: '/sectors/business-plan',
     titleKey: 'businessPlans',
-    image: 'https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?auto=format&fit=crop&w=1400&q=80',
-    descriptionKey: 'businessPlansDesc'
+    image: 'https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?auto=format&fit=crop&w=1400&q=80'
   }
 ];
