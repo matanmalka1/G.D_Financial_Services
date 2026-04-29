@@ -92,10 +92,6 @@ export const SECTION_LABELS = {
     label: "לקוחות וסקטורים",
     description: "אזור האמון והתחומים שבהם העסק פועל.",
   },
-  sectors: {
-    label: "עמוד השירותים",
-    description: "כותרות, חיפוש וכפתורים בעמוד השירותים.",
-  },
   news: {
     label: "עמוד מאמרים",
     description: "הטקסטים שסביב אזור המאמרים והחיפוש.",

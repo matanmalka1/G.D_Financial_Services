@@ -7,7 +7,7 @@ import {
 
 export const getPageKey = (path) => {
   if (path.startsWith("home.")) return "home";
-  if (path.startsWith("sectors.") || path.startsWith("sectorDetail.")) return "services";
+  if (path.startsWith("sectorDetail.")) return "services";
   if (path.startsWith("news.")) return "news";
   if (path.startsWith("contact.") || path.startsWith("modalForm.")) return "contact";
   if (
@@ -26,7 +26,7 @@ export const getItemHref = (path) => {
     const sectorId = path.split(".")[2];
     return routes.sectorDetail(sectorId);
   }
-  if (path.startsWith("sectors.") || path.startsWith("sectorDetail.")) {
+  if (path.startsWith("sectorDetail.")) {
     return routes.sectorDetail("business-plan");
   }
   if (path.startsWith("news.")) return routePaths.news;
@@ -38,13 +38,6 @@ export const getItemHref = (path) => {
 
 export const getSectionMeta = (path) => {
   const parts = path.split(".");
-
-  if (path.startsWith("sectors.")) {
-    return {
-      key: "sectors",
-      ...SECTION_LABELS.sectors,
-    };
-  }
 
   const sectionKey = parts.length >= 2 ? `${parts[0]}.${parts[1]}` : parts[0];
   if (SECTION_LABELS[sectionKey]) {
@@ -158,13 +151,6 @@ const getArrayBasedLabel = (parts) => {
     const itemIndex = Number(parts.at(-1)) + 1;
     if (!Number.isNaN(itemIndex - 1)) {
       return `יתרון ${itemIndex}`;
-    }
-  }
-
-  if (parts.includes("sectors")) {
-    const itemIndex = Number(parts[parts.indexOf("sectors") + 1]) + 1;
-    if (parts.at(-1) === "label") {
-      return `שם תחום ${itemIndex}`;
     }
   }
 
