@@ -20,7 +20,6 @@ export const Navbar = () => {
       { id: "business-presentations", labelKey: "businessPresentations" },
       { id: "sell-side-advisory", labelKey: "sellSideAdvisory" },
       { id: "business-consulting", labelKey: "businessConsulting" },
-      { id: "ongoing-financial-advisory", labelKey: "ongoingAdvisory" },
     ],
     [],
   );
@@ -71,7 +70,6 @@ export const Navbar = () => {
           sectorOptions={sectorOptions}
           onSectorChange={handleSectorChange}
           onClose={() => setMobileMenuOpen(false)}
-          navigate={navigate}
         />
       )}
     </nav>

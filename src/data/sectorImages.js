@@ -28,5 +28,4 @@ export const sectorImages = {
     "/sectorBusinessConsulting/supplier%20analysis.avif",
     "/sectorBusinessConsulting/udget%20planning.avif",
   ],
-  "ongoing-financial-advisory": ["/sectorOngoingAdvisory/graph.avif"],
 };

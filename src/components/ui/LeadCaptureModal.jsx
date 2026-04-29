@@ -52,7 +52,6 @@ export const LeadCaptureModal = ({
       return [
         { value: "business-plan", label: t.nav.businessPlans },
         { value: "sell-side", label: t.nav.sellSideAdvisory },
-        { value: "banking", label: t.nav.ongoingAdvisory },
         { value: "presentations", label: t.nav.businessPresentations },
       ].filter((opt) => Boolean(opt.label));
     return [];

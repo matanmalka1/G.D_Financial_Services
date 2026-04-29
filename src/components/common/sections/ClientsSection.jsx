@@ -22,9 +22,14 @@ export const ClientsSection = () => {
           <h2 className="text-3xl md:text-4xl font-bold text-slate-900">
             {t.home.clients.title}
           </h2>
-          <p className="text-lg text-slate-600 leading-relaxed">
-            {t.home.clients.body}
-          </p>
+          {(Array.isArray(t.home.clients.body)
+            ? t.home.clients.body
+            : [t.home.clients.body]
+          ).map((paragraph) => (
+            <p key={paragraph} className="text-lg text-slate-600 leading-relaxed">
+              {paragraph}
+            </p>
+          ))}
         </div>
 
         <div className="mt-16 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-6 md:gap-8">

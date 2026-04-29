@@ -1,4 +1,5 @@
 import { NavLink } from "react-router-dom";
+import { Phone } from "lucide-react";
 import { routePaths } from "../../../routes/paths";
 
 export const NavbarMobileMenu = ({
@@ -6,21 +7,11 @@ export const NavbarMobileMenu = ({
   sectorOptions,
   onSectorChange,
   onClose,
-  navigate,
 }) => (
   <div
     id="mobile-nav"
     className="md:hidden bg-white border-t border-gray-100 py-4 px-4 flex flex-col space-y-4"
   >
-    <NavLink
-      to={routePaths.companyProfile}
-      onClick={onClose}
-      className={({ isActive }) =>
-        `font-medium ${isActive ? "text-slate-900" : "text-slate-700"}`
-      }
-    >
-      {t.nav.profile}
-    </NavLink>
     <NavLink
       to={routePaths.sectors}
       onClick={onClose}
@@ -41,24 +32,27 @@ export const NavbarMobileMenu = ({
         </button>
       ))}
     </div>
-    <button
-      onClick={() => {
-        navigate(routePaths.news);
-        onClose();
-      }}
-      className="block w-full border-y border-gray-50 py-4 pl-4 text-left text-slate-700 rtl:pr-4 rtl:text-right"
+    <NavLink
+      to={routePaths.news}
+      onClick={onClose}
+      className={({ isActive }) =>
+        `block w-full border-y border-gray-50 py-4 pl-4 text-left rtl:pr-4 rtl:text-right font-medium ${isActive ? "text-slate-900" : "text-slate-700"}`
+      }
     >
       {t.nav.news}
-    </button>
+    </NavLink>
     <NavLink
       to={routePaths.contact}
       onClick={onClose}
       className={({ isActive }) =>
-        `text-center py-2 rounded-md ${
-          isActive ? "bg-slate-800 text-white" : "bg-slate-900 text-white"
+        `inline-flex items-center justify-center gap-2 rounded-lg border px-5 py-3 text-center font-bold transition-all ${
+          isActive
+            ? "border-slate-900 bg-slate-900 text-white"
+            : "border-slate-300 bg-white text-slate-900 hover:bg-slate-100"
         }`
       }
     >
+      <Phone className="h-4 w-4" />
       {t.nav.contact}
     </NavLink>
     <a

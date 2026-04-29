@@ -3,7 +3,6 @@ import { useSiteContent } from "../hooks/useSiteContent";
 import { useContent } from "../hooks/useContent";
 import { useDebounce } from "../hooks/useDebounce";
 import { useSeo } from "../hooks/useSeo";
-import { ParallaxHeader } from "../components/common/ParallaxHeader";
 import { SectionHeading } from "../components/ui/SectionHeading";
 import { NewsCard } from "../components/ui/NewsCard";
 import { SearchBar } from "../components/ui/SearchBar";
@@ -16,6 +15,22 @@ import { getArticleSearchValues } from "../services/contentService";
 
 const ARTICLES_PER_PAGE = ITEMS_PER_PAGE.NEWS;
 
+const NewsHero = ({ title }) => (
+  <section className="relative overflow-hidden bg-slate-900 px-4 py-24 text-white sm:px-6 lg:px-8 lg:py-32">
+    <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.06)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.06)_1px,transparent_1px)] bg-[size:60px_60px]" />
+    <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_80%_30%,rgba(255,255,255,0.14),transparent_55%),radial-gradient(ellipse_at_15%_80%,rgba(255,255,255,0.08),transparent_45%)]" />
+
+    <div className="relative mx-auto max-w-7xl text-center">
+      <div className="mb-8 inline-flex items-center justify-center rounded-full border border-white/30 bg-white/10 px-5 py-2 text-sm font-semibold text-white">
+        G.D Finance
+      </div>
+      <h1 className="font-serif text-4xl font-black leading-tight md:text-6xl">
+        {title}
+      </h1>
+    </div>
+  </section>
+);
+
 export const News = () => {
   const { t, isRtl } = useSiteContent();
   useSeo({
@@ -27,12 +42,7 @@ export const News = () => {
   const { articles, error, refreshContent, loading } = useContent();
   const [currentPage, setCurrentPage] = useState(1);
 
-  const header = (
-    <ParallaxHeader
-      image="https://images.unsplash.com/photo-1504711434969-e33886168f5c?auto=format&fit=crop&q=80&w=2000"
-      title={t.news.title}
-    />
-  );
+  const header = <NewsHero title={t.news.title} />;
 
   const filtered = useMemo(
     () => filterBySearch(articles, debouncedSearch, getArticleSearchValues),
@@ -91,11 +101,11 @@ export const News = () => {
       }
       loadingFallback={<PageLoading header={header} count={9} />}
     >
-      <main className="min-h-screen bg-slate-50/30 pb-20">
+      <main className="min-h-screen bg-white pb-20">
         {header}
 
-        <section className="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="mb-16 max-w-2xl mx-auto space-y-4">
+        <section className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
+          <div className="mx-auto -mt-32 mb-16 max-w-2xl space-y-4 md:-mt-36">
             <SearchBar
               value={search}
               onChange={handleSearchChange}
@@ -122,7 +132,7 @@ export const News = () => {
             }
           />
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
             {paginatedArticles.length > 0 ? (
               paginatedArticles.map((article) => (
                 <NewsCard

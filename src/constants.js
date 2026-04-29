@@ -9,7 +9,7 @@ export const STORAGE_KEYS = {
 export const ITEMS_PER_PAGE = {
   NEWS: 9,
   RELATED_ARTICLES: 3,
-  FEATURED_ARTICLES: 5,
+  FEATURED_ARTICLES: 4,
 };
 
 export const sectorKeywords = {
@@ -39,16 +39,6 @@ export const sectorKeywords = {
     "ייעוץ",
     "אסטרטגיה",
     "צמיחה",
-  ],
-  "ongoing-financial-advisory": [
-    "advisory",
-    "CFO",
-    "long-term",
-    "partner",
-    "budgeting",
-    "פיננסי",
-    "סמנכ\"ל",
-    "תקצוב",
   ],
   "business-plan": [
     "business plan",

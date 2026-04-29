@@ -4,7 +4,6 @@ import { ArrowLeft, ArrowRight } from "lucide-react";
 import { useSiteContent } from "../hooks/useSiteContent";
 import { useSeo } from "../hooks/useSeo";
 import { useContent } from "../hooks/useContent";
-import { ParallaxHeader } from "../components/common/ParallaxHeader";
 import {
   LoadBoundary,
   PageError,
@@ -14,16 +13,43 @@ import { routes } from "../routes/paths";
 
 const DEFAULT_IMAGE =
   "https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?auto=format&fit=crop&w=2000&q=80&sat=-20";
-const PAGE_SHELL_CLASS = "min-h-screen bg-slate-50/30";
+const PAGE_SHELL_CLASS = "min-h-screen bg-white";
 const PAGE_SECTION_CLASS = "max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16";
-const ARTICLE_SECTION_CLASS = "max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16";
+const ARTICLE_SECTION_CLASS = "max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16";
 const ARTICLE_CARD_CLASS =
-  "bg-white border border-slate-100 shadow-xl shadow-slate-200/50 rounded-[1.75rem] overflow-hidden";
+  "overflow-hidden rounded-3xl border border-slate-200 bg-stone-50 shadow-xl shadow-slate-200/50";
 const ARTICLE_INNER_CLASS = "max-w-3xl mx-auto px-5 py-8 sm:px-8 sm:py-10 lg:px-10 lg:py-12";
 const ARTICLE_TEXT_CLASS = "text-[1.05rem] sm:text-lg leading-8 sm:leading-9 text-slate-700";
 const PARAGRAPH_LABEL_PATTERN = /^([^:]{2,42}):\s+(.+)$/;
 const NUMBERED_HEADING_PATTERN = /^(\d+)\.\s+(.+)$/;
 const SHORT_HEADING_WORD_LIMIT = 10;
+
+const ArticleHero = ({ title, image }) => (
+  <section className="relative overflow-hidden bg-slate-900 px-4 py-24 text-white sm:px-6 lg:px-8 lg:py-32">
+    <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.06)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.06)_1px,transparent_1px)] bg-[size:60px_60px]" />
+    <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_80%_30%,rgba(255,255,255,0.14),transparent_55%),radial-gradient(ellipse_at_15%_80%,rgba(255,255,255,0.08),transparent_45%)]" />
+
+    <div className="relative mx-auto grid max-w-7xl items-center gap-10 lg:grid-cols-[1fr_380px]">
+      <div className="text-center lg:text-right">
+        <div className="mb-8 inline-flex items-center justify-center rounded-full border border-white/30 bg-white/10 px-5 py-2 text-sm font-semibold text-white">
+          G.D Finance
+        </div>
+        <h1 className="font-serif text-4xl font-black leading-tight md:text-6xl">
+          {title}
+        </h1>
+      </div>
+      <div className="mx-auto hidden w-full max-w-sm overflow-hidden rounded-3xl border border-white/15 bg-white/10 shadow-2xl shadow-slate-950/25 lg:block">
+        <img
+          src={image}
+          alt=""
+          className="aspect-[4/3] w-full object-cover"
+          loading="lazy"
+          aria-hidden="true"
+        />
+      </div>
+    </div>
+  </section>
+);
 
 const getLocalizedValue = (value) => value?.he || value?.en || value;
 
@@ -140,7 +166,7 @@ export const Article = () => {
     .join(" · ");
 
   const header = (
-    <ParallaxHeader
+    <ArticleHero
       image={article?.image || DEFAULT_IMAGE}
       title={title || t.news.title}
     />
@@ -201,7 +227,7 @@ export const Article = () => {
 
                 <header className="mb-10 border-b border-slate-200 pb-10">
                   <p className="mb-4 text-sm font-bold text-slate-500">{articleMeta}</p>
-                  <h2 className="text-3xl font-bold leading-tight text-slate-950 sm:text-4xl">
+                  <h2 className="font-serif text-3xl font-black leading-tight text-slate-950 sm:text-4xl">
                     {title}
                   </h2>
                   {excerpt && (

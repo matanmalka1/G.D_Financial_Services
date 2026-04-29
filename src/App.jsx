@@ -7,7 +7,6 @@ import {
 import { Layout } from "./components/layout/Layout";
 import { routePaths } from "./routes/paths";
 import { Home } from "./pages/Home";
-import { CompanyProfile } from "./pages/CompanyProfile";
 import { Sectors } from "./pages/Sectors";
 import { SectorDetail } from "./pages/SectorDetail";
 import { News } from "./pages/News";
@@ -20,7 +19,6 @@ export const App = () => (
     <Layout>
       <Routes>
         <Route path={routePaths.home} element={<Home />} />
-        <Route path={routePaths.companyProfile} element={<CompanyProfile />} />
         <Route path={routePaths.sectors} element={<Sectors />} />
         <Route path={routePaths.sectorDetail} element={<SectorDetail />} />
         <Route path={routePaths.news} element={<News />} />

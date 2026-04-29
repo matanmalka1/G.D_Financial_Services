@@ -28,8 +28,18 @@ const FooterContact = ({ t }) => (
       {t.footer.addressTitle}
     </h3>
     <p className="text-sm text-slate-600 mb-2">{t.footer.address}</p>
-    <p className="text-sm text-slate-600 mb-2">{t.footer.email}</p>
-    <p className="text-sm text-slate-600 ">{t.footer.phone}</p>
+    <a
+      href={`mailto:${t.footer.email}`}
+      className="block text-sm text-slate-600 mb-2 hover:text-slate-900 transition-colors"
+    >
+      {t.footer.email}
+    </a>
+    <a
+      href={`tel:${t.footer.phone?.replace(/[-\s]/g, "")}`}
+      className="block text-sm text-slate-600 hover:text-slate-900 transition-colors"
+    >
+      {t.footer.phone}
+    </a>
   </div>
 );
 
@@ -42,11 +52,6 @@ const FooterLinks = ({ t }) => (
       <li>
         <Link className="hover:text-slate-900" to={routePaths.home}>
           {t.nav.home}
-        </Link>
-      </li>
-      <li>
-        <Link className="hover:text-slate-900" to={routePaths.companyProfile}>
-          {t.nav.profile}
         </Link>
       </li>
       <li>

@@ -196,7 +196,6 @@ export const SECTOR_LABELS = {
   "business-plan": "תוכנית עסקית",
   "business-presentations": "מצגות עסקיות",
   "business-consulting": "ייעוץ עסקי",
-  "ongoing-financial-advisory": "ליווי פיננסי שוטף",
   "sell-side-advisory": "ליווי מכירה ועסקאות",
 };
 

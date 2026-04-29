@@ -44,7 +44,6 @@ export const Contact = () => {
     { value: "Business Presentations", label: t.nav.businessPresentations },
     { value: "Sell-side Advisory", label: t.nav.sellSideAdvisory },
     { value: "Business Consulting", label: t.nav.businessConsulting },
-    { value: "Ongoing Advisory", label: t.nav.ongoingAdvisory },
   ];
 
   return (

@@ -9,6 +9,11 @@ import { SectorServices } from "../components/common/sector/SectorServices";
 import { SectorBenefitsCard } from "../components/common/sector/SectorBenefitsCard";
 import { RelatedArticlesSection } from "../components/common/sector/RelatedArticlesSection";
 import { SectorValueBubbles } from "../components/common/sector/SectorValueBubbles";
+import { BusinessPlansPage } from "../components/common/sector/BusinessPlansPage";
+import { BusinessPresentationsPage } from "../components/common/sector/BusinessPresentationsPage";
+import { BusinessConsultingPage } from "../components/common/sector/BusinessConsultingPage";
+import { SellSideAdvisoryPage } from "../components/common/sector/SellSideAdvisoryPage";
+import { SectorHeroActions } from "../components/common/sector/SectorHeroActions";
 import { LoadBoundary, PageError, PageLoading } from "../components/common/LoadBoundary";
 import { ITEMS_PER_PAGE } from "../constants.js";
 import { sectorImages } from "../data/sectorImages";
@@ -47,7 +52,9 @@ export const SectorDetail = () => {
   });
 
   const header = sector ? (
-    <ParallaxHeader image={sector.image} title={sectorTitle} />
+    <ParallaxHeader image={sector.image} title={sectorTitle}>
+      <SectorHeroActions />
+    </ParallaxHeader>
   ) : null;
   const relatedArticles = useMemo(() => {
     if (!id) return [];
@@ -69,6 +76,30 @@ export const SectorDetail = () => {
       }
       loadingFallback={<PageLoading header={header} count={3} />}
     >
+      {sector?.id === "business-plan" && detail ? (
+        <BusinessPlansPage />
+      ) : sector?.id === "business-presentations" && detail ? (
+        <BusinessPresentationsPage
+          sectorTitle={sectorTitle}
+          mainDescription={mainDescription}
+          detail={detail}
+          relatedArticles={relatedArticles}
+          t={t}
+          isRtl={isRtl}
+        />
+      ) : sector?.id === "business-consulting" && detail ? (
+        <BusinessConsultingPage
+          relatedArticles={relatedArticles}
+          t={t}
+          isRtl={isRtl}
+        />
+      ) : sector?.id === "sell-side-advisory" && detail ? (
+        <SellSideAdvisoryPage
+          relatedArticles={relatedArticles}
+          t={t}
+          isRtl={isRtl}
+        />
+      ) : (
       <main className="bg-slate-50/30 min-h-screen pb-20">
         {header}
 
@@ -141,12 +172,10 @@ export const SectorDetail = () => {
                         const isBusinessPresentations =
                           sector?.id === "business-presentations";
                         const isSellSide = sector?.id === "sell-side-advisory";
-                        const isOngoing = sector?.id === "ongoing-financial-advisory";
                         const imgKey = `${sector?.id || "sector"}-${idx}`;
                         const skipImage =
                           (isBusinessPlan && (idx === 0 || idx === 2)) ||
                           (isBusinessPresentations && idx === 2) ||
-                          (isOngoing && idx > 0) ||
                           (isSellSide && idx === 0);
                         const overrideImage = isBusinessPlan
                           ? idx === 4
@@ -264,6 +293,7 @@ export const SectorDetail = () => {
           )}
         </section>
       </main>
+      )}
     </LoadBoundary>
   );
 };

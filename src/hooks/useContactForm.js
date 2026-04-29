@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { buildContactSchema } from "../validation/contactSchema";
@@ -9,24 +10,24 @@ import { buildContactSchema } from "../validation/contactSchema";
 export const useContactForm = (t, onSuccess, options = {}) => {
   const { includeMessage = true, includeService = true } = options;
 
-  const schema = buildContactSchema(t);
-  const fieldsToOmit = {};
-  if (!includeMessage) {
-    fieldsToOmit.message = true;
-  }
-  if (!includeService) {
-    fieldsToOmit.service = true;
-  }
-  const activeSchema =
-    Object.keys(fieldsToOmit).length > 0 ? schema.omit(fieldsToOmit) : schema;
+  const activeSchema = useMemo(() => {
+    const schema = buildContactSchema(t);
+    const fieldsToOmit = {};
+    if (!includeMessage) fieldsToOmit.message = true;
+    if (!includeService) fieldsToOmit.service = true;
+    return Object.keys(fieldsToOmit).length > 0 ? schema.omit(fieldsToOmit) : schema;
+  }, [t, includeMessage, includeService]);
 
-  const defaultValues = {
-    fullName: "",
-    email: "",
-    phone: "",
-    ...(includeService ? { service: "" } : {}),
-    ...(includeMessage ? { message: "" } : {}),
-  };
+  const defaultValues = useMemo(
+    () => ({
+      fullName: "",
+      email: "",
+      phone: "",
+      ...(includeService ? { service: "" } : {}),
+      ...(includeMessage ? { message: "" } : {}),
+    }),
+    [includeService, includeMessage],
+  );
 
   const form = useForm({
     resolver: zodResolver(activeSchema),

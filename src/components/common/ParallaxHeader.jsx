@@ -3,6 +3,7 @@ export const ParallaxHeader = ({
   mobileImage = image,
   title,
   subtitle,
+  children,
   height = "h-[500px]",
   overlayOpacity = "bg-black/40",
 }) => {
@@ -30,6 +31,7 @@ export const ParallaxHeader = ({
             {subtitle}
           </p>
         )}
+        {children ? <div className="mt-8">{children}</div> : null}
       </div>
     </div>
   );

@@ -12,11 +12,10 @@
     "sectors": "מגזרי פעילות",
     "news": "מאמרים",
     "contact": "צור קשר",
-    "businessPlans": "תוכניות עסקיות",
-    "businessPresentations": "מצגות עסקיות",
-    "sellSideAdvisory": "ליווי לצד המכירה",
-    "businessConsulting": "ליווי עסקי",
-    "ongoingAdvisory": "ליווי פיננסי שוטף"
+    "businessPlans": "תוכנית עסקית לבנק",
+    "businessPresentations": "שירות מחלקה כלכלית במיקור חוץ",
+    "sellSideAdvisory": "ליווי חברות למכירה",
+    "businessConsulting": "ייעוץ עסקי"
   },
   "footer": {
     "brandTitle": "G.D Financial Services",

@@ -128,31 +128,6 @@ export const mockArticles = [
     }
   },
   {
-    id: '6',
-    title: {
-      en: "Ongoing Advisory: Why It Matters",
-      he: "ייעוץ שוטף: למה זה חשוב"
-    },
-    date: "2023-10-15",
-    excerpt: {
-      en: "The benefits of having a long-term financial partner rather than just project-based consulting.",
-      he: "היתרונות של שותף פיננסי לטווח ארוך במקום ייעוץ מבוסס פרויקטים בלבד."
-    },
-    image: "https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?auto=format&fit=crop&w=1600&q=80&sat=-30",
-    content: {
-      en: [
-        "Project work fixes symptoms; ongoing advisory fixes systems. A retained partner keeps models, dashboards, and board materials current so decisions stay data-driven.",
-        "Continuity reduces key-person risk. The advisory team knows the business rhythms, so fundraising, banking talks, or M&A can start without a relearn cycle.",
-        "For founders, it also means a sparring partner on pricing, hiring pace, and capital allocation—topics that rarely fit into a single project scope."
-      ],
-      he: [
-        "עבודה פרויקטלית מטפלת בסימפטומים; ליווי שוטף מטפל במערכת. שותף צמוד מחזיק מודלים, דשבורדים וחומרי דירקטוריון מעודכנים כדי שהחלטות יישארו מבוססות נתונים.",
-        "המשכיות מצמצמת סיכון תלות באדם אחד. הצוות המלווה מכיר את קצב העסק, ולכן אפשר לפתוח גיוס, מו\"מ בנקאי או M&A בלי עקומת למידה מחדש.",
-        "עבור יזמים זה גם שותף להתלבטות על תמחור, קצב גיוסים והקצאת הון – נושאים שלא נכנסים בקלות למסגרת של פרויקט בודד."
-      ]
-    }
-  },
-  {
     id: '7',
     title: {
       en: "Budgeting for Innovation",
@@ -300,13 +275,6 @@ export const sectors = [
     titleKey: 'businessConsulting',
     image: 'https://picsum.photos/seed/consulting/1200/600',
     descriptionKey: 'businessConsultingDesc'
-  },
-  {
-    id: 'ongoing-financial-advisory',
-    path: '/sectors/ongoing-financial-advisory',
-    titleKey: 'ongoingAdvisory',
-    image: 'https://picsum.photos/seed/advisory/1200/600',
-    descriptionKey: 'ongoingAdvisoryDesc'
   },
   {
     id: 'business-plan',

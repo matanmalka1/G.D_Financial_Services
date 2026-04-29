@@ -33,7 +33,10 @@ export const PhoneNumberInput = forwardRef(
       [value],
     );
 
-    const localNumber = normalizedValue.replace(defaultCountry.dialCode, "");
+    const localNumber = useMemo(() => {
+      const escapedDialCode = defaultCountry.dialCode.replace(/[+]/g, "\\+");
+      return normalizedValue.replace(new RegExp(`^${escapedDialCode}`), "");
+    }, [normalizedValue, defaultCountry.dialCode]);
 
     const handleLocalChange = useCallback(
       (nextLocalDigits) => {
