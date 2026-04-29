@@ -1,7 +1,7 @@
 import { MessageCircle, Phone } from "lucide-react";
 
-const phoneNumber = "0559691334";
-const whatsappNumber = "972559691334";
+const phoneNumber = "0542121928";
+const whatsappNumber = "972542121928";
 
 export const SectorHeroActions = ({ className = "" }) => (
   <div

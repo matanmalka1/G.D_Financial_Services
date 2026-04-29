@@ -20,8 +20,8 @@ import {
 import { routes } from "../../../routes/paths";
 import { SectorHeroActions } from "./SectorHeroActions";
 
-const phoneNumber = "0559691334";
-const whatsappNumber = "972559691334";
+const phoneNumber = "0542121928";
+const whatsappNumber = "972542121928";
 
 const challenges = [
   {

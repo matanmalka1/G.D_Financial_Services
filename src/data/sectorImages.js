@@ -4,7 +4,6 @@ export const sectorImages = {
   "business-plan": [
     "/sectorBusinessPlan/create%20new%20business.avif",
     "/sectorBusinessPlan/Bank.avif",
-    "/sectorBusinessPlan/realestate.avif",
     "/sectorBusinessPlan/startup.avif",
   ],
   "business-presentations": [

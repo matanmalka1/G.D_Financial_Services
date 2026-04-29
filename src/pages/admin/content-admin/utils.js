@@ -42,7 +42,6 @@ export const isInactiveContentPath = (path) =>
 export const getPageKey = (path) => {
   if (isInactiveContentPath(path)) return "inactive";
   if (path.startsWith("home.")) return "home";
-  if (path.startsWith("companyProfile.")) return "companyProfile";
   if (path.startsWith("sectors.") || path.startsWith("sectorDetail.")) return "services";
   if (path.startsWith("news.")) return "news";
   if (path.startsWith("contact.") || path.startsWith("modalForm.")) return "contact";
@@ -59,7 +58,6 @@ export const getPageKey = (path) => {
 
 export const getItemHref = (path) => {
   if (isInactiveContentPath(path)) return routePaths.home;
-  if (path.startsWith("companyProfile.")) return routePaths.companyProfile;
   if (path.startsWith("sectors.")) return routePaths.sectors;
   if (path.startsWith("sectorDetail.sectorDetails.")) {
     const sectorId = path.split(".")[2];

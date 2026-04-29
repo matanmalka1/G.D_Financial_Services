@@ -2,8 +2,8 @@ import { MessageCircle, Phone, Presentation } from "lucide-react";
 import { RelatedArticlesSection } from "./RelatedArticlesSection";
 import { SectorHeroActions } from "./SectorHeroActions";
 
-const phoneNumber = "0559691334";
-const whatsappNumber = "972559691334";
+const phoneNumber = "0542121928";
+const whatsappNumber = "972542121928";
 
 const heroStats = [
   ["360°", "ניהול פיננסי מלא"],
