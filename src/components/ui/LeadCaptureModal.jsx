@@ -9,9 +9,7 @@ import { useSiteContent } from "../../hooks/useSiteContent";
 import { useContactForm } from "../../hooks/useContactForm";
 const TextField = ({ label, placeholder, register, name, error }) => (
   <div>
-    <label className="block text-sm font-semibold text-slate-700 mb-1.5">
-      {label}
-    </label>
+    <label className="block text-sm font-semibold text-slate-700 mb-1.5">{label}</label>
     <input
       {...register(name)}
       className={`w-full h-12 rounded-xl border px-4 text-slate-900 shadow-inner shadow-slate-900/5 focus:outline-none focus:ring-2 focus:ring-slate-900/70 ${error ? "border-red-400" : "border-slate-200"}`}
@@ -138,9 +136,7 @@ export const LeadCaptureModal = ({
               )}
             />
             {errors.service && (
-              <p className="mt-1 text-xs text-red-500">
-                {errors.service.message}
-              </p>
+              <p className="mt-1 text-xs text-red-500">{errors.service.message}</p>
             )}
           </div>
         </div>

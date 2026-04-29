@@ -26,9 +26,7 @@ export const submitContactForm = async (
     body: JSON.stringify(payload),
   });
 
-  const result = await response
-    .json()
-    .catch(() => ({ message: "Submission failed" }));
+  const result = await response.json().catch(() => ({ message: "Submission failed" }));
 
   if (!response.ok || result.success === false) {
     throw new Error(result.message || "Submission failed");

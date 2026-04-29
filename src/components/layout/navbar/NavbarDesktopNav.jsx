@@ -13,10 +13,7 @@ export const NavbarDesktopNav = ({ t, sectorOptions }) => (
         {opt.label}
       </NavLink>
     ))}
-    <NavLink
-      to={routePaths.news}
-      className={navLinkClass}
-    >
+    <NavLink to={routePaths.news} className={navLinkClass}>
       {t.nav.news}
     </NavLink>
   </div>

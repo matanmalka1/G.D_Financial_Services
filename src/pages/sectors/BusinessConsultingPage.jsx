@@ -103,13 +103,12 @@ const Hero = () => (
           מבוסס נתונים
         </h1>
         <p className="mx-auto mt-7 max-w-2xl text-lg leading-9 text-white/70">
-          עוזרים לעסקים להבין את המספרים, לזהות מנועי צמיחה ולבנות תכנית
-          פעולה לרווחיות גבוהה יותר.
+          עוזרים לעסקים להבין את המספרים, לזהות מנועי צמיחה ולבנות תכנית פעולה לרווחיות
+          גבוהה יותר.
         </p>
         <p className="mx-auto mt-4 max-w-3xl text-base leading-8 text-white/60">
-          G.D Finance מלווה בעלי עסקים בתהליך עומק שמחבר בין ניתוח פיננסי,
-          הבנה עסקית ואסטרטגיית צמיחה עד לבניית תכנית עסקית פרקטית עם
-          יעדים, תחזיות ותכנית ביצוע.
+          G.D Finance מלווה בעלי עסקים בתהליך עומק שמחבר בין ניתוח פיננסי, הבנה עסקית
+          ואסטרטגיית צמיחה עד לבניית תכנית עסקית פרקטית עם יעדים, תחזיות ותכנית ביצוע.
         </p>
         <SectorHeroActions className="mt-10" />
       </div>
@@ -138,9 +137,7 @@ const AudienceSection = () => (
             <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-white text-slate-900 shadow-sm ring-1 ring-slate-200">
               <Check className="h-6 w-6" />
             </div>
-            <h3 className="text-base font-bold leading-7 text-slate-900">
-              {item}
-            </h3>
+            <h3 className="text-base font-bold leading-7 text-slate-900">{item}</h3>
           </article>
         ))}
       </div>
@@ -198,9 +195,7 @@ const DeliverablesSection = () => (
             className="rounded-2xl border border-white/20 bg-white/[0.04] p-6 transition hover:-translate-y-1 hover:border-white/60 hover:bg-white/[0.07]"
           >
             <Check className="h-6 w-6 text-white" />
-            <h3 className="mt-5 text-base font-bold leading-7 text-white">
-              {item}
-            </h3>
+            <h3 className="mt-5 text-base font-bold leading-7 text-white">{item}</h3>
           </article>
         ))}
       </div>
@@ -250,8 +245,8 @@ const ExampleSection = () => (
             לפני
           </span>
           <p className="mt-4 text-lg leading-8 text-slate-700">
-            העסק גדל במחזור אך הרווחיות נשחקה, ולא הייתה תמונה ברורה אילו
-            שירותים רווחיים.
+            העסק גדל במחזור אך הרווחיות נשחקה, ולא הייתה תמונה ברורה אילו שירותים
+            רווחיים.
           </p>
         </article>
         <article className="rounded-3xl bg-slate-900 p-8 text-white shadow-xl shadow-slate-200/60">
@@ -259,8 +254,8 @@ const ExampleSection = () => (
             אחרי
           </span>
           <p className="mt-4 text-lg leading-8 text-white/80">
-            נבנתה מפת רווחיות, זוהו שירותים לא רווחיים, בוצע עדכון תמחור
-            ונבנתה תכנית צמיחה עם יעדי מכירות ורווחיות.
+            נבנתה מפת רווחיות, זוהו שירותים לא רווחיים, בוצע עדכון תמחור ונבנתה תכנית
+            צמיחה עם יעדי מכירות ורווחיות.
           </p>
         </article>
       </div>

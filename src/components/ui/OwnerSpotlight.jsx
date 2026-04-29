@@ -1,10 +1,9 @@
-import { Button } from './primitives/Button';
-import ownerPhoto from '/owner_photo.avif';
+import { Button } from "./primitives/Button";
+import ownerPhoto from "/owner_photo.avif";
 
 export const OwnerSpotlight = ({ title, bio, buttonLabel, onContact }) => (
   <section className="bg-slate-900 py-24 text-white">
     <div className="max-w-7xl mx-auto px-4 flex flex-col md:flex-row items-center gap-16">
-
       {/* Photo with animated rings */}
       <div className="relative flex-shrink-0 flex items-center justify-center">
         {/* outer pulse ring */}

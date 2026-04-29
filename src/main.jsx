@@ -1,14 +1,14 @@
-import { StrictMode } from 'react';
-import { createRoot } from 'react-dom/client';
-import { Toaster } from 'sonner';
-import { App } from './App';
-import { ContentProvider } from './context/ContentContext';
-import { ErrorBoundary } from './components/common/ErrorBoundary';
-import { SiteContentProvider } from './context/SiteContentContext';
+import { StrictMode } from "react";
+import { createRoot } from "react-dom/client";
+import { Toaster } from "sonner";
+import { App } from "./App";
+import { ContentProvider } from "./context/ContentContext";
+import { ErrorBoundary } from "./components/common/ErrorBoundary";
+import { SiteContentProvider } from "./context/SiteContentContext";
 
-const rootElement = document.getElementById('root');
+const rootElement = document.getElementById("root");
 if (!rootElement) {
-  throw new Error('Could not find root element to mount to');
+  throw new Error("Could not find root element to mount to");
 }
 
 createRoot(rootElement).render(
@@ -21,5 +21,5 @@ createRoot(rootElement).render(
         </ContentProvider>
       </SiteContentProvider>
     </ErrorBoundary>
-  </StrictMode>
+  </StrictMode>,
 );

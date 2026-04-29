@@ -3,11 +3,7 @@ import { Link } from "react-router-dom";
 import { toast } from "sonner";
 import { Button } from "../../../components/ui/primitives/Button";
 import { useSiteContent } from "../../../hooks/useSiteContent";
-import {
-  ADMIN_PASSWORD,
-  PAGE_OPTIONS,
-  QUICK_FILTERS,
-} from "./config";
+import { ADMIN_PASSWORD, PAGE_OPTIONS, QUICK_FILTERS } from "./config";
 import { buildAdminEntry } from "./utils";
 import { AdminLogin } from "./components/AdminLogin";
 import { EmptyState } from "./components/EmptyState";
@@ -241,10 +237,12 @@ export const ContentAdmin = () => {
               <p className="text-sm font-semibold uppercase tracking-[0.3em] text-slate-300">
                 Admin Panel
               </p>
-              <h1 className="mt-3 text-3xl font-bold md:text-4xl">ניהול תוכן האתר הנוכחי</h1>
+              <h1 className="mt-3 text-3xl font-bold md:text-4xl">
+                ניהול תוכן האתר הנוכחי
+              </h1>
               <p className="mt-3 max-w-2xl text-sm leading-6 text-slate-300">
-                בוחרים אזור פעיל באתר, משנים טקסט, רואים איך זה ייראה ושומרים
-                רק כשמוכנים. תוכן ישן שלא מחובר למסכים הנוכחיים מרוכז בנפרד.
+                בוחרים אזור פעיל באתר, משנים טקסט, רואים איך זה ייראה ושומרים רק
+                כשמוכנים. תוכן ישן שלא מחובר למסכים הנוכחיים מרוכז בנפרד.
               </p>
             </div>
 
@@ -288,7 +286,11 @@ export const ContentAdmin = () => {
               </p>
 
               <div className="flex flex-wrap items-center gap-3">
-                <Button variant="outline" className="rounded-2xl" onClick={discardAllDrafts}>
+                <Button
+                  variant="outline"
+                  className="rounded-2xl"
+                  onClick={discardAllDrafts}
+                >
                   בטל את כל הטיוטות
                 </Button>
                 <Button className="rounded-2xl" onClick={saveAllDrafts}>
@@ -315,9 +317,12 @@ export const ContentAdmin = () => {
           <div className="flex flex-col gap-5">
             <div className="flex flex-col gap-4 xl:flex-row xl:items-center xl:justify-between">
               <div>
-                <h2 className="text-xl font-semibold text-slate-900">איתור מהיר של מה שרוצים לשנות</h2>
+                <h2 className="text-xl font-semibold text-slate-900">
+                  איתור מהיר של מה שרוצים לשנות
+                </h2>
                 <p className="mt-1 text-sm text-slate-500">
-                  אפשר לחפש לפי אזור, לבחור סוג תוכן, להציג רק שדות ששונו או לעבור לתוכן לא פעיל.
+                  אפשר לחפש לפי אזור, לבחור סוג תוכן, להציג רק שדות ששונו או לעבור לתוכן
+                  לא פעיל.
                 </p>
               </div>
 
@@ -363,7 +368,11 @@ export const ContentAdmin = () => {
             </div>
 
             <div className="flex flex-wrap items-center gap-3">
-              <Button className="rounded-2xl" onClick={saveAllDrafts} disabled={!dirtyPaths.length}>
+              <Button
+                className="rounded-2xl"
+                onClick={saveAllDrafts}
+                disabled={!dirtyPaths.length}
+              >
                 שמור הכול
               </Button>
               <Button
@@ -402,7 +411,9 @@ export const ContentAdmin = () => {
             <section key={section.key} className="space-y-4">
               <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
                 <div>
-                  <h2 className="text-2xl font-semibold text-slate-900">{section.label}</h2>
+                  <h2 className="text-2xl font-semibold text-slate-900">
+                    {section.label}
+                  </h2>
                   <p className="mt-1 text-sm text-slate-500">{section.description}</p>
                 </div>
 

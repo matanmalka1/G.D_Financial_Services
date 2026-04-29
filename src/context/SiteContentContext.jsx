@@ -135,9 +135,7 @@ export const SiteContentProvider = ({ children }) => {
   );
 
   return (
-    <SiteContentContext.Provider value={value}>
-      {children}
-    </SiteContentContext.Provider>
+    <SiteContentContext.Provider value={value}>{children}</SiteContentContext.Provider>
   );
 };
 

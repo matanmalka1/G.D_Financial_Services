@@ -8,7 +8,11 @@ import { NewsCard } from "../components/ui/NewsCard";
 import { SearchBar } from "../components/ui/SearchBar";
 import { Pagination } from "../components/ui/Pagination";
 import { EmptyState } from "../components/ui/EmptyState";
-import { LoadBoundary, PageError, PageLoading } from "../components/common/LoadBoundary";
+import {
+  LoadBoundary,
+  PageError,
+  PageLoading,
+} from "../components/common/LoadBoundary";
 import { ITEMS_PER_PAGE } from "../constants.js";
 import { filterBySearch } from "../utils/helpers/utils";
 import { getArticleSearchValues } from "../services/contentService";
@@ -73,7 +77,13 @@ export const News = () => {
       debouncedSearch
         ? t.news.showingResults.replace("{count}", filtered.length.toString())
         : `${articles.length} ${t.news.title}`,
-    [articles.length, debouncedSearch, filtered.length, t.news.showingResults, t.news.title],
+    [
+      articles.length,
+      debouncedSearch,
+      filtered.length,
+      t.news.showingResults,
+      t.news.title,
+    ],
   );
 
   const handleClearSearch = () => {
@@ -135,10 +145,7 @@ export const News = () => {
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
             {paginatedArticles.length > 0 ? (
               paginatedArticles.map((article) => (
-                <NewsCard
-                  key={article.id}
-                  article={article}
-                />
+                <NewsCard key={article.id} article={article} />
               ))
             ) : (
               <EmptyState

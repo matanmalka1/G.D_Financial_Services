@@ -1,12 +1,12 @@
 const sendToGtag = (eventName, payload) => {
-  window.gtag('event', eventName, payload);
+  window.gtag("event", eventName, payload);
 };
 
 export const analyticsService = {
   trackEvent(eventName, payload = {}) {
-    if (typeof window === 'undefined') return;
+    if (typeof window === "undefined") return;
 
-    if (typeof window.gtag === 'function') {
+    if (typeof window.gtag === "function") {
       sendToGtag(eventName, payload);
       return;
     }
@@ -16,6 +16,6 @@ export const analyticsService = {
       return;
     }
 
-    console.debug('Analytics event:', eventName, payload);
+    console.debug("Analytics event:", eventName, payload);
   },
 };

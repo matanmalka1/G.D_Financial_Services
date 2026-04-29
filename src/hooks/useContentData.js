@@ -1,5 +1,8 @@
 import { useCallback, useEffect, useState } from "react";
-import { contentService, getRelatedArticlesForSector } from "../services/contentService";
+import {
+  contentService,
+  getRelatedArticlesForSector,
+} from "../services/contentService";
 import { STORAGE_KEYS } from "../constants.js";
 import { toast } from "sonner";
 

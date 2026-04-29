@@ -18,8 +18,10 @@ const PAGE_SECTION_CLASS = "max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16";
 const ARTICLE_SECTION_CLASS = "max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16";
 const ARTICLE_CARD_CLASS =
   "overflow-hidden rounded-3xl border border-slate-200 bg-stone-50 shadow-xl shadow-slate-200/50";
-const ARTICLE_INNER_CLASS = "max-w-3xl mx-auto px-5 py-8 sm:px-8 sm:py-10 lg:px-10 lg:py-12";
-const ARTICLE_TEXT_CLASS = "text-[1.05rem] sm:text-lg leading-8 sm:leading-9 text-slate-700";
+const ARTICLE_INNER_CLASS =
+  "max-w-3xl mx-auto px-5 py-8 sm:px-8 sm:py-10 lg:px-10 lg:py-12";
+const ARTICLE_TEXT_CLASS =
+  "text-[1.05rem] sm:text-lg leading-8 sm:leading-9 text-slate-700";
 const PARAGRAPH_LABEL_PATTERN = /^([^:]{2,42}):\s+(.+)$/;
 const NUMBERED_HEADING_PATTERN = /^(\d+)\.\s+(.+)$/;
 const SHORT_HEADING_WORD_LIMIT = 10;
@@ -160,7 +162,8 @@ export const Article = () => {
   const readMinutes = Math.max(2, Math.ceil(wordCount / 180));
   const BackIcon = isRtl ? ArrowRight : ArrowLeft;
   const articleMeta = [
-    article?.date && t.news.publishedOn.replace("{date}", formatDisplayDate(article.date)),
+    article?.date &&
+      t.news.publishedOn.replace("{date}", formatDisplayDate(article.date)),
     t.news.readTime.replace("{minutes}", readMinutes),
   ]
     .filter(Boolean)
@@ -204,12 +207,14 @@ export const Article = () => {
         <main className={PAGE_SHELL_CLASS}>
           {header}
           <section className={PAGE_SECTION_CLASS}>
-            <div className="flex items-center justify-between mb-8">
-              {backLink}
-            </div>
+            <div className="flex items-center justify-between mb-8">{backLink}</div>
             <div className="space-y-3">
-              <h2 className="text-3xl font-bold text-slate-900">{t.news.notFoundTitle}</h2>
-              <p className="text-base leading-7 text-slate-600">{t.news.notFoundMessage}</p>
+              <h2 className="text-3xl font-bold text-slate-900">
+                {t.news.notFoundTitle}
+              </h2>
+              <p className="text-base leading-7 text-slate-600">
+                {t.news.notFoundMessage}
+              </p>
             </div>
           </section>
         </main>
@@ -238,9 +243,7 @@ export const Article = () => {
                   )}
                 </header>
 
-                <div className="space-y-6">
-                  {paragraphs.map(renderArticleBlock)}
-                </div>
+                <div className="space-y-6">{paragraphs.map(renderArticleBlock)}</div>
               </div>
             </div>
           </section>

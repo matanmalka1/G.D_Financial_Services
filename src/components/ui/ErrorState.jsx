@@ -2,12 +2,7 @@ import { AlertCircle, RefreshCcw } from "lucide-react";
 import { Button } from "./primitives/Button";
 import { useSiteContent } from "../../hooks/useSiteContent";
 
-export const ErrorState = ({
-  title,
-  message,
-  actionLabel,
-  onAction,
-}) => {
+export const ErrorState = ({ title, message, actionLabel, onAction }) => {
   const { t } = useSiteContent();
 
   return (

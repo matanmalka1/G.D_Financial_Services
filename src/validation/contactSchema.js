@@ -9,11 +9,14 @@ export const buildContactSchema = (t) =>
     phone: z
       .string()
       .min(1, t.contact.validation.phoneRequired)
-      .refine((val) => {
-        return parsePhoneNumberFromString(val, metadata)?.isValid();
-      }, {
-        message: t.contact.validation.phoneInvalid,
-      }),
+      .refine(
+        (val) => {
+          return parsePhoneNumberFromString(val, metadata)?.isValid();
+        },
+        {
+          message: t.contact.validation.phoneInvalid,
+        },
+      ),
     service: z.string().min(1, t.contact.validation.serviceRequired),
     message: z.string().min(10, t.contact.validation.messageMin),
   });

@@ -34,9 +34,7 @@ export class ErrorBoundary extends Component {
             <div className="text-2xl font-bold text-slate-900">
               {errorText.genericTitle}
             </div>
-            <p className="text-slate-600">
-              {errorText.genericMessage}
-            </p>
+            <p className="text-slate-600">{errorText.genericMessage}</p>
             <button
               onClick={this.handleReset}
               className="px-6 py-3 bg-slate-900 text-white rounded-xl hover:bg-slate-800 transition-colors"

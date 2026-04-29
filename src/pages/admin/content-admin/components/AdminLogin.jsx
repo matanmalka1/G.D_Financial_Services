@@ -1,11 +1,6 @@
 import { Button } from "../../../../components/ui/primitives/Button";
 
-export const AdminLogin = ({
-  password,
-  setPassword,
-  onSubmit,
-  requiresPassword,
-}) => (
+export const AdminLogin = ({ password, setPassword, onSubmit, requiresPassword }) => (
   <div className="min-h-[calc(100vh-10rem)] bg-slate-100 px-4 py-12">
     <div className="mx-auto max-w-md rounded-[2rem] border border-slate-200 bg-white p-8 shadow-xl shadow-slate-200/70">
       <p className="text-sm font-semibold uppercase tracking-[0.3em] text-slate-500">

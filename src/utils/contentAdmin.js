@@ -18,10 +18,7 @@ export const flattenStringLeaves = (value, currentPath = "") => {
 
   if (isPlainObject(value)) {
     return Object.entries(value).flatMap(([key, nestedValue]) =>
-      flattenStringLeaves(
-        nestedValue,
-        currentPath ? `${currentPath}.${key}` : key,
-      ),
+      flattenStringLeaves(nestedValue, currentPath ? `${currentPath}.${key}` : key),
     );
   }
 

@@ -59,7 +59,9 @@ export const FieldEditorCard = ({
       </div>
 
       <div className="mt-5 rounded-[1.5rem] border border-slate-200 bg-slate-50 p-4">
-        <label className="mb-2 block text-sm font-medium text-slate-700">טקסט חדש</label>
+        <label className="mb-2 block text-sm font-medium text-slate-700">
+          טקסט חדש
+        </label>
         <InputTag
           value={currentValue}
           onChange={(event) => onChange(item.path, event.target.value)}
@@ -116,7 +118,9 @@ export const FieldEditorCard = ({
             פתח את האזור באתר
           </Link>
           <details className="text-xs text-slate-500">
-            <summary className="cursor-pointer select-none font-medium">פרטים מתקדמים</summary>
+            <summary className="cursor-pointer select-none font-medium">
+              פרטים מתקדמים
+            </summary>
             <p className="mt-2 font-mono text-[11px] text-slate-400">{item.path}</p>
           </details>
         </div>

@@ -151,10 +151,7 @@ export const Home = () => {
             <p>{t.home.about.p1}</p>
             <p className="mt-4">{t.home.about.p2}</p>
             <p className="mt-4">{t.home.about.p3}</p>
-            <ul
-              className="mt-8 grid gap-4 md:grid-cols-2"
-              dir={isRtl ? "rtl" : "ltr"}
-            >
+            <ul className="mt-8 grid gap-4 md:grid-cols-2" dir={isRtl ? "rtl" : "ltr"}>
               {t.home.about.highlights?.map((item) => (
                 <li
                   key={item}
@@ -200,7 +197,10 @@ export const Home = () => {
                 </p>
                 <div className="grid grid-cols-1 gap-2.5 sm:grid-cols-2">
                   <div>
-                    <label className="mb-1 block text-xs font-semibold text-white/75" htmlFor={leadFieldIds.fullName}>
+                    <label
+                      className="mb-1 block text-xs font-semibold text-white/75"
+                      htmlFor={leadFieldIds.fullName}
+                    >
                       {t.contact.fullName}
                     </label>
                     <input
@@ -212,7 +212,10 @@ export const Home = () => {
                   </div>
 
                   <div>
-                    <label className="mb-1 block text-xs font-semibold text-white/75" htmlFor={leadFieldIds.phone}>
+                    <label
+                      className="mb-1 block text-xs font-semibold text-white/75"
+                      htmlFor={leadFieldIds.phone}
+                    >
                       {t.contact.phone}
                     </label>
                     <Controller
@@ -236,7 +239,10 @@ export const Home = () => {
                   </div>
 
                   <div>
-                    <label className="mb-1 block text-xs font-semibold text-white/75" htmlFor={leadFieldIds.email}>
+                    <label
+                      className="mb-1 block text-xs font-semibold text-white/75"
+                      htmlFor={leadFieldIds.email}
+                    >
                       {t.contact.email}
                     </label>
                     <input

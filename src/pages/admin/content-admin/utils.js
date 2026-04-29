@@ -1,9 +1,5 @@
 import { routePaths, routes } from "../../../routes/paths";
-import {
-  PAGE_META,
-  SECTION_LABELS,
-  SEGMENT_LABELS,
-} from "./config";
+import { PAGE_META, SECTION_LABELS, SEGMENT_LABELS } from "./config";
 
 export const getPageKey = (path) => {
   if (path.startsWith("home.")) return "home";
@@ -93,7 +89,11 @@ export const getFieldHelpText = (path) => {
     return "הכיתוב שמופיע על כפתור או קישור באתר.";
   }
 
-  if (path.includes(".success") || path.includes(".error") || path.includes(".sending")) {
+  if (
+    path.includes(".success") ||
+    path.includes(".error") ||
+    path.includes(".sending")
+  ) {
     return "הודעת מערכת שהמבקר רואה בזמן פעולה או אחריה.";
   }
 
@@ -182,11 +182,15 @@ export const getFocusArea = (path, value) => {
     return "forms";
   }
 
-  if (/faq|highlights|services|benefits|body\.\d+|bubbles\.\d+|sections\.\d+/i.test(path)) {
+  if (
+    /faq|highlights|services|benefits|body\.\d+|bubbles\.\d+|sections\.\d+/i.test(path)
+  ) {
     return "lists";
   }
 
-  if (/title|subtitle|missionTitle|coreValuesTitle|storyTitle|bubbleTitle/i.test(path)) {
+  if (
+    /title|subtitle|missionTitle|coreValuesTitle|storyTitle|bubbleTitle/i.test(path)
+  ) {
     return "headlines";
   }
 

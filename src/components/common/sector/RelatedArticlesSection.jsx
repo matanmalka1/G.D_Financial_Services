@@ -57,7 +57,10 @@ export const RelatedArticlesSection = ({ articles = [], t, isRtl }) => {
                 <span className="border-b-2 border-slate-900 pb-0.5">
                   {t.news.readArticle}
                 </span>
-                <ArrowRight className={`w-4 h-4 ${isRtl ? "rotate-180" : ""}`} strokeWidth={2} />
+                <ArrowRight
+                  className={`w-4 h-4 ${isRtl ? "rotate-180" : ""}`}
+                  strokeWidth={2}
+                />
               </div>
             </Link>
           );

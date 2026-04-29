@@ -28,10 +28,7 @@ export const PhoneNumberInput = forwardRef(
       [],
     );
 
-    const normalizedValue = useMemo(
-      () => (value || "").replace(/\s+/g, ""),
-      [value],
-    );
+    const normalizedValue = useMemo(() => (value || "").replace(/\s+/g, ""), [value]);
 
     const localNumber = useMemo(() => {
       const escapedDialCode = defaultCountry.dialCode.replace(/[+]/g, "\\+");
@@ -43,8 +40,7 @@ export const PhoneNumberInput = forwardRef(
         const formatter = new AsYouType(defaultCountry.code, metadata);
         formatter.input(nextLocalDigits);
         const international =
-          formatter.getNumberValue() ||
-          `${defaultCountry.dialCode}${nextLocalDigits}`;
+          formatter.getNumberValue() || `${defaultCountry.dialCode}${nextLocalDigits}`;
         onChange?.(international);
       },
       [defaultCountry, onChange],
@@ -67,9 +63,7 @@ export const PhoneNumberInput = forwardRef(
     return (
       <div className={`space-y-2 ${className}`}>
         {label ? (
-          <label className="block text-sm font-semibold text-slate-700">
-            {label}
-          </label>
+          <label className="block text-sm font-semibold text-slate-700">{label}</label>
         ) : null}
 
         <div

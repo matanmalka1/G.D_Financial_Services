@@ -1,13 +1,6 @@
 import { Controller } from "react-hook-form";
 import { toast } from "sonner";
-import {
-  CheckCircle2,
-  Clock3,
-  Mail,
-  MapPin,
-  Phone,
-  Send,
-} from "lucide-react";
+import { CheckCircle2, Clock3, Mail, MapPin, Phone, Send } from "lucide-react";
 import { useSiteContent } from "../hooks/useSiteContent";
 import { useContactForm } from "../hooks/useContactForm";
 import { Select } from "../components/ui/Select";
@@ -23,19 +16,16 @@ export const Contact = () => {
     description: "צרו קשר עם G.D Financial Services לקבלת ייעוץ פיננסי מקצועי.",
   });
 
-  const { form, handleSubmit: submitContact } = useContactForm(
-    t,
-    async (data) => {
-      const loadingToast = toast.loading(t.contact.sending);
-      try {
-        await submitContactForm(data, "Contact Form - G.D Financial Services");
-        toast.success(t.contact.success, { id: loadingToast });
-      } catch (error) {
-        toast.error(t.contact.submitError, { id: loadingToast });
-        throw error;
-      }
-    },
-  );
+  const { form, handleSubmit: submitContact } = useContactForm(t, async (data) => {
+    const loadingToast = toast.loading(t.contact.sending);
+    try {
+      await submitContactForm(data, "Contact Form - G.D Financial Services");
+      toast.success(t.contact.success, { id: loadingToast });
+    } catch (error) {
+      toast.error(t.contact.submitError, { id: loadingToast });
+      throw error;
+    }
+  });
 
   const {
     register,
@@ -116,7 +106,10 @@ export const Contact = () => {
             <div className="mt-6 space-y-5">
               {t.contact.nextSteps.map((item) => (
                 <div key={item} className="flex items-start gap-3 text-slate-700">
-                  <CheckCircle2 className="mt-1 h-5 w-5 shrink-0 text-slate-900" strokeWidth={1.8} />
+                  <CheckCircle2
+                    className="mt-1 h-5 w-5 shrink-0 text-slate-900"
+                    strokeWidth={1.8}
+                  />
                   <p className="leading-7">{item}</p>
                 </div>
               ))}
@@ -133,128 +126,124 @@ export const Contact = () => {
             </div>
           </aside>
 
-        <div className="order-1 rounded-2xl border border-slate-200 bg-white p-5 shadow-xl shadow-slate-200/70 sm:p-8 lg:order-2">
-          <div className={`mb-8 ${isRtl ? "text-right" : "text-left"}`}>
-            <p className="text-sm font-bold text-slate-500">
-              {t.contact.formEyebrow}
-            </p>
-            <h2 className="mt-2 text-2xl font-bold text-slate-950">
-              {t.contact.formTitle}
-            </h2>
-          </div>
-          <form
-            onSubmit={form.handleSubmit(submitContact, onError)}
-            className="space-y-6"
-          >
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="order-1 rounded-2xl border border-slate-200 bg-white p-5 shadow-xl shadow-slate-200/70 sm:p-8 lg:order-2">
+            <div className={`mb-8 ${isRtl ? "text-right" : "text-left"}`}>
+              <p className="text-sm font-bold text-slate-500">
+                {t.contact.formEyebrow}
+              </p>
+              <h2 className="mt-2 text-2xl font-bold text-slate-950">
+                {t.contact.formTitle}
+              </h2>
+            </div>
+            <form
+              onSubmit={form.handleSubmit(submitContact, onError)}
+              className="space-y-6"
+            >
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                  <label className="block text-sm font-semibold text-slate-700 mb-2">
+                    {t.contact.fullName}*
+                  </label>
+                  <input
+                    {...register("fullName")}
+                    className={`w-full rounded-xl border bg-white px-4 py-3 text-slate-900 shadow-sm shadow-slate-900/5 transition-all placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-slate-900/20 ${errors.fullName ? "border-red-500" : "border-slate-200 focus:border-slate-400"}`}
+                    placeholder={t.contact.fullNamePlaceholder}
+                    dir={isRtl ? "rtl" : "ltr"}
+                  />
+                  {errors.fullName && (
+                    <p className="text-red-500 text-xs mt-1">
+                      {errors.fullName.message}
+                    </p>
+                  )}
+                </div>
+                <div>
+                  <label className="block text-sm font-semibold text-slate-700 mb-2">
+                    {t.contact.email}*
+                  </label>
+                  <input
+                    {...register("email")}
+                    className={`w-full rounded-xl border bg-white px-4 py-3 text-slate-900 shadow-sm shadow-slate-900/5 transition-all placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-slate-900/20 ${errors.email ? "border-red-500" : "border-slate-200 focus:border-slate-400"}`}
+                    placeholder={t.contact.emailPlaceholder}
+                    dir="ltr"
+                  />
+                  {errors.email && (
+                    <p className="text-red-500 text-xs mt-1">{errors.email.message}</p>
+                  )}
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                  <Controller
+                    name="phone"
+                    control={control}
+                    render={({ field }) => (
+                      <PhoneNumberInput
+                        label={`${t.contact.phone}*`}
+                        value={field.value}
+                        onChange={field.onChange}
+                        error={errors.phone?.message}
+                        isRtl={isRtl}
+                        className="space-y-0"
+                        inputClassName={`rounded-xl shadow-sm shadow-slate-900/5 hover:shadow-none ${errors.phone ? "border-red-500" : "border-slate-200"} focus-within:ring-2 focus-within:ring-slate-900/20 transition-all`}
+                        localInputClassName="py-3"
+                      />
+                    )}
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-semibold text-slate-700 mb-2">
+                    {t.contact.service}*
+                  </label>
+                  <Controller
+                    name="service"
+                    control={control}
+                    render={({ field }) => (
+                      <Select
+                        value={field.value}
+                        onValueChange={field.onChange}
+                        options={serviceOptions}
+                        placeholder={t.contact.selectPlaceholder}
+                        dir={isRtl ? "rtl" : "ltr"}
+                        className={errors.service ? "border-red-500" : ""}
+                      />
+                    )}
+                  />
+                  {errors.service && (
+                    <p className="text-red-500 text-xs mt-1">
+                      {errors.service.message}
+                    </p>
+                  )}
+                </div>
+              </div>
+
               <div>
                 <label className="block text-sm font-semibold text-slate-700 mb-2">
-                  {t.contact.fullName}*
+                  {t.contact.message}*
                 </label>
-                <input
-                  {...register("fullName")}
-                  className={`w-full rounded-xl border bg-white px-4 py-3 text-slate-900 shadow-sm shadow-slate-900/5 transition-all placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-slate-900/20 ${errors.fullName ? "border-red-500" : "border-slate-200 focus:border-slate-400"}`}
-                  placeholder={t.contact.fullNamePlaceholder}
+                <textarea
+                  {...register("message")}
+                  rows={5}
+                  className={`w-full resize-none rounded-xl border bg-white px-4 py-3 text-slate-900 shadow-sm shadow-slate-900/5 transition-all placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-slate-900/20 ${errors.message ? "border-red-500" : "border-slate-200 focus:border-slate-400"}`}
+                  placeholder={t.contact.messagePlaceholder}
                   dir={isRtl ? "rtl" : "ltr"}
                 />
-                {errors.fullName && (
-                  <p className="text-red-500 text-xs mt-1">
-                    {errors.fullName.message}
-                  </p>
+                {errors.message && (
+                  <p className="text-red-500 text-xs mt-1">{errors.message.message}</p>
                 )}
               </div>
-              <div>
-                <label className="block text-sm font-semibold text-slate-700 mb-2">
-                  {t.contact.email}*
-                </label>
-                <input
-                  {...register("email")}
-                  className={`w-full rounded-xl border bg-white px-4 py-3 text-slate-900 shadow-sm shadow-slate-900/5 transition-all placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-slate-900/20 ${errors.email ? "border-red-500" : "border-slate-200 focus:border-slate-400"}`}
-                  placeholder={t.contact.emailPlaceholder}
-                  dir="ltr"
-                />
-                {errors.email && (
-                  <p className="text-red-500 text-xs mt-1">
-                    {errors.email.message}
-                  </p>
-                )}
-              </div>
-            </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div>
-                <Controller
-                  name="phone"
-                  control={control}
-                  render={({ field }) => (
-                    <PhoneNumberInput
-                      label={`${t.contact.phone}*`}
-                      value={field.value}
-                      onChange={field.onChange}
-                      error={errors.phone?.message}
-                      isRtl={isRtl}
-                      className="space-y-0"
-                      inputClassName={`rounded-xl shadow-sm shadow-slate-900/5 hover:shadow-none ${errors.phone ? "border-red-500" : "border-slate-200"} focus-within:ring-2 focus-within:ring-slate-900/20 transition-all`}
-                      localInputClassName="py-3"
-                    />
-                  )}
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-semibold text-slate-700 mb-2">
-                  {t.contact.service}*
-                </label>
-                <Controller
-                  name="service"
-                  control={control}
-                  render={({ field }) => (
-                    <Select
-                      value={field.value}
-                      onValueChange={field.onChange}
-                      options={serviceOptions}
-                      placeholder={t.contact.selectPlaceholder}
-                      dir={isRtl ? "rtl" : "ltr"}
-                      className={errors.service ? "border-red-500" : ""}
-                    />
-                  )}
-                />
-                {errors.service && (
-                  <p className="text-red-500 text-xs mt-1">
-                    {errors.service.message}
-                  </p>
-                )}
-              </div>
-            </div>
-
-            <div>
-              <label className="block text-sm font-semibold text-slate-700 mb-2">
-                {t.contact.message}*
-              </label>
-              <textarea
-                {...register("message")}
-                rows={5}
-                className={`w-full resize-none rounded-xl border bg-white px-4 py-3 text-slate-900 shadow-sm shadow-slate-900/5 transition-all placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-slate-900/20 ${errors.message ? "border-red-500" : "border-slate-200 focus:border-slate-400"}`}
-                placeholder={t.contact.messagePlaceholder}
-                dir={isRtl ? "rtl" : "ltr"}
-              />
-              {errors.message && (
-                <p className="text-red-500 text-xs mt-1">
-                  {errors.message.message}
-                </p>
-              )}
-            </div>
-
-            <Button
-              type="submit"
-              variant="solid"
-              size="lg"
-              className="w-full gap-2 rounded-xl text-lg shadow-xl shadow-slate-200"
-            >
-              <span>{t.contact.submit}</span>
-              <Send className="h-5 w-5" strokeWidth={1.8} />
-            </Button>
-          </form>
-        </div>
+              <Button
+                type="submit"
+                variant="solid"
+                size="lg"
+                className="w-full gap-2 rounded-xl text-lg shadow-xl shadow-slate-200"
+              >
+                <span>{t.contact.submit}</span>
+                <Send className="h-5 w-5" strokeWidth={1.8} />
+              </Button>
+            </form>
+          </div>
         </div>
       </section>
     </main>

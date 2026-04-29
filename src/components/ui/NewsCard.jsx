@@ -27,9 +27,7 @@ export const NewsCard = ({ article }) => {
         <h3 className="text-xl font-bold leading-snug text-slate-900 transition-colors line-clamp-2 group-hover:text-slate-700">
           {title}
         </h3>
-        <p className="mt-4 text-sm leading-7 text-slate-500 line-clamp-3">
-          {excerpt}
-        </p>
+        <p className="mt-4 text-sm leading-7 text-slate-500 line-clamp-3">{excerpt}</p>
         <div className="mt-auto pt-8">
           <span className="block h-0.5 w-12 bg-slate-900 transition-all group-hover:w-20" />
         </div>

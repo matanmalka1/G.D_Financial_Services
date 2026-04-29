@@ -180,8 +180,8 @@ const Hero = () => (
           שמביאה אישור מהבנק
         </h1>
         <p className="mx-auto mt-7 max-w-2xl text-lg leading-9 text-white/70">
-          לא סתם מסמך אלא תוכנית אסטרטגית מבוססת נתונים, שמדברת בשפה של הבנק
-          ומגדילה משמעותית את הסיכוי שלך לקבל את המימון.
+          לא סתם מסמך אלא תוכנית אסטרטגית מבוססת נתונים, שמדברת בשפה של הבנק ומגדילה
+          משמעותית את הסיכוי שלך לקבל את המימון.
         </p>
         <SectorHeroActions className="mt-10" />
       </div>
@@ -260,9 +260,7 @@ const SolutionSection = () => (
               </div>
               <div>
                 <h3 className="font-bold text-slate-900">{point.title}</h3>
-                <p className="mt-1 text-sm leading-6 text-slate-600">
-                  {point.text}
-                </p>
+                <p className="mt-1 text-sm leading-6 text-slate-600">{point.text}</p>
               </div>
             </article>
           ))}
@@ -304,12 +302,8 @@ const ServicesSection = () => (
             <span className="font-serif text-5xl font-black text-slate-400/40">
               {String(idx + 1).padStart(2, "0")}
             </span>
-            <h3 className="mt-4 text-lg font-bold text-slate-900">
-              {service.title}
-            </h3>
-            <p className="mt-3 text-sm leading-7 text-slate-600">
-              {service.text}
-            </p>
+            <h3 className="mt-4 text-lg font-bold text-slate-900">{service.title}</h3>
+            <p className="mt-3 text-sm leading-7 text-slate-600">{service.text}</p>
             <div className="mt-6 rounded-xl border border-slate-200 bg-white p-4 text-sm leading-6 text-slate-800">
               <strong className="mb-1 block text-xs uppercase tracking-[0.14em] text-slate-900">
                 מה מקבלים

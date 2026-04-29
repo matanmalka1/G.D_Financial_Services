@@ -8,7 +8,11 @@ import { BusinessPlansPage } from "./sectors/BusinessPlansPage";
 import { BusinessPresentationsPage } from "./sectors/BusinessPresentationsPage";
 import { BusinessConsultingPage } from "./sectors/BusinessConsultingPage";
 import { SellSideAdvisoryPage } from "./sectors/SellSideAdvisoryPage";
-import { LoadBoundary, PageError, PageLoading } from "../components/common/LoadBoundary";
+import {
+  LoadBoundary,
+  PageError,
+  PageLoading,
+} from "../components/common/LoadBoundary";
 import { ITEMS_PER_PAGE } from "../constants.js";
 
 const NotFound = ({ t }) => (
@@ -54,11 +58,16 @@ export const SectorDetail = () => {
     const pageProps = { relatedArticles, t, isRtl };
 
     switch (sector.id) {
-      case "business-plan":        return <BusinessPlansPage {...pageProps} />;
-      case "business-presentations": return <BusinessPresentationsPage {...pageProps} />;
-      case "business-consulting":  return <BusinessConsultingPage {...pageProps} />;
-      case "sell-side-advisory":   return <SellSideAdvisoryPage {...pageProps} />;
-      default:                     return <NotFound t={t} />;
+      case "business-plan":
+        return <BusinessPlansPage {...pageProps} />;
+      case "business-presentations":
+        return <BusinessPresentationsPage {...pageProps} />;
+      case "business-consulting":
+        return <BusinessConsultingPage {...pageProps} />;
+      case "sell-side-advisory":
+        return <SellSideAdvisoryPage {...pageProps} />;
+      default:
+        return <NotFound t={t} />;
     }
   })();
 

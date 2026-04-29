@@ -2,12 +2,7 @@ import { NavLink } from "react-router-dom";
 import { Phone } from "lucide-react";
 import { routePaths } from "../../../routes/paths";
 
-export const NavbarMobileMenu = ({
-  t,
-  sectorOptions,
-  onSectorChange,
-  onClose,
-}) => (
+export const NavbarMobileMenu = ({ t, sectorOptions, onSectorChange, onClose }) => (
   <div
     id="mobile-nav"
     className="md:hidden bg-white border-t border-gray-100 py-4 px-4 flex flex-col space-y-4"
@@ -46,10 +41,7 @@ export const NavbarMobileMenu = ({
       <Phone className="h-4 w-4" />
       {t.nav.contact}
     </NavLink>
-    <a
-      href="tel:0542121928"
-      className="text-center py-2 font-semibold text-slate-700"
-    >
+    <a href="tel:0542121928" className="text-center py-2 font-semibold text-slate-700">
       054-2121928
     </a>
   </div>

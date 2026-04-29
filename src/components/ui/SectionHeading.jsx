@@ -3,7 +3,11 @@ export const SectionHeading = ({ title, subtitle, action, liveMessage }) => (
     <div>
       <h2 className="text-3xl font-bold text-slate-900">{title}</h2>
       {subtitle && (
-        <p className="text-sm text-slate-500" role="status" aria-live={liveMessage ? 'polite' : undefined}>
+        <p
+          className="text-sm text-slate-500"
+          role="status"
+          aria-live={liveMessage ? "polite" : undefined}
+        >
           {subtitle}
         </p>
       )}

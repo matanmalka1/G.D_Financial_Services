@@ -1,5 +1,5 @@
 export const setDocumentDirection = (isRtl) => {
-  document.documentElement.dir = isRtl ? 'rtl' : 'ltr';
+  document.documentElement.dir = isRtl ? "rtl" : "ltr";
 };
 
 export const setDocumentLanguage = (lang) => {

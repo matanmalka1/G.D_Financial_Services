@@ -1,19 +1,18 @@
 import { lazy, Suspense } from "react";
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  Navigate,
-} from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import { Layout } from "./components/layout/Layout";
 import { PageLoading } from "./components/common/LoadBoundary";
 import { routePaths } from "./routes/paths";
 
-const Home = lazy(() => import("./pages/Home").then((module) => ({ default: module.Home })));
+const Home = lazy(() =>
+  import("./pages/Home").then((module) => ({ default: module.Home })),
+);
 const SectorDetail = lazy(() =>
   import("./pages/SectorDetail").then((module) => ({ default: module.SectorDetail })),
 );
-const News = lazy(() => import("./pages/News").then((module) => ({ default: module.News })));
+const News = lazy(() =>
+  import("./pages/News").then((module) => ({ default: module.News })),
+);
 const Article = lazy(() =>
   import("./pages/Article").then((module) => ({ default: module.Article })),
 );

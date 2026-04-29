@@ -7,7 +7,11 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 const buildPageRange = (currentPage, totalPages, delta = 2) => {
   const range = new Set([1, totalPages]);
 
-  for (let i = Math.max(2, currentPage - delta); i <= Math.min(totalPages - 1, currentPage + delta); i++) {
+  for (
+    let i = Math.max(2, currentPage - delta);
+    i <= Math.min(totalPages - 1, currentPage + delta);
+    i++
+  ) {
     range.add(i);
   }
 
@@ -42,7 +46,11 @@ export const Pagination = ({ currentPage, totalPages, onChange, isRtl = false })
   const pageRange = buildPageRange(currentPage, totalPages);
 
   return (
-    <div className="mt-20 flex items-center justify-center gap-2" role="navigation" aria-label={isRtl ? "ניווט עמודים" : "Page navigation"}>
+    <div
+      className="mt-20 flex items-center justify-center gap-2"
+      role="navigation"
+      aria-label={isRtl ? "ניווט עמודים" : "Page navigation"}
+    >
       <button
         onClick={() => goTo(currentPage - 1)}
         disabled={currentPage === 1}
@@ -55,7 +63,10 @@ export const Pagination = ({ currentPage, totalPages, onChange, isRtl = false })
       <div className="flex items-center gap-2">
         {pageRange.map((page, i) =>
           page === null ? (
-            <span key={`ellipsis-${i}`} className="w-8 text-center text-slate-400 select-none">
+            <span
+              key={`ellipsis-${i}`}
+              className="w-8 text-center text-slate-400 select-none"
+            >
               …
             </span>
           ) : (
@@ -68,7 +79,7 @@ export const Pagination = ({ currentPage, totalPages, onChange, isRtl = false })
             >
               {page}
             </button>
-          )
+          ),
         )}
       </div>
 

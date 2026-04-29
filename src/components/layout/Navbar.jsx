@@ -48,10 +48,7 @@ export const Navbar = () => {
         <div className="flex h-20 items-center gap-6">
           <NavbarBrand to={routePaths.home} />
 
-          <NavbarDesktopNav
-            t={t}
-            sectorOptions={sectorOptions}
-          />
+          <NavbarDesktopNav t={t} sectorOptions={sectorOptions} />
 
           <NavbarDesktopActions t={t} />
 
