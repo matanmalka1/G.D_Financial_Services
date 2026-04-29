@@ -5,7 +5,8 @@ import { applyFlatOverrides, flattenStringLeaves } from "../utils/contentAdmin";
 import { setDocumentMetadata } from "../utils/helpers/dom";
 
 const SiteContentContext = createContext();
-const ADMIN_PASSWORD = import.meta.env.VITE_ADMIN_PASSWORD;
+const ADMIN_PASSWORD = import.meta.env.VITE_ADMIN_PASSWORD?.trim();
+const IS_ADMIN_ENABLED = Boolean(ADMIN_PASSWORD) || import.meta.env.DEV;
 const SITE_LANGUAGE = "he";
 const IS_RTL = true;
 
@@ -29,7 +30,7 @@ export const SiteContentProvider = ({ children }) => {
 
     try {
       const savedSession = window.localStorage.getItem(STORAGE_KEYS.ADMIN_SESSION);
-      setIsAdminAuthenticated(savedSession === "true");
+      setIsAdminAuthenticated(IS_ADMIN_ENABLED && savedSession === "true");
     } catch (error) {
       console.warn("Failed to hydrate admin session", error);
     }
@@ -79,7 +80,7 @@ export const SiteContentProvider = ({ children }) => {
   }, [persistOverrides]);
 
   const authenticateAdmin = useCallback((password) => {
-    const isAllowed = !ADMIN_PASSWORD || password === ADMIN_PASSWORD;
+    const isAllowed = ADMIN_PASSWORD ? password === ADMIN_PASSWORD : import.meta.env.DEV;
     if (!isAllowed) {
       return false;
     }
@@ -114,6 +115,7 @@ export const SiteContentProvider = ({ children }) => {
       isRtl: IS_RTL,
       adminEntries,
       adminOverrides: overrides,
+      isAdminEnabled: IS_ADMIN_ENABLED,
       isAdminAuthenticated,
       authenticateAdmin,
       logoutAdmin,

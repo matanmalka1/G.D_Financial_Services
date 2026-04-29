@@ -16,6 +16,7 @@ export const ContentAdmin = () => {
   const {
     adminEntries,
     adminOverrides,
+    isAdminEnabled,
     isAdminAuthenticated,
     authenticateAdmin,
     logoutAdmin,
@@ -211,6 +212,7 @@ export const ContentAdmin = () => {
       <AdminLogin
         password={password}
         setPassword={setPassword}
+        isAdminEnabled={isAdminEnabled}
         requiresPassword={requiresPassword}
         onSubmit={(event) => {
           event.preventDefault();
