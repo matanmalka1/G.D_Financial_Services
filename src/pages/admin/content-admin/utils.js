@@ -17,7 +17,6 @@ export const getSectorLabel = (sectorId) =>
   SECTOR_LABELS[sectorId] ?? prettifySlug(sectorId);
 
 const inactiveContentPrefixes = [
-  "companyProfile.",
   "home.bubbles.",
   "sectorDetail.sectorDetails.",
 ];
@@ -78,13 +77,6 @@ export const getSectionMeta = (path) => {
     return {
       key: `inactive-${parts[0]}-${parts[1] ?? "general"}`,
       ...SECTION_LABELS.inactive,
-    };
-  }
-
-  if (path.startsWith("companyProfile.")) {
-    return {
-      key: "companyProfile",
-      ...SECTION_LABELS.companyProfile,
     };
   }
 

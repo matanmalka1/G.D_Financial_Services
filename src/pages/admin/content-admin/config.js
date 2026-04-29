@@ -105,10 +105,6 @@ export const SECTION_LABELS = {
     label: "לקוחות וסקטורים",
     description: "אזור האמון והתחומים שבהם העסק פועל.",
   },
-  companyProfile: {
-    label: "עמוד אודות החברה",
-    description: "המסרים המרכזיים של החברה, הערכים והסיפור שלה.",
-  },
   sectors: {
     label: "עמוד השירותים",
     description: "כותרות, חיפוש וכפתורים בעמוד השירותים.",
