@@ -52,6 +52,7 @@ const ArticleHero = ({ title, image }) => (
 );
 
 const getLocalizedValue = (value) => value?.he || value?.en || value;
+const formatDisplayDate = (value) => (value || "").replaceAll("-", ".");
 
 const normalizeParagraphs = (content) => {
   if (Array.isArray(content)) {
@@ -159,7 +160,7 @@ export const Article = () => {
   const readMinutes = Math.max(2, Math.ceil(wordCount / 180));
   const BackIcon = isRtl ? ArrowRight : ArrowLeft;
   const articleMeta = [
-    article?.date && t.news.publishedOn.replace("{date}", article.date),
+    article?.date && t.news.publishedOn.replace("{date}", formatDisplayDate(article.date)),
     t.news.readTime.replace("{minutes}", readMinutes),
   ]
     .filter(Boolean)
@@ -221,7 +222,7 @@ export const Article = () => {
                 <div className="mb-10 flex flex-wrap items-center justify-between gap-4">
                   {backLink}
                   <div className="rounded-full bg-slate-100 px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.18em] text-slate-500">
-                    {article?.date}
+                    {formatDisplayDate(article?.date)}
                   </div>
                 </div>
 

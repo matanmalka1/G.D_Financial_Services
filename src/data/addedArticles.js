@@ -104,12 +104,12 @@ export const addedArticles = [
     id: "14",
     title: {
       en: "Why Banks Refuse to Open Business Accounts and How to Avoid It",
-      he: "למה הבנק מסרב לפתוח לכם חשבון עסקי - ואיך תמנעו מזה?",
+      he: "למה הבנק מסרב לפתוח לכם חשבון עסקי ואיך תמנעו מזה?",
     },
     date: "2026-04-19",
     excerpt: {
       en: "The main reasons banks reject business account applications, and how a structured business plan reduces uncertainty.",
-      he: "סירוב מהבנק נובע לרוב מאי-ודאות גבוהה. תכנית עסקית מקצועית יכולה להפוך סימני שאלה לתשובות ברורות.",
+      he: "סירוב מהבנק נובע לרוב מאי ודאות גבוהה. תכנית עסקית מקצועית יכולה להפוך סימני שאלה לתשובות ברורות.",
     },
     image: BUSINESS_PLAN_IMAGE,
     content: {

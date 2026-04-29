@@ -3,6 +3,7 @@ import { routePaths, routes } from "../../../routes/paths";
 import { ArrowRight } from "lucide-react";
 
 const getLocalizedValue = (value) => value?.he || value?.en || value;
+const formatDisplayDate = (value) => (value || "").replaceAll("-", ".");
 
 export const RelatedArticlesSection = ({ articles = [], t, isRtl }) => {
   if (!articles.length) return null;
@@ -43,7 +44,7 @@ export const RelatedArticlesSection = ({ articles = [], t, isRtl }) => {
             >
               <div className="mb-5 flex items-center gap-3 border-b border-slate-100 pb-4">
                 <span className="rounded-full bg-slate-100 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.18em] text-slate-500">
-                  {article.date}
+                  {formatDisplayDate(article.date)}
                 </span>
               </div>
               <h4 className="mb-4 text-xl font-bold leading-snug text-slate-900 transition-colors line-clamp-2 group-hover:text-slate-700">

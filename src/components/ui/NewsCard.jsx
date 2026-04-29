@@ -6,6 +6,7 @@ export const NewsCard = ({ article }) => {
   const title = article.title?.he || article.title?.en || article.title;
   const excerpt = article.excerpt?.he || article.excerpt?.en || article.excerpt;
   const to = routes.newsDetail(article.id);
+  const displayDate = (article.date || "").replaceAll("-", ".");
 
   return (
     <Link
@@ -20,7 +21,7 @@ export const NewsCard = ({ article }) => {
       >
         <div className="mb-5 flex items-center gap-3 border-b border-slate-200 pb-4">
           <span className="rounded-full bg-white px-3 py-1 text-[11px] font-bold uppercase tracking-[0.18em] text-slate-500 ring-1 ring-slate-200">
-            {article.date}
+            {displayDate}
           </span>
         </div>
         <h3 className="text-xl font-bold leading-snug text-slate-900 transition-colors line-clamp-2 group-hover:text-slate-700">
