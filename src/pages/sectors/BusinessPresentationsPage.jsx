@@ -1,4 +1,14 @@
-import { Presentation } from "lucide-react";
+import {
+  BarChart3,
+  Building2,
+  FileText,
+  Handshake,
+  Monitor,
+  Presentation,
+  Settings,
+  Target,
+  TrendingUp,
+} from "lucide-react";
 import { RelatedArticlesSection } from "../../components/common/sector/RelatedArticlesSection";
 import { SectorHeroActions } from "../../components/common/sector/SectorHeroActions";
 import {
@@ -15,7 +25,7 @@ const heroStats = [
 
 const services = [
   {
-    icon: "📊",
+    icon: BarChart3,
     title: "רווחיות ותמחור",
     items: [
       "תמחור נכון של מוצרים ושירותים",
@@ -25,7 +35,7 @@ const services = [
     result: "הבנה מלאה היכן העסק מרוויח ומה גורם לדליפת כסף",
   },
   {
-    icon: "🎯",
+    icon: Target,
     title: "ניהול ובקרה פיננסית",
     items: [
       "תקציב שנתי ורב שנתי",
@@ -35,7 +45,7 @@ const services = [
     result: "שליטה אמיתית בכסף לא רק בדיעבד, אלא בזמן אמת",
   },
   {
-    icon: "🏗️",
+    icon: Building2,
     title: "מודל עסקי ובדיקות כדאיות",
     items: [
       "בניית מודל עסקי פיננסי מלא",
@@ -45,7 +55,7 @@ const services = [
     result: "קבלת החלטות עסקיות מבוססות מספרים ולא תחושות בטן",
   },
   {
-    icon: "📈",
+    icon: TrendingUp,
     title: "מדדים ותמריצים",
     items: [
       "בניית מערכת KPI's לכל מחלקה",
@@ -55,7 +65,7 @@ const services = [
     result: "עובדים שמכוונים להצלחה, עם מדדים ברורים וישיגים",
   },
   {
-    icon: "🔭",
+    icon: Presentation,
     title: "תחזיות ותכנון קדימה",
     items: [
       "בניית Forecast פיננסי לטווח קצר וארוך",
@@ -65,7 +75,7 @@ const services = [
     result: "ראייה קדימה ברורה לא רק מה שהיה, אלא לאן הולכים",
   },
   {
-    icon: "🖥️",
+    icon: Monitor,
     title: "דוחות ודשבורדים",
     items: [
       'דשבורד מנכ"ל עם מדדי מפתח',
@@ -75,7 +85,7 @@ const services = [
     result: "תמונת מצב עסקית ברורה בכל זמן, בלחיצת כפתור",
   },
   {
-    icon: "🤝",
+    icon: Handshake,
     title: "שותפות עסקית",
     items: [
       "עבודה צמודה מול ההנהלה",
@@ -85,7 +95,7 @@ const services = [
     result: "שותף פיננסי אמיתי שמבין את העסק ולא רק את הספרות",
   },
   {
-    icon: "⚙️",
+    icon: Settings,
     title: "התייעלות ושיפור ביצועים",
     items: [
       "ניתוח הוצאות וזיהוי חיסכון פוטנציאלי",
@@ -95,7 +105,7 @@ const services = [
     result: "פחות בזבוז, יותר רווח בלי לפגוע בצמיחה",
   },
   {
-    icon: "📑",
+    icon: FileText,
     title: "מצגות חברה",
     items: [
       "בניית מצגות עסקיות להנהלה, בעלים ומשקיעים",
@@ -143,8 +153,8 @@ const Hero = () => (
           <span className="block">במיקור חוץ</span>
         </h1>
         <p className="mt-7 max-w-2xl text-lg leading-9 text-white/70">
-          ניהול פיננסי אסטרטגי ומלא לעסק שלך — רווחיות, שליטה ותכנון קדימה —
-          ללא הצורך לגייס CFO פנימי.
+          ניהול פיננסי אסטרטגי ומלא לעסק שלך — רווחיות, שליטה ותכנון קדימה — ללא הצורך
+          לגייס CFO פנימי.
         </p>
         <SectorHeroActions className="mt-10" />
       </div>
@@ -166,32 +176,34 @@ const ServicesSection = () => (
         text="כל שירות מתורגם לאחת שאלה אחת: איך העסק שלך מרוויח יותר, בשליטה מלאה."
       />
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-        {services.map((service) => (
-          <article
-            key={service.title}
-            className="group rounded-2xl border border-slate-200 bg-stone-50 p-6 transition hover:-translate-y-1 hover:border-slate-400 hover:bg-white hover:shadow-lg hover:shadow-slate-200/60"
-          >
-            <div className="mb-4 flex items-center gap-3">
-              <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-white text-2xl shadow-sm ring-1 ring-slate-200">
-                {service.icon}
-              </span>
-              <h3 className="text-lg font-bold text-slate-900">
-                {service.title}
-              </h3>
-            </div>
-            <ul className="space-y-2 text-sm leading-6 text-slate-600">
-              {service.items.map((item) => (
-                <li key={item}>{item}</li>
-              ))}
-            </ul>
-            <div className="mt-5 rounded-xl border border-slate-200 bg-white p-4">
-              <p className="text-xs font-bold text-slate-900">תוצאה:</p>
-              <p className="mt-1 text-sm leading-6 text-slate-600">
-                {service.result}
-              </p>
-            </div>
-          </article>
-        ))}
+        {services.map((service) => {
+          const Icon = service.icon;
+
+          return (
+            <article
+              key={service.title}
+              className="group rounded-2xl border border-slate-200 bg-stone-50 p-6 transition hover:-translate-y-1 hover:border-slate-400 hover:bg-white hover:shadow-lg hover:shadow-slate-200/60"
+            >
+              <div className="mb-4 flex items-center gap-3">
+                <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-white text-slate-900 shadow-sm ring-1 ring-slate-200">
+                  <Icon className="h-6 w-6" />
+                </span>
+                <h3 className="text-lg font-bold text-slate-900">{service.title}</h3>
+              </div>
+              <ul className="space-y-2 text-sm leading-6 text-slate-600">
+                {service.items.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ul>
+              <div className="mt-5 rounded-xl border border-slate-200 bg-white p-4">
+                <p className="text-xs font-bold text-slate-900">תוצאה:</p>
+                <p className="mt-1 text-sm leading-6 text-slate-600">
+                  {service.result}
+                </p>
+              </div>
+            </article>
+          );
+        })}
       </div>
     </div>
   </section>
@@ -215,9 +227,7 @@ const ProcessSection = () => (
             <span className="flex h-10 w-10 items-center justify-center rounded-full bg-slate-900 font-serif text-lg font-black text-white">
               {idx + 1}
             </span>
-            <h3 className="mt-5 text-base font-bold text-slate-900">
-              {step.title}
-            </h3>
+            <h3 className="mt-5 text-base font-bold text-slate-900">{step.title}</h3>
             <p className="mt-2 text-sm leading-6 text-slate-600">{step.text}</p>
           </article>
         ))}
