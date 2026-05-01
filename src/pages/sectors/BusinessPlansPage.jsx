@@ -1,3 +1,5 @@
+import { Controller } from "react-hook-form";
+import { toast } from "sonner";
 import {
   Banknote,
   BarChart3,
@@ -22,6 +24,9 @@ import {
   SectionHeader,
   SectionLabel,
 } from "../../components/common/sector/SectorPagePrimitives";
+import { PhoneNumberInput } from "../../components/ui/PhoneNumberInput";
+import { useContactForm } from "../../hooks/useContactForm";
+import { submitContactForm } from "../../services/contactService";
 
 const heroStats = [
   ["בנק", "מסמך שמדבר בשפה של הבנק"],
@@ -33,23 +38,23 @@ const heroStats = [
 const challenges = [
   {
     icon: Landmark,
-    title: "הבנק או המשקיע דורשים תוכנית עסקית",
-    text: "לא ברור מה בדיוק הם מחפשים, ומה ייראה להם אמין ומשכנע.",
+    title: "בקשת הלוואה לעסק",
+    text: "כאשר אתם מגישים בקשה להלוואה, הבנק רוצה להבין מה מטרת המימון, איך הכסף ישמש את העסק, ומהי יכולת ההחזר הצפויה שלכם.",
   },
   {
     icon: ClipboardList,
-    title: "לא ברור מה צריך להיות בתוכנית",
-    text: "הרבה תוכן, מעט הכוונה ומסמכים שלא עומדים בציפיות.",
+    title: "הגדלת מסגרת אשראי",
+    text: "כדי לבקש הגדלת מסגרת אשראי, חשוב להציג לבנק תמונה פיננסית ברורה: הכנסות, הוצאות, תזרים מזומנים וצרכי הפעילות השוטפת.",
   },
   {
     icon: ShieldCheck,
-    title: "פחד מדחייה או החלטה שגויה",
-    text: "תוכנית לא מדויקת יכולה לפגוע במימון, בשותפות או בכיוון העסקי.",
+    title: "פתיחת חשבון בנק לעסק",
+    text: "במקרים רבים, במיוחד בעסק חדש או במקרים מורכבים יותר, הבנק מבקש להבין את מהות הפעילות, מקורות ההכנסה, אופן ההתנהלות והצפי העסקי.",
   },
   {
     icon: BarChart3,
-    title: "חוסר ודאות לגבי המספרים",
-    text: "תחזיות שלא מבוססות על נתונים פוגעות באמינות וביכולת לקבל החלטות.",
+    title: "הצגת העסק בצורה מקצועית מול הבנק",
+    text: "תכנית עסקית טובה לא נועדה רק \"לעמוד בדרישה\" - היא מציגה את העסק בצורה ברורה, מסודרת ומשכנעת, ומסייעת לחזק את האמון מול הבנק.",
   },
 ];
 
@@ -165,6 +170,13 @@ const reasons = [
   },
 ];
 
+const businessPlanLeadFormContent = {
+  title: "בואו נעשה סדר במספרים של העסק",
+  description:
+    "השאירו פרטים ונחזור אליכם לשיחה קצרה, שבה נבין את מצב העסק ונזהה הזדמנויות לשיפור!",
+  submit: "שליחה",
+};
+
 const Hero = () => (
   <section className="relative overflow-hidden bg-slate-900 px-4 py-24 text-white sm:px-6 lg:px-8 lg:py-32">
     <HeroBackground />
@@ -191,24 +203,24 @@ const Hero = () => (
 );
 
 const ChallengeSection = () => (
-  <section className="bg-white px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
-    <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[0.9fr,1.1fr]">
+  <section className="bg-white px-4 py-16 sm:px-6 lg:px-8 lg:py-20">
+    <div className="mx-auto grid max-w-6xl gap-8 lg:grid-cols-[1fr,1.05fr] lg:items-start">
       <SectionHeader
-        label="אתגר מוכר?"
-        title="הבנק מבקש תוכנית עסקית ולא ברור מאיפה מתחילים?"
-        text="בעלי עסקים רבים צריכים תוכנית עסקית לבנק, למשקיעים, להקמת פעילות חדשה או לקבלת החלטות פנימיות, ולא יודעים מה לכלול ואיך לבנות את המספרים."
+        title="צריכים תכנית עסקית לבנק לצורך הלוואה, הגדלת מסגרת אשראי או פתיחת חשבון עסקי?"
+        text="בנק לא מסתפק רק ברעיון טוב, הוא רוצה להבין את הפעילות, לראות מספרים ברורים, לזהות יכולת החזר ולהרגיש שיש מאחורי העסק תכנון פיננסי מסודר. אנחנו בונים תכנית עסקית מקצועית ומבוססת נתונים, שמציגה את העסק בצורה ברורה ומשכנעת: מטרת המימון, תחזית הכנסות והוצאות, תזרים מזומנים, רווחיות, צרכי אשראי, סיכונים ודרך התמודדות, כדי שתגיעו לבנק מוכנים, מסודרים ובשלים יותר לקבלת החלטה חיובית."
+        compact
       />
-      <div className="grid gap-4">
+      <div className="grid gap-3">
         {challenges.map(({ icon: Icon, title, text }) => (
           <article
             key={title}
-            className="flex gap-5 rounded-2xl border border-slate-200 bg-stone-50 p-6 transition hover:-translate-x-1 hover:border-slate-400"
+            className="flex gap-4 rounded-xl border border-slate-200 bg-stone-50 p-4 transition hover:-translate-x-1 hover:border-slate-400"
           >
-            <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-white text-slate-900 shadow-sm ring-1 ring-slate-200">
-              <Icon className="h-6 w-6" />
+            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-white text-slate-900 shadow-sm ring-1 ring-slate-200">
+              <Icon className="h-5 w-5" />
             </div>
             <div>
-              <h3 className="font-bold text-slate-900">{title}</h3>
+              <h3 className="text-sm font-bold text-slate-900">{title}</h3>
               <p className="mt-1 text-sm leading-6 text-slate-600">{text}</p>
             </div>
           </article>
@@ -343,6 +355,138 @@ const WhyUsSection = () => (
   </section>
 );
 
+const BusinessPlanLeadForm = ({ t, isRtl }) => {
+  const fieldIds = {
+    fullName: "business-plan-lead-full-name",
+    phone: "business-plan-lead-phone",
+    email: "business-plan-lead-email",
+  };
+  const { form, handleSubmit: submitLead } = useContactForm(
+    t,
+    async (data) => {
+      const loadingToast = toast.loading(t.contact.sending);
+      try {
+        await submitContactForm(
+          { ...data, service: "Business plan lead form" },
+          "Business Plan Lead Form - G.D Financial Services",
+        );
+        toast.success(t.contact.success, { id: loadingToast });
+      } catch (error) {
+        toast.error(t.contact.error, { id: loadingToast });
+        throw error;
+      }
+    },
+    { includeMessage: false, includeService: false },
+  );
+  const {
+    register,
+    control,
+    formState: { errors },
+  } = form;
+  const onLeadError = () => {
+    toast.error(t.contact.error);
+  };
+
+  return (
+    <section className="bg-white px-4 py-12">
+      <div className="mx-auto max-w-5xl overflow-hidden rounded-2xl border border-slate-200/80 bg-white shadow-lg shadow-slate-200/60">
+        <div className="grid grid-cols-1 items-stretch lg:grid-cols-[1fr_300px]">
+          <form
+            onSubmit={form.handleSubmit(submitLead, onLeadError)}
+            className="relative overflow-hidden bg-slate-900 px-6 py-6 lg:px-8 lg:py-7"
+          >
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(255,255,255,0.12),transparent_40%)]" />
+            <div className="relative">
+              <p className="mb-4 text-right text-sm leading-6 text-white/70">
+                {businessPlanLeadFormContent.description}
+              </p>
+              <div className="grid grid-cols-1 gap-2.5 sm:grid-cols-2">
+                <div>
+                  <label
+                    className="mb-1 block text-xs font-semibold text-white/75"
+                    htmlFor={fieldIds.fullName}
+                  >
+                    {t.contact.fullName}
+                  </label>
+                  <input
+                    id={fieldIds.fullName}
+                    {...register("fullName")}
+                    className={`h-10 w-full rounded-lg border bg-white/96 px-3 text-right text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-white/50 ${errors.fullName ? "border-rose-300" : "border-white/60"}`}
+                    placeholder={t.contact.fullName}
+                  />
+                </div>
+
+                <div>
+                  <label
+                    className="mb-1 block text-xs font-semibold text-white/75"
+                    htmlFor={fieldIds.phone}
+                  >
+                    {t.contact.phone}
+                  </label>
+                  <Controller
+                    name="phone"
+                    control={control}
+                    render={({ field }) => (
+                      <PhoneNumberInput
+                        inputId={fieldIds.phone}
+                        value={field.value}
+                        onChange={field.onChange}
+                        error={errors.phone?.message}
+                        isRtl={isRtl}
+                        placeholder={t.contact.phone}
+                        className="space-y-0"
+                        inputClassName={`h-10 rounded-lg border bg-white/96 shadow-none hover:shadow-none focus-within:ring-2 focus-within:ring-white/50 ${errors.phone ? "border-rose-300" : "border-white/60"}`}
+                        prefixClassName="border-white/50 bg-slate-50/90 text-sm text-slate-700"
+                        localInputClassName="h-10 bg-transparent text-right text-sm text-slate-900 placeholder:text-slate-400"
+                      />
+                    )}
+                  />
+                </div>
+
+                <div>
+                  <label
+                    className="mb-1 block text-xs font-semibold text-white/75"
+                    htmlFor={fieldIds.email}
+                  >
+                    {t.contact.email}
+                  </label>
+                  <input
+                    id={fieldIds.email}
+                    {...register("email")}
+                    className={`h-10 w-full rounded-lg border bg-white/96 px-3 text-right text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-white/50 ${errors.email ? "border-rose-300" : "border-white/60"}`}
+                    placeholder={t.contact.email}
+                  />
+                </div>
+
+                <div className="flex items-end">
+                  <button
+                    type="submit"
+                    className="h-10 w-full rounded-lg bg-white px-4 text-sm font-semibold text-slate-900 transition hover:bg-slate-100"
+                  >
+                    {businessPlanLeadFormContent.submit}
+                  </button>
+                </div>
+              </div>
+            </div>
+          </form>
+
+          <div className="bg-white px-6 py-6 text-right lg:px-8 lg:py-7">
+            <div className="flex h-full flex-col justify-center">
+              <h2 className="font-serif text-2xl font-black leading-tight text-slate-900 md:text-3xl">
+                {businessPlanLeadFormContent.title}
+              </h2>
+              <p className="mt-3 text-sm leading-6 text-slate-500">
+                {businessPlanLeadFormContent.description}
+              </p>
+              <div className="mt-4 h-px w-12 bg-slate-200" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
 export const BusinessPlansPage = ({ relatedArticles = [], t, isRtl }) => (
   <main className="bg-white" dir="rtl">
     <Hero />
@@ -351,6 +495,7 @@ export const BusinessPlansPage = ({ relatedArticles = [], t, isRtl }) => (
     <SolutionSection />
     <ServicesSection />
     <WhyUsSection />
+    <BusinessPlanLeadForm t={t} isRtl={isRtl} />
     <ContactCtaSection
       title="צריך תוכנית עסקית מקצועית?"
       text="שיחת ייעוץ ראשונית ללא עלות. נבין את המטרה שלך ונסביר כיצד נוכל לבנות עבורך תוכנית מדויקת."

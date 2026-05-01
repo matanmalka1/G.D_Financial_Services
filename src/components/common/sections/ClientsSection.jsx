@@ -18,6 +18,15 @@ export const ClientsSection = () => {
   return (
     <section className="py-24 bg-slate-50/70">
       <div className="max-w-6xl mx-auto px-4">
+        <div className="mx-auto mb-16 max-w-3xl text-center">
+          <h2 className="font-serif text-4xl font-black leading-tight text-slate-900 md:text-5xl">
+            {t.home.clients.intro.title}
+          </h2>
+          <p className="mx-auto mt-5 max-w-2xl text-lg leading-8 text-slate-600">
+            {t.home.clients.intro.description}
+          </p>
+        </div>
+
         <div className="text-center max-w-4xl mx-auto space-y-4">
           <h2 className="text-3xl md:text-4xl font-bold text-slate-900">
             {t.home.clients.title}

@@ -17,7 +17,7 @@ import {
 const heroStats = [
   ["5", "שלבי תהליך מובנה"],
   ["7+", "תוצרים קונקרטיים"],
-  ["90", "יום לתכנית פעולה"],
+  ["100% מבוסס נתונים", "ניתוח, החלטות ותכנית פעולה"],
 ];
 
 const audience = [
@@ -86,6 +86,16 @@ const strengths = [
     title: "אסטרטגיית צמיחה מעשית",
     text: "מהתובנה עד לתכנית פעולה ולא עצות כלליות",
   },
+  {
+    icon: BarChart3,
+    title: "בניית תקציב ותחזיות",
+    text: "תכנון קדימה של הכנסות, הוצאות, תזרים ויעדים עסקיים כדי לנהל את העסק בצורה מסודרת ולא להגיב רק בדיעבד.",
+  },
+  {
+    icon: LineChart,
+    title: "שיפור רווחיות ותזרים",
+    text: "זיהוי מוצרים, שירותים או פעילויות שפוגעים ברווחיות, ובניית צעדים פרקטיים לשיפור הרווח הגולמי, התזרים והביצועים העסקיים.",
+  },
 ];
 
 const Hero = () => (
@@ -107,7 +117,7 @@ const Hero = () => (
           גבוהה יותר.
         </p>
         <p className="mx-auto mt-4 max-w-3xl text-base leading-8 text-white/60">
-          G.D Finance מלווה בעלי עסקים בתהליך עומק שמחבר בין ניתוח פיננסי, הבנה עסקית
+          החברה שלנו עוזרת לבעלי עסקים בתהליך עומק שמחבר בין ניתוח פיננסי, הבנה עסקית
           ואסטרטגיית צמיחה עד לבניית תכנית עסקית פרקטית עם יעדים, תחזיות ותכנית ביצוע.
         </p>
         <SectorHeroActions className="mt-10" />
@@ -126,7 +136,7 @@ const AudienceSection = () => (
       <SectionHeader
         label="קהל יעד"
         title="למי השירות מתאים?"
-        text="עסקים קטנים ובינוניים שרוצים להפוך נתונים לכלי ניהולי ולא רק לדוחות."
+        text="לבעלי עסקים שרוצים להבין באמת מה קורה בעסק, לקבל החלטות לפי מספרים, לשפר רווחיות ולבנות תהליך ניהולי ברור לצמיחה. הליווי שלנו עוזר להפוך נתונים ודוחות לכלי עבודה פרקטיים, להבין איפה העסק מרוויח, איפה הוא מאבד כסף, איך לתכנן קדימה ואילו פעולות יעזרו לשפר את הביצועים לאורך זמן."
       />
       <div className="grid gap-4">
         {audience.map((item) => (
@@ -206,13 +216,13 @@ const DeliverablesSection = () => (
 const WhyUsSection = () => (
   <section className="bg-white px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
     <div className="mx-auto max-w-7xl">
-      <div className="grid gap-12 lg:grid-cols-[0.95fr,1.05fr]">
+      <div className="grid gap-12">
         <SectionHeader
           label="הגישה שלנו"
           title="למה דווקא G.D Finance?"
-          text="שילוב של ניסיון ב-FP&A, ניתוח נתונים, בניית מודלים פיננסיים וליווי מנהלים בקבלת החלטות. המטרה היא לא רק להציג דוחות אלא להפוך את המספרים לכלי ניהולי שמוביל לצמיחה."
+          text="המשרד שלנו עוזר לעסקים להפוך מספרים להחלטות ניהוליות ברורות. באמצעות ניתוח נתונים, בניית מודלים פיננסיים, תכנון תקציבי וליווי עסקי שוטף, אנחנו מזהים איפה העסק מרוויח, איפה הוא מאבד כסף, ומה צריך לעשות כדי לשפר רווחיות, תזרים וצמיחה. המטרה היא לתת לבעל העסק תמונה פיננסית אמיתית, פשוטה להבנה ופרקטית לפעולה."
         />
-        <div className="grid gap-5 sm:grid-cols-2">
+        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {strengths.map(({ icon: Icon, title, text }) => (
             <article
               key={title}
@@ -231,38 +241,6 @@ const WhyUsSection = () => (
   </section>
 );
 
-const ExampleSection = () => (
-  <section className="bg-stone-50 px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
-    <div className="mx-auto max-w-7xl">
-      <SectionHeader
-        label="דוגמה מהשטח"
-        title="דוגמה לתוצאה"
-        text="איך ניתוח נכון הופך בעיה עסקית לאזור פעולה ברור."
-      />
-      <div className="grid gap-6 md:grid-cols-2">
-        <article className="rounded-3xl border border-slate-200 bg-white p-8 shadow-sm">
-          <span className="text-xs font-bold uppercase tracking-[0.16em] text-slate-500">
-            לפני
-          </span>
-          <p className="mt-4 text-lg leading-8 text-slate-700">
-            העסק גדל במחזור אך הרווחיות נשחקה, ולא הייתה תמונה ברורה אילו שירותים
-            רווחיים.
-          </p>
-        </article>
-        <article className="rounded-3xl bg-slate-900 p-8 text-white shadow-xl shadow-slate-200/60">
-          <span className="text-xs font-bold uppercase tracking-[0.16em] text-white/55">
-            אחרי
-          </span>
-          <p className="mt-4 text-lg leading-8 text-white/80">
-            נבנתה מפת רווחיות, זוהו שירותים לא רווחיים, בוצע עדכון תמחור ונבנתה תכנית
-            צמיחה עם יעדי מכירות ורווחיות.
-          </p>
-        </article>
-      </div>
-    </div>
-  </section>
-);
-
 export const BusinessConsultingPage = ({ relatedArticles = [], t, isRtl }) => (
   <main className="bg-white" dir="rtl">
     <Hero />
@@ -270,7 +248,6 @@ export const BusinessConsultingPage = ({ relatedArticles = [], t, isRtl }) => (
     <ProcessSection />
     <DeliverablesSection />
     <WhyUsSection />
-    <ExampleSection />
     <ContactCtaSection
       label="מוכנים להתחיל?"
       title="רוצים להבין מה באמת קורה בעסק שלכם?"

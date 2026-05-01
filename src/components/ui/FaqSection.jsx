@@ -11,19 +11,19 @@ const FaqItem = ({ item, isOpen, onToggle, idx }) => {
   }, [isOpen]);
 
   return (
-    <div className="overflow-hidden rounded-2xl border border-slate-200 bg-[#fbfbfa]">
+    <div className="overflow-hidden rounded-lg border border-slate-200 bg-[#fbfbfa]">
       <button
         onClick={onToggle}
         aria-expanded={isOpen}
         aria-controls={`faq-answer-${idx}`}
         id={`faq-question-${idx}`}
-        className="flex w-full items-center justify-between bg-[#fbfbfa] px-6 py-5 text-right transition-colors hover:bg-slate-50"
+        className="flex min-h-12 w-full items-center justify-between bg-[#fbfbfa] px-4 py-3 text-right transition-colors hover:bg-slate-50"
       >
-        <span className="text-lg font-semibold text-slate-900 leading-snug">
+        <span className="text-base font-semibold leading-snug text-slate-900">
           {item.q}
         </span>
         <span
-          className={`ms-4 text-slate-500 text-xl transition-transform duration-200 shrink-0 ${isOpen ? "rotate-180" : ""}`}
+          className={`ms-3 shrink-0 text-base text-slate-500 transition-transform duration-200 ${isOpen ? "rotate-180" : ""}`}
           aria-hidden="true"
         >
           ▾
@@ -37,7 +37,7 @@ const FaqItem = ({ item, isOpen, onToggle, idx }) => {
       >
         <div
           ref={contentRef}
-          className="bg-[#fbfbfa] px-6 pb-6 pt-1 text-base leading-relaxed text-slate-600"
+          className="bg-[#fbfbfa] px-4 pb-4 pt-0 text-sm leading-6 text-slate-600"
         >
           {item.a}
         </div>
@@ -52,7 +52,7 @@ export const FaqSection = ({ items = [] }) => {
   const toggle = (idx) => setOpenIndex(openIndex === idx ? null : idx);
 
   return (
-    <div className="space-y-3">
+    <div className="space-y-2">
       {items.map((item, idx) => (
         <FaqItem
           key={idx}
