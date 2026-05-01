@@ -71,7 +71,6 @@ export const PhoneNumberInput = forwardRef(
         >
           <div
             className={`flex min-w-[5.75rem] shrink-0 items-center justify-center gap-2 border-slate-200 bg-slate-50 px-3 text-sm font-semibold text-slate-700 transition-colors group-focus-within:bg-slate-100 ${isRtl ? "border-l" : "border-r"} ${prefixClassName}`}
-            dir="ltr"
             style={{ unicodeBidi: "isolate" }}
             aria-hidden="true"
           >

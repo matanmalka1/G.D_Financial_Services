@@ -69,7 +69,7 @@ export const Home = () => {
             </div>
             <p
               className="mx-auto mb-8 max-w-2xl text-xl leading-9 text-white/70 md:text-2xl"
-              dir={isRtl ? "rtl" : "ltr"}
+              dir="rtl"
               style={{ unicodeBidi: "plaintext" }}
             >
               {t.home.hero.subtitle}
@@ -97,7 +97,7 @@ export const Home = () => {
         <div className="mb-12 text-center">
           <h2
             className="font-serif text-3xl font-black leading-tight text-slate-900 md:text-5xl"
-            dir={isRtl ? "rtl" : "ltr"}
+            dir="rtl"
             style={{ unicodeBidi: "plaintext" }}
           >
             {t.home.about.title}
@@ -109,13 +109,13 @@ export const Home = () => {
             className={`rounded-3xl border border-slate-200 bg-stone-50 p-8 text-lg leading-8 text-slate-600 md:p-10 ${
               isRtl ? "text-right" : "text-left"
             }`}
-            dir={isRtl ? "rtl" : "ltr"}
+            dir="rtl"
             style={{ unicodeBidi: "plaintext" }}
           >
             <p>{t.home.about.p1}</p>
             <p className="mt-4">{t.home.about.p2}</p>
             <p className="mt-4">{t.home.about.p3}</p>
-            <ul className="mt-8 grid gap-4 md:grid-cols-2" dir={isRtl ? "rtl" : "ltr"}>
+            <ul className="mt-8 grid gap-4 md:grid-cols-2" dir="rtl">
               {t.home.about.highlights?.map((item) => (
                 <li
                   key={item}
@@ -150,7 +150,7 @@ export const Home = () => {
       {/* FAQ Section */}
       <section
         className="mx-auto flex max-w-6xl flex-col gap-8 px-4 py-16 lg:flex-row lg:items-start"
-        dir="ltr"
+        dir="rtl"
       >
         <div
           className="text-center lg:sticky lg:top-24 lg:w-[34%] lg:shrink-0 lg:text-right"

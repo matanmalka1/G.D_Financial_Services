@@ -23,11 +23,9 @@ export const LeadCaptureModal = ({
   open,
   onClose = () => {},
   onSubmit,
-  isRtl: isRtlProp,
   services,
 }) => {
-  const { t, isRtl: contextIsRtl } = useSiteContent();
-  const isRtl = typeof isRtlProp === "boolean" ? isRtlProp : contextIsRtl;
+  const { t } = useSiteContent();
   const copy = t?.modalForm || {};
   const { form, handleSubmit: submitLeadForm } = useContactForm(
     t,
@@ -63,7 +61,7 @@ export const LeadCaptureModal = ({
     <Modal
       open={open}
       onClose={handleClose}
-      isRtl={isRtl}
+      isRtl
       title={copy.title || ""}
       maxWidth="max-w-2xl"
     >
@@ -100,7 +98,7 @@ export const LeadCaptureModal = ({
                 value={field.value}
                 onChange={field.onChange}
                 error={errors.phone?.message}
-                isRtl={isRtl}
+                isRtl
                 className="space-y-0"
                 inputClassName={`h-12 rounded-xl shadow-inner shadow-slate-900/5 ${errors.phone ? "border-red-400" : "border-slate-200"} focus-within:ring-2 focus-within:ring-slate-900/70`}
               />
@@ -130,7 +128,6 @@ export const LeadCaptureModal = ({
                   onValueChange={field.onChange}
                   options={serviceOptions}
                   placeholder={copy.servicePlaceholder || ""}
-                  dir={isRtl ? "rtl" : "ltr"}
                   className={`h-12 ${errors.service ? "border-red-400" : ""}`}
                 />
               )}

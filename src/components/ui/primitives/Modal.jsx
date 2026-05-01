@@ -44,8 +44,8 @@ export const Modal = ({
             leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
           >
             <DialogPanel
-              className={`relative w-full ${maxWidth} overflow-hidden rounded-3xl bg-white/95 shadow-[0_20px_70px_rgba(15,23,42,0.35)] ring-1 ring-slate-900/10 backdrop-blur-xl ${padded ? "p-6 sm:p-8" : ""} ${isRtl ? "text-right" : "text-left"}`}
-              dir={isRtl ? "rtl" : "ltr"}
+              className={`relative w-full ${maxWidth} overflow-hidden rounded-3xl bg-white/95 text-right shadow-[0_20px_70px_rgba(15,23,42,0.35)] ring-1 ring-slate-900/10 backdrop-blur-xl ${padded ? "p-6 sm:p-8" : ""}`}
+              dir="rtl"
             >
               <div className="absolute inset-x-0 top-0 h-1.5 bg-gradient-to-r from-slate-900 via-amber-500 to-emerald-500" />
 

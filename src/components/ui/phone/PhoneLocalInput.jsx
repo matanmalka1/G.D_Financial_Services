@@ -10,7 +10,6 @@ export const PhoneLocalInput = forwardRef(
       className={`h-12 w-full border-0 bg-transparent px-4 text-base text-slate-900 placeholder:text-slate-400 focus:outline-none ${isRtl ? "text-right" : "text-left"} ${className}`}
       placeholder={placeholder}
       inputMode="tel"
-      dir="ltr"
     />
   ),
 );

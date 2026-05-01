@@ -3,20 +3,21 @@ import { useState, useRef, useEffect } from "react";
 const FaqItem = ({ item, isOpen, onToggle, idx }) => {
   const contentRef = useRef(null);
   const [height, setHeight] = useState(0);
+  const questionId = `faq-question-${idx}`;
+  const answerId = `faq-answer-${idx}`;
 
   useEffect(() => {
-    if (contentRef.current) {
-      setHeight(isOpen ? contentRef.current.scrollHeight : 0);
-    }
+    setHeight(isOpen && contentRef.current ? contentRef.current.scrollHeight : 0);
   }, [isOpen]);
 
   return (
     <div className="overflow-hidden rounded-lg border border-slate-200 bg-[#fbfbfa]">
       <button
+        type="button"
         onClick={onToggle}
         aria-expanded={isOpen}
-        aria-controls={`faq-answer-${idx}`}
-        id={`faq-question-${idx}`}
+        aria-controls={answerId}
+        id={questionId}
         className="flex min-h-12 w-full items-center justify-between bg-[#fbfbfa] px-4 py-3 text-right transition-colors hover:bg-slate-50"
       >
         <span className="text-base font-semibold leading-snug text-slate-900">
@@ -30,9 +31,9 @@ const FaqItem = ({ item, isOpen, onToggle, idx }) => {
         </span>
       </button>
       <div
-        id={`faq-answer-${idx}`}
+        id={answerId}
         role="region"
-        aria-labelledby={`faq-question-${idx}`}
+        aria-labelledby={questionId}
         style={{ height, overflow: "hidden", transition: "height 250ms ease" }}
       >
         <div
@@ -49,13 +50,15 @@ const FaqItem = ({ item, isOpen, onToggle, idx }) => {
 export const FaqSection = ({ items = [] }) => {
   const [openIndex, setOpenIndex] = useState(null);
 
-  const toggle = (idx) => setOpenIndex(openIndex === idx ? null : idx);
+  const toggle = (idx) => {
+    setOpenIndex((currentIndex) => (currentIndex === idx ? null : idx));
+  };
 
   return (
     <div className="space-y-2">
       {items.map((item, idx) => (
         <FaqItem
-          key={idx}
+          key={item.q || idx}
           item={item}
           idx={idx}
           isOpen={openIndex === idx}

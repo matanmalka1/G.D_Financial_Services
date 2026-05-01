@@ -60,7 +60,7 @@ export const Contact = () => {
             </h1>
             <p
               className="mt-6 max-w-2xl text-lg leading-9 text-white/72"
-              dir={isRtl ? "rtl" : "ltr"}
+              dir="rtl"
               style={{ unicodeBidi: "plaintext" }}
             >
               {t.contact.heroDescription}
@@ -75,7 +75,7 @@ export const Contact = () => {
               <a
                 href={`tel:${t.footer.phone}`}
                 className="flex items-center gap-3 transition hover:text-white"
-                dir="ltr"
+                dir="rtl"
               >
                 <Phone className="h-5 w-5 text-white/55" strokeWidth={1.8} />
                 <span>{t.footer.phone}</span>
@@ -83,7 +83,7 @@ export const Contact = () => {
               <a
                 href={`mailto:${t.footer.email}`}
                 className="flex items-center gap-3 transition hover:text-white"
-                dir="ltr"
+                dir="rtl"
               >
                 <Mail className="h-5 w-5 text-white/55" strokeWidth={1.8} />
                 <span>{t.footer.email}</span>
@@ -148,7 +148,7 @@ export const Contact = () => {
                     {...register("fullName")}
                     className={`w-full rounded-xl border bg-white px-4 py-3 text-slate-900 shadow-sm shadow-slate-900/5 transition-all placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-slate-900/20 ${errors.fullName ? "border-red-500" : "border-slate-200 focus:border-slate-400"}`}
                     placeholder={t.contact.fullNamePlaceholder}
-                    dir={isRtl ? "rtl" : "ltr"}
+                    dir="rtl"
                   />
                   {errors.fullName && (
                     <p className="text-red-500 text-xs mt-1">
@@ -164,7 +164,7 @@ export const Contact = () => {
                     {...register("email")}
                     className={`w-full rounded-xl border bg-white px-4 py-3 text-slate-900 shadow-sm shadow-slate-900/5 transition-all placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-slate-900/20 ${errors.email ? "border-red-500" : "border-slate-200 focus:border-slate-400"}`}
                     placeholder={t.contact.emailPlaceholder}
-                    dir="ltr"
+                    dir="rtl"
                   />
                   {errors.email && (
                     <p className="text-red-500 text-xs mt-1">{errors.email.message}</p>
@@ -204,7 +204,7 @@ export const Contact = () => {
                         onValueChange={field.onChange}
                         options={serviceOptions}
                         placeholder={t.contact.selectPlaceholder}
-                        dir={isRtl ? "rtl" : "ltr"}
+                        dir="rtl"
                         className={errors.service ? "border-red-500" : ""}
                       />
                     )}
@@ -226,7 +226,7 @@ export const Contact = () => {
                   rows={5}
                   className={`w-full resize-none rounded-xl border bg-white px-4 py-3 text-slate-900 shadow-sm shadow-slate-900/5 transition-all placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-slate-900/20 ${errors.message ? "border-red-500" : "border-slate-200 focus:border-slate-400"}`}
                   placeholder={t.contact.messagePlaceholder}
-                  dir={isRtl ? "rtl" : "ltr"}
+                  dir="rtl"
                 />
                 {errors.message && (
                   <p className="text-red-500 text-xs mt-1">{errors.message.message}</p>
