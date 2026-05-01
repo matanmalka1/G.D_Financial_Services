@@ -78,9 +78,16 @@ export const HeroBackground = () => (
   </>
 );
 
+const STAT_GRID_COLUMNS = {
+  2: "sm:grid-cols-2",
+  3: "sm:grid-cols-3",
+  4: "sm:grid-cols-2 lg:grid-cols-4",
+  5: "sm:grid-cols-2 lg:grid-cols-5",
+};
+
 export const HeroStatGrid = ({ stats, cols = 3 }) => (
   <div
-    className={`mx-auto mt-16 grid max-w-5xl gap-px overflow-hidden rounded-2xl border border-slate-200 bg-slate-200 shadow-xl shadow-slate-950/10 sm:grid-cols-${cols}`}
+    className={`mx-auto mt-16 grid max-w-5xl gap-px overflow-hidden rounded-2xl border border-slate-200 bg-slate-200 shadow-xl shadow-slate-950/10 ${STAT_GRID_COLUMNS[cols] ?? STAT_GRID_COLUMNS[3]}`}
   >
     {stats.map(([value, label]) => (
       <div key={label} className="bg-white p-7 text-center">

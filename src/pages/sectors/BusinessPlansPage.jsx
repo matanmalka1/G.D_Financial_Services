@@ -184,7 +184,7 @@ const Hero = () => (
       <div className="mx-auto max-w-3xl text-center">
         <div className="mb-8 inline-flex items-center justify-center gap-2 rounded-full border border-white/30 bg-white/10 px-5 py-2 text-sm font-semibold text-white">
           <BriefcaseBusiness className="h-4 w-4" />
-          תוכנית עסקית לבנק
+         G.D finance
         </div>
         <h1 className="font-serif text-4xl font-black leading-tight md:text-6xl">
           תוכנית עסקית
