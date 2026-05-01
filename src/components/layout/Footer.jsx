@@ -5,8 +5,8 @@ import { routePaths } from "../../routes/paths";
 import { InstagramLogo, FacebookLogo, LinkedInLogo } from "../common/SocialLogos";
 
 const FooterBrand = ({ t }) => (
-  <div className="max-w-xs">
-    <div className="flex items-center gap-3 mb-4">
+  <div className="max-w-sm text-right">
+    <div className="mb-4 flex items-center justify-start gap-3">
       <Logo size={48} />
       <h2 className="brand text-xl font-bold text-slate-900">{t.footer.brandTitle}</h2>
     </div>
@@ -17,7 +17,7 @@ const FooterBrand = ({ t }) => (
 );
 
 const FooterContact = ({ t }) => (
-  <div>
+  <div className="text-right">
     <h3 className="text-sm font-bold text-slate-900 uppercase tracking-widest mb-4">
       {t.footer.addressTitle}
     </h3>
@@ -38,7 +38,7 @@ const FooterContact = ({ t }) => (
 );
 
 const FooterLinks = ({ t }) => (
-  <div>
+  <div className="text-right">
     <h3 className="text-sm font-bold text-slate-900 uppercase tracking-widest mb-4">
       {t.footer.quickLinksTitle}
     </h3>
@@ -63,11 +63,11 @@ const FooterLinks = ({ t }) => (
 );
 
 const FooterSocial = ({ t }) => (
-  <div>
+  <div className="text-right">
     <h3 className="text-sm font-bold text-slate-900 uppercase tracking-widest mb-4">
       {t.footer.socialTitle}
     </h3>
-    <div className="flex items-center gap-4 text-slate-600">
+    <div className="flex items-center justify-start gap-4 text-slate-600">
       <a
         href="https://www.instagram.com/g.d_finance/"
         aria-label="Instagram"
@@ -102,17 +102,14 @@ const FooterSocial = ({ t }) => (
 export const Footer = () => {
   const { t } = useSiteContent();
   return (
-    <footer className="bg-slate-50 border-t border-gray-200 py-16">
-      <div className="max-w-7xl mx-auto px-4 flex flex-col md:flex-row justify-between gap-12">
+    <footer className="border-t border-gray-200 bg-slate-50 py-16" dir="rtl">
+      <div className="mx-auto grid max-w-7xl grid-cols-1 gap-12 px-4 sm:grid-cols-2 lg:grid-cols-[minmax(280px,1.35fr)_minmax(180px,1fr)_minmax(160px,0.75fr)_minmax(180px,0.85fr)] lg:items-start">
         <FooterBrand t={t} />
-
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-12">
-          <FooterContact t={t} />
-          <FooterLinks t={t} />
-          <FooterSocial t={t} />
-        </div>
+        <FooterContact t={t} />
+        <FooterLinks t={t} />
+        <FooterSocial t={t} />
       </div>
-      <div className="max-w-7xl mx-auto px-4 mt-16 pt-8 border-t border-gray-200 text-center text-xs text-slate-400">
+      <div className="mx-auto mt-16 max-w-7xl border-t border-gray-200 px-4 pt-8 text-center text-xs text-slate-400">
         &copy; {new Date().getFullYear()} {t.footer.brandTitle}. {t.footer.copyright}
         <Link
           className="ms-3 underline underline-offset-4"

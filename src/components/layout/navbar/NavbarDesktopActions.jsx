@@ -6,13 +6,7 @@ export const NavbarDesktopActions = ({ t }) => (
   <div className="hidden shrink-0 items-center gap-5 md:flex lg:gap-6">
     <NavLink
       to={routePaths.contact}
-      className={({ isActive }) =>
-        `inline-flex items-center justify-center gap-2 rounded-lg border px-5 py-2.5 text-sm font-bold transition-all hover:-translate-y-0.5 ${
-          isActive
-            ? "border-slate-900 bg-slate-900 text-white"
-            : "border-slate-300 bg-white/70 text-slate-900 hover:bg-slate-100"
-        }`
-      }
+      className="inline-flex items-center justify-center gap-2 rounded-full px-5 py-2.5 text-sm font-bold transition-all hover:-translate-y-0.5 bg-slate-900 text-white hover:bg-slate-800"
     >
       <Phone className="h-4 w-4" />
       {t.nav.contact}

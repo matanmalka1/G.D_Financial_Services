@@ -1,15 +1,12 @@
-import { useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import { Check } from "lucide-react";
 import { useSiteContent } from "../hooks/useSiteContent";
 import { useSeo } from "../hooks/useSeo";
-import { routePaths, routes } from "../routes/paths";
-import { FeatureBubble } from "../components/ui/FeatureBubble";
+import { routePaths } from "../routes/paths";
 import { OwnerSpotlight } from "../components/ui/OwnerSpotlight";
 import { ClientsSection } from "../components/common/sections/ClientsSection";
 import { FaqSection } from "../components/ui/FaqSection";
 import { analyticsService } from "../services/analyticsService";
-import { ITEMS_PER_PAGE } from "../constants.js";
 
 export const Home = () => {
   const { t, isRtl } = useSiteContent();
@@ -19,42 +16,9 @@ export const Home = () => {
       "G.D Finance - בניית תוכנית עסקית לבנק עם תחזיות פיננסיות, ניתוח סיכון, תזרים מזומנים ומסמך מקצועי שמגדיל את הסיכוי לקבל מימון.",
   });
 
-  const bubbles = useMemo(
-    () =>
-      [
-        {
-          title: t.nav.businessPlans,
-          icon: "FileText",
-          path: routes.sectorDetail("business-plan"),
-        },
-        {
-          title: t.nav.businessPresentations,
-          icon: "PresentationIcon",
-          path: routes.sectorDetail("business-presentations"),
-        },
-        {
-          title: t.nav.businessConsulting,
-          icon: "TrendingUp",
-          path: routes.sectorDetail("business-consulting"),
-        },
-        {
-          title: t.nav.sellSideAdvisory,
-          icon: "Handshake",
-          path: routes.sectorDetail("sell-side-advisory"),
-        },
-      ].slice(0, ITEMS_PER_PAGE.FEATURED_ARTICLES),
-    [t.nav],
-  );
   const handleContact = () => {
     analyticsService.trackEvent("owner_contact_click", { source: "home" });
     navigate(routePaths.contact);
-  };
-  const handleBubbleClick = (bubble) => {
-    analyticsService.trackEvent("home_bubble_click", {
-      title: bubble.title,
-      destination: bubble.path,
-    });
-    navigate(bubble.path);
   };
   return (
     <main className="relative bg-white">
@@ -68,27 +32,27 @@ export const Home = () => {
               {t.home.hero.title}
             </div>
             <p
-              className="mx-auto mb-8 max-w-2xl text-xl leading-9 text-white/70 md:text-2xl"
+              className="mx-auto mb-10 max-w-2xl text-xl leading-9 text-white/70 md:text-2xl"
               dir="rtl"
               style={{ unicodeBidi: "plaintext" }}
             >
               {t.home.hero.subtitle}
             </p>
+            <div className="flex flex-wrap items-center justify-center gap-4">
+              <button
+                onClick={handleContact}
+                className="rounded-full bg-white px-8 py-3 text-base font-semibold text-slate-900 transition hover:bg-white/90"
+              >
+                {t.home.owner.contact}
+              </button>
+              <button
+                onClick={() => navigate(routePaths.news)}
+                className="rounded-full border border-white/40 bg-white/10 px-8 py-3 text-base font-semibold text-white transition hover:bg-white/20"
+              >
+                קרא מאמרים
+              </button>
+            </div>
           </div>
-        </div>
-      </section>
-
-      {/* Bubbles Section */}
-      <section className="relative z-20 -mt-12 mx-auto max-w-7xl px-4 md:-mt-16">
-        <div className="mx-auto grid max-w-5xl grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {bubbles.map((bubble, idx) => (
-            <FeatureBubble
-              key={bubble.title + idx}
-              icon={bubble.icon}
-              title={bubble.title}
-              onClick={() => handleBubbleClick(bubble)}
-            />
-          ))}
         </div>
       </section>
 
