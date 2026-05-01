@@ -4,20 +4,10 @@ import { Sparkles } from "lucide-react";
 import { PhoneNumberInput } from "./PhoneNumberInput";
 import { Select } from "./Select";
 import { Button } from "./primitives/Button";
+import { FieldError, FieldLabel, TextField } from "./primitives/FormField";
 import { Modal } from "./primitives/Modal";
 import { useSiteContent } from "../../hooks/useSiteContent";
 import { useContactForm } from "../../hooks/useContactForm";
-const TextField = ({ label, placeholder, register, name, error }) => (
-  <div>
-    <label className="block text-sm font-semibold text-slate-700 mb-1.5">{label}</label>
-    <input
-      {...register(name)}
-      className={`w-full h-12 rounded-xl border px-4 text-slate-900 shadow-inner shadow-slate-900/5 focus:outline-none focus:ring-2 focus:ring-slate-900/70 ${error ? "border-red-400" : "border-slate-200"}`}
-      placeholder={placeholder}
-    />
-    {error && <p className="mt-1 text-xs text-red-500">{error}</p>}
-  </div>
-);
 
 export const LeadCaptureModal = ({
   open,
@@ -85,9 +75,11 @@ export const LeadCaptureModal = ({
           <TextField
             label={copy.fullNameLabel || ""}
             placeholder={copy.fullNamePlaceholder || ""}
-            register={register}
-            name="fullName"
+            {...register("fullName")}
             error={errors.fullName?.message}
+            variant="inset"
+            inputSize="md"
+            labelSpacing="sm"
           />
           <Controller
             name="phone"
@@ -110,15 +102,15 @@ export const LeadCaptureModal = ({
           <TextField
             label={copy.emailLabel || ""}
             placeholder={copy.emailPlaceholder || ""}
-            register={register}
-            name="email"
+            {...register("email")}
             error={errors.email?.message}
+            variant="inset"
+            inputSize="md"
+            labelSpacing="sm"
           />
 
           <div className="flex flex-col justify-end">
-            <label className="block text-sm font-semibold text-slate-700 mb-1.5">
-              {copy.serviceLabel || ""}
-            </label>
+            <FieldLabel spacing="sm">{copy.serviceLabel || ""}</FieldLabel>
             <Controller
               name="service"
               control={control}
@@ -132,9 +124,7 @@ export const LeadCaptureModal = ({
                 />
               )}
             />
-            {errors.service && (
-              <p className="mt-1 text-xs text-red-500">{errors.service.message}</p>
-            )}
+            <FieldError>{errors.service?.message}</FieldError>
           </div>
         </div>
 

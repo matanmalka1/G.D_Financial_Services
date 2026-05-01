@@ -5,6 +5,12 @@ import { useSiteContent } from "../hooks/useSiteContent";
 import { useContactForm } from "../hooks/useContactForm";
 import { Select } from "../components/ui/Select";
 import { Button } from "../components/ui/primitives/Button";
+import {
+  FieldError,
+  FieldLabel,
+  TextField,
+  TextInput,
+} from "../components/ui/primitives/FormField";
 import { PhoneNumberInput } from "../components/ui/PhoneNumberInput";
 import { submitContactForm } from "../services/contactService";
 import { useSeo } from "../hooks/useSeo";
@@ -140,36 +146,20 @@ export const Contact = () => {
               className="space-y-6"
             >
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div>
-                  <label className="block text-sm font-semibold text-slate-700 mb-2">
-                    {t.contact.fullName}*
-                  </label>
-                  <input
-                    {...register("fullName")}
-                    className={`w-full rounded-xl border bg-white px-4 py-3 text-slate-900 shadow-sm shadow-slate-900/5 transition-all placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-slate-900/20 ${errors.fullName ? "border-red-500" : "border-slate-200 focus:border-slate-400"}`}
-                    placeholder={t.contact.fullNamePlaceholder}
-                    dir="rtl"
-                  />
-                  {errors.fullName && (
-                    <p className="text-red-500 text-xs mt-1">
-                      {errors.fullName.message}
-                    </p>
-                  )}
-                </div>
-                <div>
-                  <label className="block text-sm font-semibold text-slate-700 mb-2">
-                    {t.contact.email}*
-                  </label>
-                  <input
-                    {...register("email")}
-                    className={`w-full rounded-xl border bg-white px-4 py-3 text-slate-900 shadow-sm shadow-slate-900/5 transition-all placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-slate-900/20 ${errors.email ? "border-red-500" : "border-slate-200 focus:border-slate-400"}`}
-                    placeholder={t.contact.emailPlaceholder}
-                    dir="rtl"
-                  />
-                  {errors.email && (
-                    <p className="text-red-500 text-xs mt-1">{errors.email.message}</p>
-                  )}
-                </div>
+                <TextField
+                  label={`${t.contact.fullName}*`}
+                  placeholder={t.contact.fullNamePlaceholder}
+                  dir="rtl"
+                  error={errors.fullName?.message}
+                  {...register("fullName")}
+                />
+                <TextField
+                  label={`${t.contact.email}*`}
+                  placeholder={t.contact.emailPlaceholder}
+                  dir="rtl"
+                  error={errors.email?.message}
+                  {...register("email")}
+                />
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -192,9 +182,7 @@ export const Contact = () => {
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-semibold text-slate-700 mb-2">
-                    {t.contact.service}*
-                  </label>
+                  <FieldLabel>{t.contact.service}*</FieldLabel>
                   <Controller
                     name="service"
                     control={control}
@@ -209,28 +197,22 @@ export const Contact = () => {
                       />
                     )}
                   />
-                  {errors.service && (
-                    <p className="text-red-500 text-xs mt-1">
-                      {errors.service.message}
-                    </p>
-                  )}
+                  <FieldError>{errors.service?.message}</FieldError>
                 </div>
               </div>
 
               <div>
-                <label className="block text-sm font-semibold text-slate-700 mb-2">
-                  {t.contact.message}*
-                </label>
-                <textarea
+                <FieldLabel>{t.contact.message}*</FieldLabel>
+                <TextInput
+                  as="textarea"
                   {...register("message")}
                   rows={5}
-                  className={`w-full resize-none rounded-xl border bg-white px-4 py-3 text-slate-900 shadow-sm shadow-slate-900/5 transition-all placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-slate-900/20 ${errors.message ? "border-red-500" : "border-slate-200 focus:border-slate-400"}`}
+                  error={errors.message?.message}
+                  className="resize-none"
                   placeholder={t.contact.messagePlaceholder}
                   dir="rtl"
                 />
-                {errors.message && (
-                  <p className="text-red-500 text-xs mt-1">{errors.message.message}</p>
-                )}
+                <FieldError>{errors.message?.message}</FieldError>
               </div>
 
               <Button

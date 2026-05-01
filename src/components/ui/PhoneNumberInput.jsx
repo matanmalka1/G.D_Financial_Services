@@ -2,6 +2,7 @@ import { forwardRef, useMemo, useCallback } from "react";
 import { AsYouType, getExampleNumber } from "libphonenumber-js";
 import metadata from "libphonenumber-js/metadata.min.json";
 import { PhoneLocalInput } from "./phone/PhoneLocalInput";
+import { FieldError, FieldLabel } from "./primitives/FormField";
 import { COMMON_COUNTRIES, DEFAULT_COUNTRY_CODE } from "../../data/countries";
 
 export const PhoneNumberInput = forwardRef(
@@ -62,9 +63,7 @@ export const PhoneNumberInput = forwardRef(
 
     return (
       <div className={`space-y-2 ${className}`}>
-        {label ? (
-          <label className="block text-sm font-semibold text-slate-700">{label}</label>
-        ) : null}
+        <FieldLabel spacing="none">{label}</FieldLabel>
 
         <div
           className={`group relative flex min-h-12 overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm transition focus-within:border-slate-900/40 focus-within:ring-2 focus-within:ring-slate-900/80 ${isRtl ? "flex-row-reverse" : "flex-row"} ${inputClassName}`}
@@ -93,7 +92,7 @@ export const PhoneNumberInput = forwardRef(
           </div>
         </div>
 
-        {error ? <p className="text-red-500 text-xs">{error}</p> : null}
+        <FieldError className="mt-0">{error}</FieldError>
       </div>
     );
   },

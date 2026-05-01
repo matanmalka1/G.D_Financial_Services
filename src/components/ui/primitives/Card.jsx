@@ -1,12 +1,11 @@
 import React from "react";
+import { joinClasses } from "./classes";
 
 const VARIANT_STYLES = {
   flat: "bg-white border border-slate-100 shadow-sm",
   elevated: "bg-white border border-slate-100 shadow-xl shadow-slate-200/50",
   dark: "bg-slate-900 border border-slate-900 text-white shadow-2xl",
 };
-
-const joinClasses = (...classes) => classes.filter(Boolean).join(" ");
 
 export const Card = React.forwardRef(
   (

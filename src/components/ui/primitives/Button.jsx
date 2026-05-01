@@ -1,4 +1,5 @@
 import React from "react";
+import { joinClasses } from "./classes";
 
 const VARIANT_STYLES = {
   solid:
@@ -15,8 +16,6 @@ const SIZE_STYLES = {
   md: "px-4 py-2 text-sm",
   lg: "px-6 py-3 text-base",
 };
-
-const joinClasses = (...classes) => classes.filter(Boolean).join(" ");
 
 export const Button = React.forwardRef(
   (
