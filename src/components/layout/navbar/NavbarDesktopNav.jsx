@@ -4,7 +4,7 @@ import { ChevronDown } from "lucide-react";
 import { routePaths } from "../../../routes/paths";
 
 const navLinkClass = ({ isActive }) =>
-  `whitespace-nowrap text-sm font-medium transition-colors ${
+  `whitespace-nowrap text-base font-medium transition-colors ${
     isActive ? "text-slate-900" : "text-slate-600 hover:text-slate-900"
   }`;
 
@@ -30,7 +30,7 @@ export const NavbarDesktopNav = ({ t, sectorOptions }) => {
       <div className="relative" ref={ref}>
         <button
           onClick={() => setOpen((o) => !o)}
-          className="flex items-center gap-1.5 whitespace-nowrap text-sm font-medium transition-colors text-slate-600 hover:text-slate-900"
+          className="flex items-center gap-1.5 whitespace-nowrap text-base font-medium transition-colors text-slate-600 hover:text-slate-900"
         >
           {t.nav.services}
           <ChevronDown className={`h-4 w-4 transition-transform ${open ? "rotate-180" : ""}`} />
@@ -42,7 +42,7 @@ export const NavbarDesktopNav = ({ t, sectorOptions }) => {
               <button
                 key={opt.value}
                 onClick={() => { navigate(opt.value); setOpen(false); }}
-                className="block w-full px-4 py-2.5 text-right text-sm text-slate-700 hover:bg-slate-50 hover:text-slate-900"
+                className="block w-full px-4 py-2.5 text-right text-base text-slate-700 hover:bg-slate-50 hover:text-slate-900"
               >
                 {opt.label}
               </button>

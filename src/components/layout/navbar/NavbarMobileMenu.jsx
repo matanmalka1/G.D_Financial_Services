@@ -12,7 +12,7 @@ export const NavbarMobileMenu = ({ t, sectorOptions, onSectorChange, onClose }) 
         <button
           key={opt.value}
           onClick={() => onSectorChange(opt.value)}
-          className="block w-full text-left rtl:text-right py-2 text-slate-700 pl-4 rtl:pr-4"
+          className="block w-full text-left rtl:text-right py-2 text-lg text-slate-700 pl-4 rtl:pr-4"
         >
           {opt.label}
         </button>
@@ -22,7 +22,7 @@ export const NavbarMobileMenu = ({ t, sectorOptions, onSectorChange, onClose }) 
       to={routePaths.news}
       onClick={onClose}
       className={({ isActive }) =>
-        `block w-full border-y border-gray-50 py-4 pl-4 text-left rtl:pr-4 rtl:text-right font-medium ${isActive ? "text-slate-900" : "text-slate-700"}`
+        `block w-full border-y border-gray-50 py-4 pl-4 text-left rtl:pr-4 rtl:text-right text-lg font-medium ${isActive ? "text-slate-900" : "text-slate-700"}`
       }
     >
       {t.nav.news}
@@ -31,7 +31,7 @@ export const NavbarMobileMenu = ({ t, sectorOptions, onSectorChange, onClose }) 
       to={routePaths.contact}
       onClick={onClose}
       className={({ isActive }) =>
-        `inline-flex items-center justify-center gap-2 rounded-lg border px-5 py-3 text-center font-bold transition-all ${
+        `inline-flex items-center justify-center gap-2 rounded-lg border px-5 py-3 text-center text-lg font-bold transition-all ${
           isActive
             ? "border-slate-900 bg-slate-900 text-white"
             : "border-slate-300 bg-white text-slate-900 hover:bg-slate-100"
@@ -41,7 +41,7 @@ export const NavbarMobileMenu = ({ t, sectorOptions, onSectorChange, onClose }) 
       <Phone className="h-4 w-4" />
       {t.nav.contact}
     </NavLink>
-    <a href="tel:0542121928" className="text-center py-2 font-semibold text-slate-700">
+    <a href="tel:0542121928" className="text-center py-2 text-lg font-semibold text-slate-700">
       054-2121928
     </a>
   </div>
